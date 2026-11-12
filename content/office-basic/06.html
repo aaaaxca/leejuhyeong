@@ -1,0 +1,44 @@
+<div class="day-head"><span class="day-num">06차시</span><h3>엑셀로 업무 대장 만들기</h3></div>
+    <p class="goal">비품 관리 대장을 직접 만들고 금액·합계를 계산해, 한 장짜리 보고용 PDF로 내보내는 순서를 익힙니다. 이 결과가 7차시 보고 자료의 재료가 됩니다.</p>
+    <div class="tags"><span class="tag time">업무 흐름 — 만들기</span><span class="tag">엑셀 (없으면 구글 시트)</span></div>
+    <h4>진행 순서</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>순서</th><th>진행 과정</th><th>내용</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>도입</td><td>복습, 오늘은 5단계 중 "만들기"</td><td></td></tr>
+        <tr><td>2</td><td>엑셀 이론</td><td>엑셀의 구조 — 칸(셀), 가로줄(행), 세로줄(열), 칸 이름(A1) / 엑셀이 "계산하는 표"인 이유</td><td>이론</td></tr>
+        <tr><td>3</td><td>실습</td><td>실습 J — 비품 관리 대장 만들기</td><td>실습</td></tr>
+        <tr><td>4</td><td>보기 좋게</td><td>칸 너비 맞추기, 테두리, 머리글 굵게</td><td>따라하기</td></tr>
+        <tr><td></td><td>쉬는 시간</td><td></td><td></td></tr>
+        <tr><td>5</td><td>정렬·필터</td><td>원하는 것만 골라 보기</td><td>이론 + 따라하기</td></tr>
+        <tr><td>6</td><td>실습</td><td>실습 K — 정렬·그래프 넣고 한 장 PDF로</td><td>실습</td></tr>
+        <tr><td>7</td><td>조절 구간</td><td>필터 / 틀 고정</td><td>아래 참고</td></tr>
+        <tr><td>8</td><td>정리</td><td>오늘 정리 퀴즈, 다음 차시 예고</td><td></td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">🛠 실습 J — 비품 관리 대장 만들기</div>
+      <p>순서는 <b>① 머리글 입력</b> → <b>② 품목 10개 채우기</b> → <b>③ 금액 수식 넣기</b> → <b>④ 맨 아래 합계</b>.</p>
+      <ol>
+        <li>1행에 머리글: 품목 / 수량 / 단가 / 금액 / 비고</li>
+        <li>비품 목록의 10개 품목을 옮겨 적기 (복사·붙여넣기)</li>
+        <li>금액 칸에 <code>=B2*C2</code> 입력 → 칸 오른쪽 아래 점을 끌어 아래로 채우기</li>
+        <li>금액 맨 아래 칸에서 자동 합계(Σ) → "업무 &gt; 자료" 폴더에 "날짜_비품대장"으로 저장</li>
+      </ol>
+      <p><b>확인할 것</b> — 수량 하나를 바꾸면 금액과 합계가 같이 바뀌나요? 엑셀이 다시 계산하는 것이 그냥 표와 "계산하는 표"의 차이입니다.</p>
+      <div class="practice-prep"><div class="prep-label">📎 준비물</div><ul><li><b>비품목록.xlsx</b> <span class="meta">· 품목 10개 (품목·수량·단가)</span></li></ul></div>
+    </div>
+    <div class="practice-card">
+      <div class="practice-title">🛠 실습 K — 정렬·그래프 넣고 한 장 PDF로 내보내기</div>
+      <p>순서는 <b>① 금액 큰 순 정렬</b> → <b>② 막대 그래프 넣기</b> → <b>③ 인쇄 미리보기로 한 장 맞추기</b> → <b>④ PDF로 저장</b>.<br>실습 J와 <b>같은 파일</b>에서 이어갑니다.</p>
+      <ol>
+        <li>금액 열을 누르고 데이터 → 내림차순 정렬</li>
+        <li>품목과 금액을 선택 → 삽입 → 막대 그래프</li>
+        <li>파일 → 인쇄 → "한 페이지에 시트 맞추기" 선택</li>
+        <li>프린터를 "Microsoft Print to PDF"로 골라 저장</li>
+      </ol>
+      <p><b>확인할 것</b> — PDF 한 장에 표와 그래프가 다 들어가 있나요? 이 그래프를 7차시 보고 자료에 넣습니다.</p>
+      <div class="practice-prep"><div class="prep-label">📎 준비물</div><ul><li><b>실습 J의 비품 관리 대장</b> <span class="meta">· 업무 &gt; 자료 폴더</span></li></ul></div>
+    </div>
+    <div class="adjust">⏸ <b>조절 구간</b> — 필터로 "재고 부족" 품목만 보기 / 틀 고정. 빠르면 늘리고 느리면 생략</div>
+    <div class="out">📦 <b>오늘 결과물</b> — 비품 관리 대장(.xlsx), 표+그래프 한 장 PDF</div>
