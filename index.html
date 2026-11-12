@@ -379,12 +379,12 @@ function viewCat(cat){
 /* 3단계 */
 function viewItem(cat, it){
   const where = ["SBS아카데미컴퓨터AIX학원"].filter(Boolean).join(" · ");
-  const full = it.subtitle ? `${esc(it.title)} <span class="sub">·</span> ${esc(it.subtitle)}` : esc(it.title);
+  const full = esc(it.title);
   const stuUrl = it.key ? `c/${it.id}-${it.key}.html` : "";
   const acts = stuUrl ? `<div class="row">${it.teacher?linkBtn(it.teacher,"수업 진행",true):""}${linkBtn(stuUrl,"학생 페이지 열기",!it.teacher)}${copyBtn(stuUrl)}</div>` : "";
   $("#head").innerHTML = crumb([["홈","#/"],[cat.title,"#/"+cat.id],[it.title]])
     + `<span class="d-eyebrow">${esc(where)}</span>`
-    + `<h1 class="d-title">${full}</h1>${it.desc?`<p class="lead d-lead">${esc(it.desc)}</p>`:""}`
+    + `<h1 class="d-title">${full}</h1>${it.subtitle?`<p class="lead d-lead">${esc(it.subtitle)}</p>`:""}${it.desc?`<p class="lead d-lead">${esc(it.desc)}</p>`:""}`
     + (acts ? `<div class="head-actions">${acts}</div>` : "");
   let ps = it.projects||[], sample = false;
   if(!ps.length){ ps = [{title:"프로젝트 1"},{title:"프로젝트 2"}]; sample = true; }

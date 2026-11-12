@@ -65,7 +65,7 @@ def tbar(parts):
 
 def page(cat, it):
     where = " · ".join(x for x in ["SBS아카데미컴퓨터AIX학원"] if x)
-    title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
+    title = e(it["title"])
     cards = []
     for i, p in enumerate(it.get("projects") or [], 1):
         no = f"{i:02d}"
@@ -93,6 +93,7 @@ def page(cat, it):
     {tbar([("홈","../index.html#/"),(cat["title"],"../index.html#/"+cat["id"]),(it["title"],None)])}
     <span class="d-eyebrow">{e(where)}</span>
     <h1 class="d-title">{title}</h1>
+    {f'<p class="lead d-lead">{e(it["subtitle"])}</p>' if it.get("subtitle") else ""}
     {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
   </header>
   <main>
@@ -179,7 +180,7 @@ def strip_emoji(t):
 def course_with_content(it, folder):
     cdir = os.path.join(ROOT, "content", it["content"])
     where = " · ".join(x for x in ["SBS아카데미컴퓨터AIX학원"] if x)
-    title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
+    title = e(it["title"])
     meta = "".join(f"<span>{e(m)}</span>" for m in it.get("meta") or [])
     phases = "".join(f"<span>{e(m)}</span>" for m in it.get("phases") or [])
     projs = it.get("projects") or []
@@ -190,6 +191,7 @@ def course_with_content(it, folder):
     {tbar([("홈","../index.html#/"),("수업 과정","../index.html#/course"),(it["title"],None)])}
     <span class="d-eyebrow">{e(where)}</span>
     <h1 class="d-title">{title}</h1>
+    {f'<p class="lead d-lead">{e(it["subtitle"])}</p>' if it.get("subtitle") else ""}
     {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
     {f'<div class="meta-row">{meta}</div>' if meta else ""}
   </header>
