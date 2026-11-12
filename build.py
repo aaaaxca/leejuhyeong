@@ -95,6 +95,128 @@ def page(cat, it):
 </html>
 """
 
+
+CONTENT_CSS = """
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+"""
+
+def shell(title, inner):
+    return f"""<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{e(title)} · 이주형 클래스</title>
+{fonts}
+<style>{css}{PAGE_CSS}{CONTENT_CSS}</style>
+</head>
+<body class="stu">
+<div class="wrap">
+{inner}
+</div>
+</body>
+</html>
+"""
+
+def strip_emoji(t):
+    return re.sub("[\U0001F300-\U0001FAFF☀-➿⏰-⏿️]\\s?", "", t)
+
+def course_with_content(it, folder):
+    cdir = os.path.join(ROOT, "content", it["content"])
+    where = " · ".join(x for x in ["SBS아카데미AIX 안산", it.get("group")] if x)
+    title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
+    meta = "".join(f"<span>{e(m)}</span>" for m in it.get("meta") or [])
+    phases = "".join(f"<span>{e(m)}</span>" for m in it.get("phases") or [])
+    projs = it.get("projects") or []
+    cards = "".join(f'<a class="pcard" href="{folder}/{p["doc"]}.html"><span class="pno">{p["doc"]}차시</span><h3>{e(p["title"])}</h3><span class="ps">열기 →</span></a>' for p in projs)
+    ov = open(os.path.join(cdir, "overview.html"), encoding="utf-8").read() if os.path.exists(os.path.join(cdir, "overview.html")) else ""
+    inner = f"""  <header>
+    <span class="d-eyebrow">{e(where)}</span>
+    <h1 class="d-title">{title}</h1>
+    {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
+    {f'<div class="meta-row">{meta}</div>' if meta else ""}
+  </header>
+  <main>
+    <h2 class="d-sec">차시별 수업</h2>
+    <div class="pgrid">{cards}</div>
+    {f'<div class="phase">{phases}</div>' if phases else ""}
+    <div class="doc">{strip_emoji(ov)}</div>
+    <div class="d-foot">{e(" · ".join(x for x in ["SBS아카데미AIX 안산", it["title"], it.get("subtitle")] if x))}</div>
+  </main>"""
+    return shell(it["title"], inner)
+
+def session_page(it, idx, folder_name):
+    projs = it["projects"]; p = projs[idx]
+    raw = open(os.path.join(ROOT, "content", it["content"], p["doc"] + ".html"), encoding="utf-8").read()
+    h3 = re.search(r"<h3>(.*?)</h3>", raw, re.S); goal = re.search(r'<p class="goal">(.*?)</p>', raw, re.S)
+    tags = re.search(r'<div class="tags">(.*?)</div>', raw, re.S)
+    body = re.sub(r'<div class="day-head">.*?</div>\s*', "", raw, count=1, flags=re.S)
+    body = re.sub(r'<p class="goal">.*?</p>\s*', "", body, count=1, flags=re.S)
+    body = re.sub(r'<div class="tags">.*?</div>\s*', "", body, count=1, flags=re.S)
+    prev = projs[idx-1] if idx > 0 else None; nxt = projs[idx+1] if idx+1 < len(projs) else None
+    nav = '<nav class="snav">' + (f'<a href="{prev["doc"]}.html"><small>← {prev["doc"]}차시</small>{e(prev["title"])}</a>' if prev else "<span style=flex:1></span>") \
+        + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt else "<span style=flex:1></span>") + "</nav>"
+    inner = f"""  <header>
+    <a class="back" href="../{folder_name}.html">← {e(it["title"])} 전체</a><br>
+    <span class="d-eyebrow">{e(it["title"])} · {p["doc"]}차시</span>
+    <h1 class="d-title">{h3.group(1) if h3 else e(p["title"])}</h1>
+    {f'<p class="goal">{goal.group(1)}</p>' if goal else ""}
+    {f'<div class="tags">{tags.group(1)}</div>' if tags else ""}
+  </header>
+  <main class="doc">
+    {strip_emoji(body)}
+    {nav}
+    <div class="d-foot">{e(it["title"])} · {p["doc"]}차시</div>
+  </main>"""
+    return shell(f'{p["doc"]}차시 · {p["title"]}', inner)
+
+import shutil
+
 os.makedirs(OUT, exist_ok=True)
 keep = set()
 for cat in data:
@@ -105,8 +227,18 @@ for cat in data:
             continue
         name = f'{it["id"]}-{it["key"]}.html'
         keep.add(name)
-        open(os.path.join(OUT, name), "w", encoding="utf-8").write(page(cat, it))
+        base = name[:-5]
+        if it.get("content"):
+            open(os.path.join(OUT, name), "w", encoding="utf-8").write(course_with_content(it, base))
+            d = os.path.join(OUT, base); os.makedirs(d, exist_ok=True)
+            for f in os.listdir(d): os.remove(os.path.join(d, f))
+            for i in range(len(it["projects"])):
+                open(os.path.join(d, it["projects"][i]["doc"] + ".html"), "w", encoding="utf-8").write(session_page(it, i, base))
+            keep.add(base)
+        else:
+            open(os.path.join(OUT, name), "w", encoding="utf-8").write(page(cat, it))
 for f in os.listdir(OUT):
-    if f.endswith(".html") and f not in keep:
-        os.remove(os.path.join(OUT, f))
-print(f"학생 페이지 {len(keep)}개 생성")
+    fp = os.path.join(OUT, f)
+    if f.endswith(".html") and f not in keep: os.remove(fp)
+    elif os.path.isdir(fp) and f not in keep: shutil.rmtree(fp)
+print(f"학생 페이지 {len([k for k in keep if k.endswith('.html')])}개 생성")
