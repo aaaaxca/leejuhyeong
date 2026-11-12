@@ -273,6 +273,7 @@ const DATA = [
     { id:"ai-consult", icon:"screen", title:"AI과정 컨설팅 및 커리큘럼", tags:["PPT"], desc:"", status:"done", ppt:"" },
     { id:"cg-curri", icon:"screen", title:"CG학과 커리큘럼", tags:["PPT"], desc:"", status:"plan", ppt:"" },
   ]},
+  { id:"report", title:"보고서", desc:"보고 자료 PDF · Google 드라이브", icon:"doc", href:"https://drive.google.com/drive/folders/1Ia4LXKDsKZPwEP6oywyVOafAB_2lGRPt", items:[] },
 ];
 /* ================================================================== */
 
@@ -378,11 +379,11 @@ function route(){
 function viewHome(){
   $("#head").innerHTML = `<p class="eyebrow">Class by Lee Juhyung</p><h1>이주형 클래스</h1><p class="lead">과정 개발 · 세미나 · 사내교육</p>`;
   $("#view").innerHTML = `<div class="cats">${DATA.map((c,i)=>`
-    <a class="cat" href="#/${c.id}">
+    <a class="cat" href="${c.href?esc(c.href):"#/"+c.id}"${c.href?' target="_blank" rel="noopener"':""}>
       ${icon(c.icon)}
       <div><h2>${esc(c.title)}</h2><p>${esc(c.desc)}</p></div>
-      <span class="cnt">${c.lock?'<span class="lock">잠금 · </span>':""}${c.items.length}개</span>
-      <span class="arr">→</span>
+      <span class="cnt">${c.href?"드라이브":(c.lock?'<span class="lock">잠금 · </span>':"")+c.items.length+"개"}</span>
+      <span class="arr">${c.href?"↗":"→"}</span>
     </a>`).join("")}</div>`;
 }
 
