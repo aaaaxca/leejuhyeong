@@ -3,7 +3,7 @@
 SBS아카데미AIX 안산 이주형 학과장의 수업 허브. GitHub Pages로 배포: https://aaaaxca.github.io/leejuhyeong/
 
 ## 구조
-- `index.html` — 강사용 허브. 파일 안 `const DATA = [...]`에 모든 카테고리·과목 목록이 있음. 수업 과정은 4자리 번호 잠금(SHA-256 값, 번호는 사용자만 앎).
+- `index.html` — 강사용 허브. 파일 안 `const DATA = [...]`에 모든 카테고리·과목 목록이 있음. 허브 전체가 4자리 번호 잠금(`HUB_LOCK`, SHA-256 값, 번호는 사용자만 앎). 과목 카드는 학생 페이지를 새 탭으로 연다.
 - `content/<과목id>/` — 과목 본문. `overview.html`(과정 첫 페이지 아래쪽) + `01.html`~ (차시별 본문, 첫 줄 `day-head`의 h3가 차시 제목).
 - `c/` — **자동 생성물. 직접 고치지 말 것.** 학생 배포용 페이지(`c/<id>-<key>.html`, 차시는 `c/<id>-<key>/01.html`).
 - `build.py` — `python3 build.py` 실행 시 DATA와 content를 읽어 `c/` 전체를 다시 만듦. key 없는 과목엔 key를 만들어 index.html에 기록.

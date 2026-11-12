@@ -141,11 +141,11 @@
 
    status : "plan"(기획) | "wip"(제작중) | "live"(수업중) | "done"(완료)
    주소를 비워두면 '준비중'으로 표시됩니다.
-   lock : 4자리 번호의 암호값(SHA-256). 번호를 바꾸려면 새 번호의 암호값으로 교체. 빼면 잠금 해제.
+   허브 입장 번호는 아래 HUB_LOCK (SHA-256 값).
    ================================================================== */
 /* 아이콘 이름: book · mic · building · screen · spark · doc · prompt · bot · share · briefcase · pen · layers · film · draw · cube · brush */
 const DATA = [
-  { id:"course", title:"수업 과정", desc:"정규 과정 · 과목별 프로젝트", icon:"book", lock:"34c24df580a66acd9ea14b56f960fde0d3554d73d66aa3c67bb4b25a629b4e17", items:[
+  { id:"course", title:"수업 과정", desc:"정규 과정 · 과목별 프로젝트", icon:"book", items:[
     // ── 시니어
     { id:"ai-basic", key:"59ily", group:"시니어", icon:"spark", title:"AI 기초", tags:["시니어"], subtitle:"ChatGPT로 생활과 업무를 한 단계씩 줄이기", desc:"사무 실무 과정에서 손으로 해 본 일을 ChatGPT에게 시켜 보며 \"이런 것도 되는구나\"를 맛보는 과정입니다. 나이와 상관없이 집에서 바로 써 볼 만한 쉬운 쓰임새부터 시작해 사무 5단계(받기 → 열기 → 정리하기 → 만들기 → 보내기)로 이어갑니다.", meta:["2시간 × 8차시 (월·수 4주)","매 차시 이론 30분 · 실습 70분 · 조절 20분","연령 제한 없음"], phases:["① 생활에서 맛보기 — 1~4차시","② 사무 5단계에 붙이기 — 5~7차시","③ 안전하게 내 것으로 — 8차시"], content:"ai-basic", status:"wip", teacher:"", student:"", projects:[
       { title:"ChatGPT에게 처음 말 걸기", doc:"01" },
@@ -249,6 +249,8 @@ function crumb(parts){
 
 /* 번호 잠금: 홈에서 들어갈 때마다 팝업으로 확인 */
 let unlockedCat = null;
+const HUB_LOCK = "34c24df580a66acd9ea14b56f960fde0d3554d73d66aa3c67bb4b25a629b4e17";  /* 허브 입장 번호(SHA-256) */
+let hubOpen = false;
 function sha256(str){
   const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
   let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
@@ -269,13 +271,13 @@ function sha256(str){
 async function sha(t){ return sha256(t); }
 function askPin(cat, go){
   const m=$("#pinModal");
-  m.innerHTML = `<div class="gate"><button class="x" aria-label="닫기">×</button>
+  m.innerHTML = `<div class="gate">${cat.closable===false?"":`<button class="x" aria-label="닫기">×</button>`}
     <h4>${esc(cat.title)}</h4><p>입장 번호 4자리를 입력하세요</p>
     <div class="pins"><input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></div>
     <div class="err"></div></div>`;
   m.classList.add("on");
   const close=()=>{ m.classList.remove("on"); m.innerHTML=""; };
-  m.onclick=e=>{ if(e.target===m || e.target.closest(".x")) close(); };
+  m.onclick=e=>{ if(cat.closable!==false && (e.target===m || e.target.closest(".x"))) close(); };
   const el=m.querySelector(".pins input");
   setTimeout(()=>el.focus(),30);
   el.addEventListener("input",async()=>{
@@ -286,7 +288,7 @@ function askPin(cat, go){
         m.querySelector(".err").textContent="번호가 맞지 않습니다"; el.value=""; el.focus(); }
     }
   });
-  el.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); });
+  el.addEventListener("keydown",e=>{ if(e.key==="Escape" && cat.closable!==false) close(); });
 }
 
 function route(){
@@ -294,13 +296,11 @@ function route(){
   const cat = DATA.find(c=>c.id===catId);
   const item = cat && cat.items.find(i=>i.id===itemId);
   window.scrollTo(0,0);
-  if(!cat) unlockedCat = null;
-  if(cat && cat.lock && unlockedCat!==cat.id){
-    const target = curHash(); go("#/", true); viewHome();
-    return askPin(cat, ()=>go(target));
+  if(!hubOpen){
+    $("#head").innerHTML = ""; $("#view").innerHTML = "";
+    return askPin({title:"이주형 클래스", lock:HUB_LOCK, closable:false}, ()=>{ hubOpen = true; route(); });
   }
-  if(cat && unlockedCat && unlockedCat!==cat.id) unlockedCat = null;
-  if(item && item.key){ location.href = `c/${item.id}-${item.key}.html`; return; }
+  if(item && item.key){ window.open(`c/${item.id}-${item.key}.html`,"_blank"); go("#/"+cat.id,true); return viewCat(cat); }
   if(item) return viewItem(cat, item);
   if(cat) return viewCat(cat);
   viewHome();
@@ -331,7 +331,7 @@ function viewCat(cat){
     }
     if(it.key){
       const u = `c/${it.id}-${it.key}.html`;
-      return `<a class="card" href="${u}" data-ext>${head}<span class="more">${(it.projects||[]).length ? (it.content?"차시":"수업 자료")+" "+(it.projects||[]).length+"개 →" : "페이지 열기 →"}</span>${meta(it)}
+      return `<a class="card" href="${u}" target="_blank" rel="noopener">${head}<span class="more">${(it.projects||[]).length ? (it.content?"차시":"수업 자료")+" "+(it.projects||[]).length+"개 →" : "페이지 열기 →"}</span>${meta(it)}
         <button class="btn copy" style="margin-top:10px" data-copy="${esc(abs(u))}">학생용 링크 복사</button></a>`;
     }
     return `<a class="card" href="#/${cat.id}/${it.id}">${head}<span class="more">프로젝트 ${(it.projects||[]).length}개 →</span>${meta(it)}</a>`;
