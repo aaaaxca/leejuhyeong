@@ -55,14 +55,12 @@ PAGE_CSS = """
 """
 
 TBAR_CSS = """
-  .tbar{display:none;position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-  .tbar.on{display:block}
-  .tbar a{display:block;max-width:1040px;margin:0 auto;padding:10px 24px;font-size:13px;color:var(--sub);text-decoration:none}
-  .tbar a:hover{color:var(--ink)}
+  .tcrumb{display:none} .tcrumb.on{display:flex}
 """
-def tbar(href):
-    # 허브에서 번호를 입력한 브라우저에서만 보이는 강사용 돌아가기 줄
-    return (f'<div class="tbar" id="tbar"><a href="{href}">← 이주형 클래스로 돌아가기</a></div>'
+def tbar(parts):
+    # 허브에서 번호를 입력한 브라우저에서만 보이는 강사용 경로 (홈 / 수업 과정 / 과목)
+    html_ = " ".join((f'<a href="{h}">{e(t)}</a> <span>/</span>' if h else f"<b>{e(t)}</b>") for t, h in parts)
+    return (f'<nav class="crumb tcrumb" id="tbar">{html_}</nav>'
             '<script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>')
 
 def page(cat, it):
@@ -90,9 +88,9 @@ def page(cat, it):
 <style>{css}{PAGE_CSS}{TBAR_CSS}</style>
 </head>
 <body class="stu">
-{tbar("../index.html#/" + cat["id"])}
 <div class="wrap">
   <header>
+    {tbar([("홈","../index.html#/"),(cat["title"],"../index.html#/"+cat["id"]),(it["title"],None)])}
     <span class="d-eyebrow">{e(where)}</span>
     <h1 class="d-title">{title}</h1>
     {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
@@ -168,7 +166,6 @@ def shell(title, inner, back=""):
 <style>{css}{PAGE_CSS}{CONTENT_CSS}{TBAR_CSS}</style>
 </head>
 <body class="stu">
-{tbar(back) if back else ""}
 <div class="wrap">
 {inner}
 </div>
@@ -190,6 +187,7 @@ def course_with_content(it, folder):
                     else f'<div class="pcard ready"><span class="pno">{i:02d}</span><h3>{e(p["title"])}</h3><span class="ps">준비 중</span></div>' for i, p in enumerate(projs, 1))
     ov = open(os.path.join(cdir, "overview.html"), encoding="utf-8").read() if os.path.exists(os.path.join(cdir, "overview.html")) else ""
     inner = f"""  <header>
+    {tbar([("홈","../index.html#/"),("수업 과정","../index.html#/course"),(it["title"],None)])}
     <span class="d-eyebrow">{e(where)}</span>
     <h1 class="d-title">{title}</h1>
     {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
@@ -202,7 +200,7 @@ def course_with_content(it, folder):
     <div class="doc">{strip_emoji(ov)}</div>
     <div class="d-foot">{e(" · ".join(x for x in ["SBS아카데미AIX 안산", it["title"], it.get("subtitle")] if x))}</div>
   </main>"""
-    return shell(it["title"], inner, "../index.html#/course")
+    return shell(it["title"], inner)
 
 def session_page(it, idx, folder_name):
     projs = it["projects"]; p = projs[idx]
@@ -216,6 +214,7 @@ def session_page(it, idx, folder_name):
     nav = '<nav class="snav">' + (f'<a href="{prev["doc"]}.html"><small>← {prev["doc"]}차시</small>{e(prev["title"])}</a>' if prev else "<span style=flex:1></span>") \
         + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt else "<span style=flex:1></span>") + "</nav>"
     inner = f"""  <header>
+    {tbar([("홈","../../index.html#/"),("수업 과정","../../index.html#/course"),(it["title"],f"../{folder_name}.html"),(p["doc"]+"차시",None)])}
     <a class="back" href="../{folder_name}.html">← {e(it["title"])} 전체</a><br>
     <span class="d-eyebrow">{e(it["title"])} · {p["doc"]}차시</span>
     <h1 class="d-title">{h3.group(1) if h3 else e(p["title"])}</h1>
@@ -227,7 +226,7 @@ def session_page(it, idx, folder_name):
     {nav}
     <div class="d-foot">{e(it["title"])} · {p["doc"]}차시</div>
   </main>"""
-    return shell(f'{p["doc"]}차시 · {p["title"]}', inner, "../../index.html#/course")
+    return shell(f'{p["doc"]}차시 · {p["title"]}', inner)
 
 import shutil
 

@@ -126,16 +126,13 @@
   a.pcard .ps{color:var(--sub)}
   .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
 
-  .tbar{display:none;position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-  .tbar.on{display:block}
-  .tbar a{display:block;max-width:1040px;margin:0 auto;padding:10px 24px;font-size:13px;color:var(--sub);text-decoration:none}
-  .tbar a:hover{color:var(--ink)}
+  .tcrumb{display:none} .tcrumb.on{display:flex}
 </style>
 </head>
 <body class="stu">
-<div class="tbar" id="tbar"><a href="../index.html#/course">← 이주형 클래스로 돌아가기</a></div><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
 <div class="wrap">
   <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../index.html#/">홈</a> <span>/</span> <a href="../index.html#/course">수업 과정</a> <span>/</span> <b>애프터이펙트 1</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
     <span class="d-eyebrow">SBS아카데미AIX 안산 · 모션</span>
     <h1 class="d-title">애프터이펙트 1</h1>
     

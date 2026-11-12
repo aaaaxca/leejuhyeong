@@ -172,16 +172,13 @@
   .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
   .back:hover{color:var(--ink)}
 
-  .tbar{display:none;position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-  .tbar.on{display:block}
-  .tbar a{display:block;max-width:1040px;margin:0 auto;padding:10px 24px;font-size:13px;color:var(--sub);text-decoration:none}
-  .tbar a:hover{color:var(--ink)}
+  .tcrumb{display:none} .tcrumb.on{display:flex}
 </style>
 </head>
 <body class="stu">
-<div class="tbar" id="tbar"><a href="../index.html#/course">← 이주형 클래스로 돌아가기</a></div><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
 <div class="wrap">
   <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../index.html#/">홈</a> <span>/</span> <a href="../index.html#/course">수업 과정</a> <span>/</span> <b>AI 기초</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
     <span class="d-eyebrow">SBS아카데미AIX 안산 · 시니어</span>
     <h1 class="d-title">AI 기초</h1>
     <p class="lead d-lead">AI를 처음 써 보는 분도 따라올 수 있게, 생활 속 쉬운 쓰임새부터 시작해 &quot;이런 것도 되는구나&quot;를 맛보는 과정입니다. 익숙해지면 일의 5단계(받기 → 열기 → 정리하기 → 만들기 → 보내기)에 하나씩 붙여 봅니다. 다른 과정 없이 이 과정만으로 따라올 수 있습니다.</p>
