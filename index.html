@@ -378,7 +378,7 @@ function viewCat(cat){
 
 /* 3단계 */
 function viewItem(cat, it){
-  const where = ["SBS아카데미AIX 안산", it.group].filter(Boolean).join(" · ");
+  const where = ["SBS아카데미컴퓨터AIX학원"].filter(Boolean).join(" · ");
   const full = it.subtitle ? `${esc(it.title)} <span class="sub">·</span> ${esc(it.subtitle)}` : esc(it.title);
   const stuUrl = it.key ? `c/${it.id}-${it.key}.html` : "";
   const acts = stuUrl ? `<div class="row">${it.teacher?linkBtn(it.teacher,"수업 진행",true):""}${linkBtn(stuUrl,"학생 페이지 열기",!it.teacher)}${copyBtn(stuUrl)}</div>` : "";
@@ -398,7 +398,7 @@ function viewItem(cat, it){
     return `<div class="pcard"><span class="pno">${pad(i+1)}</span><h3>${esc(p.title)}</h3>${p.desc?`<span class="ps" style="margin-top:0">${esc(p.desc)}</span>`:""}${linkRow(p)}</div>`;
   };
   $("#view").innerHTML = `<h2 class="d-sec">${it.content?"차시별 수업":"수업 자료"}</h2><div class="pgrid">${ps.map(pcard).join("")}</div>
-    <div class="d-foot">${esc(["SBS아카데미AIX 안산", it.title, it.subtitle].filter(Boolean).join(" · "))}</div>`;
+    <div class="d-foot">${esc(["SBS아카데미컴퓨터AIX학원", it.title, it.subtitle].filter(Boolean).join(" · "))}</div>`;
 }
 
 document.addEventListener("click", e=>{

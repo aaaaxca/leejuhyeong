@@ -64,7 +64,7 @@ def tbar(parts):
             '<script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>')
 
 def page(cat, it):
-    where = " · ".join(x for x in ["SBS아카데미AIX 안산", it.get("group")] if x)
+    where = " · ".join(x for x in ["SBS아카데미컴퓨터AIX학원"] if x)
     title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
     cards = []
     for i, p in enumerate(it.get("projects") or [], 1):
@@ -76,7 +76,7 @@ def page(cat, it):
         else:
             cards.append(f'<div class="pcard ready"><span class="pno">{no}</span><h3>{e(p["title"])}</h3><span class="ps">준비 중</span></div>')
     body = f'<div class="pgrid">{"".join(cards)}</div>' if cards else '<div class="notice">수업 자료가 곧 올라옵니다.</div>'
-    foot = " · ".join(x for x in ["SBS아카데미AIX 안산", it["title"], it.get("subtitle")] if x)
+    foot = " · ".join(x for x in ["SBS아카데미컴퓨터AIX학원", it["title"], it.get("subtitle")] if x)
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -178,7 +178,7 @@ def strip_emoji(t):
 
 def course_with_content(it, folder):
     cdir = os.path.join(ROOT, "content", it["content"])
-    where = " · ".join(x for x in ["SBS아카데미AIX 안산", it.get("group")] if x)
+    where = " · ".join(x for x in ["SBS아카데미컴퓨터AIX학원"] if x)
     title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
     meta = "".join(f"<span>{e(m)}</span>" for m in it.get("meta") or [])
     phases = "".join(f"<span>{e(m)}</span>" for m in it.get("phases") or [])
@@ -198,7 +198,7 @@ def course_with_content(it, folder):
     <div class="pgrid">{cards}</div>
     {f'<div class="phase">{phases}</div>' if phases else ""}
     <div class="doc">{strip_emoji(ov)}</div>
-    <div class="d-foot">{e(" · ".join(x for x in ["SBS아카데미AIX 안산", it["title"], it.get("subtitle")] if x))}</div>
+    <div class="d-foot">{e(" · ".join(x for x in ["SBS아카데미컴퓨터AIX학원", it["title"], it.get("subtitle")] if x))}</div>
   </main>"""
     return shell(it["title"], inner)
 
