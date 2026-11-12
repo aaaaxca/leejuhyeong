@@ -126,6 +126,52 @@
   a.pcard .ps{color:var(--sub)}
   .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
 
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
   .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
 </style>
 </head>
@@ -136,11 +182,47 @@
     <span class="d-eyebrow">SBS아카데미컴퓨터AIX학원</span>
     <h1 class="d-title">AI 기초디자인</h1>
     
-    <p class="lead d-lead">편집 과목 개편 · 디자인 기초</p>
+    <p class="lead d-lead">Photoshop과 Illustrator의 기본 도구를 교재 순서대로 익히고, AI로 만든 이미지를 직접 다듬어 포스터와 SNS 이미지로 완성하는 과정입니다.</p>
+    <div class="meta-row"><span>2시간 × 16회</span></div>
   </header>
   <main>
-    <h2 class="d-sec">수업 자료</h2>
-    <div class="notice">수업 자료가 곧 올라옵니다.</div>
+    <h2 class="d-sec">차시별 수업</h2>
+    <div class="pgrid"><a class="pcard" href="design-basic-sj34u/01.html"><span class="pno">01차시</span><h3>Photoshop 기초 + AI 맛보기</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/02.html"><span class="pno">02차시</span><h3>레이어와 이동·변형</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/03.html"><span class="pno">03차시</span><h3>영역 선택 + AI 누끼</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/04.html"><span class="pno">04차시</span><h3>색상·그레이디언트·패턴</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/05.html"><span class="pno">05차시</span><h3>브러시</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/06.html"><span class="pno">06차시</span><h3>타이포그래피 + 레이어 스타일</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/07.html"><span class="pno">07차시</span><h3>패스와 모양</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/08.html"><span class="pno">08차시</span><h3>클리핑·레이어 마스크</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/09.html"><span class="pno">09차시</span><h3>PS 중간 종합 (AI + Photoshop)</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/10.html"><span class="pno">10차시</span><h3>Illustrator 기초</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/11.html"><span class="pno">11차시</span><h3>변형·정렬·색상</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/12.html"><span class="pno">12차시</span><h3>패스파인더·도형 구성 도구</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/13.html"><span class="pno">13차시</span><h3>펜·곡률·선</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/14.html"><span class="pno">14차시</span><h3>텍스트 편집</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/15.html"><span class="pno">15차시</span><h3>AI 이미지 → 벡터 변환</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-basic-sj34u/16.html"><span class="pno">16차시</span><h3>AI 기초 종합 프로젝트</h3><span class="ps">열기 →</span></a></div>
+    <div class="phase"><span>① Photoshop 기초 — 1~8회</span><span>② AI + Photoshop 종합 — 9회</span><span>③ Illustrator 기초 — 10~14회</span><span>④ AI 벡터 변환과 종합 프로젝트 — 15~16회</span></div>
+    <div class="doc"><section class="hub-section">
+  <div class="hub-section-head">
+    <h2>16회 한눈에 보기</h2>
+    <p>Photoshop 9회(1~9회) → Illustrator 7회(10~16회). 9회와 16회는 AI로 만든 이미지를 직접 다듬어 결과물 한 장을 완성하는 종합 회차입니다.</p>
+  </div>
+  <div class="table-scroll"><table>
+    <thead><tr><th>회차</th><th>주제</th><th>교재</th><th>결과물</th></tr></thead>
+    <tbody>
+      <tr><td>1회</td><td>Photoshop 기초 + AI 맛보기</td><td>PS 01</td><td>바로잡은 이미지, Firefly 소스가 담긴 PDF</td></tr>
+      <tr><td>2회</td><td>레이어와 이동·변형</td><td>PS 02</td><td>햄버거 배너, 스마트폰 목업 PSD</td></tr>
+      <tr><td>3회</td><td>영역 선택 + AI 누끼</td><td>PS 03</td><td>제품 포스터, 여행 콜라주</td></tr>
+      <tr><td>4회</td><td>색상·그레이디언트·패턴</td><td>PS 04</td><td>워터마크 이미지, 화병 아트웍</td></tr>
+      <tr><td>5회</td><td>브러시</td><td>PS 05</td><td>인물 드로잉, 매거진 표지 초안</td></tr>
+      <tr><td>6회</td><td>타이포그래피 + 레이어 스타일</td><td>PS 06·07</td><td>사원증, 문자 질감 2종</td></tr>
+      <tr><td>7회</td><td>패스와 모양</td><td>PS 08·09</td><td>제품 누끼, 시즌 포스터</td></tr>
+      <tr><td>8회</td><td>클리핑·레이어 마스크</td><td>PS 10</td><td>클리핑 타이포, 푸드 포스터</td></tr>
+      <tr><td>9회</td><td>PS 중간 종합 (AI + Photoshop)</td><td>PS 01~10</td><td>AI 합성 포스터 1장 (PSD·JPG)</td></tr>
+      <tr><td>10회</td><td>Illustrator 기초</td><td>IL 01·02</td><td>도형 조합 그림 AI 파일</td></tr>
+      <tr><td>11회</td><td>변형·정렬·색상</td><td>IL 03·04</td><td>기하학 선 그래픽, 그레이디언트 화병</td></tr>
+      <tr><td>12회</td><td>패스파인더·도형 구성 도구</td><td>IL 05</td><td>날씨 아이콘 세트, 풍경 일러스트</td></tr>
+      <tr><td>13회</td><td>펜·곡률·선</td><td>IL 06</td><td>라인 일러스트, 캘리그라피</td></tr>
+      <tr><td>14회</td><td>텍스트 편집</td><td>IL 08</td><td>원형 문자 로고, 타이포 포스터</td></tr>
+      <tr><td>15회</td><td>AI 이미지 → 벡터 변환</td><td>IL 11(일부)</td><td>AI 이미지에서 만든 벡터 그래픽</td></tr>
+      <tr><td>16회</td><td>AI 기초 종합 프로젝트</td><td>PS + IL</td><td>포스터 또는 SNS 이미지 1종 (최종본)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section class="hub-section">
+  <div class="hub-section-head">
+    <h2>AI는 이렇게 씁니다</h2>
+  </div>
+  <div class="callout callout--tip"><div class="callout-label">알아 두기</div><p>Photoshop에서는 Firefly 이미지 생성과 Remove Background 같은 AI 기능을 씁니다. Illustrator의 생성형 AI 기능은 학원 라이선스에서 쓸 수 없어서, 벡터 변환은 <b>Image Trace</b>와 <b>Kittl Vectorizer</b>로 진행합니다.</p></div>
+</section>
+</div>
     <div class="d-foot">SBS아카데미컴퓨터AIX학원 · AI 기초디자인</div>
   </main>
 </div>
