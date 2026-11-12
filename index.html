@@ -300,6 +300,7 @@ function route(){
     return askPin(cat, ()=>go(target));
   }
   if(cat && unlockedCat && unlockedCat!==cat.id) unlockedCat = null;
+  if(item && item.key){ location.href = `c/${item.id}-${item.key}.html`; return; }
   if(item) return viewItem(cat, item);
   if(cat) return viewCat(cat);
   viewHome();
@@ -327,6 +328,11 @@ function viewCat(cat){
       return it.ppt
         ? `<a class="card" href="${esc(it.ppt)}" target="_blank" rel="noopener">${head}<span class="more">PPT 열기 ↗</span>${meta(it)}</a>`
         : `<div class="card">${head}<span class="more">PPT 준비중</span>${meta(it)}</div>`;
+    }
+    if(it.key){
+      const u = `c/${it.id}-${it.key}.html`;
+      return `<a class="card" href="${u}" data-ext>${head}<span class="more">${(it.projects||[]).length ? (it.content?"차시":"수업 자료")+" "+(it.projects||[]).length+"개 →" : "페이지 열기 →"}</span>${meta(it)}
+        <button class="btn copy" style="margin-top:10px" data-copy="${esc(abs(u))}">학생용 링크 복사</button></a>`;
     }
     return `<a class="card" href="#/${cat.id}/${it.id}">${head}<span class="more">프로젝트 ${(it.projects||[]).length}개 →</span>${meta(it)}</a>`;
   };
