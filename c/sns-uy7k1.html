@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>SNS 마케팅 · 이주형 클래스</title>
+<title>SNS 브랜드 마케팅 · 이주형 클래스</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -126,21 +126,104 @@
   a.pcard .ps{color:var(--sub)}
   .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
 
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
   .tcrumb{display:none} .tcrumb.on{display:flex}
 </style>
 </head>
 <body class="stu">
 <div class="wrap">
   <header>
-    <nav class="crumb tcrumb" id="tbar"><a href="../index.html#/">홈</a> <span>/</span> <a href="../index.html#/course">수업 과정</a> <span>/</span> <b>SNS 마케팅</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
+    <nav class="crumb tcrumb" id="tbar"><a href="../index.html#/">홈</a> <span>/</span> <a href="../index.html#/course">수업 과정</a> <span>/</span> <b>SNS 브랜드 마케팅</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
     <span class="d-eyebrow">SBS아카데미AIX 안산 · AI</span>
-    <h1 class="d-title">SNS 마케팅</h1>
-    <p class="lead d-lead">SNS 채널 운영과 콘텐츠 마케팅</p>
+    <h1 class="d-title">SNS 브랜드 마케팅 <span class="sub">·</span> AI로 브랜드를 만들고 알리기</h1>
+    <p class="lead d-lead">반 전체가 가상 브랜드 하나를 10일 동안 키웁니다 — 브랜드를 정하고, 조사하고, 콘텐츠를 만들고, 홈페이지와 인스타그램에 내보내기까지. 1인 기업·소상공인·SNS 담당자 대상, 코딩 몰라도 됩니다.</p>
+    <div class="meta-row"><span>2시간 × 10차시</span></div>
   </header>
   <main>
-    <h2 class="d-sec">수업 자료</h2>
-    <div class="notice">수업 자료가 곧 올라옵니다.</div>
-    <div class="d-foot">SBS아카데미AIX 안산 · SNS 마케팅</div>
+    <h2 class="d-sec">차시별 수업</h2>
+    <div class="pgrid"><a class="pcard" href="sns-uy7k1/01.html"><span class="pno">01차시</span><h3>AI에게 브랜드 말투로 말 시키기</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/02.html"><span class="pno">02차시</span><h3>Project로 브랜드 만들기 — 브랜드 인터뷰</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/03.html"><span class="pno">03차시</span><h3>시장·타깃 조사 — 출처 있는 조사만 믿기</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/04.html"><span class="pno">04차시</span><h3>브랜드 규칙과 비주얼 — 매번 같은 느낌 내기</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/05.html"><span class="pno">05차시</span><h3>콘텐츠 기획 — 기둥과 4주 캘린더</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/06.html"><span class="pno">06차시</span><h3>카드뉴스 만들기 — HTML로 디자인하고 PNG로 저장</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/07.html"><span class="pno">07차시</span><h3>숏폼 영상 기획 — 벤치마킹에서 대본·장면까지</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/08.html"><span class="pno">08차시</span><h3>트렌드 팔로워 팀 — 매주 오는 SNS 트렌드 브리핑</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/09.html"><span class="pno">09차시</span><h3>브랜드 홈페이지와 검색 — 프로필 링크가 갈 곳</h3><span class="ps">열기 →</span></a><a class="pcard" href="sns-uy7k1/10.html"><span class="pno">10차시</span><h3>인스타에 내보내기 — 안전하게 올리고 내 브랜드로</h3><span class="ps">열기 →</span></a></div>
+    <div class="phase"><span>① 브랜드 세우기 — 1~4차시</span><span>② 콘텐츠 만들기 — 5~8차시</span><span>③ 내보내기 — 9~10차시</span></div>
+    <div class="doc"><section class="hub-section">
+  <div class="hub-section-head">
+    <h2>10차시 동안의 흐름</h2>
+    <p>반 전체가 가상 브랜드 하나를 10차시 동안 키웁니다. 매일 결과물이 <b>같은 Project</b>에 쌓여 다음 날의 재료가 됩니다.</p>
+  </div>
+  <div class="table-scroll"><table>
+    <thead><tr><th>구간</th><th>무엇을 하나</th><th>결과물</th></tr></thead>
+    <tbody>
+      <tr><td>① 브랜드 세우기 — 1~4차시</td><td>브랜드 말투로 글 쓰기, 인터뷰로 브랜드 정리, 시장·타깃 조사, 브랜드 규칙과 비주얼</td><td>브랜드 한 장, 페르소나, 브랜드 규칙, 무드보드</td></tr>
+      <tr><td>② 콘텐츠 만들기 — 5~8차시</td><td>콘텐츠 기둥과 캘린더, 카드뉴스, 숏폼 기획, 트렌드 브리핑 팀</td><td>4주 캘린더, 카드뉴스 5장, 릴스 대본, 트렌드 브리핑</td></tr>
+      <tr><td>③ 내보내기 — 9~10차시</td><td>브랜드 홈페이지와 검색, 인스타그램 게시와 안전 수칙, 내 브랜드 발표</td><td>홈페이지 주소, 인스타 게시물 1건, 내 브랜드 한 장</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><div class="callout-label">10차시 동안 이어지는 상황</div><p>1인 브랜드 <b>뮤지엄(MUSEUM)</b> — 슬로건 "일상을 전시하다." 짧은 영상을 중심으로 사진·글 카드, 음악, 일러스트 작업을 합니다. (수업용 가상 브랜드) 첫 SNS 계정을 열고 알리기까지를 반 전체가 함께 만들고, 마지막 날에는 각자 내 브랜드로 바꿔 봅니다.</p></div>
+</section>
+
+<section class="hub-section">
+  <div class="hub-section-head">
+    <h2>준비물과 요금 — 첫날 전에 확인</h2>
+    <p>Claude Free로 되는 날과 유료가 필요한 날이 나뉩니다. 안 되는 날은 강사 화면 시연으로 따라옵니다.</p>
+  </div>
+  <div class="table-scroll"><table>
+    <thead><tr><th>필요한 것</th><th>쓰는 날</th><th>알아둘 점</th></tr></thead>
+    <tbody>
+      <tr><td><b>Claude 계정</b> (Free 가능)</td><td>1~5, 9차시</td><td>설정 → 기능에서 "코드 실행 및 파일 생성"을 켜야 아티팩트가 만들어짐</td></tr>
+      <tr><td><b>Claude 유료(Pro 이상) + 데스크톱 앱</b></td><td>6, 8차시 (7차시 일부)</td><td>Code 탭으로 카드뉴스·에이전트 팀을 만듦. 예약 작업도 유료 기능</td></tr>
+      <tr><td><b>이미지 생성 도구</b></td><td>4, 7차시</td><td>Claude는 사진 같은 이미지를 직접 그리지 않음 → Claude가 쓴 프롬프트를 생성 도구에 넣음</td></tr>
+      <tr><td><b>카페24 계정</b> (AI SPACE)</td><td>9차시</td><td>14일 무료 체험(카드 없이), 체험판은 하루 배포 횟수 제한</td></tr>
+      <tr><td><b>실습용 인스타그램 계정</b></td><td>10차시</td><td>프로페셔널(크리에이터·비즈니스) 계정으로 전환해 둘 것. <b>회사 공식 계정은 쓰지 않음</b></td></tr>
+      <tr><td><b>Zernio 계정</b></td><td>10차시</td><td>연결 계정 2개까지 무료, 카드 등록 없이 가입. API 키는 <code>.env</code>에만</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout callout--tip"><div class="callout-label">인스타 계정은 미리</div><p>프로페셔널 계정 전환은 5차시 숙제입니다. 계정 연결이 부담스러우면 <b>PNG 저장까지</b>(6차시)로도 과정의 대부분을 해낸 것입니다.</p></div>
+</section>
+</div>
+    <div class="d-foot">SBS아카데미AIX 안산 · SNS 브랜드 마케팅 · AI로 브랜드를 만들고 알리기</div>
   </main>
 </div>
 </body>
