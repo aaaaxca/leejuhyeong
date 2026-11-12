@@ -9,13 +9,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root{
-    --bg:#f3f2ee; --panel:#fbfaf7; --ink:#1e1f22; --sub:#6e6f73; --faint:#a3a3a3; --line:#dcd9d2;
-    --accent:#2f3a48; --accent-ink:#f3f2ee;
-    --c-plan:#9a9a9a; --c-wip:#a07c45; --c-live:#5a7a62; --c-done:#4b5a70;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#151617; --panel:#1b1c1e; --ink:#e7e5e0; --sub:#9a9894; --faint:#6b6a67; --line:#2b2c2f;
-      --accent:#d8d4cb; --accent-ink:#151617; }
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
@@ -79,7 +76,7 @@
 
 
   /* 번호 잠금 */
-  .pin-modal{position:fixed;inset:0;background:rgba(20,20,22,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
   .pin-modal.on{display:flex}
   .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
   .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
@@ -89,7 +86,7 @@
   .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
     border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
   .pins input:focus{border-color:var(--sub)}
-  .gate .err{color:#a5574b;font-size:11px;height:16px;margin-top:8px}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
   .shake{animation:sh .35s}
   @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
   .cat .lock{font-size:12px;color:var(--faint)}
