@@ -173,7 +173,8 @@ def course_with_content(it, folder):
     meta = "".join(f"<span>{e(m)}</span>" for m in it.get("meta") or [])
     phases = "".join(f"<span>{e(m)}</span>" for m in it.get("phases") or [])
     projs = it.get("projects") or []
-    cards = "".join(f'<a class="pcard" href="{folder}/{p["doc"]}.html"><span class="pno">{p["doc"]}차시</span><h3>{e(p["title"])}</h3><span class="ps">열기 →</span></a>' for p in projs)
+    cards = "".join(f'<a class="pcard" href="{folder}/{p["doc"]}.html"><span class="pno">{p["doc"]}차시</span><h3>{e(p["title"])}</h3><span class="ps">열기 →</span></a>' if p.get("doc")
+                    else f'<div class="pcard ready"><span class="pno">{i:02d}</span><h3>{e(p["title"])}</h3><span class="ps">준비 중</span></div>' for i, p in enumerate(projs, 1))
     ov = open(os.path.join(cdir, "overview.html"), encoding="utf-8").read() if os.path.exists(os.path.join(cdir, "overview.html")) else ""
     inner = f"""  <header>
     <span class="d-eyebrow">{e(where)}</span>
@@ -198,7 +199,7 @@ def session_page(it, idx, folder_name):
     body = re.sub(r'<div class="day-head">.*?</div>\s*', "", raw, count=1, flags=re.S)
     body = re.sub(r'<p class="goal">.*?</p>\s*', "", body, count=1, flags=re.S)
     body = re.sub(r'<div class="tags">.*?</div>\s*', "", body, count=1, flags=re.S)
-    prev = projs[idx-1] if idx > 0 else None; nxt = projs[idx+1] if idx+1 < len(projs) else None
+    prev = projs[idx-1] if idx > 0 and projs[idx-1].get("doc") else None; nxt = projs[idx+1] if idx+1 < len(projs) and projs[idx+1].get("doc") else None
     nav = '<nav class="snav">' + (f'<a href="{prev["doc"]}.html"><small>← {prev["doc"]}차시</small>{e(prev["title"])}</a>' if prev else "<span style=flex:1></span>") \
         + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt else "<span style=flex:1></span>") + "</nav>"
     inner = f"""  <header>
@@ -233,6 +234,7 @@ for cat in data:
             d = os.path.join(OUT, base); os.makedirs(d, exist_ok=True)
             for f in os.listdir(d): os.remove(os.path.join(d, f))
             for i in range(len(it["projects"])):
+                if not it["projects"][i].get("doc"): continue
                 open(os.path.join(d, it["projects"][i]["doc"] + ".html"), "w", encoding="utf-8").write(session_page(it, i, base))
             keep.add(base)
         else:

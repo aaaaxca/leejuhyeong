@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>01차시 · AI 변천사와 생성형 AI 이해 · 이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+
+  .stu header{margin-bottom:40px}
+  a.pcard{cursor:pointer}
+  a.pcard .ps{color:var(--sub)}
+  .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+</style>
+</head>
+<body class="stu">
+<div class="wrap">
+  <header>
+    <a class="back" href="../prompt-to7lu.html">← AI 프롬프트 엔지니어링 전체</a><br>
+    <span class="d-eyebrow">AI 프롬프트 엔지니어링 · 01차시</span>
+    <h1 class="d-title">AI 변천사와 생성형 AI 이해</h1>
+    <p class="goal">AI가 70년 동안 어떻게 지금의 ChatGPT까지 왔는지 흐름을 잡고, 생성형 AI가 무엇이며 검색과 어떻게 다른지 이해한 뒤 ChatGPT에 첫 프롬프트를 넣어 봅니다.</p>
+    <div class="tags"><span class="tag time">이론 50 · 실습 50 · 조절 20</span><span class="tag">ChatGPT (PC)</span><span class="tag src">Google 계정</span></div>
+  </header>
+  <main class="doc">
+    <h4>이론 1 — AI는 70년 넘게 쌓인 이야기</h4>
+    <p>AI는 갑자기 나타난 기술이 아닙니다. "생각하는 기계"를 꿈꾼 지 70년이 넘었고, 지금은 그 흐름의 한가운데입니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>시기</th><th>사건</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>1950</td><td>앨런 튜링의 질문 — 대화해서 사람인지 기계인지 구분 못 하면 "생각한다"고 볼 수 있지 않을까? (튜링 테스트)</td><td>"기계가 생각할 수 있을까?"의 시작. 영화 〈이미테이션 게임〉의 그 인물</td></tr>
+        <tr><td>1956</td><td>미국 다트머스 대학 학회에서 <b>Artificial Intelligence(인공지능)</b>라는 이름이 처음 붙음</td><td>몇 년이면 된다고 믿었지만 실제로는 수십 년이 걸림</td></tr>
+        <tr><td>1974–1993</td><td><b>AI 겨울</b> — 성과가 기대에 못 미치자 투자가 끊기고 연구가 얼어붙은 시기가 여러 번</td><td>한동안 AI는 "말만 거창한 기술"의 대명사</td></tr>
+        <tr><td>1997</td><td>IBM <b>딥블루</b>가 체스 세계 챔피언 카스파로프를 이김</td><td>체스만 할 줄 아는 <b>좁은 분야 AI</b>. 사람이 정한 규칙으로 움직임</td></tr>
+        <tr><td>2012</td><td>GPU와 인터넷 데이터 덕분에 <b>딥러닝</b>이 이미지 인식 대회에서 압도적 성적</td><td>"AI가 드디어 쓸 만해졌다"는 신호탄</td></tr>
+        <tr><td>2016</td><td>구글 딥마인드 <b>알파고</b>가 이세돌 9단에게 4승 1패</td><td>규칙이 아니라 <b>데이터로 스스로 패턴을 학습</b>하는 AI</td></tr>
+        <tr><td>2017</td><td>구글 연구진이 <b>트랜스포머(Transformer)</b> 구조 발표</td><td>글 전체의 맥락을 한 번에 이해 → 지금의 LLM(거대 언어 모델)의 설계도. GPT의 T가 바로 Transformer</td></tr>
+        <tr><td>2022</td><td>Midjourney, ChatGPT 공개. ChatGPT는 두 달 만에 사용자 1억 명</td><td>누구나 <b>말로</b> AI를 쓰는 시대</td></tr>
+        <tr><td>2023–지금</td><td>글·이미지·영상을 함께 다루는 모델, 영상 생성 AI(Kling 등), AI 에이전트 등장</td><td>"답하는 AI"에서 "일하는 AI"로 넘어가는 중</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><div class="callout-label">한 줄 요약</div><p>생각하는 기계를 꿈꿨고 → 딥러닝·트랜스포머로 똑똑해졌고 → 챗봇으로 누구나 쓰게 됐습니다. 그 사이 바뀐 건 <b>AI를 쓰는 방법이 "말"이 됐다</b>는 것. 그래서 말하는 기술, 프롬프트가 중요해졌습니다.</p></div>
+
+    <h4>이론 2 — 용어 정리: AI · 머신러닝 · 딥러닝 · 생성형 AI</h4>
+    <p>네 단어는 따로 있는 게 아니라 <b>큰 원 안에 작은 원</b>이 들어 있는 관계입니다. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝 ⊃ 생성형 AI</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>용어</th><th>쉽게 말해</th><th>예시</th></tr></thead>
+      <tbody>
+        <tr><td>인공지능(AI)</td><td>사람의 지능으로 하던 일을 컴퓨터가 하게 만드는 기술 전체</td><td>음성 비서, 자율 주행</td></tr>
+        <tr><td>머신러닝(ML)</td><td>규칙을 일일이 가르치지 않고, 많은 예제를 보고 스스로 패턴을 찾는 방법</td><td>스팸 메일 거르기, 넷플릭스 추천</td></tr>
+        <tr><td>딥러닝(DL)</td><td>뇌의 신경망을 흉내 낸 여러 층의 구조로, 특징까지 스스로 찾아내는 머신러닝</td><td>얼굴 인식, 보행자 인식</td></tr>
+        <tr><td>생성형 AI</td><td>딥러닝을 바탕으로, 명령어(프롬프트)에 따라 <b>새로운 콘텐츠를 만들어 내는</b> AI</td><td>ChatGPT, Midjourney, Kling</td></tr>
+      </tbody>
+    </table></div>
+    <p>예전에는 "고양이는 귀가 뾰족하고…"처럼 사람이 특징을 알려 줘야 했다면, 딥러닝은 고양이 사진을 아주 많이 보고 <b>무엇이 고양이다운지 스스로</b> 알아냅니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>AI가 배우는 방식</th><th>비유</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>지도학습</td><td>정답지가 있는 문제집으로 공부</td><td>스팸/정상 메일 분류, 집값 예측</td></tr>
+        <tr><td>비지도학습</td><td>정답 없이 비슷한 것끼리 묶어 보기</td><td>고객을 취향별 그룹으로 나누기</td></tr>
+        <tr><td>강화학습</td><td>잘하면 칭찬, 못하면 감점 받으며 스스로 터득</td><td>게임·바둑 AI, 자율 주행</td></tr>
+      </tbody>
+    </table></div>
+    <div class="table-scroll"><table>
+      <thead><tr><th>기준</th><th>AI</th><th>사람</th></tr></thead>
+      <tbody>
+        <tr><td>배우는 방식</td><td>데이터와 알고리즘</td><td>경험·감정·관계를 통한 복합적 학습</td></tr>
+        <tr><td>판단</td><td>학습한 패턴에 따른 추론</td><td>직관과 주관, 맥락을 함께 고려</td></tr>
+        <tr><td>창의성</td><td>학습한 데이터 안에서 조합</td><td>완전히 새로운 개념을 떠올림</td></tr>
+        <tr><td>새 상황</td><td>다시 학습하거나 조정이 필요</td><td>빠르게 적응</td></tr>
+      </tbody>
+    </table></div>
+    <p>그래서 AI에게는 <b>무엇을 원하는지 사람이 정확히 알려 주는 일</b>이 필요합니다. 이것이 이 과정 전체의 출발점입니다.</p>
+
+    <h4>이론 3 — 생성형 AI의 종류와 이 과정의 도구</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>유형</th><th>하는 일</th><th>대표 도구</th></tr></thead>
+      <tbody>
+        <tr><td>텍스트</td><td>문장 생성, 번역, 요약, 질의응답, 기획</td><td><b>ChatGPT</b>, Claude, Gemini</td></tr>
+        <tr><td>이미지</td><td>설명으로 그림 만들기, 스타일 변환, 캐릭터·포스터</td><td><b>Midjourney</b>, ChatGPT 이미지, Firefly</td></tr>
+        <tr><td>영상·3D</td><td>이미지나 글로 영상 만들기, 3D 모델링</td><td><b>Kling</b>, Sora</td></tr>
+        <tr><td>음성·음악</td><td>음성 합성, 작곡</td><td>Suno, AI 보이스</td></tr>
+        <tr><td>코드</td><td>프로그램 작성·자동화</td><td>Claude, GitHub Copilot</td></tr>
+      </tbody>
+    </table></div>
+    <p>이 과정은 굵게 표시한 세 도구를 순서대로 씁니다. <b>ChatGPT로 기획하고 → Midjourney로 이미지를 만들고 → Kling으로 움직입니다.</b></p>
+
+    <h4>이론 4 — 검색과 생성형 AI는 어떻게 다른가</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th></th><th>검색 엔진</th><th>생성형 AI</th></tr></thead>
+      <tbody>
+        <tr><td>목적</td><td>이미 있는 정보 중 키워드에 맞는 것을 찾아 줌</td><td>학습한 것을 바탕으로 새 답을 만들어 줌</td></tr>
+        <tr><td>작동 방식</td><td>웹을 돌며 수집(크롤링)하고 정리(인덱싱)해 둔 것에서 찾기</td><td>다음에 올 가장 그럴듯한 말을 이어 붙여 생성</td></tr>
+        <tr><td>결과물</td><td>관련 웹페이지 목록</td><td>정리된 글·그림·영상</td></tr>
+        <tr><td>주의할 점</td><td>내가 직접 읽고 골라야 함</td><td>매번 답이 조금씩 다르고, <b>그럴듯하게 틀릴 수 있음</b></td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><div class="callout-label">GPT라는 이름</div><p><b>Generative Pre-trained Transformer</b> — 미리 대량의 글로 학습한(Pre-trained), 트랜스포머 구조의, 생성하는(Generative) 모델이라는 뜻입니다.</p></div>
+    <div class="callout callout--tip"><div class="callout-label">할루시네이션(환각)</div><p>생성형 AI가 사실이 아니거나 근거 없는 내용을 <b>자신 있게 사실처럼</b> 말하는 현상입니다. 학습 데이터가 부족하거나, 질문이 모호하거나, 최신 정보를 확인 없이 답할 때 생깁니다. 질문을 구체적으로 하고, 중요한 내용은 확인하는 습관이 필요합니다.</p></div>
+
+    <h4>이론 5 — 앞으로의 흐름</h4>
+    <ul>
+      <li><b>멀티모달</b> — 글만 다루던 AI가 이미지·음성·영상까지 한 번에 이해하고 만들어 냄 (ChatGPT, Gemini)</li>
+      <li><b>버티컬 AI</b> — 금융·제조·바이오처럼 한 분야에 특화된 AI (예: 단백질 구조를 예측하는 AlphaFold)</li>
+      <li><b>AGI(범용 인공지능)</b> — 사람처럼 여러 일을 스스로 배우고 해내는 AI를 목표로 하는 연구</li>
+      <li><b>AI 에이전트</b> — 목표만 주면 계획하고 도구를 써서 일을 처리하는 AI. 이런 흐름이 있다는 것만 알아 두고, 자세한 내용은 AI Agent 과정에서 다룹니다</li>
+    </ul>
+    <p>도구는 계속 바뀌지만, <b>무엇을 원하는지 분명히 말하는 능력</b>은 어떤 도구에서도 그대로 쓰입니다.</p>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 A — ChatGPT 시작하고 모드 비교하기</div>
+      <p>순서는 <b>① Google 계정으로 로그인</b> → <b>② 화면 읽기(새 채팅 · 입력창 · + 파일 · 왼쪽 대화 기록 · 모델 선택)</b> → <b>③ 같은 질문을 Instant와 Thinking에 각각 넣어 비교</b>.<br>
+      질문 예: "디자인 학원에서 ChatGPT 유료 플랜을 도입해야 할까? 결론만 간단히 말해줘." / Thinking에는 "상황 정리 → 장점 → 단점 → 판단 기준 → 결론 순서로 생각해서 설명해줘."를 붙여 봅니다.</p>
+      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>Google 계정</b> <span class="meta">· 비밀번호 기억</span></li></ul></div>
+    </div>
+    <div class="practice-card">
+      <div class="practice-title">실습 B — 질문의 질이 결과물의 질을 바꾼다</div>
+      <p>같은 주제를 두 번 묻고 결과를 나란히 비교합니다.<br>
+      <b>① 모호하게</b>: "AI가 디자인에 미치는 영향 알려줘"<br>
+      <b>② 구체적으로</b>: "나는 <i>(내 전공)</i>을 배우는 수강생이야. AI 때문에 이 분야의 일하는 방식이 과거·현재·미래로 어떻게 바뀌는지, 초보자도 이해하게 3행짜리 표로 정리해줘."<br>
+      ②에 들어간 네 가지를 찾아봅니다 — <b>명확성</b>(무엇을), <b>맥락</b>(누가, 왜), <b>형식</b>(표, 3행), <b>수준</b>(초보자). 2차시에서 이것을 프롬프트 구조로 정리합니다.</p>
+      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>내 전공·관심 분야 한 줄</b> <span class="meta">· 사무, 편집, CG, 영상 등</span></li></ul></div>
+    </div>
+    <div class="practice-card">
+      <div class="practice-title">실습 C — 검색 vs 생성, 그리고 확인하기</div>
+      <p>"2016년 알파고와 이세돌의 대국 결과와 날짜"를 <b>구글 검색</b>과 <b>ChatGPT</b>에 각각 물어 결과 형태를 비교합니다. 이어서 ChatGPT에 "방금 답에서 확실하지 않은 부분이 있으면 표시하고 출처를 알려줘"라고 되물어, 답을 그대로 믿지 않고 확인하는 습관을 연습합니다.</p>
+    </div>
+    <div class="adjust"><b>조절 구간</b> — 로그인이 막힌 수강생 돕기 / 빠른 수강생은 실습 B의 ② 프롬프트에 조건을 하나씩 더 붙여(분량, 말투, 예시 포함) 결과가 어떻게 바뀌는지 기록</div>
+    <div class="out"><b>오늘 결과물</b> — ChatGPT 계정, 모호한 질문과 구체적인 질문의 결과 비교(내 전공의 AI 변화 표)</div>
+
+    <nav class="snav"><span style=flex:1></span><span style=flex:1></span></nav>
+    <div class="d-foot">AI 프롬프트 엔지니어링 · 01차시</div>
+  </main>
+</div>
+</body>
+</html>
