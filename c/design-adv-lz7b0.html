@@ -126,6 +126,52 @@
   a.pcard .ps{color:var(--sub)}
   .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
 
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
   .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
 </style>
 </head>
@@ -135,13 +181,46 @@
     <nav class="crumb tcrumb" id="tbar"><a href="../index.html#/">홈</a> <span>/</span> <a href="../index.html#/course">수업 과정</a> <span>/</span> <b>AI 응용디자인</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
     <span class="d-eyebrow">SBS아카데미컴퓨터AIX학원</span>
     <h1 class="d-title">AI 응용디자인</h1>
-    
-    <p class="lead d-lead">편집 과목 개편 · 응용 실무</p>
+    <p class="lead d-lead">Photoshop · Illustrator · 생성형 AI 응용</p>
+    <p class="lead d-lead">Photoshop 보정·합성과 Illustrator 그래픽 응용 기능을 실무 수준으로 다루고, Photoshop 생성형 AI로 이미지를 만들고 고치는 과정입니다. 마지막에는 AI 생성부터 벡터 변환·레이아웃까지 한 흐름으로 최종 디자인을 완성합니다.</p>
+    <div class="meta-row"><span>2시간 × 16차시</span></div>
   </header>
   <main>
-    <h2 class="d-sec">수업 자료</h2>
-    <div class="notice">수업 자료가 곧 올라옵니다.</div>
-    <div class="d-foot">SBS아카데미컴퓨터AIX학원 · AI 응용디자인</div>
+    <h2 class="d-sec">차시별 수업</h2>
+    <div class="pgrid"><a class="pcard" href="design-adv-lz7b0/01.html"><span class="pno">01차시</span><h3>필터</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/02.html"><span class="pno">02차시</span><h3>혼합 모드</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/03.html"><span class="pno">03차시</span><h3>사진 보정</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/04.html"><span class="pno">04차시</span><h3>조정 레이어</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/05.html"><span class="pno">05차시</span><h3>인물·제품 보정</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/06.html"><span class="pno">06차시</span><h3>채널</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/07.html"><span class="pno">07차시</span><h3>Photoshop 생성형 AI ①</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/08.html"><span class="pno">08차시</span><h3>Photoshop 생성형 AI ②</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/09.html"><span class="pno">09차시</span><h3>자유 변형·왜곡</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/10.html"><span class="pno">10차시</span><h3>브러시·자유형상 드로잉</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/11.html"><span class="pno">11차시</span><h3>마스크·투명도·혼합</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/12.html"><span class="pno">12차시</span><h3>패턴·이미지 추적</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/13.html"><span class="pno">13차시</span><h3>둘러싸기 왜곡·라이브 페인트·원근감 격자</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/14.html"><span class="pno">14차시</span><h3>블렌드·망·효과·모양</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/15.html"><span class="pno">15차시</span><h3>심볼·그래프·3D</h3><span class="ps">열기 →</span></a><a class="pcard" href="design-adv-lz7b0/16.html"><span class="pno">16차시</span><h3>AI 종합 응용</h3><span class="ps">열기 →</span></a></div>
+    <div class="phase"><span>① Photoshop 심화 — 1~6차시</span><span>② Photoshop 생성형 AI — 7~8차시</span><span>③ Illustrator 심화 — 9~15차시</span><span>④ 종합 — 16차시</span></div>
+    <div class="doc"><section class="hub-section">
+  <div class="hub-section-head">
+    <h2>16차시 동안의 흐름</h2>
+    <p>AI 기초디자인에서 익힌 Photoshop·Illustrator 기본기 위에, 실무 보정·합성과 그래픽 응용, 생성형 AI를 더합니다.</p>
+  </div>
+  <div class="table-scroll"><table>
+    <thead><tr><th>구간</th><th>무엇을 하나</th><th>결과물</th></tr></thead>
+    <tbody>
+      <tr><td>① Photoshop 심화 — 1~6차시</td><td>필터, 혼합 모드, 사진 보정, 조정 레이어, 인물·제품 보정, 채널</td><td>질감 포스터, 표지, 보정 사진, 리터칭 결과물</td></tr>
+      <tr><td>② Photoshop 생성형 AI — 7~8차시</td><td>생성형 채우기·확장, 이미지 생성, Rotate Object</td><td>배경 확장 이미지, AI 광고 이미지</td></tr>
+      <tr><td>③ Illustrator 심화 — 9~15차시</td><td>변형·왜곡, 브러시, 마스크·투명도, 패턴·이미지 추적, 둘러싸기·원근감, 블렌드·효과, 심볼·그래프·3D</td><td>로고, 패턴, 타이포 포스터, 3D 로고</td></tr>
+      <tr><td>④ 종합 — 16차시</td><td>AI 생성부터 보정·합성·벡터 변환·레이아웃까지 한 흐름</td><td>AI 포스터 / SNS 콘텐츠</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="hub-section">
+  <div class="hub-section-head">
+    <h2>준비물</h2>
+  </div>
+  <div class="table-scroll"><table>
+    <thead><tr><th>필요한 것</th><th>쓰는 날</th><th>알아둘 점</th></tr></thead>
+    <tbody>
+      <tr><td><b>Adobe Photoshop</b></td><td>1~8, 16차시</td><td>생성형 AI 기능(7·8차시)은 최신 버전과 Adobe 계정 로그인이 필요</td></tr>
+      <tr><td><b>Adobe Illustrator</b></td><td>9~16차시</td><td>생성형 AI 기능은 라이선스상 사용하지 않음</td></tr>
+      <tr><td><b>Kittl Vectorizer</b></td><td>16차시</td><td>AI 이미지를 벡터로 바꿀 때 Image Trace와 함께 사용</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><div class="callout-label">벡터 변환</div><p>Illustrator의 생성형 AI 기능은 라이선스상 쓸 수 없어, AI 이미지를 벡터로 바꿀 때는 <b>Image Trace</b>와 <b>Kittl Vectorizer</b>를 씁니다.</p></div>
+</section>
+</div>
+    <div class="d-foot">SBS아카데미컴퓨터AIX학원 · AI 응용디자인 · Photoshop · Illustrator · 생성형 AI 응용</div>
   </main>
 </div>
 </body>
