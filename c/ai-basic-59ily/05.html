@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>05차시 · 받은 문서 정리를 AI에게 · 이주형 클래스</title>
+<title>05차시 · 긴 문서 정리 — 요약과 할 일 뽑기 · 이주형 클래스</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -181,33 +181,33 @@
     <nav class="crumb tcrumb" id="tbar"><a href="../../index.html#/">홈</a> <span>/</span> <a href="../../index.html#/course">수업 과정</a> <span>/</span> <a href="../ai-basic-59ily.html">AI 기초</a> <span>/</span> <b>05차시</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
     <a class="back" href="../ai-basic-59ily.html">← AI 기초 전체</a><br>
     <span class="d-eyebrow">AI 기초 · 05차시</span>
-    <h1 class="d-title">받은 문서 정리를 AI에게 — 받기·열기·정리하기</h1>
-    <p class="goal">복지센터로 온 긴 안내문을 요약해 할 일을 뽑고, 비품 대장 엑셀을 올려 질문한 뒤 <b>엑셀 합계와 맞는지</b> 확인합니다.</p>
-    <div class="tags"><span class="tag src">받기·열기·정리하기 · 예시 파일 2개</span><span class="tag time">이론 25 · 실습 75 · 조절 20</span><span class="tag">ChatGPT 무료 (파일 2개)</span></div>
+    <h1 class="d-title">긴 문서 정리 — 요약과 할 일 뽑기</h1>
+    <p class="goal">긴 안내 공문을 요약해 할 일과 날짜를 뽑고, 대충 적은 회의 메모를 정리된 회의록으로 바꿉니다.</p>
+    <div class="tags"><span class="tag src">받기·열기·정리하기 · 예시 공문</span><span class="tag time">이론 25 · 실습 75 · 조절 20</span><span class="tag">ChatGPT 무료 (파일 1개)</span></div>
   </header>
   <main class="doc">
-    <div class="callout"><div class="callout-label">오늘의 상황</div><p>오늘부터 7차시까지는 <b>○○복지센터 행정실 신입 직원</b>이 되어 봅니다. 출근 첫 주, 2쪽짜리 안내 공문과 비품 대장 엑셀 파일이 도착했고 과장님이 "할 일 정리하고 비품 현황 좀 알려 줘요"라고 합니다. 문서를 AI에게 맡겨 정리하고, 숫자는 엑셀로 한 번 더 확인합니다. 파일은 강사가 나눠 줍니다.</p></div>
+    <div class="callout"><div class="callout-label">오늘의 상황</div><p>오늘부터 7차시까지는 <b>○○복지센터 행정실 신입 직원</b>이 되어 봅니다. 출근 첫 주, 2쪽짜리 안내 공문이 왔고 첫 회의에도 들어갔습니다. 과장님이 "공문에서 할 일 정리하고, 오늘 회의 내용도 정리해서 올려 줘요"라고 합니다. 파일은 강사가 나눠 줍니다.</p></div>
     <h4>이론</h4>
     <ul>
-      <li>일의 5단계(받기→열기→정리하기→만들기→보내기) 중 <b>정리하기</b>가 가장 크게 줄어든다 — 읽고 요약하고 표로 바꾸기</li>
+      <li>일의 5단계(받기→열기→정리하기→만들기→보내기) 중 <b>정리하기</b>가 가장 크게 줄어든다</li>
       <li>"요약해 줘" 대신 <b>"내가 해야 할 일과 날짜만"</b>처럼 무엇을 뽑을지 말하기</li>
-      <li>AI가 낸 숫자는 <b>엑셀로 한 번 더</b> — 합계 버튼 하나로 함께 맞춰 본다</li>
+      <li>형식을 정해 주기 — "날짜·참석자·정한 것·할 일(담당) 순서로"</li>
       <li>개인정보(이름·연락처·주민번호)가 든 실제 업무 파일은 올리지 않는다</li>
     </ul>
     <div class="practice-card">
       <div class="practice-title">실습 A — 긴 안내문에서 할 일과 날짜만 뽑기</div>
       <p>순서는 <b>① 안내문 PDF 올리기</b> → <b>② 3줄 요약</b> → <b>③ 할 일·마감일 표로 받기</b>.<br><b>새 대화</b>에서 시작합니다.</p>
-      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>센터 안내 공문</b>(<code>center_notice.pdf</code>) <span class="meta">· PDF · 수업용 가상 공문 2쪽</span></li></ul></div>
+      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>센터 안내 공문</b> <span class="meta">· <code>center_notice.pdf</code> · 수업용 가상 공문 2쪽</span></li></ul></div>
     </div>
     <div class="practice-card">
-      <div class="practice-title">실습 B — 비품 대장에게 묻고 엑셀로 확인하기</div>
-      <p>순서는 <b>① 비품 대장 올리기</b> → <b>② "가장 많이 산 품목과 총액은?" 묻기</b> → <b>③ 엑셀 합계와 비교</b>.<br><b>새 대화</b>에서 시작합니다.</p>
-      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>비품 관리 대장</b>(<code>비품관리대장.xlsx</code>) <span class="meta">· 엑셀 · 강사 제공 예시 파일</span></li></ul></div>
+      <div class="practice-title">실습 B — 회의 메모를 회의록으로</div>
+      <p>순서는 <b>① 회의 메모 붙여 넣기</b> → <b>② 회의록 형식으로 받기</b> → <b>③ 빠진 내용·날짜 확인</b>.<br><b>새 대화</b>에서 시작합니다.</p>
+      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>회의 메모</b> <span class="meta">· 띄엄띄엄 적은 10줄 · 페이지에 있음</span></li></ul></div>
     </div>
-    <div class="adjust"><b>조절 구간</b> — 파일 받기·올리기, 엑셀 합계 버튼 돕기 / 빠른 수강생은 비품 대장으로 "다음 달에 더 사야 할 것" 묻기</div>
-    <div class="out"><b>오늘 결과물</b> — 할 일·마감일 표, AI 답과 엑셀 합계 비교 결과</div>
+    <div class="adjust"><b>조절 구간</b> — 파일 받기·올리기 돕기 / 빠른 수강생은 회의록을 과장님께 보낼 3줄 보고로</div>
+    <div class="out"><b>오늘 결과물</b> — 할 일·마감일 표, 정리된 회의록</div>
 
-    <nav class="snav"><a href="04.html"><small>← 04차시</small>아이·소중한 사람과 함께 쓰기</a><a class="nx" href="06.html"><small>06차시 →</small>보고 자료를 1분 만에 — 감마</a></nav>
+    <nav class="snav"><a href="04.html"><small>← 04차시</small>상대에 맞는 글 — 문자부터 문의 메일까지</a><a class="nx" href="06.html"><small>06차시 →</small>표와 숫자 — 엑셀 자료에 묻고 확인하기</a></nav>
     <div class="d-foot">AI 기초 · 05차시</div>
   </main>
 </div>
