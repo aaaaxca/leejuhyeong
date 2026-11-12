@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --bg:#f3f2ee; --panel:#fbfaf7; --ink:#1e1f22; --sub:#6e6f73; --faint:#a3a3a3; --line:#dcd9d2;
+    --accent:#2f3a48; --accent-ink:#f3f2ee;
+    --c-plan:#9a9a9a; --c-wip:#a07c45; --c-live:#5a7a62; --c-done:#4b5a70;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#151617; --panel:#1b1c1e; --ink:#e7e5e0; --sub:#9a9894; --faint:#6b6a67; --line:#2b2c2f;
+      --accent:#d8d4cb; --accent-ink:#151617; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(20,20,22,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#a5574b;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header id="head"></header>
+  <main id="view"></main>
+</div>
+<div class="pin-modal" id="pinModal"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================================================================
+   여기만 수정하면 됩니다.
+
+   [카테고리]  id · title · desc · items
+   [과정]      id · key(학생 주소용, 자동 생성 — 바꾸면 학생 링크가 바뀜) · group(구분) · title · desc · tags · status · teacher · student · projects
+               (사내교육처럼 바로 열 페이지면 ppt:"주소" 만 넣으면 됨 → 클릭 시 바로 열림)
+   [프로젝트]  title · desc · teacher · student
+
+   status : "plan"(기획) | "wip"(제작중) | "live"(수업중) | "done"(완료)
+   주소를 비워두면 '준비중'으로 표시됩니다.
+   lock : 4자리 번호의 암호값(SHA-256). 번호를 바꾸려면 새 번호의 암호값으로 교체. 빼면 잠금 해제.
+   ================================================================== */
+/* 아이콘 이름: book · mic · building · screen · spark · doc · prompt · bot · share · briefcase · pen · layers · film · draw · cube · brush */
+const DATA = [
+  { id:"course", title:"수업 과정", desc:"정규 과정 · 과목별 프로젝트", icon:"book", lock:"34c24df580a66acd9ea14b56f960fde0d3554d73d66aa3c67bb4b25a629b4e17", items:[
+    // ── 시니어
+    { id:"ai-basic", key:"59ily", group:"시니어", icon:"spark", title:"AI 기초", tags:["시니어"], desc:"AI 도구를 처음 접하는 시니어 대상 입문", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"office-basic", key:"y28l1", group:"시니어", icon:"doc", title:"사무기초", tags:["시니어"], desc:"시니어 대상 문서·사무 기초", status:"plan", teacher:"", student:"", projects:[] },
+    // ── AI
+    { id:"prompt", key:"to7lu", group:"AI", icon:"prompt", title:"AI 프롬프트 엔지니어링", tags:["통합 과정"], desc:"프롬프트 엔지니어링 1·2 통합", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"agent1", key:"lybh9", group:"AI", icon:"bot", title:"AI Agent 1", tags:[], subtitle:"업무 자동화", desc:"지시하는 법, 업무 도구 연결, 문서·데이터·조사·회의 같은 기본 업무를 AI에게 맡기는 법을 배웁니다.", status:"plan", teacher:"", student:"", projects:[
+      { title:"AI Agent 이해", teacher:"", student:"" },
+      { title:"지시 설계", teacher:"", student:"" },
+      { title:"Project", teacher:"", student:"" },
+      { title:"보고서", teacher:"", student:"" },
+      { title:"커넥터 · 메일", teacher:"", student:"" },
+      { title:"MCP · 카카오톡", teacher:"", student:"" },
+      { title:"데이터 다루기", teacher:"", student:"" },
+      { title:"조사 · 요약 · 검토", teacher:"", student:"" },
+      { title:"이미지 만들기", teacher:"", student:"" },
+      { title:"회의 · 액션아이템", teacher:"", student:"" },
+      { title:"아티팩트 · 배포", teacher:"", student:"" },
+      { title:"AI SPACE · 검색", teacher:"", student:"" },
+    ] },
+    { id:"agent2", key:"bbjyp", group:"AI", icon:"bot", title:"AI Agent 2", tags:[], desc:"마케팅 · 1인 기업 · 홈페이지 · SNS", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"biz-agent", key:"1fvij", group:"AI", icon:"briefcase", title:"기업 AI Agent", tags:["기업"], desc:"기업 실무용 AI Agent 도입·활용", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"sns", key:"uy7k1", group:"AI", icon:"share", title:"SNS 마케팅", tags:[], desc:"SNS 채널 운영과 콘텐츠 마케팅", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"short-drama", key:"q3xx3", group:"AI", icon:"film", title:"AI 숏드라마", tags:[], desc:"AI 숏드라마 제작 & 채널 운영", status:"plan", teacher:"", student:"", projects:[] },
+    // ── 모션
+    { id:"ae1", key:"dqa0t", group:"모션", icon:"film", title:"애프터이펙트 1", tags:["모션"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"ae2", key:"7as6q", group:"모션", icon:"film", title:"애프터이펙트 2", tags:["모션"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"pr1", key:"9yjde", group:"모션", icon:"film", title:"프리미어", tags:["모션"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"pr2", key:"ffggx", group:"모션", icon:"film", title:"프리미어 심화", tags:["모션"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    // ── 편집 디자인
+    { id:"design-basic", key:"sj34u", group:"편집 디자인", icon:"pen", title:"AI 기초디자인", tags:["편집"], desc:"편집 과목 개편 · 디자인 기초", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"design-adv", key:"lz7b0", group:"편집 디자인", icon:"layers", title:"AI 응용디자인", tags:["편집"], desc:"편집 과목 개편 · 응용 실무", status:"plan", teacher:"", student:"", projects:[] },
+    // ── CG · Maya
+    { id:"maya1", key:"hsw0h", group:"CG · Maya", icon:"cube", title:"Maya 1", tags:["CG"], desc:"인터페이스 · 폴리곤 모델링 기초", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya2", key:"3ayh6", group:"CG · Maya", icon:"cube", title:"Maya 2", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya3", key:"fhef2", group:"CG · Maya", icon:"cube", title:"Maya 3", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya4", key:"4y05w", group:"CG · Maya", icon:"cube", title:"Maya 4", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya5", key:"w57kv", group:"CG · Maya", icon:"cube", title:"Maya 5", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya6", key:"z3evm", group:"CG · Maya", icon:"cube", title:"Maya 6", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya7", key:"vtaxa", group:"CG · Maya", icon:"cube", title:"Maya 7", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"maya8", key:"ywu4b", group:"CG · Maya", icon:"cube", title:"Maya 8", tags:["CG"], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+  ]},
+  { id:"seminar", title:"세미나", desc:"원데이 · 단기 세미나", icon:"mic", items:[
+    { id:"ai-draw-move", key:"0wcfv", icon:"draw", title:"AI가 그리고, 내가 움직인다", tags:[], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"figure", key:"8akqb", icon:"cube", title:"AI 기반 캐릭터 피규어 제작", tags:[], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+    { id:"zbrush", key:"i29ry", icon:"brush", title:"ZBrush 디테일 세미나", tags:[], desc:"", status:"plan", teacher:"", student:"", projects:[] },
+  ]},
+  { id:"inhouse", title:"사내교육", desc:"내부 발표 · 교육용 HTML PPT", icon:"building", items:[
+    { id:"ai-consult", icon:"screen", title:"AI과정 컨설팅 및 커리큘럼", tags:["PPT"], desc:"", status:"done", ppt:"" },
+    { id:"cg-curri", icon:"screen", title:"CG학과 커리큘럼", tags:["PPT"], desc:"", status:"plan", ppt:"" },
+  ]},
+];
+/* ================================================================== */
+
+const ICONS = {
+  book:'<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/>',
+  building:'<path d="M5 21V4h9v17M14 9h5v12M3 21h18M8 8h3M8 12h3M8 16h3M17 13h0M17 17h0"/>',
+  screen:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5"/>',
+  doc:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',
+  prompt:'<rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M7 10l3 2-3 2M12 15h5"/>',
+  bot:'<rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 4v4M9.5 13h0M14.5 13h0M9.5 16h5"/>',
+  share:'<circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 11l8-4M8 13l8 4"/>',
+  briefcase:'<rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5h6v2M3 12h18"/>',
+  pen:'<path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/>',
+  layers:'<path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/>',
+  film:'<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4"/>',
+  draw:'<path d="M3 17c3-6 6 2 9-4s6 2 9-4"/><path d="M3 21h18"/>',
+  cube:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+  brush:'<path d="M14 4l6 6-7 7-6-6z"/><path d="M7 11c-2 0-4 2-4 5v4h4c3 0 5-2 5-4"/>',
+};
+const icon = (n, cls="") => n && ICONS[n] ? `<span class="ic ${cls}"><svg viewBox="0 0 24 24">${ICONS[n]}</svg></span>` : "";
+
+const ST = {plan:"기획", wip:"제작중", live:"수업중", done:"완료"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const abs = u => { try{return new URL(u, location.href).href}catch(e){return u} };
+const pad = n => String(n).padStart(2,"0");
+
+function linkBtn(url, label, primary){
+  return url ? `<a class="btn ${primary?'primary':''}" href="${esc(url)}" target="_blank" rel="noopener">${label}</a>`
+             : `<a class="btn ${primary?'primary':''}" aria-disabled="true">${label} · 준비중</a>`;
+}
+function copyBtn(url){ return url ? `<button class="btn copy" data-copy="${esc(abs(url))}">링크 복사</button>` : ""; }
+function linkRow(o){ return `<div class="row">${linkBtn(o.teacher,"수업 진행",true)}${linkBtn(o.student,"학생용")}${copyBtn(o.student)}</div>`; }
+function meta(o){
+  return `<div class="meta">${o.status?`<span class="st ${o.status}">${ST[o.status]}</span>`:""}${(o.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+}
+function crumb(parts){
+  return `<nav class="crumb">${parts.map((p,i)=> i<parts.length-1 ? `<a href="${p[1]}">${esc(p[0])}</a> <span>/</span>` : `<b>${esc(p[0])}</b>`).join(" ")}</nav>`;
+}
+
+/* 번호 잠금: 홈에서 들어갈 때마다 팝업으로 확인 */
+let unlockedCat = null;
+function sha256(str){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const m=[...unescape(encodeURIComponent(str))].map(c=>c.charCodeAt(0)); const l=m.length*8;
+  m.push(0x80); while(m.length%64!==56) m.push(0);
+  for(let i=7;i>=0;i--) m.push(i>3?0:(l>>>(i*8))&255);
+  const r=(x,n)=>(x>>>n)|(x<<(32-n));
+  for(let o=0;o<m.length;o+=64){
+    const w=[]; for(let i=0;i<16;i++) w[i]=(m[o+i*4]<<24)|(m[o+i*4+1]<<16)|(m[o+i*4+2]<<8)|m[o+i*4+3];
+    for(let i=16;i<64;i++){ const s0=r(w[i-15],7)^r(w[i-15],18)^(w[i-15]>>>3), s1=r(w[i-2],17)^r(w[i-2],19)^(w[i-2]>>>10); w[i]=(w[i-16]+s0+w[i-7]+s1)|0; }
+    let [a,b,c,d,e,f,g,h]=H;
+    for(let i=0;i<64;i++){ const t1=(h+(r(e,6)^r(e,11)^r(e,25))+((e&f)^(~e&g))+K[i]+w[i])|0, t2=((r(a,2)^r(a,13)^r(a,22))+((a&b)^(a&c)^(b&c)))|0;
+      h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0; }
+    H=H.map((v,i)=>(v+[a,b,c,d,e,f,g,h][i])|0);
+  }
+  return H.map(v=>(v>>>0).toString(16).padStart(8,"0")).join("");
+}
+async function sha(t){ return sha256(t); }
+function askPin(cat, go){
+  const m=$("#pinModal");
+  m.innerHTML = `<div class="gate"><button class="x" aria-label="닫기">×</button>
+    <h4>${esc(cat.title)}</h4><p>입장 번호 4자리를 입력하세요</p>
+    <div class="pins"><input type="password" inputmode="numeric" maxlength="4" autocomplete="off"></div>
+    <div class="err"></div></div>`;
+  m.classList.add("on");
+  const close=()=>{ m.classList.remove("on"); m.innerHTML=""; };
+  m.onclick=e=>{ if(e.target===m || e.target.closest(".x")) close(); };
+  const el=m.querySelector(".pins input");
+  setTimeout(()=>el.focus(),30);
+  el.addEventListener("input",async()=>{
+    el.value=el.value.replace(/\D/g,"").slice(0,4);
+    if(el.value.length===4){
+      if(await sha(el.value)===cat.lock){ unlockedCat=cat.id; close(); go(); }
+      else{ const g=m.querySelector(".pins"); g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
+        m.querySelector(".err").textContent="번호가 맞지 않습니다"; el.value=""; el.focus(); }
+    }
+  });
+  el.addEventListener("keydown",e=>{ if(e.key==="Escape") close(); });
+}
+
+function route(){
+  const [catId, itemId] = curHash().replace(/^#\/?/,"").split("/").filter(Boolean);
+  const cat = DATA.find(c=>c.id===catId);
+  const item = cat && cat.items.find(i=>i.id===itemId);
+  window.scrollTo(0,0);
+  if(!cat) unlockedCat = null;
+  if(cat && cat.lock && unlockedCat!==cat.id){
+    const target = curHash(); go("#/", true); viewHome();
+    return askPin(cat, ()=>go(target));
+  }
+  if(cat && unlockedCat && unlockedCat!==cat.id) unlockedCat = null;
+  if(item) return viewItem(cat, item);
+  if(cat) return viewCat(cat);
+  viewHome();
+}
+
+/* 1단계 */
+function viewHome(){
+  $("#head").innerHTML = `<p class="eyebrow">Class by Lee Juhyung</p><h1>이주형 클래스</h1><p class="lead">과정 개발 · 세미나 · 사내교육</p>`;
+  $("#view").innerHTML = `<div class="cats">${DATA.map((c,i)=>`
+    <a class="cat" href="#/${c.id}">
+      ${icon(c.icon)}
+      <div><h2>${esc(c.title)}</h2><p>${esc(c.desc)}</p></div>
+      <span class="cnt">${c.lock?'<span class="lock">잠금 · </span>':""}${c.items.length}개</span>
+      <span class="arr">→</span>
+    </a>`).join("")}</div>`;
+}
+
+/* 2단계 */
+function viewCat(cat){
+  $("#head").innerHTML = crumb([["홈","#/"],[cat.title]]) + icon(cat.icon,"lead-ic") + `<h1>${esc(cat.title)}</h1><p class="lead">${esc(cat.desc)}</p>`;
+  if(!cat.items.length){ $("#view").innerHTML = `<div class="empty">아직 항목이 없습니다.</div>`; return; }
+  const card = (it,i)=>{
+    const head = `<div class="card-top"><div class="no">${pad(i+1)}</div>${icon(it.icon)}</div><h3>${esc(it.title)}</h3>${(it.subtitle||it.desc)?`<p>${esc(it.subtitle||it.desc)}</p>`:""}`;
+    if(it.ppt !== undefined){
+      return it.ppt
+        ? `<a class="card" href="${esc(it.ppt)}" target="_blank" rel="noopener">${head}<span class="more">PPT 열기 ↗</span>${meta(it)}</a>`
+        : `<div class="card">${head}<span class="more">PPT 준비중</span>${meta(it)}</div>`;
+    }
+    return `<a class="card" href="#/${cat.id}/${it.id}">${head}<span class="more">프로젝트 ${(it.projects||[]).length}개 →</span>${meta(it)}</a>`;
+  };
+  const groups = [];
+  cat.items.forEach(it=>{ const g=it.group||""; let x=groups.find(y=>y.name===g); if(!x) groups.push(x={name:g,items:[]}); x.items.push(it); });
+  $("#view").innerHTML = groups.map(g=>`
+    <section class="grp">${g.name?`<div class="grp-head"><h2>${esc(g.name)}</h2><span>${g.items.length}</span></div>`:""}
+      <div class="grid">${g.items.map(card).join("")}</div></section>`).join("");
+}
+
+/* 3단계 */
+function viewItem(cat, it){
+  const where = ["SBS아카데미AIX 안산", it.group].filter(Boolean).join(" · ");
+  const full = it.subtitle ? `${esc(it.title)} <span class="sub">·</span> ${esc(it.subtitle)}` : esc(it.title);
+  const stuUrl = it.key ? `c/${it.id}-${it.key}.html` : "";
+  const acts = stuUrl ? `<div class="row">${it.teacher?linkBtn(it.teacher,"수업 진행",true):""}${linkBtn(stuUrl,"학생 페이지 열기",!it.teacher)}${copyBtn(stuUrl)}</div>` : "";
+  $("#head").innerHTML = crumb([["홈","#/"],[cat.title,"#/"+cat.id],[it.title]])
+    + `<span class="d-eyebrow">${esc(where)}</span>`
+    + `<h1 class="d-title">${full}</h1>${it.desc?`<p class="lead d-lead">${esc(it.desc)}</p>`:""}`
+    + (acts ? `<div class="head-actions">${acts}</div>` : "");
+  let ps = it.projects||[], sample = false;
+  if(!ps.length){ ps = [{title:"프로젝트 1"},{title:"프로젝트 2"}]; sample = true; }
+  const pcard = (p,i)=>{
+    const ready = !p.teacher && !p.student;
+    if(ready) return `<div class="pcard ready ${sample?'sample':''}"><span class="pno">${pad(i+1)}</span><h3>${esc(p.title)}</h3><span class="ps">${sample?'예시 · 내용 없음':'준비 중'}</span></div>`;
+    return `<div class="pcard"><span class="pno">${pad(i+1)}</span><h3>${esc(p.title)}</h3>${p.desc?`<span class="ps" style="margin-top:0">${esc(p.desc)}</span>`:""}${linkRow(p)}</div>`;
+  };
+  $("#view").innerHTML = `<h2 class="d-sec">수업 자료</h2><div class="pgrid">${ps.map(pcard).join("")}</div>
+    <div class="d-foot">${esc(["SBS아카데미AIX 안산", it.title, it.subtitle].filter(Boolean).join(" · "))}</div>`;
+}
+
+document.addEventListener("click", e=>{
+  const c = e.target.closest("[data-copy]");
+  if(!c) return;
+  e.preventDefault();
+  (navigator.clipboard ? navigator.clipboard.writeText(c.dataset.copy) : Promise.reject())
+    .then(()=>toast("학생용 링크를 복사했습니다")).catch(()=>prompt("아래 링크를 복사하세요", c.dataset.copy));
+});
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1600); }
+let CUR = location.hash || "#/";
+const curHash = () => (location.hash && location.hash!=="#") ? location.hash : CUR;
+function go(h, silent){
+  CUR = h;
+  try{ silent ? history.replaceState(null,"",h) : history.pushState(null,"",h); }catch(err){}
+  if(!silent) route();
+}
+document.addEventListener("click", e=>{
+  const a = e.target.closest('a[href^="#"]');
+  if(!a) return;
+  e.preventDefault();
+  go(a.getAttribute("href"));
+});
+window.addEventListener("hashchange", ()=>{ CUR = location.hash || "#/"; route(); });
+window.addEventListener("popstate", ()=>{ CUR = location.hash || "#/"; route(); });
+route();
+</script>
+</body>
+</html>
