@@ -54,6 +54,17 @@ PAGE_CSS = """
   .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
 """
 
+TBAR_CSS = """
+  .tbar{display:none;position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+  .tbar.on{display:block}
+  .tbar a{display:block;max-width:1040px;margin:0 auto;padding:10px 24px;font-size:13px;color:var(--sub);text-decoration:none}
+  .tbar a:hover{color:var(--ink)}
+"""
+def tbar(href):
+    # 허브에서 번호를 입력한 브라우저에서만 보이는 강사용 돌아가기 줄
+    return (f'<div class="tbar" id="tbar"><a href="{href}">← 이주형 클래스로 돌아가기</a></div>'
+            '<script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>')
+
 def page(cat, it):
     where = " · ".join(x for x in ["SBS아카데미AIX 안산", it.get("group")] if x)
     title = e(it["title"]) + (f' <span class="sub">·</span> {e(it["subtitle"])}' if it.get("subtitle") else "")
@@ -76,9 +87,10 @@ def page(cat, it):
 <meta name="robots" content="noindex, nofollow">
 <title>{e(it["title"])} · 이주형 클래스</title>
 {fonts}
-<style>{css}{PAGE_CSS}</style>
+<style>{css}{PAGE_CSS}{TBAR_CSS}</style>
 </head>
 <body class="stu">
+{tbar("../index.html#/" + cat["id"])}
 <div class="wrap">
   <header>
     <span class="d-eyebrow">{e(where)}</span>
@@ -144,7 +156,7 @@ CONTENT_CSS = """
   .back:hover{color:var(--ink)}
 """
 
-def shell(title, inner):
+def shell(title, inner, back=""):
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -153,9 +165,10 @@ def shell(title, inner):
 <meta name="robots" content="noindex, nofollow">
 <title>{e(title)} · 이주형 클래스</title>
 {fonts}
-<style>{css}{PAGE_CSS}{CONTENT_CSS}</style>
+<style>{css}{PAGE_CSS}{CONTENT_CSS}{TBAR_CSS}</style>
 </head>
 <body class="stu">
+{tbar(back) if back else ""}
 <div class="wrap">
 {inner}
 </div>
@@ -189,7 +202,7 @@ def course_with_content(it, folder):
     <div class="doc">{strip_emoji(ov)}</div>
     <div class="d-foot">{e(" · ".join(x for x in ["SBS아카데미AIX 안산", it["title"], it.get("subtitle")] if x))}</div>
   </main>"""
-    return shell(it["title"], inner)
+    return shell(it["title"], inner, "../index.html#/course")
 
 def session_page(it, idx, folder_name):
     projs = it["projects"]; p = projs[idx]
@@ -214,7 +227,7 @@ def session_page(it, idx, folder_name):
     {nav}
     <div class="d-foot">{e(it["title"])} · {p["doc"]}차시</div>
   </main>"""
-    return shell(f'{p["doc"]}차시 · {p["title"]}', inner)
+    return shell(f'{p["doc"]}차시 · {p["title"]}', inner, "../../index.html#/course")
 
 import shutil
 

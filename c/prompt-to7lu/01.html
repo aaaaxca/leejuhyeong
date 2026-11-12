@@ -171,9 +171,15 @@
   .snav .nx{text-align:right}
   .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
   .back:hover{color:var(--ink)}
+
+  .tbar{display:none;position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+  .tbar.on{display:block}
+  .tbar a{display:block;max-width:1040px;margin:0 auto;padding:10px 24px;font-size:13px;color:var(--sub);text-decoration:none}
+  .tbar a:hover{color:var(--ink)}
 </style>
 </head>
 <body class="stu">
+<div class="tbar" id="tbar"><a href="../../index.html#/course">← 이주형 클래스로 돌아가기</a></div><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
 <div class="wrap">
   <header>
     <a class="back" href="../prompt-to7lu.html">← AI 프롬프트 엔지니어링 전체</a><br>
