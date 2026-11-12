@@ -55,7 +55,7 @@ PAGE_CSS = """
 """
 
 TBAR_CSS = """
-  .tcrumb{display:none} .tcrumb.on{display:flex}
+  .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
 """
 def tbar(parts):
     # 허브에서 번호를 입력한 브라우저에서만 보이는 강사용 경로 (홈 / 수업 과정 / 과목)
