@@ -215,13 +215,17 @@ def session_page(it, idx, folder_name):
     prev = projs[idx-1] if idx > 0 and projs[idx-1].get("doc") else None; nxt = projs[idx+1] if idx+1 < len(projs) and projs[idx+1].get("doc") else None
     nav = '<nav class="snav">' + (f'<a href="{prev["doc"]}.html"><small>← {prev["doc"]}차시</small>{e(prev["title"])}</a>' if prev else "<span style=flex:1></span>") \
         + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt else "<span style=flex:1></span>") + "</nav>"
+    full_t = h3.group(1).strip() if h3 else e(p["title"])
+    t_main, _, t_sub = full_t.partition(" — ")
+    tag_html = re.sub(r'<span class="tag time">.*?</span>', "", tags.group(1)) if tags else ""
     inner = f"""  <header>
     {tbar([("홈","../../index.html#/"),("수업 과정","../../index.html#/course"),(it["title"],f"../{folder_name}.html"),(p["doc"]+"차시",None)])}
     <a class="back" href="../{folder_name}.html">← {e(it["title"])} 전체</a><br>
     <span class="d-eyebrow">{e(it["title"])} · {p["doc"]}차시</span>
-    <h1 class="d-title">{h3.group(1) if h3 else e(p["title"])}</h1>
+    <h1 class="d-title">{t_main}</h1>
+    {f'<p class="lead d-lead">{t_sub}</p>' if t_sub else ""}
     {f'<p class="goal">{goal.group(1)}</p>' if goal else ""}
-    {f'<div class="tags">{tags.group(1)}</div>' if tags else ""}
+    {f'<div class="tags">{tag_html}</div>' if tag_html.strip() else ""}
   </header>
   <main class="doc">
     {strip_emoji(body)}
