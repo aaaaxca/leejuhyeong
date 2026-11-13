@@ -1,0 +1,207 @@
+<div class="day-head"><span class="day-num">01차시</span><h3>AI Agent 이해</h3></div>
+    <p class="goal">챗봇과 에이전트가 무엇이 다른지, 에이전트가 어떻게 일을 끝내는지, 어디까지 믿고 맡길 수 있는지 정리하고 Claude 가입·결제까지 마칩니다.</p>
+    <div class="tags"><span class="tag time">이론 60 · 실습 40 · 조절 20</span><span class="tag">Claude (PC)</span><span class="tag src">이메일 또는 Google 계정</span></div>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>당신은 작은 회사의 마케팅 담당자입니다. 팀장이 말합니다. "요즘 다들 AI로 일한다던데, 우리도 'AI 동료' 하나 들이자. 자네가 먼저 써 보고 팀에 알려줘." AI 동료가 대체 뭐지? 챗봇이랑 뭐가 다르고, 돈은 어떻게 내지? 회사 자료를 올려도 되나? 오늘 이 질문들을 끝냅니다.</p></div>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>1. 답하는 AI에서 일하는 AI로</h2><p>AI 70년 역사는 프롬프트 엔지니어링 과정에서 봤습니다. 오늘은 그 마지막 장면, 챗봇 이후부터 이어 갑니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>AI가 하는 일</th><th>사람이 하는 일</th></tr></thead>
+        <tbody>
+          <tr><td>챗봇 대중화 (2022~)</td><td>물으면 말로 답한다. 방법을 알려 준다</td><td>답을 읽고, 직접 실행한다</td></tr>
+          <tr><td>도구를 쥔 AI (2023~)</td><td>검색하고, 파일을 읽고, 계산하고, 문서·코드를 만든다</td><td>무엇을 원하는지 말하고, 결과를 확인한다</td></tr>
+          <tr><td>에이전트 (지금)</td><td>목표를 받으면 계획을 세우고 여러 단계를 스스로 이어서 일을 끝낸다</td><td>일을 맡기고, 검수하고, 최종 판단한다</td></tr>
+        </tbody>
+      </table></div>
+      <p>프롬프트 과정에서 배운 "AI에게 정확히 말하는 법"이 여기서 그대로 쓰입니다. 달라지는 점은 하나, <b>AI가 말만 하는 게 아니라 손을 쓴다</b>는 것입니다. 우리는 그 출발선에 서 있습니다. 늦지 않았습니다.</p>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>2. 챗봇과 에이전트</h2></div>
+      <p><b>챗봇</b>은 텍스트로 묻고 텍스트로 답을 받습니다. <b>에이전트</b>는 파일을 주고 "읽고, 처리하고, 결과물을 만들어 줘"라고 시키면 도구를 써서 여러 단계를 알아서 처리합니다. 같은 요청 "이번 달 매출 정리해 줘"에 대해:</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>기존 챗봇</th><th>AI 에이전트</th></tr></thead>
+        <tbody>
+          <tr><td>반응</td><td>"엑셀에서 SUM 함수를 쓰세요"</td><td>파일을 직접 읽고 계산·표·차트까지</td></tr>
+          <tr><td>도구 사용</td><td>못 함 (말로만)</td><td>함 (파일 열기, 계산, 작성)</td></tr>
+          <tr><td>결과</td><td><b>방법</b>을 받음</td><td><b>결과물</b>을 받음</td></tr>
+          <tr><td>내 역할</td><td>내가 다 한다</td><td>확인하고 다듬는다</td></tr>
+          <tr><td>비유</td><td>길을 물으면 "저기서 우회전하세요"라고 알려 주는 행인</td><td>"목적지요? 타세요, 모셔다 드릴게요" 하는 운전기사</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">한 문장 정리</div><p>챗봇은 <b>답을 주고</b>, 에이전트는 <b>일을 끝낸다</b>.</p></div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>3. 에이전트 동작 방식 맛보기</h2></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 사람이 하는 방식 vs 에이전트가 하는 방식</div>
+        <p><b>① 사람이 직접</b>: "컴퓨터 예약 종료 방법"을 검색해 명령어를 찾고, 명령 프롬프트(cmd)를 열어 복사·붙여넣기 합니다.<br>
+        <code>shutdown -s -t 3600</code> (1시간 뒤 꺼짐) → <code>shutdown -a</code> (취소)<br>
+        <b>② 에이전트에게</b>: "30분 뒤에 컴퓨터 종료 예약해 줘"라고 말하면, 에이전트가 명령어를 찾아 직접 실행합니다.<br>
+        같은 일을 누가 손을 움직였는지 비교해 봅니다.</p>
+        <div class="practice-prep"><div class="prep-label">참고</div><ul><li><b>취소 알림이 안 보여도 정상</b> <span class="meta">· 알림 설정이나 PC 정책에 따라 팝업만 안 뜰 수 있음</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>4. 에이전트는 어떻게 "일을 끝내나"</h2><p>마법이 아닙니다. 사람이 일하듯 같은 순서를 반복합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>하는 일</th><th>매출 정리 예</th><th>종료 예약 예</th></tr></thead>
+        <tbody>
+          <tr><td>① 목표 이해</td><td>무엇을 원하는지 파악</td><td>매출을 정리하라는 거구나</td><td>30분 뒤에 끄고 싶구나</td></tr>
+          <tr><td>② 계획</td><td>어떤 순서로 할지 짠다</td><td>파일 열기 → 합계 → 표 → 요약</td><td>명령어 찾기 → 예약 실행</td></tr>
+          <tr><td>③ 행동</td><td>도구를 실제로 쓴다</td><td>파일 읽기, 계산, 작성</td><td>shutdown 명령 실행</td></tr>
+          <tr><td>④ 관찰</td><td>결과가 맞는지 확인</td><td>숫자가 이상한데? 다시</td><td>예약이 걸렸는지 확인</td></tr>
+        </tbody>
+      </table></div>
+      <p>목표를 이룰 때까지 ②~④를 <b>스스로 반복</b>하는 것이 핵심입니다. 신입 사원이 "어, 이거 아닌가? 다시 해 볼게요" 하는 것과 같습니다.</p>
+      <div class="callout"><div class="callout-label">가장 중요한 단계는 ③ 행동</div><p>도구를 쓸 수 있어야 진짜 에이전트입니다. 폴더를 통째로 맡기는 <b>Cowork</b>, 파일·코드를 직접 다루는 <b>Claude Code</b>가 그런 도구입니다. 구글 드라이브·노션 같은 서비스를 잇는 <b>커넥터</b>, 그 연결의 표준 규격인 <b>MCP</b>도 뒤에서 배웁니다. 지금은 "그런 콘센트가 있다"만 기억하세요.</p></div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>5. 잘하는 일, 약한 일</h2><p>기대를 현실적으로 맞춰야 실망하지 않습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>잘하는 일</th><th>약한 일 (사람이 챙길 것)</th></tr></thead>
+        <tbody>
+          <tr><td>초안 쓰기 (보고서·메일·기획서의 0→1)</td><td>사실 확인 — 가끔 그럴듯하게 틀림(할루시네이션). 숫자·인용은 검증</td></tr>
+          <tr><td>긴 문서 요약, 자료 비교·정리</td><td>최신 정보 — 학습 시점 이후 일은 모를 수 있음</td></tr>
+          <tr><td>데이터 분석·표·차트</td><td>회사 내부 사정·관계 — 알려 주지 않으면 모름</td></tr>
+          <tr><td>반복적이고 규칙이 있는 작업, 형식 바꾸기 (보고서→메일→슬라이드)</td><td>최종 책임·판단 — 결정과 책임은 항상 사람</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">검색하면 최신 정보도 알지 않나요?</div><p>검색 기능을 쓰면 방금 찾은 페이지 내용은 압니다. 하지만 검색 없이 원래 아는 지식에는 한계가 있고, 찾은 내용도 틀리게 요약할 수 있습니다. 그래서 찾아온 정보도 검증이 필요합니다.</p></div>
+      <div class="callout callout--tip"><div class="callout-label">황금률</div><p>AI를 <b>"똑똑하지만 가끔 틀리는 유능한 인턴"</b>으로 대하세요. 일은 맡기되, 결과는 사람이 검수합니다.</p></div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>6. AI 에이전트의 종류</h2><p>여러 회사가 에이전트를 만듭니다. 모두 훌륭하지만 성격이 다릅니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>기준</th><th>Claude (Anthropic)</th><th>Codex (OpenAI)</th><th>Antigravity (Google)</th></tr></thead>
+        <tbody>
+          <tr><td>성격</td><td>폭넓은 업무 동료</td><td>코딩 특화</td><td>여러 에이전트를 나눠 돌리는 개발 작업 특화</td></tr>
+          <tr><td>잘하는 일</td><td>문서·메일·기획·분석·요약 전반</td><td>코드 작성·수정·자동화</td><td>복잡한 개발 작업 병렬 처리, Google 생태계 연동</td></tr>
+          <tr><td>대상</td><td>누구나 (비개발자 포함)</td><td>주로 개발자</td><td>주로 개발자·개발팀</td></tr>
+        </tbody>
+      </table></div>
+      <p>모델 이름은 자주 바뀌니 외우는 데 힘쓰지 마세요. 중요한 질문은 하나, <b>"이 도구가 내 일에 맞나"</b>입니다.</p>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>7. 왜 Claude인가, 그리고 가입</h2></div>
+      <p>Claude를 만든 <b>Anthropic</b>은 2021년 OpenAI 출신 연구자들이 세운 회사입니다. "AI를 더 크게"보다 <b>"AI가 강력해질수록 안전하게 만드는 법을 먼저 연구하자"</b>는 문제의식에서 출발했습니다. 이름은 '인류(anthropos)'에서 왔고, Claude는 스스로 정직·무해 원칙을 따르도록 훈련하는 <b>헌법적 AI(Constitutional AI)</b> 방식으로 만들어집니다.</p>
+      <ul>
+        <li>이 과정은 코드가 아니라 문서·데이터·보고·조사 같은 <b>일반 업무</b>를 다룹니다</li>
+        <li>Claude는 사무 업무 전반에 폭넓게 쓰이고, 필요하면 Claude Code로 자동화까지 — 이 과정의 메인 도구</li>
+        <li>"뭐가 더 똑똑하냐"보다 <b>"내 일에 누가 더 맞느냐"</b>가 옳은 질문</li>
+      </ul>
+      <p>도구는 빠르게 바뀝니다. 그래서 이 과정은 버전 암기가 아니라 <b>에이전트와 일하는 방식</b>을 연습합니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — Claude 무료 가입</div>
+        <p><b>① claude.ai 접속</b> → <b>② 이메일 또는 Google 계정으로 가입</b> (카드 등록 없음) → <b>③ 언어를 한국어로, 화면 둘러보기</b>. 오늘은 무료 계정이면 충분합니다.</p>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>이메일 또는 Google 계정</b> <span class="meta">· 인증 메일이 안 오면 스팸함 확인</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>8. 회의록 정리해 보기</h2><p>챗봇과 에이전트의 차이, 에이전트의 반복 과정을 손으로 느껴 봅니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 방법을 받을까, 결과물을 받을까</div>
+        <p><b>① 챗봇처럼</b>: "회의록 양식 하나 만들어 줘. 항목은 일시·참석자·안건·결정사항·할 일." → 이건 방법일까요, 결과물일까요?<br>
+        <b>② 에이전트에게</b>: 회의록 파일 하나를 끌어다 올리고 "이 회의 메모를 위 양식에 맞춰 정리해 줘. 특히 할 일은 담당자와 마감을 표로 뽑아 줘."<br>
+        <b>③ 이어서 묻기</b>: "이 회의에서 내가 챙겨야 할 일만 따로 뽑아 줘", "다음 회의 안건도 제안해 줘"<br>
+        <b>④ 비교 실험</b>: 새 대화에서 파일도 양식도 없이 "회의록 정리해 줘"만 입력. Claude가 무엇을 되묻는지 봅니다 — <b>맥락을 줘야 한다</b>는 다음 차시 주제가 여기서 나옵니다.</p>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>실습 회의록 3개</b> <span class="meta">· 마케팅 정기회의 / 신제품 킥오프 / 주간 업무공유 — 강사가 당일 배부</span></li></ul></div>
+      </div>
+      <div class="callout"><div class="callout-label">팁</div><p>AI에게 간략하게 시켜도 잘 처리합니다. 다만 회사마다 회의록에 들어가야 할 항목이 다르니, 그 부분은 꼭 분명히 알려 주세요.</p></div>
+      <div class="callout"><div class="callout-label">미리 보기</div><p>양식을 한 번 만들어 두면, 뒤 차시에서는 Claude가 템플릿 불러오기 → 문서 생성 → PDF 변환 → 확인 → 저장까지 여러 단계를 스스로 이어서 끝냅니다. 4절의 반복 과정이 길게 늘어난 모습입니다.</p></div>
+      <div class="adjust"><b>조절 구간</b> — 가입·업로드가 막힌 수강생 돕기 / 빠른 수강생은 나머지 회의록 2개도 같은 방식으로 정리하거나, "다음 회의 전까지 내가 할 일과 놓치면 안 되는 마감만 표로"처럼 더 구체적으로 시켜 결과 비교</div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>9. 에이전트의 자율성 단계</h2><p>자율주행차에 레벨이 있듯, 에이전트도 얼마나 스스로 움직이는지에 따라 단계가 다릅니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>특징</th><th>이 과정에서</th></tr></thead>
+        <tbody>
+          <tr><td>L0 — 그냥 챗봇</td><td>묻고 답만. 도구 없음</td><td>실습 C ① 양식만 받기</td></tr>
+          <tr><td>L1 — 한 번 도구 사용</td><td>파일 하나 읽고 결과 하나</td><td>실습 C ② 회의록 정리</td></tr>
+          <tr><td>L2 — 여러 단계 스스로</td><td>계획 세우고 여러 도구를 순서대로</td><td>AI Agent 1 대부분의 차시</td></tr>
+          <tr><td>L3 — 폴더·과제 단위로 맡기기</td><td>통째로 맡기면 알아서 다단계 수행</td><td>Cowork (AI Agent 2)</td></tr>
+          <tr><td>L4 — 도구로 만들어 재사용</td><td>반복 작업을 도구로 만들어 계속 실행</td><td>Claude Code (AI Agent 2)</td></tr>
+        </tbody>
+      </table></div>
+      <p>단계가 높아질수록 편하지만 <b>검수가 더 중요</b>해집니다. 오늘은 L0~L1을 맛봤습니다. 내 업무 중 "방법은 아는데 시간만 잡아먹는" 반복 작업 3개를 적고, 각각 어느 단계까지 맡길 수 있을지 상상해 보세요.</p>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>10. 왜 지금, 왜 업무인가 — AX</h2></div>
+      <ul>
+        <li><b>AX = AI Transformation</b>. 디지털 전환(DX)을 넘어 일하는 방식 자체를 AI와 함께 바꾸는 것</li>
+        <li>AI가 사람을 대체하는 게 아니라 <b>사람 + AI가 한 팀</b> — 반복·단순·시간 잡아먹는 일은 에이전트에게, 판단·책임·관계·최종 결정은 사람에게</li>
+        <li>"AI가 내 일을 뺏는다"보다 <b>"AI를 잘 쓰는 동료가 내 일을 뺏는다"</b>에 가깝다</li>
+        <li>이 과정의 목표: 각자의 실제 업무 하나를 에이전트와 함께 다시 설계하는 것</li>
+      </ul>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>11. 결제 — 구독과 API</h2><p>돈을 써야 하느냐는 어느 정도의 일과 결과물을 원하느냐에 따라 다릅니다. 무료로도 시작할 수 있습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>구독 (claude.ai)</th><th>API</th></tr></thead>
+        <tbody>
+          <tr><td>누가</td><td>일반 사용자 (우리)</td><td>개발자</td></tr>
+          <tr><td>요금</td><td>정액제 (월 고정, 사용 한도 있음)</td><td>종량제 (쓴 토큰만큼 청구)</td></tr>
+          <tr><td>비유</td><td>헬스장 월 회원권</td><td>운동기구 1분당 요금</td></tr>
+          <tr><td>이 과정</td><td>이것만 씀</td><td>안 씀</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>플랜</th><th>가격 (대략)</th><th>누구에게</th></tr></thead>
+        <tbody>
+          <tr><td>무료</td><td>$0</td><td>맛보기. 한도가 작아 2시간 실습엔 금방 막힘</td></tr>
+          <tr><td>Pro</td><td>월 $20 수준</td><td>입문 실습 권장. 이 과정엔 충분</td></tr>
+          <tr><td>Max</td><td>월 $100~</td><td>Claude Code를 많이 돌리는 헤비 유저. 입문 필수 아님</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>토큰</b>은 AI가 글을 읽고 쓰는 처리 단위(글자·단어 조각)입니다. 구독은 정해진 한도 안에서만 쓰지만, API는 토큰만큼 돈이 나가고 얼마 나올지 가늠하기 어렵습니다. 개발 지식 없이 API를 만지면 요금 폭탄을 맞기 쉬운 이유입니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 D — Pro 구독 신청 (선택)</div>
+        <p><b>① 왼쪽 아래 프로필</b> → <b>② 플랜 업그레이드</b> → <b>③ Pro 선택, 월간/연간 고르기</b> → <b>④ 이름·국가·주소 입력</b> → <b>⑤ 카드 정보 입력, 약관 동의 후 구독</b>. API 키 없이 바로 씁니다.</p>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>해외 결제 가능한 카드</b> <span class="meta">· 비자·마스터 등, 달러로 청구 — 오늘 안 해도 다음 차시 전까지면 됨</span></li></ul></div>
+      </div>
+      <ul>
+        <li>Pro 사용 한도는 일정 시간(현재 5시간) 단위로 초기화됩니다. 정책은 바뀔 수 있으니 결제 전 최신 안내 확인</li>
+        <li>Pro에는 Claude Code, Cowork 등 이 과정의 핵심 기능이 포함됩니다</li>
+      </ul>
+      <div class="callout callout--warning"><div class="callout-label">돈·정보 주의</div><p>"API"라는 단어가 보이면 멈추기 · 자동 결제일과 갱신 주기 확인 · 달러 청구라 환율 따라 금액이 달라짐 · 회사 카드는 미리 승인 · <b>사내 기밀·고객 개인정보는 함부로 올리지 않기</b></p></div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>12. 자주 묻는 질문</h2></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>회사에서 AI 사용을 막으면요?</td><td>회사 정책이 항상 우선입니다. 사내 규정을 먼저 확인하고 IT·보안팀에 문의하세요.</td></tr>
+          <tr><td>영어를 잘 못해도 되나요?</td><td>네. Claude는 한국어를 잘 이해하고 잘 씁니다.</td></tr>
+          <tr><td>코딩을 전혀 몰라요.</td><td>괜찮습니다. 코드는 AI가 짭니다. 원하는 걸 한국어로 말하면 됩니다.</td></tr>
+          <tr><td>ChatGPT를 쓰는데 바꿔야 하나요?</td><td>꼭 바꿀 필요는 없습니다. 지시하는 법, 검수하는 법은 다른 AI에도 그대로 통합니다.</td></tr>
+          <tr><td>모바일에서도 되나요?</td><td>앱이 있습니다. 다만 폴더·파일을 다루는 실습은 컴퓨터가 필요합니다.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="hub-section">
+      <div class="hub-section-head"><h2>13. 안 될 때</h2></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>가입이 안 됨</td><td>이메일 인증 문제</td><td>스팸함 확인, 다른 이메일로 재시도</td></tr>
+          <tr><td>파일을 못 읽는 것 같음</td><td>지원하지 않는 형식이나 용량 초과</td><td>txt·docx·xlsx·pdf인지 확인, 크면 나눠서</td></tr>
+          <tr><td>결제했는데 무료로 보임</td><td>처리 지연 또는 다른 계정 로그인</td><td>몇 분 뒤 새로고침, 로그인 계정 확인</td></tr>
+          <tr><td>답이 영어로 나옴</td><td>드물게 발생</td><td>"한국어로 답해 줘"라고 명시</td></tr>
+          <tr><td>무슨 말인지 모르겠음</td><td>정상입니다. 오늘은 개념 잡는 날</td><td>Claude에게 "방금 배운 [용어], 초등학생도 알아듣게 설명해 줘"</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — Claude 계정, 회의록 정리 결과(할 일 표), 맡기고 싶은 반복 업무 3개 메모<br>다음 차시까지 노트북 등 실습 환경 준비. Cowork·Claude Code는 데스크톱 전용입니다.</div>
