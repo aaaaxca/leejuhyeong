@@ -286,22 +286,21 @@
       </tbody>
     </table></div>
 
-    <h4>AI가 배우는 4단계 — 실습 A에서 그대로 해 봅니다</h4>
-    <div class="table-scroll"><table>
-      <thead><tr><th>단계</th><th>뜻</th><th>실습 A에서</th></tr></thead>
-      <tbody>
-        <tr><td>① 데이터 모으기</td><td>배울 예제를 모은다</td><td>이미지 폴더 다운로드</td></tr>
-        <tr><td>② 정답 붙이기</td><td>예제마다 이름표를 단다</td><td>클래스 이름 cat / dog</td></tr>
-        <tr><td>③ 학습 → 모델</td><td>예제를 반복해 보며 규칙을 찾는다. 그 결과물이 <b>모델</b></td><td>모델 학습시키기</td></tr>
-        <tr><td>④ 처음 보는 것에 답하기</td><td>배운 적 없는 예제에 <b>확률(%)로</b> 답한다</td><td>test 폴더 사진으로 미리보기</td></tr>
-      </tbody>
-    </table></div>
-    <p>시험 문제를 공부한 문제집에서 내면 늘 맞히겠죠. 그래서 확인용 사진(test)은 학습용 사진(train)과 <b>따로</b> 둡니다.</p>
     <p>그럼 ChatGPT는 셋 중 어떤 방식으로 배웠을까요? 답은 6번에서 확인합니다.</p>
 
     <h2 class="sec-head" id="s4"><span class="sec-num">4</span>내 손으로 AI 학습시키기</h2>
     <div class="practice-card">
       <div class="practice-title">실습 A — Teachable Machine으로 고양이·강아지 구분 AI 만들기</div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>뜻</th><th>실습 A에서</th></tr></thead>
+        <tbody>
+          <tr><td>① 데이터 모으기</td><td>배울 예제를 모은다</td><td>이미지 폴더 다운로드</td></tr>
+          <tr><td>② 정답 붙이기</td><td>예제마다 이름표를 단다</td><td>클래스 이름 cat / dog</td></tr>
+          <tr><td>③ 학습 → 모델</td><td>예제를 반복해 보며 규칙을 찾는다. 그 결과물이 <b>모델</b></td><td>모델 학습시키기</td></tr>
+          <tr><td>④ 처음 보는 것에 답하기</td><td>배운 적 없는 예제에 <b>확률(%)로</b> 답한다</td><td>test 폴더 사진으로 미리보기</td></tr>
+        </tbody>
+      </table></div>
+      <p>시험 문제를 공부한 문제집에서 내면 늘 맞히겠죠. 그래서 확인용 사진(test)은 학습용 사진(train)과 <b>따로</b> 둡니다.</p>
       <p>구글의 무료 도구로 <b>고양이·강아지를 구분하는 AI</b>를 직접 만듭니다. 정답(이름표)을 붙인 사진을 주고 배우게 하니 <b>지도학습</b>이고, 속은 <b>딥러닝</b> 이미지 모델입니다.</p>
       <ol class="steps">
         <li><b>Teachable Machine 페이지</b> — teachablemachine.withgoogle.com → 시작하기(Get Started) → 이미지 프로젝트(Image Project) → 표준 이미지 모델(Standard image model)</li>
