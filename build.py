@@ -204,6 +204,7 @@ CONTENT_CSS = """
   .duo-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
   .duo-title{font-weight:600;color:var(--c-wip);margin-bottom:6px}
   .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+  .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
   @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
