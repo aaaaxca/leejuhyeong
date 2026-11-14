@@ -1,7 +1,7 @@
 <div class="day-head"><span class="day-num">01차시</span><h3>AI 변천사와 생성형 AI 이해</h3></div>
     <p class="goal">AI가 70년 동안 어떻게 지금까지 왔는지 흐름을 잡고, AI가 "예제를 보고 배운다"는 것을 직접 AI를 학습시켜 보며 체감합니다. 마지막엔 ChatGPT에게 말로 시켜 내가 만든 AI를 쓰는 웹페이지까지 만들어 봅니다.</p>
-    <div class="tags"><span class="tag time">이론 40 · 실습 60 · 조절 20</span><span class="tag">Teachable Machine</span><span class="tag">ChatGPT (PC)</span><span class="tag src">Google 계정</span></div>
-    <nav class="sec-nav"><a href="#s1"><span>1</span>AI 70년</a><a href="#s2"><span>2</span>용어 정리</a><a href="#s3"><span>3</span>배우는 방식</a><a href="#s4"><span>4</span>실습 · Teachable Machine</a><a href="#s5"><span>5</span>생성형 AI 종류</a><a href="#s6"><span>6</span>실습 · ChatGPT</a><a href="#s7"><span>7</span>실습 · 웹페이지</a><a href="#s8"><span>8</span>정리</a></nav>
+    <div class="tags"><span class="tag time">이론 40 · 실습 60 · 조절 20</span><span class="tag">Teachable Machine</span><span class="tag">ChatGPT (PC · 휴대폰)</span><span class="tag src">Google 계정</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>AI 70년</a><a href="#s2"><span>2</span>용어 정리</a><a href="#s3"><span>3</span>배우는 방식</a><a href="#s4"><span>4</span>실습 · Teachable Machine</a><a href="#s5"><span>5</span>생성형 AI 종류</a><a href="#s6"><span>6</span>ChatGPT · LLM</a><a href="#s7"><span>7</span>실습 · 가입</a><a href="#s8"><span>8</span>실습 · 웹페이지</a><a href="#s9"><span>9</span>정리</a></nav>
 
 
     <h2 class="sec-head" id="s1"><span class="sec-num">1</span>AI는 70년 넘게 쌓인 이야기</h2>
@@ -22,12 +22,12 @@
     <h2 class="sec-head" id="s2"><span class="sec-num">2</span>AI · 머신러닝 · 딥러닝 · 생성형 AI</h2>
     <p>네 단어는 따로 있는 게 아니라 <b>큰 원 안에 작은 원</b>이 들어 있는 관계입니다. 예전에는 "고양이는 귀가 뾰족하고…"처럼 사람이 특징을 알려 줘야 했다면, 딥러닝은 고양이 사진을 아주 많이 보고 <b>무엇이 고양이다운지 스스로</b> 알아냅니다.</p>
     <div class="concept-grid">
-      <figure style="margin:0;text-align:center"><svg viewBox="0 0 420 360" role="img" aria-label="인공지능 안에 머신러닝, 그 안에 딥러닝, 그 안에 생성형 AI가 들어 있는 동심원 그림" style="width:100%;max-width:420px;height:auto;font-family:inherit"><circle cx="210" cy="180" r="170" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="34" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">인공지능</text><text x="210" y="51" text-anchor="middle" font-size="10.5" fill="var(--sub)">AI · 사람의 지능을 기계로</text><circle cx="210" cy="220" r="130" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="114" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">머신러닝</text><text x="210" y="131" text-anchor="middle" font-size="10.5" fill="var(--sub)">Machine Learning · 데이터로 스스로 학습</text><circle cx="210" cy="260" r="90" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="194" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">딥러닝</text><text x="210" y="211" text-anchor="middle" font-size="10.5" fill="var(--sub)">Deep Learning · 신경망으로 특징까지</text><circle cx="210" cy="300" r="50" fill="var(--c-wip)" fill-opacity=".18" stroke="var(--c-wip)" stroke-width="1.5"/><text x="210" y="298" text-anchor="middle" font-size="15" font-weight="600" fill="var(--c-wip)">생성형 AI</text><text x="210" y="316" text-anchor="middle" font-size="10.5" fill="var(--sub)">Generative AI</text></svg><figcaption style="font-size:13px;color:var(--faint);margin-top:6px">큰 원일수록 넓은 개념 — 생성형 AI는 딥러닝의 한 갈래입니다</figcaption></figure>
+      <figure style="margin:0;text-align:center"><svg viewBox="0 0 420 360" role="img" aria-label="인공지능 안에 머신러닝, 그 안에 딥러닝, 그 안에 생성형 AI가 들어 있는 동심원 그림" style="width:100%;max-width:420px;height:auto;font-family:inherit"><circle cx="210" cy="180" r="170" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="40" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">인공지능</text><circle cx="210" cy="220" r="130" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="120" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">머신러닝</text><circle cx="210" cy="260" r="90" fill="var(--panel)" fill-opacity=".55" stroke="var(--sub)" stroke-opacity=".6" stroke-width="1"/><text x="210" y="200" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">딥러닝</text><circle cx="210" cy="300" r="50" fill="var(--c-wip)" fill-opacity=".18" stroke="var(--c-wip)" stroke-width="1.5"/><text x="210" y="305" text-anchor="middle" font-size="15" font-weight="600" fill="var(--c-wip)">생성형 AI</text></svg><figcaption style="font-size:13px;color:var(--faint);margin-top:6px">큰 원일수록 넓은 개념 — 생성형 AI는 딥러닝의 한 갈래입니다</figcaption></figure>
       <div class="concept-list">
-        <div class="concept-card"><div class="cc-name">인공지능 <small>AI</small></div><p>사람의 지능으로 하던 일을 컴퓨터가 하게 만드는 기술 전체</p><div class="cc-ex"><span>음성 비서 (시리·빅스비)</span><span>자율 주행 자동차</span></div></div>
-        <div class="concept-card"><div class="cc-name">머신러닝 <small>Machine Learning</small></div><p>규칙을 일일이 가르치지 않고, 많은 예제를 보고 스스로 패턴을 찾는 방법</p><div class="cc-ex"><span>스팸 메일 거르기</span><span>넷플릭스 추천</span></div></div>
-        <div class="concept-card"><div class="cc-name">딥러닝 <small>Deep Learning</small></div><p>뇌의 신경망을 흉내 낸 여러 층의 구조로, 무엇을 봐야 할지(특징)까지 스스로 찾아내는 머신러닝</p><div class="cc-ex"><span>스마트폰 얼굴 인식</span><span>사진 속 고양이 찾기</span></div></div>
-        <div class="concept-card"><div class="cc-name">생성형 AI <small>Generative AI</small></div><p>딥러닝을 바탕으로, 명령어(프롬프트)에 따라 새로운 글·그림·영상을 만들어 내는 AI</p><div class="cc-ex"><span>ChatGPT (글)</span><span>Midjourney·Kling (이미지·영상)</span></div></div>
+        <div class="concept-card"><div class="cc-name">인공지능 <small>AI</small></div><p>사람의 지능으로 하던 일을 컴퓨터가 하게 만드는 기술 전체</p><div class="cc-ex">예: 음성 비서 (시리·빅스비) · 자율 주행 자동차</div></div>
+        <div class="concept-card"><div class="cc-name">머신러닝 <small>Machine Learning</small></div><p>규칙을 일일이 가르치지 않고, 많은 예제를 보고 스스로 패턴을 찾는 방법</p><div class="cc-ex">예: 스팸 메일 거르기 · 넷플릭스 추천</div></div>
+        <div class="concept-card"><div class="cc-name">딥러닝 <small>Deep Learning</small></div><p>뇌의 신경망을 흉내 낸 여러 층의 구조로, 무엇을 봐야 할지(특징)까지 스스로 찾아내는 머신러닝</p><div class="cc-ex">예: 스마트폰 얼굴 인식 · 사진 속 고양이 찾기</div></div>
+        <div class="concept-card"><div class="cc-name">생성형 AI <small>Generative AI</small></div><p>딥러닝을 바탕으로, 명령어(프롬프트)에 따라 새로운 글·그림·영상을 만들어 내는 AI</p><div class="cc-ex">예: ChatGPT (글) · Midjourney·Kling (이미지·영상)</div></div>
       </div>
     </div>
 
@@ -37,17 +37,17 @@
       <thead><tr><th>방식</th><th>비유</th><th>이미 쓰고 있는 곳</th></tr></thead>
       <tbody>
         <tr><td><b>지도학습</b> (Supervised)</td><td>정답지가 있는 문제집으로 공부. "이건 고양이, 이건 강아지"</td><td>스팸 메일함, 얼굴 인식, <b>오늘 실습 A</b></td></tr>
-        <tr><td><b>비지도학습</b> (Unsupervised)</td><td>정답 없이 비슷한 것끼리 스스로 묶기</td><td>쇼핑몰·유튜브 "이런 것도 좋아하실 거예요"</td></tr>
+        <tr><td><b>비지도학습</b> (Unsupervised)</td><td>정답 없이 비슷한 것끼리 스스로 묶기</td><td>쇼핑몰이 고객을 취향별 그룹으로 나누기, 비슷한 뉴스 기사끼리 묶기</td></tr>
         <tr><td><b>강화학습</b> (Reinforcement)</td><td>잘하면 점수, 못하면 감점 받으며 스스로 터득</td><td>알파고, 게임 AI, 자율 주행</td></tr>
       </tbody>
     </table></div>
-    <div class="callout"><div class="callout-label">2분 확인</div><p><b>비지도</b> — 휴대폰으로 유튜브나 쇼핑 앱 첫 화면을 열어 보세요. 내가 "이걸 좋아해"라고 알려 준 적 없는데, 본 것과 비슷한 것끼리 묶어 추천합니다.<br><b>강화</b> — 강사 화면으로 OpenAI의 숨바꼭질 AI 영상(Multi-Agent Hide and Seek)을 봅니다. 아무도 방법을 안 가르쳤는데, 수백만 번 술래잡기를 하며 상자로 문을 막는 전략을 스스로 찾아냅니다.</p></div>
-    <p>ChatGPT 같은 생성형 AI는 엄청난 양의 글을 보고 다음 말을 맞히는 연습을 한 뒤, 사람의 피드백으로 다듬어졌습니다. 여러 방식을 섞어서 만든 셈입니다.</p>
+    <div class="callout"><div class="callout-label">2분 확인</div><p><b>비지도</b> — 강사 화면으로 ChatGPT에 "사과, 축구, 고양이, 바나나, 야구, 강아지, 포도, 농구, 토끼… 이 단어들을 정답 없이 비슷한 것끼리 묶어 줘. 그룹 이름은 붙이지 말고"라고 시켜 봅니다. 아무도 "과일·운동·동물"이라고 알려 주지 않았는데 스스로 묶습니다.<br><b>강화</b> — OpenAI의 숨바꼭질 AI 영상(Multi-Agent Hide and Seek)을 봅니다. 아무도 방법을 안 가르쳤는데, 수백만 번 술래잡기를 하며 상자로 문을 막는 전략을 스스로 찾아냅니다.</p></div>
+    <p>그럼 ChatGPT는 셋 중 어떤 방식으로 배웠을까요? 답은 6번에서 확인합니다.</p>
 
     <h2 class="sec-head" id="s4"><span class="sec-num">4</span>내 손으로 AI 학습시키기</h2>
     <div class="practice-card">
       <div class="practice-title">실습 A — Teachable Machine으로 고양이·강아지 구분 AI 만들기</div>
-      <p>구글의 무료 도구로 <b>고양이·강아지를 구분하는 AI</b>를 직접 만듭니다. 정답(이름표)을 붙인 사진을 주고 배우게 하니 <b>지도학습</b>이고, 속은 <b>딥러닝</b> 이미지 모델입니다. ChatGPT 같은 언어 모델(LLM)은 아니지만, 배우고 답하는 원리는 같습니다.</p>
+      <p>구글의 무료 도구로 <b>고양이·강아지를 구분하는 AI</b>를 직접 만듭니다. 정답(이름표)을 붙인 사진을 주고 배우게 하니 <b>지도학습</b>이고, 속은 <b>딥러닝</b> 이미지 모델입니다. ChatGPT 같은 언어 모델(LLM)은 아니지만, <b>예제로 배우고 확률로 답한다</b>는 점은 같습니다.</p>
       <ol class="steps">
         <li><b>Teachable Machine 페이지</b> — teachablemachine.withgoogle.com → 시작하기(Get Started) → 이미지 프로젝트(Image Project) → 표준 이미지 모델(Standard image model)</li>
         <li><b>이미지 다운로드</b> — 강사가 공유한 이미지 폴더를 받아 압축을 풉니다. <code>train/cat</code> · <code>train/dog</code> · <code>test</code></li>
@@ -91,23 +91,60 @@
         <tr><td>음성·음악</td><td>음성 합성, 작곡</td><td>Suno, AI 보이스</td></tr>
       </tbody>
     </table></div>
-    <p>이 과정은 굵게 표시한 세 도구를 순서대로 씁니다. <b>ChatGPT로 기획하고 → Midjourney로 이미지를 만들고 → Kling으로 움직입니다.</b></p>
+    <p>이 과정은 굵게 표시한 세 도구를 순서대로 씁니다. <b>ChatGPT로 기획하고 → Midjourney로 이미지를 만들고 → Kling으로 움직입니다.</b> 그 첫 번째, ChatGPT부터 봅니다.</p>
+
+    <h2 class="sec-head" id="s6"><span class="sec-num">6</span>그중 ChatGPT — 왜 GPT인가</h2>
+    <h4>LLM — 글을 다루는 생성형 AI</h4>
+    <p>ChatGPT, Claude, Gemini는 모두 <b>LLM(Large Language Model, 거대 언어 모델)</b>입니다. 생성형 AI 중에서 글을 읽고 쓰는 쪽입니다.</p>
     <div class="table-scroll"><table>
-      <thead><tr><th></th><th>검색 엔진</th><th>생성형 AI</th></tr></thead>
+      <thead><tr><th>단계</th><th>하는 일</th><th>3번의 어떤 방식?</th></tr></thead>
+      <tbody>
+        <tr><td>① 미리 학습</td><td>인터넷의 엄청난 양의 글을 읽으며 "다음에 올 말"을 맞히는 연습을 반복</td><td>정답을 따로 붙이지 않고 글 자체에서 스스로 배움 (비지도에 가까움)</td></tr>
+        <tr><td>② 대화 연습</td><td>사람이 만든 좋은 질문·답변 예시로 대화하는 법을 배움</td><td>지도학습</td></tr>
+        <tr><td>③ 다듬기</td><td>여러 답 중 사람이 더 좋다고 고른 쪽으로 점점 맞춰 감</td><td>강화학습</td></tr>
+      </tbody>
+    </table></div>
+    <p>세 가지 방식이 <b>ChatGPT 하나에 다 들어 있습니다.</b> 그리고 답할 때는 가장 그럴듯한 다음 말을 하나씩 이어 붙입니다. 그래서 같은 질문에도 매번 답이 조금씩 다르고, 4번의 호랑이처럼 <b>그럴듯하게 틀릴 수</b> 있습니다.</p>
+    <div class="callout"><div class="callout-label">토큰 (Token)</div><p>AI가 글을 읽고 쓰는 단위입니다. 글자나 단어 조각 정도라고 생각하면 됩니다. AI가 한 번에 기억하는 대화 길이, 유료 요금제의 사용 한도도 토큰으로 셉니다.</p></div>
+
+    <h4>GPT라는 이름</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>글자</th><th>뜻</th><th>쉽게 말해</th></tr></thead>
+      <tbody>
+        <tr><td><b>G</b>enerative</td><td>생성하는</td><td>찾아 주는 게 아니라 새로 만들어 낸다</td></tr>
+        <tr><td><b>P</b>re-trained</td><td>미리 학습된</td><td>위 ① 단계, 엄청난 글을 미리 읽었다</td></tr>
+        <tr><td><b>T</b>ransformer</td><td>트랜스포머 구조</td><td>1번 타임라인 2017년의 그 설계도</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>검색과 무엇이 다른가</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th></th><th>검색 엔진</th><th>ChatGPT</th></tr></thead>
       <tbody>
         <tr><td>하는 일</td><td>이미 있는 정보 중 키워드에 맞는 것을 찾아 줌</td><td>배운 것을 바탕으로 새 답을 만들어 줌</td></tr>
-        <tr><td>결과물</td><td>관련 웹페이지 목록 — 내가 읽고 골라야 함</td><td>정리된 글·그림·영상 — 바로 쓸 수 있음</td></tr>
+        <tr><td>결과물</td><td>관련 웹페이지 목록 — 내가 읽고 골라야 함</td><td>정리된 글 — 바로 쓸 수 있음</td></tr>
         <tr><td>주의할 점</td><td>광고·오래된 글이 섞임</td><td>매번 답이 조금씩 다르고, <b>그럴듯하게 틀릴 수 있음</b></td></tr>
       </tbody>
     </table></div>
-    <div class="callout"><div class="callout-label">GPT라는 이름</div><p><b>Generative Pre-trained Transformer</b> — 미리 대량의 글로 학습한(Pre-trained), 트랜스포머 구조의, 생성하는(Generative) 모델이라는 뜻입니다. 타임라인의 2017년 트랜스포머가 바로 이 T입니다.</p></div>
 
-    <h2 class="sec-head" id="s6"><span class="sec-num">6</span>ChatGPT 시작하기</h2>
+    <h4>왜 이 과정에서 ChatGPT인가</h4>
+    <ul>
+      <li><b>바로 시작</b> — 무료 계정으로 오늘 당장 쓸 수 있음</li>
+      <li><b>한 곳에서 다</b> — 글·사진·음성·파일을 한 화면에서 주고받음 (멀티모달)</li>
+      <li><b>과정의 첫 단계</b> — 기획과 글을 맡고, 여기서 만든 기획이 Midjourney·Kling 프롬프트의 재료가 됨</li>
+      <li><b>어디서나 통함</b> — 여기서 익힌 "정확히 말하는 법"은 Claude·Gemini 등 다른 AI에도 그대로 쓰임</li>
+    </ul>
+
+    <h2 class="sec-head" id="s7"><span class="sec-num">7</span>ChatGPT 가입하고 써 보기</h2>
     <div class="practice-card">
-      <div class="practice-title">실습 B — ChatGPT 시작하기</div>
-      <p>순서는 <b>① chatgpt.com에서 Google 계정으로 로그인</b> → <b>② 화면 읽기</b>(새 채팅 · 입력창 · + 파일 올리기 · 왼쪽 대화 기록) → <b>③ 같은 질문을 두 번 다시 생성</b>해 답이 매번 다른지 확인.<br>질문 예: "2016년 알파고와 이세돌의 대국 결과를 알려줘" — 같은 질문을 구글에도 검색해 결과 모양을 비교해 봅니다.</p>
-      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>Google 계정</b> <span class="meta">· 비밀번호 기억</span></li></ul></div>
+      <div class="practice-title">실습 B — PC와 휴대폰에서 ChatGPT 시작하기</div>
+      <p><b>① PC</b>: chatgpt.com에서 Google 계정으로 로그인 → 화면 읽기(새 채팅 · 입력창 · + 파일 올리기 · 왼쪽 대화 기록) → "2016년 알파고와 이세돌의 대국 결과를 알려줘"를 입력하고 <b>다시 생성</b>해 답이 매번 다른지 확인. 같은 질문을 구글에도 검색해 결과 모양을 비교합니다.<br>
+      <b>② 휴대폰</b>: Play 스토어·App Store에서 ChatGPT 앱 설치 → 같은 Google 계정으로 로그인 → PC에서 한 대화가 휴대폰에도 보이는지 확인합니다.<br>
+      <b>③ 멀티모달 체험</b>: 휴대폰으로 손글씨 메모나 칠판을 찍어 올리고 "이 내용 정리해 줘" → 음성 모드로 "오늘 배운 AI 역사 30초로 요약해 줘"라고 말해 봅니다. 글뿐 아니라 <b>사진·목소리로도</b> AI에게 말할 수 있습니다.</p>
+      <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>Google 계정</b> <span class="meta">· 비밀번호 기억</span></li><li><b>휴대폰</b> <span class="meta">· 앱 설치 가능 상태</span></li></ul></div>
     </div>
+    <div class="callout"><div class="callout-label">녹음도 된다</div><p>회의를 녹음해 받아 적고 요약까지 해 주는 기능도 있습니다. ChatGPT의 기록 모드(Mac 앱, 유료), 무료로는 네이버 클로바노트가 한국어에 강합니다. 회의록 정리는 AI Agent 과정에서 실습합니다.</p></div>
+    <h4>요금제와 구독</h4>
     <div class="table-scroll"><table>
       <thead><tr><th>요금제</th><th>월 요금 (국내, VAT 포함)</th><th>누구에게</th></tr></thead>
       <tbody>
@@ -119,7 +156,7 @@
     </table></div>
     <p>오늘은 무료로 충분합니다. 결제는 프로필 → 플랜 업그레이드에서 하며, 해외 결제 카드로 매월 자동 결제됩니다. 요금과 기능은 자주 바뀌니 결제 화면에서 최신 내용을 확인하세요. (2026년 11월 기준)</p>
 
-    <h2 class="sec-head" id="s7"><span class="sec-num">7</span>말로 시켜서 웹페이지 만들기</h2>
+    <h2 class="sec-head" id="s8"><span class="sec-num">8</span>말로 시켜서 웹페이지 만들기</h2>
     <div class="practice-card">
       <div class="practice-title">실습 C — 말로 시켜서 웹페이지 만들기</div>
       <p>실습 A에서 만든 고양이·강아지 AI를, ChatGPT에게 말로 시켜 <b>누구나 쓸 수 있는 웹페이지</b>로 만듭니다. 같은 일을 두 번 시켜 결과를 비교합니다.<br>
@@ -131,13 +168,13 @@
     </div>
     <p>①은 내 모델을 모르니 엉뚱한 페이지가 나오고, ②는 내가 만든 AI가 들어간 페이지가 나옵니다. <b>질문의 질이 결과물의 질을 결정합니다.</b> ②에 들어간 것 — 무엇을(웹페이지), 무엇으로(모델 링크), 어떻게(확률 표시, 한국어, 큰 버튼), 어떤 형식으로(HTML 파일 하나) — 이것을 2차시에 프롬프트 구조로 정리합니다.</p>
 
-    <h2 class="sec-head" id="s8"><span class="sec-num">8</span>앞으로의 흐름</h2>
+    <h2 class="sec-head" id="s9"><span class="sec-num">9</span>앞으로의 흐름</h2>
     <ul>
-      <li><b>멀티모달</b> — 글만 다루던 AI가 이미지·음성·영상까지 한 번에 이해하고 만들어 냄</li>
+      <li><b>멀티모달</b> — 7번에서 체험한 것처럼, 글·사진·음성·영상을 한 번에 이해하고 만들어 내는 방향으로</li>
       <li><b>버티컬 AI</b> — 금융·의료·바이오처럼 한 분야에 특화된 AI (예: 단백질 구조를 예측하는 AlphaFold)</li>
       <li><b>AI 에이전트</b> — 목표만 주면 계획하고 도구를 써서 일을 처리하는 AI. 이런 흐름이 있다는 것만 알아 두고, 자세한 내용은 AI Agent 과정에서 다룹니다</li>
     </ul>
     <p>도구는 계속 바뀌지만, <b>무엇을 원하는지 분명히 말하는 능력</b>은 어떤 도구에서도 그대로 쓰입니다.</p>
 
     <div class="adjust"><b>조절 구간</b> — 업로드·로그인이 막힌 수강생 돕기 / 빠른 수강생은 실습 A에서 잔디 고양이·실내 강아지 사진을 추가해 다시 학습하고 결과가 바뀌는지 확인</div>
-    <div class="out"><b>오늘 결과물</b> — 고양이·강아지 판별 AI(공유 링크), ChatGPT 계정, 내 AI가 들어간 판별 웹페이지</div>
+    <div class="out"><b>오늘 결과물</b> — 고양이·강아지 판별 AI(공유 링크), ChatGPT 계정(PC·휴대폰), 내 AI가 들어간 판별 웹페이지</div>
