@@ -190,6 +190,10 @@ CONTENT_CSS = """
   .pb-sep{color:var(--faint)}
   .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
   .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:6px 0 10px;padding:0}
+  .doc ol.num-steps li{counter-increment:ns;position:relative;padding:7px 0 7px 40px;font-size:14.5px;color:var(--sub);line-height:1.65}
+  .doc ol.num-steps li::before{content:counter(ns);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .doc ol.num-steps b{color:var(--ink)}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}

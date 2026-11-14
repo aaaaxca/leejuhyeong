@@ -208,6 +208,10 @@
   .pb-sep{color:var(--faint)}
   .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
   .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:6px 0 10px;padding:0}
+  .doc ol.num-steps li{counter-increment:ns;position:relative;padding:7px 0 7px 40px;font-size:14.5px;color:var(--sub);line-height:1.65}
+  .doc ol.num-steps li::before{content:counter(ns);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .doc ol.num-steps b{color:var(--ink)}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
@@ -391,11 +395,26 @@
 
     <h2 class="sec-head" id="s7"><span class="sec-num">7</span>ChatGPT 가입하고 써 보기</h2>
     <div class="practice-card">
-      <div class="practice-title">실습 B — PC와 휴대폰에서 ChatGPT 시작하기</div>
-      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>Google 계정</b><small>비밀번호 기억</small></span><span class="pb-sep">·</span><span class="pb-item"><span class="pb-num">②</span><b>휴대폰</b><small>앱 설치 가능 상태</small></span></div>
-      <p><b>① PC</b>: chatgpt.com에서 Google 계정으로 로그인 → 화면 읽기(새 채팅 · 입력창 · + 파일 올리기 · 왼쪽 대화 기록) → "2016년 알파고와 이세돌의 대국 결과를 알려줘"를 입력하고 <b>다시 생성</b>해 답이 매번 다른지 확인. 같은 질문을 구글에도 검색해 결과 모양을 비교합니다.<br>
-      <b>② 휴대폰</b>: Play 스토어·App Store에서 ChatGPT 앱 설치 → 같은 Google 계정으로 로그인 → PC에서 한 대화가 휴대폰에도 보이는지 확인합니다.<br>
-      <b>③ 멀티모달 체험</b>: 휴대폰으로 손글씨 메모나 칠판을 찍어 올리고 "이 내용 정리해 줘" → 음성 모드로 "오늘 배운 AI 역사 30초로 요약해 줘"라고 말해 봅니다. 글뿐 아니라 <b>사진·목소리로도</b> AI에게 말할 수 있습니다.</p>
+      <div class="practice-title">실습 B-1 — PC에서 시작하기</div>
+      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>Google 계정</b></span></div>
+      <ol class="num-steps">
+        <li><b>chatgpt.com</b> 접속 → <b>로그인</b> → Google 계정으로 계속하기</li>
+        <li>화면 읽기 — 새 채팅 · 입력창 · <b>+</b> 파일 올리기 · 왼쪽 대화 기록</li>
+        <li>"2016년 알파고와 이세돌의 대국 결과를 알려줘" 입력</li>
+        <li>답 아래 <b>다시 생성</b> 버튼 → 답이 매번 조금씩 다른지 비교</li>
+        <li>같은 질문을 구글에도 검색해 결과 모양 비교 — 목록을 주는 검색 vs 정리된 답을 주는 ChatGPT</li>
+      </ol>
+    </div>
+    <div class="practice-card">
+      <div class="practice-title">실습 B-2 — 휴대폰에서 사진·목소리로 말하기</div>
+      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>휴대폰</b></span><span class="pb-sep">·</span><span class="pb-item"><span class="pb-num">②</span><b>Google 계정</b></span></div>
+      <ol class="num-steps">
+        <li>Play 스토어 · App Store에서 <b>ChatGPT</b> 검색 → 개발자가 <b>OpenAI</b>인 공식 앱 설치</li>
+        <li>PC와 같은 Google 계정으로 로그인 → PC에서 한 대화가 보이는지 확인</li>
+        <li><b>+</b> 버튼 → 카메라로 손글씨 메모나 칠판을 찍어 올리고 "이 내용 정리해 줘"</li>
+        <li><b>음성 모드</b> 버튼 → "오늘 배운 AI 역사 30초로 요약해 줘"라고 말하기</li>
+      </ol>
+      <p>글뿐 아니라 <b>사진·목소리로도</b> AI에게 말할 수 있습니다. 이렇게 여러 형태를 한 번에 다루는 것을 <b>멀티모달</b>이라고 합니다.</p>
     </div>
     <div class="callout"><div class="callout-label">녹음도 된다</div><p>회의를 녹음해 받아 적고 요약까지 해 주는 기능도 있습니다. ChatGPT의 기록 모드(Mac 앱, 유료), 무료로는 네이버 클로바노트가 한국어에 강합니다. 회의록 정리는 AI Agent 과정에서 실습합니다.</p></div>
     <h4>요금제와 구독</h4>
