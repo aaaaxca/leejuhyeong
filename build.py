@@ -206,6 +206,12 @@ CONTENT_CSS = """
   .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
   .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
   @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
@@ -266,6 +272,16 @@ def course_with_content(it, folder):
   </main>"""
     return shell(it["title"], inner)
 
+COPY_JS = """<script>
+document.querySelectorAll('.pbox').forEach(function(b){
+  var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
+  btn.onclick=function(){var txt=b.querySelector('pre').innerText;
+    var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done)}else{var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}};
+  b.appendChild(btn);
+});
+</script>"""
+
 def session_page(it, idx, folder_name):
     projs = it["projects"]; p = projs[idx]
     raw = open(os.path.join(ROOT, "content", it["content"], p["doc"] + ".html"), encoding="utf-8").read()
@@ -294,7 +310,7 @@ def session_page(it, idx, folder_name):
     {strip_emoji(body)}
     {nav}
     <div class="d-foot">{e(it["title"])} · {p["doc"]}차시</div>
-  </main>"""
+  </main>""" + (COPY_JS if 'class="pbox"' in body else "")
     return shell(f'{p["doc"]}차시 · {p["title"]}', inner)
 
 import shutil

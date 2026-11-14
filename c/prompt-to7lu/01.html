@@ -224,6 +224,12 @@
   .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
   .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
   @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
@@ -485,7 +491,7 @@
     </table></div>
     <div class="callout callout--tip"><div class="callout-label">오늘의 결론</div><p>AI는 똑똑하지만 <b>내가 말해 준 만큼만</b> 압니다. 그래서 <b>정확히 말하고, 결과는 확인한다</b> — 이 과정에서 12차시 동안 연습할 것입니다.</p></div>
 
-    <nav class="snav"><span style=flex:1></span><span class="nx off"><small>02차시 · 준비 중</small>프롬프트 기본 구조</span></nav>
+    <nav class="snav"><span style=flex:1></span><a class="nx" href="02.html"><small>02차시 →</small>프롬프트 기본 구조</a></nav>
     <div class="d-foot">AI 프롬프트 엔지니어링 · 01차시</div>
   </main>
 </div>
