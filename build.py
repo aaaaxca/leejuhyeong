@@ -203,6 +203,7 @@ CONTENT_CSS = """
   .snav a:hover{border-color:var(--sub)}
   .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
   .snav .nx{text-align:right}
+  .snav .off{flex:1;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--faint);font-size:14px}
   .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
   .back:hover{color:var(--ink)}
 """
@@ -267,7 +268,8 @@ def session_page(it, idx, folder_name):
     body = re.sub(r'<div class="tags">.*?</div>\s*', "", body, count=1, flags=re.S)
     prev = projs[idx-1] if idx > 0 and projs[idx-1].get("doc") else None; nxt = projs[idx+1] if idx+1 < len(projs) and projs[idx+1].get("doc") else None
     nav = '<nav class="snav">' + (f'<a href="{prev["doc"]}.html"><small>← {prev["doc"]}차시</small>{e(prev["title"])}</a>' if prev else "<span style=flex:1></span>") \
-        + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt else "<span style=flex:1></span>") + "</nav>"
+        + (f'<a class="nx" href="{nxt["doc"]}.html"><small>{nxt["doc"]}차시 →</small>{e(nxt["title"])}</a>' if nxt
+           else (f'<span class="nx off"><small>{idx+2:02d}차시 · 준비 중</small>{e(projs[idx+1]["title"])}</span>' if idx+1 < len(projs) else "<span style=flex:1></span>")) + "</nav>"
     full_t = h3.group(1).strip() if h3 else e(p["title"])
     t_main, _, t_sub = full_t.partition(" — ")
     tag_html = re.sub(r'<span class="tag time">.*?</span>', "", tags.group(1)) if tags else ""
