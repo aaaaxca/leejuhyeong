@@ -164,6 +164,14 @@
   .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
   .adjust{border:1px dashed var(--line)}
   .out{background:var(--panel);border:1px solid var(--line)}
+  .doc .timeline{list-style:none;margin:20px 0 8px;padding:0 0 0 26px;position:relative}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .doc .timeline li{position:relative;margin:0 0 30px}
+  .timeline li:last-child{margin-bottom:0}
+  .timeline li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-wip);box-shadow:0 0 0 4px var(--bg,#fff)}
+  .tl-year{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600;color:var(--c-wip);letter-spacing:.02em}
+  .tl-title{display:block;font-weight:600;color:var(--ink);font-size:15.5px;margin:6px 0 6px}
+  .timeline p{margin:0;color:var(--sub);font-size:14.5px}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
@@ -188,21 +196,18 @@
   </header>
   <main class="doc">
     <h4>이론 1 — AI는 70년 넘게 쌓인 이야기</h4>
-    <p>AI는 갑자기 나타난 기술이 아닙니다. "생각하는 기계"를 꿈꾼 지 70년이 넘었고, 지금은 그 흐름의 한가운데입니다.</p>
-    <div class="table-scroll"><table>
-      <thead><tr><th>시기</th><th>사건</th><th>의미</th></tr></thead>
-      <tbody>
-        <tr><td>1950</td><td>앨런 튜링의 질문 — 대화해서 사람인지 기계인지 구분 못 하면 "생각한다"고 볼 수 있지 않을까? (튜링 테스트)</td><td>"기계가 생각할 수 있을까?"의 시작. 영화 〈이미테이션 게임〉의 그 인물</td></tr>
-        <tr><td>1956</td><td>미국 다트머스 대학 학회에서 <b>Artificial Intelligence(인공지능)</b>라는 이름이 처음 붙음</td><td>몇 년이면 된다고 믿었지만 실제로는 수십 년이 걸림</td></tr>
-        <tr><td>1974–1993</td><td><b>AI 겨울</b> — 성과가 기대에 못 미치자 투자가 끊기고 연구가 얼어붙은 시기가 여러 번</td><td>한동안 AI는 "말만 거창한 기술"의 대명사</td></tr>
-        <tr><td>1997</td><td>IBM <b>딥블루</b>가 체스 세계 챔피언 카스파로프를 이김</td><td>체스만 할 줄 아는 <b>좁은 분야 AI</b>. 사람이 정한 규칙으로 움직임</td></tr>
-        <tr><td>2012</td><td>GPU와 인터넷 데이터 덕분에 <b>딥러닝</b>이 이미지 인식 대회에서 압도적 성적</td><td>"AI가 드디어 쓸 만해졌다"는 신호탄</td></tr>
-        <tr><td>2016</td><td>구글 딥마인드 <b>알파고</b>가 이세돌 9단에게 4승 1패</td><td>규칙이 아니라 <b>데이터로 스스로 패턴을 학습</b>하는 AI</td></tr>
-        <tr><td>2017</td><td>구글 연구진이 <b>트랜스포머(Transformer)</b> 구조 발표</td><td>글 전체의 맥락을 한 번에 이해 → 지금의 LLM(거대 언어 모델)의 설계도. GPT의 T가 바로 Transformer</td></tr>
-        <tr><td>2022</td><td>Midjourney, ChatGPT 공개. ChatGPT는 두 달 만에 사용자 1억 명</td><td>누구나 <b>말로</b> AI를 쓰는 시대</td></tr>
-        <tr><td>2023–지금</td><td>글·이미지·영상을 함께 다루는 모델, 영상 생성 AI(Kling 등), AI 에이전트 등장</td><td>"답하는 AI"에서 "일하는 AI"로 넘어가는 중</td></tr>
-      </tbody>
-    </table></div>
+    <p>AI는 갑자기 하늘에서 떨어진 기술이 아닙니다. 사실 <b>70년 넘게 쌓인 이야기</b>입니다. 짧게 풀어 볼게요.</p>
+    <ul class="timeline">
+      <li><span class="tl-year">1950</span><span class="tl-title">“기계가 생각할 수 있을까?”</span><p>수학자 <b>앨런 튜링</b>이 질문을 던집니다. <i>“기계가 사람처럼 대화해서, 상대가 사람인지 기계인지 구분 못 하면, 그건 생각하는 것 아닌가?”</i> — 이게 그 유명한 <b>튜링 테스트</b>입니다. 컴퓨터도 제대로 없던 시절에 이미 “생각하는 기계”를 상상한 거죠. 영화 〈이미테이션 게임〉의 그 인물입니다.</p></li>
+      <li><span class="tl-year">1956</span><span class="tl-title">‘AI’라는 단어가 태어나다</span><p>미국 다트머스 대학에 학자들이 모여 한 학문 분야를 출범시킵니다. 이때 처음 <b>“Artificial Intelligence(인공지능)”</b>라는 이름이 붙습니다. “몇 년만 연구하면 사람처럼 똑똑한 기계를 만들 수 있다”는 자신감이 넘쳤습니다. (결과적으로 <i>몇 년</i>이 아니라 <i>수십 년</i>이 걸렸지만요.)</p></li>
+      <li><span class="tl-year">1974–1993</span><span class="tl-title">‘AI 겨울’</span><p>현실은 호락호락하지 않았습니다. 기대만큼 성과가 안 나오자 투자가 끊기고, 연구가 얼어붙는 시기가 여러 번 옵니다. 이걸 <b>“AI 겨울(AI Winter)”</b>이라 부릅니다. AI는 한동안 “말만 거창하고 안 되는 것”의 대명사였습니다.</p></li>
+      <li><span class="tl-year">1997</span><span class="tl-title">딥블루, 체스 챔피언을 꺾다</span><p>IBM이 만든 체스 전용 컴퓨터 <b>딥블루</b>가 세계 체스 챔피언 가리 카스파로프를 이깁니다. “기계가 인간 챔피언을 이겼다”는 첫 상징적 사건이었지만, 딥블루는 <b>체스만</b> 할 줄 아는 기계였습니다. AI 겨울 속에서도 <b>좁은 분야(narrow AI)</b>는 조용히 발전하고 있었다는 걸 보여 준 사건입니다.</p></li>
+      <li><span class="tl-year">2012</span><span class="tl-title">딥러닝이 판을 뒤집다</span><p>컴퓨터 성능(특히 게임용 칩이던 <b>GPU</b>)과 인터넷 데이터가 폭발하면서, <b>딥러닝</b>이라는 방식이 이미지 인식 대회에서 압도적 성적을 냅니다. “AI가 드디어 쓸 만해졌다”는 신호탄이었습니다. 사진 속 고양이를 사람보다 잘 찾기 시작한 게 이 무렵입니다.</p></li>
+      <li><span class="tl-year">2016</span><span class="tl-title">알파고, 바둑을 정복하다</span><p>구글 딥마인드의 <b>알파고</b>가 이세돌 9단과의 대국에서 4승 1패로 승리합니다. 바둑은 경우의 수가 우주의 원자 수보다 많다고 알려져 “기계는 절대 못 이긴다”던 종목이었습니다. 딥블루와 달리 알파고는 <b>딥러닝으로 스스로 패턴을 학습</b>했다는 점에서 질적으로 달랐습니다.</p></li>
+      <li><span class="tl-year">2017</span><span class="tl-title">트랜스포머, 지금 LLM의 씨앗</span><p>구글 연구진이 〈Attention Is All You Need〉 논문에서 <b>트랜스포머(Transformer)</b> 구조를 발표합니다. 단어를 앞에서부터 하나씩 읽던 방식에서, 글의 맥락을 통째로 보고 관련도를 계산하는 방식으로 바뀌면서 훨씬 많은 데이터를 빠르게 학습하게 됐습니다. 오늘날 <b>거대 언어 모델(LLM)</b>의 설계도이고, ‘GPT’의 <b>T가 바로 Transformer</b>입니다.</p></li>
+      <li><span class="tl-year">2022</span><span class="tl-title">말로 AI를 쓰는 시대</span><p>Midjourney와 ChatGPT가 공개됩니다. “와, 얘랑 진짜 말이 통하네?” 하는 충격이 전 세계로 번졌고, ChatGPT는 출시 두 달 만에 사용자 1억 명을 넘기며 역사상 가장 빠르게 퍼진 서비스가 됩니다. 누구나 <b>말로</b> AI에게 글과 그림을 시키게 된 겁니다.</p></li>
+      <li><span class="tl-year">2023–지금</span><span class="tl-title">글·이미지·영상을 함께</span><p>글과 이미지, 음성, 영상을 한 번에 다루는 AI가 나오고, Kling 같은 영상 생성 AI도 등장합니다. 도구를 써서 직접 일을 처리하는 <b>AI 에이전트</b>도 나왔는데, 이건 AI Agent 과정에서 이어서 다룹니다.</p></li>
+    </ul>
     <div class="callout"><div class="callout-label">한 줄 요약</div><p>생각하는 기계를 꿈꿨고 → 딥러닝·트랜스포머로 똑똑해졌고 → 챗봇으로 누구나 쓰게 됐습니다. 그 사이 바뀐 건 <b>AI를 쓰는 방법이 "말"이 됐다</b>는 것. 그래서 말하는 기술, 프롬프트가 중요해졌습니다.</p></div>
 
     <h4>이론 2 — 용어 정리: AI · 머신러닝 · 딥러닝 · 생성형 AI</h4>
