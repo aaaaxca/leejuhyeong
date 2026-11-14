@@ -129,15 +129,15 @@ CONTENT_CSS = """
   .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
   .callout p:last-child{margin-bottom:0}
   .callout-label{font-weight:600;margin-bottom:6px}
-  .callout--tip{border-left-color:var(--c-wip)} .callout--tip .callout-label{color:var(--c-wip)}
+  .callout--tip{border-left-color:var(--c-done)} .callout--tip .callout-label{color:var(--c-done)}
   .callout--warning{border-left-color:#d08a7c}
   .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
   .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
   .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
   .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
   .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
-  .practice-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
-  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .practice-card{border:1px solid var(--line);border-left:3px solid var(--c-wip);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--c-wip)}
   .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
   .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
   .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
