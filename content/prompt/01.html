@@ -62,23 +62,23 @@
               </table></div>
           <p>이렇게 사람이 정하는 학습 설정을 <b>하이퍼파라미터</b>라고 합니다. 시간이 남으면 에포크를 5로 줄여 다시 학습해 보세요. 확률 막대가 애매하게 흔들립니다 — 공부를 덜 시키면 덜 똑똑합니다.</p>
         </li>
-        <li><b>미리보기(Preview)</b> — 입력(Input)을 <b>파일(File)</b>로 바꾸고 <code>test</code> 폴더 사진을 하나씩 넣어 출력(Output) 막대를 봅니다.</li>
+        <li><b>미리보기(Preview)</b> — 입력(Input)을 <b>파일(File)</b>로 바꾸고 <code>test</code> 폴더 사진을 하나씩 넣어 출력(Output) 막대를 봅니다. AI는 정말 "고양이"를 배웠을까요?
+          <div class="table-scroll"><table>
+            <thead><tr><th>테스트 사진</th><th>AI의 답</th><th>왜 그럴까</th></tr></thead>
+            <tbody>
+              <tr><td>실내 고양이 · 잔디 강아지</td><td>잘 맞힘</td><td>배운 사진과 비슷하니까</td></tr>
+              <tr><td>잔디 위 고양이</td><td><b>강아지</b>라고 틀림</td><td>동물이 아니라 <b>배경</b>으로 구분하고 있었다 (학습용 고양이는 전부 실내, 강아지는 전부 잔디)</td></tr>
+              <tr><td>실내 강아지</td><td><b>고양이</b>라고 틀림</td><td>같은 이유 — 실내면 고양이라고 배웠다</td></tr>
+              <tr><td>호랑이 · 여우</td><td>둘 중 하나로 <b>자신 있게</b> 틀림</td><td>cat·dog 말고는 모르는데, "모르겠다"고 하지 않는다</td></tr>
+            </tbody>
+          </table></div>
+          <p>AI는 <b>내가 준 예제만큼</b> 압니다. 그리고 우리가 의도한 걸 배웠다는 보장도 없습니다. 고치려면? 잔디 위 고양이, 실내 강아지 사진을 더 넣고 다시 학습하면 됩니다 — <b>데이터를 고치면 AI가 바뀝니다</b>.</p>
+        </li>
         <li><b>모델 내보내기(Export Model)</b> — Tensorflow.js 탭 → 업로드(Upload my model) → 생성된 <b>공유 가능한 링크(Shareable link)</b> 복사 → 옆 사람에게 보내 써 보게 하기. 이 링크는 실습 C에서 다시 씁니다.</li>
       </ol>
       <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>이미지 폴더</b> <span class="meta">· 강사 배부 (학습용 고양이·강아지 각 12장 안팎, 테스트용 5~6장)</span></li><li><b>영문 페이지로 진행</b> <span class="meta">· 한국어 화면에서는 이미지 업로드가 안 될 수 있음</span></li></ul></div>
     </div>
 
-    <h4>결과 보기 — AI는 정말 "고양이"를 배웠을까?</h4>
-    <div class="table-scroll"><table>
-      <thead><tr><th>테스트 사진</th><th>AI의 답</th><th>왜 그럴까</th></tr></thead>
-      <tbody>
-        <tr><td>실내 고양이 · 잔디 강아지</td><td>잘 맞힘</td><td>배운 사진과 비슷하니까</td></tr>
-        <tr><td>잔디 위 고양이</td><td><b>강아지</b>라고 틀림</td><td>동물이 아니라 <b>배경</b>으로 구분하고 있었다 (학습용 고양이는 전부 실내, 강아지는 전부 잔디)</td></tr>
-        <tr><td>실내 강아지</td><td><b>고양이</b>라고 틀림</td><td>같은 이유 — 실내면 고양이라고 배웠다</td></tr>
-        <tr><td>호랑이 · 여우</td><td>둘 중 하나로 <b>자신 있게</b> 틀림</td><td>cat·dog 말고는 모르는데, "모르겠다"고 하지 않는다</td></tr>
-      </tbody>
-    </table></div>
-    <p>AI는 <b>내가 준 예제만큼</b> 압니다. 그리고 우리가 의도한 걸 배웠다는 보장도 없습니다. 고치려면? 잔디 위 고양이, 실내 강아지 사진을 더 넣고 다시 학습하면 됩니다 — <b>데이터를 고치면 AI가 바뀝니다</b>.</p>
     <div class="callout callout--tip"><div class="callout-label">ChatGPT의 할루시네이션도 같은 원리</div><p>생성형 AI가 사실이 아니거나 근거 없는 내용을 <b>자신 있게 사실처럼</b> 말하는 현상을 할루시네이션(환각)이라고 합니다. 호랑이를 고양이라고 우기던 모델처럼, 학습 데이터가 부족하거나, 질문이 모호하거나, 최신 정보를 확인 없이 답할 때 생깁니다. 그래서 <b>질문은 구체적으로, 중요한 내용은 확인</b>하는 습관이 필요합니다.</p></div>
 
     <h2 class="sec-head" id="s5"><span class="sec-num">5</span>생성형 AI의 종류와 이 과정의 도구</h2>
