@@ -1,7 +1,7 @@
 <div class="day-head"><span class="day-num">01차시</span><h3>AI 변천사와 생성형 AI 이해</h3></div>
     <p class="goal">AI가 70년 동안 어떻게 지금까지 왔는지 흐름을 잡고, AI가 "예제를 보고 배운다"는 것을 직접 AI를 학습시켜 보며 체감합니다. 마지막엔 ChatGPT에게 말로 시켜 내가 만든 AI를 쓰는 웹페이지까지 만들어 봅니다.</p>
     <div class="tags"><span class="tag time">이론 40 · 실습 60 · 조절 20</span><span class="tag">Teachable Machine</span><span class="tag">ChatGPT (PC · 휴대폰)</span><span class="tag src">Google 계정</span></div>
-    <nav class="sec-nav"><a href="#s1"><span>1</span>AI 70년</a><a href="#s2"><span>2</span>용어 정리</a><a href="#s3"><span>3</span>배우는 방식</a><a href="#s4"><span>4</span>실습 · Teachable Machine</a><a href="#s5"><span>5</span>생성형 AI 종류</a><a href="#s6"><span>6</span>ChatGPT · LLM</a><a href="#s7"><span>7</span>실습 · 가입</a><a href="#s8"><span>8</span>결제 · 토큰</a><a href="#s9"><span>9</span>실습 · 웹페이지</a></nav>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>AI 70년</a><a href="#s2"><span>2</span>용어 정리</a><a href="#s3"><span>3</span>배우는 방식</a><a href="#s4"><span>4</span>실습 · Teachable Machine</a><a href="#s5"><span>5</span>생성형 AI 종류</a><a href="#s6"><span>6</span>ChatGPT · LLM</a><a href="#s7"><span>7</span>실습 · 가입</a><a href="#s8"><span>8</span>결제 · 토큰</a></nav>
 
 
     <h2 class="sec-head" id="s1"><span class="sec-num">1</span>AI는 70년 넘게 쌓인 이야기</h2>
@@ -86,7 +86,7 @@
           </table></div>
           <p>AI는 <b>내가 준 예제만큼</b> 압니다. 그리고 우리가 의도한 걸 배웠다는 보장도 없습니다. 고치려면? 잔디 위 고양이, 실내 강아지 사진을 더 넣고 다시 학습하면 됩니다 — <b>데이터를 고치면 AI가 바뀝니다</b>.</p>
         </li>
-        <li><b>모델 내보내기(Export Model)</b> — Tensorflow.js 탭 → 업로드(Upload my model) → 생성된 <b>공유 가능한 링크(Shareable link)</b> 복사 → 옆 사람에게 보내 써 보게 하기. 이 링크는 실습 C에서 다시 씁니다.<br><span class="meta">※ 업로드는 <b>영문 페이지</b>에서 진행하세요. 한국어 화면에서는 업로드가 안 될 수 있습니다.</span></li>
+        <li><b>모델 내보내기(Export Model)</b> — Tensorflow.js 탭 → 업로드(Upload my model) → 생성된 <b>공유 가능한 링크(Shareable link)</b> 복사 → 옆 사람에게 보내 써 보게 하기. 이 링크는 실습 B에서 다시 씁니다.<br><span class="meta">※ 업로드는 <b>영문 페이지</b>에서 진행하세요. 한국어 화면에서는 업로드가 안 될 수 있습니다.</span></li>
       </ol>
     </div>
 
@@ -168,6 +168,14 @@
         <li><b>chatgpt.com</b> 접속 → <b>로그인</b> → <b>Google 계정으로 계속하기</b></li>
         <li>화면 읽기 — 새 채팅 · 입력창 · <b>+</b> 파일 올리기 · 왼쪽 대화 기록</li>
         <li>"2016년 알파고와 이세돌의 대국 결과를 알려줘" 입력</li>
+        <li><b>실습 A의 모델로 판별 페이지 만들기</b> — 실습 A에서 복사한 공유 링크가 필요합니다
+          <ol class="sub-steps">
+            <li>이렇게 요청 — "아래 Teachable Machine 이미지 모델 링크를 사용해서, 사진을 올리면 고양이인지 강아지인지 확률과 함께 보여 주는 웹페이지를 HTML 파일 하나로 만들어줘. 버튼은 크게, 설명은 한국어로. 모델 링크: <i>(실습 A에서 복사한 링크)</i>"</li>
+            <li>캔버스 미리보기로 열기 — 안 되면 코드를 메모장에 붙여 <code>cat-dog.html</code>로 저장(인코딩 UTF-8)해 크롬으로 열기</li>
+            <li>"결과를 귀여운 문구로 보여줘", "배경을 어둡게"처럼 한 가지씩 더 시켜 보기</li>
+          </ol>
+          <span class="meta">실습 A에서 만든 AI를, 말 몇 마디로 누구나 쓸 수 있는 페이지로 바꿔 봅니다.</span>
+        </li>
       </ol>
       <div class="step-group">휴대폰</div>
       <ol class="num-steps">
@@ -220,18 +228,3 @@
     </div>
     <p>AI가 한 대화에서 기억할 수 있는 길이도 토큰으로 정해집니다 — 대화가 아주 길어지면 앞부분을 잊는 이유입니다. 이 과정은 <b>구독만</b> 씁니다.</p>
     <p>숫자와 한도는 자주 바뀌니, 정확한 값은 공식 도움말과 내 계정의 사용량 화면에서 확인하세요.</p>
-
-    <h2 class="sec-head" id="s9"><span class="sec-num">9</span>말로 시켜서 웹페이지 만들기</h2>
-    <div class="practice-card">
-      <div class="practice-title">실습 C — 말로 시켜서 웹페이지 만들기</div>
-      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>실습 A의 공유 링크</b><small>없으면 옆 사람 링크를 받아서</small></span></div>
-      <p>실습 A에서 만든 고양이·강아지 AI를, ChatGPT에게 말로 시켜 <b>누구나 쓸 수 있는 웹페이지</b>로 만듭니다. 같은 일을 두 번 시켜 결과를 비교합니다.</p>
-      <ol class="num-steps">
-        <li><b>대충 시키기</b> — "고양이 강아지 구분하는 웹페이지 만들어줘"</li>
-        <li><b>정확히 시키기</b> — "아래 Teachable Machine 이미지 모델 링크를 사용해서, 사진을 올리면 고양이인지 강아지인지 확률과 함께 보여 주는 웹페이지를 HTML 파일 하나로 만들어줘. 버튼은 크게, 설명은 한국어로, 깔끔한 디자인으로. 모델 링크: <i>(실습 A에서 복사한 링크)</i>"</li>
-        <li><b>실행</b> — 캔버스의 미리보기로 열거나, 코드를 메모장에 붙여 <code>cat-dog.html</code>로 저장(인코딩 UTF-8)해 크롬으로 엽니다.</li>
-        <li><b>되묻기로 고치기</b> — "결과를 귀여운 문구로 보여줘", "배경을 어둡게" 처럼 한 가지씩 더 시켜 봅니다.</li>
-      </ol>
-    </div>
-    <p>01은 내 모델을 모르니 엉뚱한 페이지가 나오고, 02는 내가 만든 AI가 들어간 페이지가 나옵니다. <b>질문의 질이 결과물의 질을 결정합니다.</b> 02에 들어간 것 — 무엇을(웹페이지), 무엇으로(모델 링크), 어떻게(확률 표시, 한국어, 큰 버튼), 어떤 형식으로(HTML 파일 하나) — 이것을 2차시에 프롬프트 구조로 정리합니다.</p>
-
