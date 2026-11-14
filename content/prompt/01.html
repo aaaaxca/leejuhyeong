@@ -47,7 +47,7 @@
     <h2 class="sec-head" id="s4"><span class="sec-num">4</span>내 손으로 AI 학습시키기</h2>
     <div class="practice-card">
       <div class="practice-title">실습 A — Teachable Machine으로 고양이·강아지 구분 AI 만들기</div>
-      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>실습A_학습용_테스트용이미지.zip</b><small>강사가 알려 주는 링크에서 다운로드</small></span><span class="pb-sep">·</span><span class="pb-item"><span class="pb-num">②</span><b>PC와 크롬 브라우저</b><small>로그인 없이 바로 사용</small></span></div>
+      <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b class="hl">실습A_학습용_테스트용이미지.zip</b><small>강사가 알려 주는 링크에서 다운로드</small></span></div>
       <div class="table-scroll"><table>
         <thead><tr><th>단계</th><th>뜻</th><th>실습 A에서</th></tr></thead>
         <tbody>
@@ -61,7 +61,7 @@
       <p>구글의 무료 도구로 <b>고양이·강아지를 구분하는 AI</b>를 직접 만듭니다. 정답(이름표)을 붙인 사진을 주고 배우게 하니 <b>지도학습</b>이고, 속은 <b>딥러닝</b> 이미지 모델입니다.</p>
       <ol class="steps">
         <li><b>Teachable Machine 페이지</b> — teachablemachine.withgoogle.com → 시작하기(Get Started) → 이미지 프로젝트(Image Project) → 표준 이미지 모델(Standard image model)</li>
-        <li><b>이미지 다운로드</b> — <code>실습A_학습용_테스트용이미지.zip</code>을 받아 압축을 풉니다. 안에 <code>train/cat</code> · <code>train/dog</code> · <code>test</code> 폴더가 있습니다.</li>
+        <li><b>이미지 다운로드</b> — <code class="hl">실습A_학습용_테스트용이미지.zip</code>을 받아 압축을 풉니다. 안에 <code>train/cat</code> · <code>train/dog</code> · <code>test</code> 폴더가 있습니다.</li>
         <li><b>클래스(Class)</b> — <code>Class 1</code>을 <b>cat</b>, <code>Class 2</code>를 <b>dog</b>로 이름 변경 → 업로드(Upload)로 각 폴더 사진을 끌어다 놓기</li>
         <li><b>학습(Training)</b> — 고급(Advanced)을 열어 세 값을 확인만 하고, 기본값 그대로 <b>모델 학습시키기(Train Model)</b>. 학습 중에는 탭을 옮기지 않습니다.
           <div class="table-scroll"><table>
@@ -96,13 +96,12 @@
     <div class="table-scroll"><table>
       <thead><tr><th>유형</th><th>하는 일</th><th>대표 도구</th></tr></thead>
       <tbody>
-        <tr><td>텍스트</td><td>문장 생성, 번역, 요약, 기획, 코드</td><td><b>ChatGPT</b>, Claude, Gemini</td></tr>
-        <tr><td>이미지</td><td>설명으로 그림 만들기, 스타일 변환, 캐릭터·포스터</td><td><b>Midjourney</b>, ChatGPT 이미지, Firefly</td></tr>
-        <tr><td>영상·3D</td><td>이미지나 글로 영상 만들기</td><td><b>Kling</b>, Veo (Google)</td></tr>
+        <tr><td>텍스트</td><td>문장 생성, 번역, 요약, 기획, 코드</td><td><b class="hl">ChatGPT</b>, Claude, Gemini</td></tr>
+        <tr><td>이미지</td><td>설명으로 그림 만들기, 스타일 변환, 캐릭터·포스터</td><td><b class="hl">Midjourney</b>, ChatGPT 이미지, Firefly</td></tr>
+        <tr><td>영상·3D</td><td>이미지나 글로 영상 만들기</td><td><b class="hl">Kling</b>, Veo (Google)</td></tr>
         <tr><td>음성·음악</td><td>음성 합성, 작곡</td><td>Suno, ElevenLabs</td></tr>
       </tbody>
     </table></div>
-    <p>이 과정은 굵게 표시한 세 도구를 순서대로 씁니다. <b>ChatGPT로 기획하고 → Midjourney로 이미지를 만들고 → Kling으로 움직입니다.</b> 그 첫 번째, ChatGPT부터 봅니다.</p>
 
     <h2 class="sec-head" id="s6"><span class="sec-num">6</span>그중 ChatGPT — 왜 GPT인가</h2>
     <h4>LLM — 글을 다루는 생성형 AI</h4>
