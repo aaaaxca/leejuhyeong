@@ -177,6 +177,8 @@ CONTENT_CSS = """
   .dl-btn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:12.5px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:6px;padding:3px 10px;vertical-align:middle}
   .dl-btn::before{content:"↓"}
   .dl-btn:hover{background:color-mix(in srgb,var(--c-wip) 14%,transparent)}
+  .files-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:8px;padding:9px 16px;background:color-mix(in srgb,var(--c-wip) 8%,transparent)}
+  .files-btn:hover{background:color-mix(in srgb,var(--c-wip) 16%,transparent)}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
@@ -225,6 +227,7 @@ def course_with_content(it, folder):
     {f'<p class="lead d-lead">{e(it["subtitle"])}</p>' if it.get("subtitle") else ""}
     {f'<p class="lead d-lead">{e(it["desc"])}</p>' if it.get("desc") else ""}
     {f'<div class="meta-row">{meta}</div>' if meta else ""}
+    {f'<a class="files-btn" href="{e(it["files"])}" target="_blank" rel="noopener">실습 파일 받기 <span>→</span></a>' if it.get("files") else ""}
   </header>
   <main>
     <h2 class="d-sec">차시별 수업</h2>
