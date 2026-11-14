@@ -208,9 +208,9 @@
   .pb-sep{color:var(--faint)}
   .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
   .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
-  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:6px 0 10px;padding:0}
-  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:7px 0 7px 40px;font-size:14.5px;color:var(--sub);line-height:1.65}
-  .doc ol.num-steps>li::before{content:counter(ns);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:8px 0 12px;padding:0}
+  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:6px 0 6px 52px;font-size:14.5px;color:var(--sub);line-height:1.7}
+  .doc ol.num-steps>li::before{content:counter(ns,decimal-leading-zero);position:absolute;left:0;top:6px;width:30px;padding-right:10px;border-right:1px solid var(--line);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.95;color:var(--faint);text-align:left}
   .doc ol.num-steps b{color:var(--ink)}
   .doc ol.sub-steps{list-style:none;counter-reset:ss;margin:8px 0 6px;padding:0}
   .doc ol.sub-steps li{counter-increment:ss;position:relative;padding:3px 0 3px 26px;font-size:14px}
@@ -305,7 +305,7 @@
       </table></div>
       <p>시험 문제를 공부한 문제집에서 내면 늘 맞히겠죠. 그래서 확인용 사진(test)은 학습용 사진(train)과 <b>따로</b> 둡니다.</p>
       <p>구글의 무료 도구로 <b>고양이·강아지를 구분하는 AI</b>를 직접 만듭니다. 정답(이름표)을 붙인 사진을 주고 배우게 하니 <b>지도학습</b>이고, 속은 <b>딥러닝</b> 이미지 모델입니다.</p>
-      <ol class="steps">
+      <ol class="num-steps">
         <li><b>Teachable Machine 페이지</b> — teachablemachine.withgoogle.com → 시작하기(Get Started) → 이미지 프로젝트(Image Project) → 표준 이미지 모델(Standard image model)</li>
         <li><b>이미지 다운로드</b> — <code class="hl">실습A_학습용_테스트용이미지.zip</code>을 받아 압축을 풉니다. 안에 <code>train/cat</code> · <code>train/dog</code> · <code>test</code> 폴더가 있습니다.</li>
         <li><b>클래스(Class)</b> — <code>Class 1</code>을 <b>cat</b>, <code>Class 2</code>를 <b>dog</b>로 이름 변경 → 업로드(Upload)로 각 폴더 사진을 끌어다 놓기</li>
@@ -471,13 +471,15 @@
     <div class="practice-card">
       <div class="practice-title">실습 C — 말로 시켜서 웹페이지 만들기</div>
       <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>실습 A의 공유 링크</b><small>없으면 옆 사람 링크를 받아서</small></span></div>
-      <p>실습 A에서 만든 고양이·강아지 AI를, ChatGPT에게 말로 시켜 <b>누구나 쓸 수 있는 웹페이지</b>로 만듭니다. 같은 일을 두 번 시켜 결과를 비교합니다.<br>
-      <b>① 대충 시키기</b>: "고양이 강아지 구분하는 웹페이지 만들어줘"<br>
-      <b>② 정확히 시키기</b>: "아래 Teachable Machine 이미지 모델 링크를 사용해서, 사진을 올리면 고양이인지 강아지인지 확률과 함께 보여 주는 웹페이지를 HTML 파일 하나로 만들어줘. 버튼은 크게, 설명은 한국어로, 깔끔한 디자인으로. 모델 링크: <i>(실습 A에서 복사한 링크)</i>"<br>
-      <b>③ 실행</b>: 캔버스의 미리보기로 열거나, 코드를 메모장에 붙여 <code>cat-dog.html</code>로 저장(인코딩 UTF-8)해 크롬으로 엽니다.<br>
-      <b>④ 되묻기로 고치기</b>: "결과를 귀여운 문구로 보여줘", "배경을 어둡게" 처럼 한 가지씩 더 시켜 봅니다.</p>
+      <p>실습 A에서 만든 고양이·강아지 AI를, ChatGPT에게 말로 시켜 <b>누구나 쓸 수 있는 웹페이지</b>로 만듭니다. 같은 일을 두 번 시켜 결과를 비교합니다.</p>
+      <ol class="num-steps">
+        <li><b>대충 시키기</b> — "고양이 강아지 구분하는 웹페이지 만들어줘"</li>
+        <li><b>정확히 시키기</b> — "아래 Teachable Machine 이미지 모델 링크를 사용해서, 사진을 올리면 고양이인지 강아지인지 확률과 함께 보여 주는 웹페이지를 HTML 파일 하나로 만들어줘. 버튼은 크게, 설명은 한국어로, 깔끔한 디자인으로. 모델 링크: <i>(실습 A에서 복사한 링크)</i>"</li>
+        <li><b>실행</b> — 캔버스의 미리보기로 열거나, 코드를 메모장에 붙여 <code>cat-dog.html</code>로 저장(인코딩 UTF-8)해 크롬으로 엽니다.</li>
+        <li><b>되묻기로 고치기</b> — "결과를 귀여운 문구로 보여줘", "배경을 어둡게" 처럼 한 가지씩 더 시켜 봅니다.</li>
+      </ol>
     </div>
-    <p>①은 내 모델을 모르니 엉뚱한 페이지가 나오고, ②는 내가 만든 AI가 들어간 페이지가 나옵니다. <b>질문의 질이 결과물의 질을 결정합니다.</b> ②에 들어간 것 — 무엇을(웹페이지), 무엇으로(모델 링크), 어떻게(확률 표시, 한국어, 큰 버튼), 어떤 형식으로(HTML 파일 하나) — 이것을 2차시에 프롬프트 구조로 정리합니다.</p>
+    <p>01은 내 모델을 모르니 엉뚱한 페이지가 나오고, 02는 내가 만든 AI가 들어간 페이지가 나옵니다. <b>질문의 질이 결과물의 질을 결정합니다.</b> 02에 들어간 것 — 무엇을(웹페이지), 무엇으로(모델 링크), 어떻게(확률 표시, 한국어, 큰 버튼), 어떤 형식으로(HTML 파일 하나) — 이것을 2차시에 프롬프트 구조로 정리합니다.</p>
 
 
     <nav class="snav"><span style=flex:1></span><span class="nx off"><small>02차시 · 준비 중</small>프롬프트 기본 구조</span></nav>
