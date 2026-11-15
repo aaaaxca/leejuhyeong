@@ -254,7 +254,7 @@
     <span class="d-eyebrow">AI 프롬프트 엔지니어링 · 01차시</span>
     <h1 class="d-title">AI 변천사와 생성형 AI 이해</h1>
     
-    <p class="goal">AI가 70년 동안 어떻게 지금까지 왔는지 흐름을 잡고, AI가 "예제를 보고 배운다"는 것을 직접 AI를 학습시켜 보며 체감합니다. 이어서 이 수업에서 쓸 ChatGPT · Midjourney · Kling이 어떻게 다른지 알아보고, 세 도구에 가입합니다.</p>
+    <p class="goal">AI가 70년 동안 어떻게 지금까지 왔는지 흐름을 잡고, AI가 "예제를 보고 배운다"는 것을 직접 AI를 학습시켜 보며 체감합니다. 이어서 이 수업에서 쓸 ChatGPT · Midjourney · Kling이 어떻게 다른지 알아보고, 세 도구에 가입해 직접 글·이미지·영상을 만들어 봅니다.</p>
     <div class="tags"><span class="tag">Teachable Machine</span><span class="tag">ChatGPT · Midjourney · Kling</span><span class="tag src">Google 계정</span></div>
   </header>
   <main class="doc">
@@ -359,6 +359,35 @@
       </tbody>
     </table></div>
 
+    <h4>그중 ChatGPT — 글을 맡은 도구</h4>
+    <h4>GPT라는 이름</h4>
+    <p><b>GPT</b>는 <b>Generative Pre-trained Transformer</b>의 줄임말입니다. 글을 만들어 내고(<b>G</b>enerative), 엄청난 글을 미리 읽고 배웠고(<b>P</b>re-trained — 아래 '어떻게 배웠나'의 미리 학습), 1번 타임라인 2017년의 트랜스포머 구조로 만든(<b>T</b>ransformer) 모델이라는 뜻입니다. 앞에 붙은 <b>Chat</b>은 말 그대로 채팅, 대화로 쓰는 GPT라는 뜻입니다.</p>
+
+    <h4>누가 만들었나 — OpenAI</h4>
+    <p>ChatGPT는 미국의 <b>OpenAI</b>가 만들었습니다. 2015년 샌프란시스코에서 "AI가 인류 전체에 도움이 되게 하자"는 목표의 비영리 연구소로 출발했고, 샘 올트먼(Sam Altman)이 CEO를 맡고 있습니다. 이후 마이크로소프트의 대규모 투자를 받으며 회사 규모로 커졌고, <b>2022년 11월 ChatGPT를 공개</b>해 1번 타임라인의 "말로 AI를 쓰는 시대"를 열었습니다.</p>
+
+    <h4>어떻게 배웠나</h4>
+    <p>ChatGPT는 어떻게 이렇게 말을 잘하게 됐을까요? 3번에서 본 세 가지 방식을 모두 거쳤습니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>단계</th><th>하는 일</th><th>3번의 어떤 방식?</th></tr></thead>
+      <tbody>
+        <tr><td>① 미리 학습</td><td>인터넷의 엄청난 양의 글을 읽으며 "다음에 올 말"을 맞히는 연습을 반복</td><td>정답을 따로 붙이지 않고 글 자체에서 스스로 배움 (비지도에 가까움)</td></tr>
+        <tr><td>② 대화 연습</td><td>사람이 만든 좋은 질문·답변 예시로 대화하는 법을 배움</td><td>지도학습</td></tr>
+        <tr><td>③ 다듬기</td><td>여러 답 중 사람이 더 좋다고 고른 쪽으로 점점 맞춰 감</td><td>강화학습</td></tr>
+      </tbody>
+    </table></div>
+    <p>세 가지 방식이 <b>ChatGPT 하나에 다 들어 있습니다.</b> 그리고 답할 때는 가장 그럴듯한 다음 말을 하나씩 이어 붙입니다. 그래서 같은 질문에도 매번 답이 조금씩 다르고, 앞에서 본 할루시네이션처럼 <b>그럴듯하게 틀릴 수</b> 있습니다.</p>
+
+    <h4>검색과 무엇이 다른가</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th></th><th>검색 엔진</th><th>ChatGPT</th></tr></thead>
+      <tbody>
+        <tr><td>하는 일</td><td>이미 있는 정보 중 키워드에 맞는 것을 찾아 줌</td><td>배운 것을 바탕으로 새 답을 만들어 줌</td></tr>
+        <tr><td>결과물</td><td>관련 웹페이지 목록 — 내가 읽고 골라야 함</td><td>정리된 글 — 바로 쓸 수 있음</td></tr>
+        <tr><td>주의할 점</td><td>광고·오래된 글이 섞임</td><td>매번 답이 조금씩 다르고, <b>그럴듯하게 틀릴 수 있음</b></td></tr>
+      </tbody>
+    </table></div>
+
     <h2 class="sec-head" id="s6"><span class="sec-num">6</span>글을 만드는 AI vs 그림·영상을 만드는 AI</h2>
     <p>세 도구 모두 프롬프트(글)로 지시한다는 점은 같지만, 결과를 만드는 방식이 다릅니다.</p>
     <div class="duo-cards">
@@ -380,9 +409,41 @@
     </table></div>
     <div class="callout callout--warning"><div class="callout-label">Kling 크레딧은 아껴 쓰기</div><p>Kling은 크레딧을 다 쓰면 그달에는 더 만들 수 없습니다. 결제한 뒤에도 꼭 아껴 쓰세요.</p></div>
 
+    <h4>ChatGPT 요금제</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>요금제</th><th>월 요금 (국내, VAT 포함)</th><th>누구에게</th></tr></thead>
+      <tbody>
+        <tr><td>Free</td><td>0원</td><td>맛보기. 기본 대화는 되지만 이미지·파일·고급 기능은 금방 한도</td></tr>
+        <tr><td>Go</td><td>13,000원</td><td>무료보다 대화·업로드·이미지 생성 한도가 넉넉함. 고급 모델은 제한적</td></tr>
+        <tr><td>Plus</td><td>29,000원</td><td>생각하는 모델, 프로젝트, 이미지 생성 여유 — <b>이 과정엔 이것이면 충분</b></td></tr>
+        <tr><td>Pro</td><td>159,000원부터</td><td>매일 많이 쓰는 전문가용. 입문엔 필요 없음</td></tr>
+      </tbody>
+    </table></div>
+    <h4>사용량 — 얼마나 쓸 수 있나</h4>
+    <p>요금제마다 쓸 수 있는 양이 정해져 있습니다. (2026년 11월 공식 안내 기준)</p>
+    <ul>
+      <li><b>일반 대화</b> — 무료를 포함한 모든 요금제에서 사실상 무제한 (지나친 남용만 막음)</li>
+      <li><b>기능별 한도</b> — 파일 올리기, 이미지 생성, 심층 리서치, 음성 대화, 생각하는 모델은 따로 한도가 있습니다. 예: 무료는 파일 업로드 하루 3개</li>
+      <li><b>시간 단위로 초기화</b> — Plus는 무거운 작업 기능에 <b>5시간 단위</b>와 <b>1주 단위</b> 한도가 함께 걸려 있고, 첫 사용 시점부터 시간이 셉니다</li>
+      <li><b>한도에 닿으면</b> — 다른 모델로 이어서 쓰거나, 초기화 시간까지 기다리면 됩니다</li>
+      <li><b>내 사용량 확인</b> — <b>설정 → 사용량(Usage)</b>에서 남은 양과 초기화 시간을 볼 수 있습니다</li>
+    </ul>
+    <h4>구독과 API — API가 무서운 이유</h4>
+    <ul>
+      <li><b>구독</b>은 사용량이 정해져 있어, 구독한 금액만큼만 씁니다. 한도에 닿으면 기다리거나 다른 모델로 넘어갈 뿐 돈이 더 나가지 않습니다.</li>
+      <li><b>API</b>는 <b>토큰 단위로 돈을 받습니다.</b> 글을 많이 주고받을수록 토큰이 쌓이고 그만큼 청구됩니다. 문제는 <b>"얼마 나올지 미리 가늠하기 어렵다"</b>는 점. 그래서 개발 지식 없이 API를 만지면 요금 폭탄을 맞기 쉽습니다.</li>
+    </ul>
+    <div class="duo-cards">
+      <div class="duo-card"><div class="duo-title">구독</div><p>사람이 채팅 앱에서 쓰는 용도 + 정액 요금 + 사용 한도. 사람이 직접 채팅하는 용도입니다.</p></div>
+      <div class="duo-card"><div class="duo-title">API</div><p>개발자가 프로그램에 붙여 쓰는 용도 + 종량 요금 + 한도 없이 쓴 만큼 청구. 프로그램이 자동으로 호출하는 용도입니다.</p><p class="duo-note">ChatGPT의 API는 <b>platform.openai.com</b>에서 따로 가입·충전합니다. 같은 계정이어도 결제는 별개라, ChatGPT를 구독해도 API 사용량은 포함되지 않습니다.</p></div>
+    </div>
+    <p>AI가 한 대화에서 기억할 수 있는 길이도 토큰으로 정해집니다 — 대화가 아주 길어지면 앞부분을 잊는 이유입니다. 이 과정은 <b>구독만</b> 씁니다.</p>
+    <p>숫자와 한도는 자주 바뀌니, 정확한 값은 공식 도움말과 내 계정의 사용량 화면에서 확인하세요.</p>
+
     <h2 class="sec-head" id="s8"><span class="sec-num">8</span>AI 도구 가입하고 써 보기</h2>
     <div class="practice-card">
-      <div class="practice-title">실습 B — ChatGPT 가입하고 써 보기 (PC)</div>
+      <div class="practice-title">실습 B — ChatGPT 가입하고 써 보기</div>
+      <div class="step-group">PC</div>
       <ol class="num-steps">
         <li><b>크롬(Chrome)</b> 실행 → 오른쪽 위 프로필에서 <b>Google 계정으로 로그인</b></li>
         <li><b>chatgpt.com</b> 접속 → <b>로그인</b> → <b>Google 계정으로 계속하기</b></li>
@@ -397,27 +458,40 @@
           <span class="meta">실습 A에서 만든 AI를, 말 몇 마디로 누구나 쓸 수 있는 페이지로 바꿔 봅니다.</span>
         </li>
       </ol>
-      <p class="note">1차시에 결제 후 써 보는 것은 ChatGPT의 04, 05 두 가지뿐입니다.</p>
+      <div class="step-group">휴대폰</div>
+      <ol class="num-steps">
+        <li>Play 스토어 · App Store에서 <b>ChatGPT</b> 검색 → 개발자가 <b>OpenAI</b>인 공식 앱 설치</li>
+        <li>PC와 같은 Google 계정으로 로그인 → PC에서 한 대화가 보이는지 확인</li>
+        <li><b>+</b> 버튼 → 카메라로 손글씨 메모나 칠판을 찍어 올리고 "이 내용 정리해 줘"</li>
+        <li><b>음성 모드</b> 버튼 → "오늘 배운 AI 역사 30초로 요약해 줘"라고 말하기</li>
+      </ol>
+      <p>글뿐 아니라 <b>사진·목소리로도</b> AI에게 말할 수 있습니다. 이렇게 여러 형태를 한 번에 다루는 것을 <b>멀티모달</b>이라고 합니다.</p>
     </div>
     <div class="practice-card">
-      <div class="practice-title">실습 C — Midjourney 가입하기 (PC)</div>
+      <div class="practice-title">실습 C — Midjourney 가입하고 이미지 만들어 보기 (PC)</div>
       <ol class="num-steps">
         <li><b>midjourney.com</b> 접속 → <b>Sign Up</b> → Google 계정으로 계속하기</li>
         <li>이메일 수신 설정 → <b>"중요한 발표만 허용"</b> 선택</li>
         <li><b>구독 구매하기</b> → <b>Standard</b> 요금제 → 결제 <span class="meta">Monthly 선택 확인 · 월 $30, 연 결제 시 $288</span></li>
-        <li>가입 완료 확인 후 마무리 — 이미지 만들기는 2차시에서 해 봅니다.</li>
+        <li>왼쪽 메뉴 <b>Create</b> → 위쪽 입력창에 프롬프트를 넣고 <b>Enter</b> — 소녀 이미지 만들어 보기
+          <div class="pbox"><div class="pbox-label">창가에서 책을 읽는 소녀, 부드러운 오후 햇살</div><pre>a girl reading a book by the window, soft afternoon light</pre></div>
+        </li>
+        <li>한 번에 이미지 4장이 만들어지는지 확인하고, 마음에 드는 한 장을 크게 열어 보기</li>
       </ol>
     </div>
     <div class="practice-card">
-      <div class="practice-title">실습 D — Kling 가입하기 (PC)</div>
+      <div class="practice-title">실습 D — Kling 가입하고 영상 만들어 보기 (PC)</div>
       <ol class="num-steps">
         <li><b>klingai.com</b> 접속 → 로그인 → Google 계정으로 가입</li>
         <li>상단 <b>멤버십 특가</b> → <b>Standard</b> 요금제 → 결제 <span class="meta">첫 달 $6.99, 원화로 표시 · 이후 월 $8.80으로 알려져 있으니 결제 화면에서 확인</span></li>
         <li>화면 상단에서 남은 <b>크레딧(660)</b> 확인</li>
-        <li>가입 완료 확인 후 마무리 — 영상 만들기는 2차시에서 해 봅니다.</li>
+        <li>영상 만들기에서 <b>텍스트로 영상(Text to Video)</b>을 고르고, 프롬프트를 넣어 생성 — 하늘을 나는 강아지 만들어 보기
+          <div class="pbox"><div class="pbox-label">파란 하늘, 뭉게구름 사이를 나는 귀여운 강아지</div><pre>a cute puppy flying in the blue sky among fluffy clouds</pre></div>
+        </li>
+        <li>영상이 완성되면 재생해 보고, 크레딧이 <b>610</b>으로 줄었는지 확인</li>
       </ol>
     </div>
-    <div class="callout callout--warning"><div class="callout-label">크레딧 계산해 보기</div><p>영상 1개(기본 설정) = 50 크레딧, 한 달 크레딧 660 ÷ 50 = <b>영상 약 13개</b>. 뒤 차시 실습에서 쓸 양을 남겨 두려면, 집에서는 1~2개만 시험해 보세요.</p></div>
+    <div class="callout callout--warning"><div class="callout-label">크레딧 계산해 보기</div><p>영상 1개(기본 설정) = 50 크레딧. 한 달 660 크레딧에서 오늘 1개를 쓰면 610, <b>영상 약 12개</b>가 남습니다. 뒤 차시 실습에서 쓸 양이니 집에서는 1~2개만 시험해 보세요.</p></div>
     <p class="note">구독은 매달 자동 결제됩니다. 수업이 끝난 뒤 계속 쓰지 않으면 계정 설정에서 해지하세요.</p>
 
     <h2 class="sec-head" id="s9"><span class="sec-num">9</span>AI가 아직 약한 것</h2>
@@ -434,11 +508,19 @@
       </tbody>
     </table></div>
     <div class="callout callout--tip"><div class="callout-label">오늘의 결론</div><p>AI는 똑똑하지만 <b>내가 말해 준 만큼만</b> 압니다. 그래서 <b>정확히 말하고, 결과는 확인한다</b> — 이 과정에서 12차시 동안 연습할 것입니다.</p></div>
-    <p>AI는 똑똑하지만, 무엇을 원하는지 정확히 말해 주지 않으면 엉뚱한 결과를 냅니다. 다음 시간에는 세 도구를 직접 써 보고, 결과가 아쉬운 부분을 <b>프롬프트 기본 구조</b>로 고쳐 봅니다.</p>
+    <p>오늘 세 도구로 만든 글, 이미지, 영상은 마음에 쏙 들었나요? AI는 똑똑하지만, 무엇을 원하는지 정확히 말해 주지 않으면 평범하거나 엉뚱한 결과를 냅니다. 다음 시간에는 오늘 결과를 돌아보고, 아쉬운 부분을 <b>프롬프트 기본 구조</b>로 고쳐 봅니다.</p>
 
     <nav class="snav"><span style=flex:1></span><a class="nx" href="02.html"><small>02차시 →</small>프롬프트 기본 구조</a></nav>
     <div class="d-foot">AI 프롬프트 엔지니어링 · 01차시</div>
-  </main>
+  </main><script>
+document.querySelectorAll('.pbox').forEach(function(b){
+  var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
+  btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
+    var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done)}else{var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}};
+  b.appendChild(btn);
+});
+</script>
 </div>
 </body>
 </html>
