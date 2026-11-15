@@ -1,19 +1,25 @@
 <div class="day-head"><span class="day-num">02차시</span><h3>프롬프트 기본 구조</h3></div>
-    <p class="goal">AI는 내가 말해 준 만큼만 압니다. 무엇을 말해 줘야 하는지 프롬프트의 5가지 재료로 정리하고, 재료를 하나씩 더해 가며 결과가 어떻게 바뀌는지 직접 실행해 확인합니다. 마지막엔 매번 쓰는 맥락을 ChatGPT에 저장해 둡니다.</p>
+    <p class="goal">1차시에 세 도구로 만든 결과를 돌아보며 왜 아쉬운지 찾고, 무엇을 말해 줘야 하는지 프롬프트의 5가지 재료로 정리합니다. 재료를 하나씩 더해 가며 결과가 어떻게 바뀌는지 직접 실행해 확인하고, 마지막엔 매번 쓰는 맥락을 ChatGPT에 저장해 둡니다.</p>
     <div class="tags"><span class="tag time">이론 45 · 실습 60 · 조절 15</span><span class="tag">ChatGPT (PC)</span></div>
-    <nav class="sec-nav"><a href="#s1"><span>1</span>왜 구조인가</a><a href="#s2"><span>2</span>5가지 재료</a><a href="#s3"><span>3</span>역할 주기</a><a href="#s4"><span>4</span>후카츠 기법</a><a href="#s5"><span>5</span>구분 기호</a><a href="#s6"><span>6</span>말투 요령</a><a href="#s7"><span>7</span>실습 · 맞춤 설정</a><a href="#s8"><span>8</span>체크리스트</a></nav>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>결과 돌아보기</a><a href="#s2"><span>2</span>5가지 재료</a><a href="#s3"><span>3</span>역할 주기</a><a href="#s4"><span>4</span>후카츠 기법</a><a href="#s5"><span>5</span>구분 기호</a><a href="#s6"><span>6</span>말투 요령</a><a href="#s7"><span>7</span>실습 · 맞춤 설정</a><a href="#s8"><span>8</span>체크리스트</a></nav>
 
-    <h2 class="sec-head" id="s1"><span class="sec-num">1</span>왜 구조가 필요한가</h2>
-    <p>1차시의 결론은 "AI는 똑똑하지만 <b>내가 말해 준 만큼만</b> 안다"였습니다. 짧게 물으면 AI는 나머지를 추측으로 채우고, 그 추측은 대부분 평범하고 두루뭉술합니다.</p>
+    <h2 class="sec-head" id="s1"><span class="sec-num">1</span>1차시 결과 돌아보기</h2>
+    <p>1차시에 세 도구로 글, 이미지, 영상을 만들어 봤습니다. 먼저 그 결과를 다시 열어 보세요.</p>
+    <ol class="num-steps">
+      <li><b>Midjourney</b> — "a girl reading a book by the window…"로 만든 소녀 이미지</li>
+      <li><b>Kling</b> — "a cute puppy flying in the blue sky…"로 만든 하늘을 나는 강아지 영상</li>
+      <li><b>ChatGPT</b> — 알파고 질문, 판별 페이지 만들기 결과</li>
+    </ol>
+    <p>그럴듯하지만, "<b>내가 원하던 바로 그것</b>"이었나요? 마음에 안 드는 이유는 대부분 이 셋 중 하나입니다.</p>
     <div class="table-scroll"><table>
-      <thead><tr><th>대충 말하면</th><th>정확히 말하면</th></tr></thead>
+      <thead><tr><th>왜 아쉬울까</th><th>프롬프트에 빠진 것</th><th>예</th></tr></thead>
       <tbody>
-        <tr><td>AI의 이점에 대해 설명해줘</td><td>AI를 쓰면 작은 카페가 얻을 수 있는 이점 3가지를, 사장님이 이해하기 쉽게 표로 정리해줘</td></tr>
-        <tr><td>여행 계획 짜줘</td><td>부모님과 가는 2박 3일 부산 여행 계획을 짜줘. 어르신 걸음 기준으로 하루 2곳만, 시간표 형식으로</td></tr>
-        <tr><td>교육 커리큘럼 작성해줘</td><td>교육 목적 · 교육 대상 · 교육 시간 항목으로, 표 형식으로 교육 일정을 작성해줘</td></tr>
+        <tr><td>누구를 위한 건지 모르겠다</td><td><b>대상</b>이 없음</td><td>소녀 그림이 동화책용인지 광고용인지 AI는 모름</td></tr>
+        <tr><td>결과가 평범하다</td><td><b>분위기 · 스타일</b> 지정이 없음</td><td>사진인지 일러스트인지, 따뜻한지 차가운지 말하지 않음</td></tr>
+        <tr><td>원하는 모양이 아니다</td><td><b>길이 · 형식</b> 지정이 없음</td><td>세로 포스터인지 가로 화면인지, 몇 초짜리인지 말하지 않음</td></tr>
       </tbody>
     </table></div>
-    <p>오른쪽 문장들은 길기만 한 게 아니라 <b>들어 있는 재료</b>가 다릅니다. 그 재료를 정리한 것이 프롬프트의 구조입니다.</p>
+    <p>1차시의 결론처럼 AI는 <b>내가 말해 준 만큼만</b> 압니다. 말하지 않은 부분은 추측으로 채우고, 그 추측은 대부분 평범합니다. 그럼 무엇을 말해 줘야 할까요? 그걸 정리한 것이 <b>프롬프트의 구조</b>입니다. 도구는 달라도 원리는 같아서, 오늘은 결과를 가장 빨리 확인할 수 있는 ChatGPT로 연습합니다.</p>
     <div class="callout"><div class="callout-label">프롬프트와 프롬프트 엔지니어링</div><p><b>프롬프트</b>는 AI에게 답을 받기 위해 넣는 입력, 즉 우리가 입력창에 쓰는 말입니다. <b>프롬프트 엔지니어링</b>은 원하는 결과를 얻도록 그 말을 설계하는 일입니다. 이 과정 이름이 바로 이것입니다.</p></div>
 
     <h2 class="sec-head" id="s2"><span class="sec-num">2</span>프롬프트의 5가지 재료</h2>
@@ -138,16 +144,18 @@
     <p>틀을 쓰면 빠진 재료가 한눈에 보이고, 고칠 때도 <b>어느 칸을 고칠지</b>가 분명해집니다.</p>
 
     <h2 class="sec-head" id="s5"><span class="sec-num">5</span>구분 기호와 마크다운</h2>
-    <p>지시, 예시, 질문이 한 덩어리로 섞이면 AI도 어디까지가 지시인지 헷갈립니다. <b>###</b> 같은 기호로 칸을 나눠 주면 훨씬 정확하게 알아듣습니다. 아래 프롬프트를 실행해 보세요.</p>
-    <div class="pbox"><div class="pbox-label">구분 기호로 나눈 프롬프트</div><pre>###지시문###
-아래 예시처럼 문장 속 색깔을 영어로 대답해줘
+    <p>지시, 예시, 질문이 한 덩어리로 섞여 있으면 AI는 어디까지가 지시이고 어디부터가 내용인지 헷갈립니다. 이때 기호로 칸을 나눠 주면 훨씬 정확하게 알아듣습니다.</p>
+    <p>기호는 <code>###</code>, <code>"""</code>, <code>【】</code>, <code>&lt;&gt;</code> 무엇을 써도 괜찮습니다. 정해진 정답은 없습니다. 중요한 것은 <b>한 프롬프트 안에서 같은 방식으로 일관되게 나누는 것</b>입니다. 아래 프롬프트를 실행해 보세요.</p>
+    <div class="pbox"><div class="pbox-label">구분 기호로 나눈 프롬프트</div><pre>### 지시
+아래 글을 초등학생도 이해할 수 있게 3줄로 요약해 줘.
 
-###예시###
-"하늘이 파랗다" : blue
-"태양이 빨갛다" : red
+### 조건
+- 어려운 단어는 쉬운 말로 바꿀 것
+- 각 줄은 한 문장으로 쓸 것
 
-###질문###
-"산이 초록색이다" : ???</pre></div>
+### 내용
+(요약할 글을 여기에 붙여 넣기)</pre></div>
+    <div class="callout"><div class="callout-label">기호를 바꿔 실행해 보기</div><p>같은 프롬프트에서 <code>###</code>을 【지시】, 【조건】, 【내용】으로 바꿔 실행해 보세요. 결과가 거의 같게 나옵니다. 기호보다 <b>'나누는 것'</b>이 핵심이라는 뜻입니다.</p></div>
     <p>AI는 웹사이트와 코드를 아주 많이 읽어서 <b>마크다운</b>이라는 간단한 글 꾸미기 기호도 잘 이해합니다. 프롬프트를 쓸 때도, 결과를 받을 때도 쓸 수 있습니다.</p>
     <div class="table-scroll"><table>
       <thead><tr><th>기호</th><th>뜻</th><th>이렇게 써요</th></tr></thead>
