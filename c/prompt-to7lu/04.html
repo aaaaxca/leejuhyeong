@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>04차시 · ChatGPT 이미지 생성·편집 — 로고부터 기획안까지 · 이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+
+  .stu header{margin-bottom:40px}
+  a.pcard{cursor:pointer}
+  a.pcard .ps{color:var(--sub)}
+  .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-done)} .callout--tip .callout-label{color:var(--c-done)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-left:3px solid var(--c-wip);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--c-wip)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .doc .timeline{list-style:none;margin:20px 0 8px;padding:0 0 0 26px;position:relative}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .doc .timeline li{position:relative;margin:0 0 30px}
+  .timeline li:last-child{margin-bottom:0}
+  .timeline li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-wip);box-shadow:0 0 0 4px var(--bg,#fff)}
+  .tl-year{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600;color:var(--c-wip);letter-spacing:.02em}
+  .tl-title{display:block;font-weight:600;color:var(--ink);font-size:15.5px;margin:6px 0 6px}
+  .timeline p{margin:0;color:var(--sub);font-size:14.5px}
+  .concept-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px;align-items:center;margin:20px 0 28px}
+  .concept-list{display:flex;flex-direction:column;gap:8px}
+  .concept-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:10px 14px}
+  .concept-card:last-child{border-color:color-mix(in srgb,var(--c-wip) 45%,var(--line))}
+  .cc-name{font-weight:600;color:var(--ink);font-size:15px}
+  .concept-card:last-child .cc-name{color:var(--c-wip)}
+  .cc-name small{font-weight:400;color:var(--faint);font-size:12px;margin-left:4px}
+  .concept-card p{margin:3px 0 4px;font-size:13.5px;color:var(--sub);line-height:1.6}
+  .cc-ex{font-size:12.5px;color:var(--faint)}
+  @media (max-width:720px){.concept-grid{grid-template-columns:1fr}.concept-grid figure{max-width:360px;margin:0 auto}}
+  .doc ol.steps{margin:12px 0 0;padding-left:1.3em;font-size:14px;color:var(--sub)}
+  .doc ol.steps li{margin-bottom:.55em}
+  .doc ol.steps b{color:var(--ink)}
+  .sec-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:22px 0 8px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .sec-nav a{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 4px;background:var(--panel);white-space:nowrap;flex-shrink:0}
+  .sec-nav a:hover{color:var(--ink);border-color:var(--sub)}
+  .sec-nav a span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .doc h2.sec-head{display:flex;align-items:center;gap:12px;font-family:"Noto Serif KR",serif;font-size:21px;font-weight:500;color:var(--ink);margin:64px 0 16px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:20px}
+  .doc .sec-nav + h2.sec-head{border-top:0;padding-top:0;margin-top:44px}
+  .sec-num{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:14px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .dl-btn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:12.5px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:6px;padding:3px 10px;vertical-align:middle}
+  .dl-btn::before{content:"↓"}
+  .dl-btn:hover{background:color-mix(in srgb,var(--c-wip) 14%,transparent)}
+  .files-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:8px;padding:9px 16px;background:color-mix(in srgb,var(--c-wip) 8%,transparent)}
+  .files-btn:hover{background:color-mix(in srgb,var(--c-wip) 16%,transparent)}
+  .prep-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 16px;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 70%,transparent);font-size:14px}
+  .pb-label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--sub);margin-right:2px}
+  .pb-label::before{content:"";width:15px;height:15px;background:var(--sub);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pb-label::after{content:":";margin-left:-3px}
+  .pb-item{display:inline-flex;align-items:baseline;gap:6px}
+  .pb-num{color:var(--ink);font-weight:600}
+  .pb-item b{color:var(--ink);font-weight:600}
+  .pb-item small{color:var(--faint);font-size:12px}
+  .pb-sep{color:var(--faint)}
+  .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
+  .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:8px 0 12px;padding:0}
+  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:6px 0 6px 52px;font-size:14.5px;color:var(--sub);line-height:1.7}
+  .doc ol.num-steps>li::before{content:counter(ns,decimal-leading-zero);position:absolute;left:0;top:6px;width:30px;padding-right:10px;border-right:1px solid var(--line);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.95;color:var(--faint);text-align:left}
+  .doc ol.num-steps b{color:var(--ink)}
+  .doc ol.sub-steps{list-style:none;counter-reset:ss;margin:8px 0 6px;padding:0}
+  .doc ol.sub-steps li{counter-increment:ss;position:relative;padding:3px 0 3px 26px;font-size:14px}
+  .doc ol.sub-steps li::before{content:counter(ss) ")";position:absolute;left:4px;color:var(--faint);font-size:12.5px}
+  .doc ol.num-steps .meta{display:block;font-size:12.5px;color:var(--faint);margin-top:4px;border:0;padding:0}
+  .step-group{margin:18px 0 4px;font-size:12.5px;font-weight:600;letter-spacing:.08em;color:var(--faint);padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .doc p.note{font-size:13px;color:var(--faint);margin:2px 0 14px}
+  .duo-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .duo-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
+  .duo-title{font-weight:600;color:var(--c-wip);margin-bottom:6px}
+  .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+  .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .pbox .nc{color:var(--faint);font-size:12.5px;margin-left:6px;user-select:none}
+  .result-box{margin:-4px 0 16px;border-left:2px solid var(--line);padding:4px 0 4px 16px}
+  .result-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:6px}
+  .result-box p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.75}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .snav .off{flex:1;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--faint);font-size:14px}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
+  .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
+</style>
+</head>
+<body class="stu">
+<div class="wrap">
+  <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../../index.html#/">홈</a> <span>/</span> <a href="../../index.html#/course">수업 과정</a> <span>/</span> <a href="../prompt-to7lu.html">AI 프롬프트 엔지니어링</a> <span>/</span> <b>04차시</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
+    <a class="back" href="../prompt-to7lu.html">← AI 프롬프트 엔지니어링 전체</a><br>
+    <span class="d-eyebrow">AI 프롬프트 엔지니어링 · 04차시</span>
+    <h1 class="d-title">ChatGPT 이미지 생성·편집</h1>
+    <p class="lead d-lead">로고부터 기획안까지</p>
+    <p class="goal">2차시에는 내 사진을 바꿔 봤다면, 오늘은 이미지를 분석하고, 처음부터 만들고, 원하는 부분만 고칩니다. 가상의 가게 로고를 만들어 다듬은 뒤, 마지막에는 캔버스에서 로고 기획안으로 정리합니다.</p>
+    <div class="tags"><span class="tag">ChatGPT (PC)</span></div>
+  </header>
+  <main class="doc">
+    <nav class="sec-nav"><a href="#s1"><span>1</span>들어가며</a><a href="#s2"><span>2</span>이미지 분석</a><a href="#s3"><span>3</span>이미지 만들기</a><a href="#s4"><span>4</span>실습 · 로고</a><a href="#s5"><span>5</span>부분만 고치기</a><a href="#s6"><span>6</span>캔버스 · 기획안</a><a href="#s7"><span>7</span>카드뉴스 이미지</a><a href="#s8"><span>8</span>정리</a></nav>
+
+    <h2 class="sec-head" id="s1"><span class="sec-num">1</span>들어가며 — 오늘 만들 것</h2>
+    <p>2차시에서는 내 사진을 다른 그림체로 <b>바꾸는</b> 것을 해 봤습니다. 오늘은 ChatGPT의 이미지 기능을 처음부터 끝까지 써 봅니다.</p>
+    <ol class="num-steps">
+      <li><b>보고 분석하기</b> — 잘 만든 이미지를 보여 주고 무엇이 좋은지 말로 풀게 하기</li>
+      <li><b>처음부터 만들기</b> — 가상의 가게 로고를 글로 설명해 만들기</li>
+      <li><b>부분만 고치기</b> — 마음에 안 드는 곳만 골라 다시 그리기</li>
+      <li><b>기획안으로 묶기</b> — 캔버스에서 로고 기획안 문서 만들기</li>
+    </ol>
+    <div class="prep-bar"><span class="pb-label">준비물</span><span class="pb-item"><span class="pb-num">①</span><b>잘 만들었다고 생각하는 로고나 포스터 사진 1장</b></span></div>
+    <p class="note">이미지 생성은 요금제마다 한도가 있습니다. 한도에 닿으면 안내된 시간 뒤에 다시 하거나, 옆 사람과 결과를 함께 보며 진행하세요.</p>
+
+    <h2 class="sec-head" id="s2"><span class="sec-num">2</span>이미지 분석 — 보여 주고 말로 풀게 하기</h2>
+    <p>ChatGPT는 이미지를 <b>보고 이해</b>할 수도 있습니다. 사진, 스크린샷, 포스터, 표를 올리고 질문하면 내용을 읽고 해석해 줍니다. 만들기 전에 좋은 예를 분석해 두면, 내가 원하는 것을 말로 설명하기가 훨씬 쉬워집니다.</p>
+    <div class="practice-card">
+      <div class="practice-title">실습 A — 잘 만든 이미지 분석하고 거꾸로 프롬프트 뽑기</div>
+      <ol class="num-steps">
+        <li>입력창의 <b>+</b> 버튼으로 준비한 로고나 포스터 사진을 올리고 실행
+          <div class="pbox"><pre>이 디자인을 실제 손님 입장에서 분석해줘.
+1. 잘 된 부분
+2. 헷갈릴 수 있는 부분
+3. 개선하면 좋을 점
+색, 글꼴, 배치, 분위기를 기준으로 표로 정리해줘.</pre></div>
+        </li>
+        <li>같은 대화에서 이어서 실행
+          <div class="pbox"><pre>이 이미지와 비슷한 분위기의 이미지를 새로 만들려면 어떤 프롬프트를 쓰면 좋을지, 대상 · 스타일 · 색 · 구도 · 글자로 나눠서 써줘</pre></div>
+        </li>
+        <li>AI가 뽑아 준 <b>대상 · 스타일 · 색 · 구도 · 글자</b> 다섯 칸을 메모해 두기 — 3번 섹션에서 그대로 씁니다</li>
+      </ol>
+    </div>
+
+    <h2 class="sec-head" id="s3"><span class="sec-num">3</span>이미지 만들기 — 이미지에서는 무엇을 말해 줘야 할까</h2>
+    <p>2차시의 5가지 재료가 이미지에서는 이렇게 바뀝니다. 실습 A에서 AI가 나눠 준 칸과 같습니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>칸</th><th>말해 줄 것</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td><b>대상</b></td><td>무엇을, 누구를 위해</td><td>동네 카페 '모퉁이'의 로고</td></tr>
+        <tr><td><b>스타일</b></td><td>그림체, 분위기</td><td>심플한 라인 아이콘, 따뜻하고 아늑한 느낌</td></tr>
+        <tr><td><b>색</b></td><td>쓸 색, 색 수</td><td>베이지와 짙은 갈색 두 가지</td></tr>
+        <tr><td><b>구도</b></td><td>배치, 비율, 배경</td><td>정사각형, 가운데 정렬, 흰 배경</td></tr>
+        <tr><td><b>글자</b></td><td>들어갈 글자와 글꼴 느낌</td><td>아래에 영문 'MOTUNGI COFFEE', 둥근 고딕체</td></tr>
+      </tbody>
+    </table></div>
+    <p>ChatGPT에서 이미지를 만드는 방법은 두 가지입니다.</p>
+    <ul>
+      <li>입력창의 <b>+</b> 버튼 → <b>이미지 만들기</b>를 고른 뒤 설명하기</li>
+      <li>그냥 대화하듯 "<b>~한 이미지를 만들어줘</b>"라고 쓰기</li>
+    </ul>
+    <p>ChatGPT 이미지는 <b>그림 속 글자</b>를 비교적 정확하게 넣는 편이라, 로고·포스터·안내문처럼 글자가 들어가는 이미지에 잘 맞습니다.</p>
+
+    <h2 class="sec-head" id="s4"><span class="sec-num">4</span>로고 만들기</h2>
+    <div class="practice-card">
+      <div class="practice-title">실습 B — 짧게 한 번, 칸을 채워 한 번</div>
+      <p>각각 <b>새 채팅</b>에서 실행해 비교하세요.</p>
+      <ol class="num-steps">
+        <li><b>짧게</b>
+          <div class="pbox"><pre>카페 로고 만들어줘</pre></div>
+        </li>
+        <li><b>다섯 칸을 채워서</b>
+          <div class="pbox"><pre>동네 작은 카페 '모퉁이'의 로고를 만들어줘.
+스타일: 골목 모퉁이에 있는 커피잔을 표현한 심플한 라인 아이콘, 따뜻하고 아늑한 느낌
+색: 베이지와 짙은 갈색 두 가지만
+구도: 정사각형, 가운데 정렬, 흰 배경
+글자: 아이콘 아래에 영문 'MOTUNGI COFFEE', 둥근 고딕 느낌</pre></div>
+        </li>
+        <li><b>내 가게로 바꾸기</b> — 2번 프롬프트에서 가게 이름·업종·분위기를 내가 정한 것으로 바꿔 다시 실행 (예: 꽃집, 문구점, 1인 디자인 스튜디오)</li>
+      </ol>
+      <p class="note">결과가 마음에 들 때까지 다시 만들기를 반복하기보다, 다음 섹션처럼 <b>부분만 고치는 것</b>이 빠르고 한도도 아낍니다.</p>
+    </div>
+
+    <h2 class="sec-head" id="s5"><span class="sec-num">5</span>부분만 고치기 — 선택 도구와 올린 이미지 편집</h2>
+    <p>전체를 다시 만들면 마음에 들었던 부분까지 바뀌어 버립니다. 고치고 싶은 곳만 골라 다시 그리게 하세요.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>방법</th><th>이렇게</th></tr></thead>
+      <tbody>
+        <tr><td><b>선택해서 고치기</b></td><td>만든 이미지를 클릭 → <b>선택</b> 도구로 고칠 부분을 칠함 → "이 부분을 ~로 바꿔줘"</td></tr>
+        <tr><td><b>말로 고치기</b></td><td>"나머지는 그대로 두고, 글자 색만 짙은 초록으로 바꿔줘"처럼 <b>바꿀 것과 둘 것</b>을 함께 말함</td></tr>
+        <tr><td><b>올린 이미지 고치기</b></td><td>내가 가진 이미지를 올리고 "배경만 흰색으로", "이 글자를 ~로 바꿔줘"</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 C — 실습 B의 로고 다듬기</div>
+      <ol class="num-steps">
+        <li>실습 B에서 만든 로고를 클릭 → <b>선택</b> 도구로 커피잔 부분만 칠하고 실행
+          <div class="pbox"><pre>이 부분의 커피잔에 김이 모락모락 나는 모양을 더해줘</pre></div>
+        </li>
+        <li>같은 대화에서 말로 고치기
+          <div class="pbox"><pre>나머지는 그대로 두고, 글자 색만 짙은 초록으로 바꿔줘</pre></div>
+        </li>
+        <li>활용 이미지 만들기 — 로고를 실제로 쓴 모습 보기
+          <div class="pbox"><pre>이 로고를 그대로 써서, 테이크아웃 컵과 가게 간판에 적용한 모습을 각각 보여줘</pre></div>
+        </li>
+        <li>마음에 드는 이미지를 <b>다운로드</b>해 두기 — 6번 섹션 기획안에 씁니다</li>
+      </ol>
+      <p class="note">한 번에 여러 곳을 고치라고 하면 엉뚱한 곳까지 바뀌기 쉽습니다. <b>한 번에 하나씩</b> 고치세요.</p>
+    </div>
+
+    <h2 class="sec-head" id="s6"><span class="sec-num">6</span>캔버스로 로고 기획안 만들기</h2>
+    <p><b>캔버스</b>는 ChatGPT와 함께 문서를 쓰고 고치는 작업 공간입니다. 대화창 옆에 문서가 따로 열려서, 직접 고치거나 원하는 부분만 다시 쓰게 할 수 있습니다. 오늘 만든 로고를 한 장짜리 기획안으로 정리해 봅니다.</p>
+    <div class="practice-card">
+      <div class="practice-title">실습 D — 캔버스에서 기획안 쓰고 다듬기</div>
+      <ol class="num-steps">
+        <li>로고를 만든 대화에서 이어서 실행 — 오른쪽에 캔버스 문서가 열립니다
+          <div class="pbox"><pre>캔버스에서, 지금까지 만든 '모퉁이' 카페 로고의 기획안을 한 장짜리 문서로 만들어줘.
+항목: 브랜드 이름 / 로고 콘셉트 / 색상과 그 이유 / 글꼴 느낌 / 로고 활용 예(컵, 간판, SNS) / 앞으로 만들 것
+표와 짧은 설명을 섞어서 정리해줘.</pre></div>
+        </li>
+        <li><b>직접 고치기</b> — 문서를 클릭해 브랜드 이름이나 문장을 직접 고쳐 보기</li>
+        <li><b>부분만 다시 쓰게 하기</b> — '로고 콘셉트' 문단을 드래그해 선택 → 나타나는 입력칸에 "더 짧고 감성적으로"</li>
+        <li><b>수정 제안</b> — 오른쪽 아래 편집 버튼에서 수정 제안을 눌러 AI가 단 의견을 보고, 받아들일 것만 적용</li>
+        <li><b>다운로드</b> — 완성한 기획안을 파일로 내려받기</li>
+      </ol>
+      <p class="note">캔버스의 버튼 이름과 위치는 업데이트로 바뀔 수 있습니다. 로고 이미지는 다운로드한 파일을 문서에 함께 붙여 두면 기획안이 완성됩니다.</p>
+    </div>
+
+    <h2 class="sec-head" id="s7"><span class="sec-num">7</span>3차시 카드뉴스를 이미지로 — 골목분식 신메뉴</h2>
+    <p>3차시에서 받은 신메뉴 카드뉴스 문구를 이번에는 <b>이미지</b>로 만들어 봅니다. 로고 때와 같은 칸(스타일 · 색 · 구도 · 글자)으로 말하고, <b>한 장씩</b> 만들어 이어 가면 카드의 분위기가 같아집니다.</p>
+    <div class="practice-card">
+      <div class="practice-title">실습 E — 신메뉴 카드뉴스 이미지 만들기</div>
+      <ol class="num-steps">
+        <li><b>문구 준비</b> — 3차시에서 받은 카드 6장 문구를 이 대화에 가져옵니다. 3차시 대화가 남아 있으면 거기서 이어서 하고, 없으면 문구를 붙여 넣고 시작합니다.</li>
+        <li><b>1장(표지)만 먼저</b>
+          <div class="pbox"><pre>위 카드뉴스 문구 중 1장(표지)을 인스타그램 카드 이미지로 만들어줘.
+스타일: 따뜻한 일러스트 느낌, 김이 나는 치즈 떡볶이 그릇
+색: 주황과 크림색 두 가지만
+구도: 세로 4:5 비율, 제목은 위쪽 가운데, 음식은 아래쪽
+글자: 1장 제목을 위 문구 그대로 정확히, 굵은 둥근 고딕 느낌</pre></div>
+        </li>
+        <li><b>같은 스타일로 이어서</b> — 같은 대화에서 실행
+          <div class="pbox"><pre>방금 만든 1장과 같은 스타일 · 색 · 글꼴 느낌으로 2장을 만들어줘.
+글자: 2장 제목을 위 문구 그대로 정확히</pre></div>
+        </li>
+        <li><b>글자 틀린 곳만 고치기</b> — 한글이 문구와 다르게 나왔다면
+          <div class="pbox"><pre>2장의 제목 글자만 위 문구와 똑같이 고쳐줘. 나머지는 그대로 둬.</pre></div>
+        </li>
+        <li>마음에 드는 카드를 <b>다운로드</b>해 두기</li>
+      </ol>
+      <p class="note">6장을 한 번에 만들라고 하면 카드마다 분위기가 달라지고 글자도 틀리기 쉽습니다. 한 장씩 만들고, 글자는 틀릴 수 있으니 꼭 문구와 비교하세요.</p>
+    </div>
+
+    <h2 class="sec-head" id="s8"><span class="sec-num">8</span>정리 — 이미지 프롬프트 체크리스트</h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>확인할 것</th><th>스스로 묻기</th></tr></thead>
+      <tbody>
+        <tr><td><b>대상</b></td><td>무엇을, 누구를 위해 만드는지 말했나?</td></tr>
+        <tr><td><b>스타일</b></td><td>그림체와 분위기를 말했나?</td></tr>
+        <tr><td><b>색</b></td><td>쓸 색과 색의 수를 정했나?</td></tr>
+        <tr><td><b>구도</b></td><td>비율, 배치, 배경을 말했나?</td></tr>
+        <tr><td><b>글자</b></td><td>들어갈 글자를 정확히 적었나?</td></tr>
+        <tr><td><b>고칠 때</b></td><td>바꿀 것과 그대로 둘 것을 함께 말했나? 한 번에 하나씩 고쳤나?</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout callout--tip"><div class="callout-label">다음 차시 예고</div><p>5차시부터는 이미지 전문 도구 <b>Midjourney</b>로 넘어갑니다. 오늘 정리한 대상 · 스타일 · 색 · 구도가 Midjourney에서는 어떻게 쓰이는지, 같은 원리를 더 깊게 다룹니다.</p></div>
+
+    <nav class="snav"><a href="03.html"><small>← 03차시</small>ChatGPT 심화</a><span class="nx off"><small>05차시 · 준비 중</small>Midjourney 시작 — 웹 화면과 이미지 생성</span></nav>
+    <div class="d-foot">AI 프롬프트 엔지니어링 · 04차시</div>
+  </main><script>
+document.querySelectorAll('.pbox').forEach(function(b){
+  var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
+  btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
+    var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done)}else{var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}};
+  b.appendChild(btn);
+});
+</script>
+</div>
+</body>
+</html>
