@@ -216,6 +216,12 @@ CONTENT_CSS = """
   .result-box{margin:-4px 0 16px;border-left:2px solid var(--line);padding:4px 0 4px 16px}
   .result-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:6px}
   .result-box p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.75}
+  .doc details.toggle{margin:10px 0 4px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+  .doc details.toggle>summary{cursor:pointer;padding:9px 14px;font-size:13.5px;color:var(--sub);list-style:none}
+  .doc details.toggle>summary::-webkit-details-marker{display:none}
+  .doc details.toggle>summary::before{content:"+";display:inline-block;width:16px;color:var(--faint)}
+  .doc details.toggle[open]>summary::before{content:"−"}
+  .doc details.toggle .pbox{margin:0 12px 12px}
   .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
   .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
   .snav a:hover{border-color:var(--sub)}
