@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>05차시 · 보고서 · 이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+
+  .stu header{margin-bottom:40px}
+  a.pcard{cursor:pointer}
+  a.pcard .ps{color:var(--sub)}
+  .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-done)} .callout--tip .callout-label{color:var(--c-done)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-left:3px solid var(--c-wip);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--c-wip)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .doc .timeline{list-style:none;margin:20px 0 8px;padding:0 0 0 26px;position:relative}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .doc .timeline li{position:relative;margin:0 0 30px}
+  .timeline li:last-child{margin-bottom:0}
+  .timeline li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-wip);box-shadow:0 0 0 4px var(--bg,#fff)}
+  .tl-year{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600;color:var(--c-wip);letter-spacing:.02em}
+  .tl-title{display:block;font-weight:600;color:var(--ink);font-size:15.5px;margin:6px 0 6px}
+  .timeline p{margin:0;color:var(--sub);font-size:14.5px}
+  .concept-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px;align-items:center;margin:20px 0 28px}
+  .concept-list{display:flex;flex-direction:column;gap:8px}
+  .concept-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:10px 14px}
+  .concept-card:last-child{border-color:color-mix(in srgb,var(--c-wip) 45%,var(--line))}
+  .cc-name{font-weight:600;color:var(--ink);font-size:15px}
+  .concept-card:last-child .cc-name{color:var(--c-wip)}
+  .cc-name small{font-weight:400;color:var(--faint);font-size:12px;margin-left:4px}
+  .concept-card p{margin:3px 0 4px;font-size:13.5px;color:var(--sub);line-height:1.6}
+  .cc-ex{font-size:12.5px;color:var(--faint)}
+  @media (max-width:720px){.concept-grid{grid-template-columns:1fr}.concept-grid figure{max-width:360px;margin:0 auto}}
+  .doc ol.steps{margin:12px 0 0;padding-left:1.3em;font-size:14px;color:var(--sub)}
+  .doc ol.steps li{margin-bottom:.55em}
+  .doc ol.steps b{color:var(--ink)}
+  .sec-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:22px 0 8px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .sec-nav a{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 4px;background:var(--panel);white-space:nowrap;flex-shrink:0}
+  .sec-nav a:hover{color:var(--ink);border-color:var(--sub)}
+  .sec-nav a span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .doc h2.sec-head{display:flex;align-items:center;gap:12px;font-family:"Noto Serif KR",serif;font-size:21px;font-weight:500;color:var(--ink);margin:64px 0 16px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:20px}
+  .doc .sec-nav + h2.sec-head{border-top:0;padding-top:0;margin-top:44px}
+  .sec-num{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:14px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .dl-btn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:12.5px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:6px;padding:3px 10px;vertical-align:middle}
+  .dl-btn::before{content:"↓"}
+  .dl-btn:hover{background:color-mix(in srgb,var(--c-wip) 14%,transparent)}
+  .files-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:8px;padding:9px 16px;background:color-mix(in srgb,var(--c-wip) 8%,transparent)}
+  .files-btn:hover{background:color-mix(in srgb,var(--c-wip) 16%,transparent)}
+  .prep-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 16px;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 70%,transparent);font-size:14px}
+  .pb-label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--sub);margin-right:2px}
+  .pb-label::before{content:"";width:15px;height:15px;background:var(--sub);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pb-label::after{content:":";margin-left:-3px}
+  .pb-item{display:inline-flex;align-items:baseline;gap:6px}
+  .pb-num{color:var(--ink);font-weight:600}
+  .pb-item b{color:var(--ink);font-weight:600}
+  .pb-item small{color:var(--faint);font-size:12px}
+  .pb-sep{color:var(--faint)}
+  .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
+  .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:8px 0 12px;padding:0}
+  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:6px 0 6px 52px;font-size:14.5px;color:var(--sub);line-height:1.7}
+  .doc ol.num-steps>li::before{content:counter(ns,decimal-leading-zero);position:absolute;left:0;top:6px;width:30px;padding-right:10px;border-right:1px solid var(--line);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.95;color:var(--faint);text-align:left}
+  .doc ol.num-steps b{color:var(--ink)}
+  .doc ol.sub-steps{list-style:none;counter-reset:ss;margin:8px 0 6px;padding:0}
+  .doc ol.sub-steps li{counter-increment:ss;position:relative;padding:3px 0 3px 26px;font-size:14px}
+  .doc ol.sub-steps li::before{content:counter(ss) ")";position:absolute;left:4px;color:var(--faint);font-size:12.5px}
+  .doc ol.num-steps .meta{display:block;font-size:12.5px;color:var(--faint);margin-top:4px;border:0;padding:0}
+  .step-group{margin:18px 0 4px;font-size:12.5px;font-weight:600;letter-spacing:.08em;color:var(--faint);padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .doc p.note{font-size:13px;color:var(--faint);margin:2px 0 14px}
+  .duo-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .duo-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
+  .duo-title{font-weight:600;color:var(--c-wip);margin-bottom:6px}
+  .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+  .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .pbox .nc{color:var(--faint);font-size:12.5px;margin-left:6px;user-select:none}
+  .result-box{margin:-4px 0 16px;border-left:2px solid var(--line);padding:4px 0 4px 16px}
+  .result-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:6px}
+  .result-box p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.75}
+  .doc details.toggle{margin:10px 0 4px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+  .doc details.toggle>summary{cursor:pointer;padding:9px 14px;font-size:13.5px;color:var(--sub);list-style:none}
+  .doc details.toggle>summary::-webkit-details-marker{display:none}
+  .doc details.toggle>summary::before{content:"+";display:inline-block;width:16px;color:var(--faint)}
+  .doc details.toggle[open]>summary::before{content:"−"}
+  .doc details.toggle .pbox{margin:0 12px 12px}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .snav .off{flex:1;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--faint);font-size:14px}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
+  .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
+</style>
+</head>
+<body class="stu">
+<div class="wrap">
+  <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../../index.html#/">홈</a> <span>/</span> <a href="../../index.html#/course">수업 과정</a> <span>/</span> <a href="../agent1-lybh9.html">AI Agent 1</a> <span>/</span> <b>05차시</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
+    <a class="back" href="../agent1-lybh9.html">← AI Agent 1 전체</a><br>
+    <span class="d-eyebrow">AI Agent 1 · 05차시</span>
+    <h1 class="d-title">보고서</h1>
+    
+    <p class="goal">매주 30분 걸리던 주간보고를 5분으로 줄입니다. 초안 → 교정 → 형식 → 검수 → 톤 조절 순서로 Claude와 글쓰기를 나누고, 숫자 사고 4가지를 직접 걸러 낸 뒤, 보고서를 템플릿과 마스터 프롬프트로 굳혀 매주 돌아가는 루틴으로 만듭니다.</p>
+    <div class="tags"><span class="tag">Claude (PC)</span><span class="tag">04차시 그린컵 Project</span><span class="tag src">주간 매출 엑셀 · 보고서 자료 3종 · 워크시트</span></div>
+  </header>
+  <main class="doc">
+    <nav class="sec-nav"><a href="#s1"><span>1</span>재료 세팅</a><a href="#s2"><span>2</span>초안</a><a href="#s3"><span>3</span>구조 · 교정</a><a href="#s4"><span>4</span>형식</a><a href="#s5"><span>5</span>숫자 검수</a><a href="#s6"><span>6</span>독자별 톤</a><a href="#s7"><span>7</span>템플릿</a><a href="#s8"><span>8</span>5분 루틴</a><a href="#s9"><span>9</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>매주 금요일, 엑셀에서 숫자를 뽑고 지난주 형식을 복사하고 문장을 다듬느라 30분이 사라집니다. 내용은 매주 거의 같은데요. 오늘 이걸 5분으로 줄이고, 보고서 하나로 팀 공유 메일 · 메신저 요약 · 경영진 한 줄까지 함께 뽑습니다.</p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. 오늘 만들 것과 재료</h2><p>초안은 맡기고, 형식은 템플릿으로 고정하고, 사람은 숫자를 검수합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>재료</th><th>형식</th><th>어디에 두나</th></tr></thead>
+        <tbody>
+          <tr><td><b>이번 주 매출 데이터</b> <span class="meta">weekly_sales.xlsx · 일별매출 / 전주실적 / 채널별유입 / 인기상품TOP5 / 환불사유</span></td><td>Excel · 5시트</td><td>대화에 첨부 <span class="meta">— 매주 바뀜</span></td></tr>
+          <tr><td>지난주 주간보고서</td><td>Word</td><td>Project 자료 <span class="meta">— 형식 · 톤 참고</span></td></tr>
+          <tr><td>재사용 보고 템플릿</td><td>Word</td><td>Project 자료 <span class="meta">— 빈칸 채우기용</span></td></tr>
+          <tr><td>공유 메일 · 요약 예시</td><td>Word</td><td>Project 자료 <span class="meta">— 독자별 톤 참고</span></td></tr>
+        </tbody>
+      </table></div>
+      <p>04차시의 경계 그대로입니다. <b>변하지 않는 형식 · 예시는 Project에 상주</b>, <b>매번 바뀌는 데이터는 대화에 첨부</b>. 이 구분이 매주 5분 루틴의 뼈대입니다. 전주실적 시트가 있어야 "전주 대비 증감"을 AI가 계산하고, 여러분도 검산할 수 있습니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — Project에 재료 세팅 (최초 1회)</div>
+        <p>04차시의 그린컵 Project를 열고 자료 영역에 Word 파일 3개를 올립니다. <b>매출 엑셀은 올리지 않습니다.</b></p>
+      </div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>누가 잘하나</th><th>시킬 말</th></tr></thead>
+        <tbody>
+          <tr><td>① 초안 — 빈 화면 깨기</td><td>Claude</td><td>"이 내용으로 일단 초안 써 줘"</td></tr>
+          <tr><td>② 교정 — 내용 · 표현</td><td>Claude</td><td>"데이터 숫자를 채워 줘" · "어색한 표현 다듬어 줘"</td></tr>
+          <tr><td>③ 형식 — 회사 양식에 앉히기</td><td>Claude</td><td>"지난주 보고서와 같은 항목 구성 · 순서로"</td></tr>
+          <tr><td>④ 검수 — 숫자 · 논리</td><td>사람 (검수표는 Claude)</td><td>"계산 과정을 보여 줘" + 원본과 직접 대조</td></tr>
+          <tr><td>⑤ 톤 조절 — 독자 맞춤</td><td>사람 + Claude</td><td>"팀장 보고용으로 더 간결하게"</td></tr>
+        </tbody>
+      </table></div>
+      <p>글쓰기의 뼈대는 초안 → 교정 → 톤 조절입니다. 보고서는 회사 양식이 있고 틀리면 안 되는 숫자가 들어가서 형식과 검수가 끼어 다섯 단계가 됩니다. 이 뼈대는 메일(06차시)과 회의록(10차시)에서도 그대로 씁니다.</p>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 초안 — 빈 화면 깨기</h2><p>가장 힘든 건 첫 줄입니다. 0 → 1은 Claude, 1 → 100은 함께.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>방법</th><th>이럴 때</th><th>지시</th></tr></thead>
+        <tbody>
+          <tr><td>바로 초안</td><td>뭘 쓸지 대충 안다</td><td>"이 내용으로 초안 잡아 줘"</td></tr>
+          <tr><td>목차 먼저</td><td>내용이 많아 구조부터</td><td>"먼저 목차만 짜 줘. 소제목 5개와 각 항목 내용 한 줄씩"</td></tr>
+          <tr><td>역질문</td><td>뭘 써야 할지 모르겠다</td><td>"이 보고서를 쓰려면 나한테 뭘 더 물어봐야 해?"</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 데이터 없이 초안 받아 보기</div>
+        <p>그린컵 Project 안에서 새 대화를 열고, <b>파일은 첨부하지 않고</b> 세 방법 중 한 줄만 던집니다.</p>
+        <div class="pbox"><div class="pbox-label">셋 중 하나</div><pre>이번 주에 신제품 출시했고 매출 올랐어. 주간보고 초안 일단 대충 잡아 줘.
+이번 주에 신제품 출시했고 매출 올랐어. 먼저 목차만 짜 줘. 소제목 5개와 각 항목에 들어갈 내용 한 줄씩.
+이번 주에 신제품 출시했고 매출 올랐어. 이 보고서를 쓰려면 나한테 뭘 더 물어봐야 해?</pre></div>
+        <p><b>확인할 것</b> — 시킨 적 없는데 '핵심 요약 / 주요 지표 / …' 뼈대가 나왔나요? Project에 올린 지난주 보고서가 벌써 일하고 있는 겁니다. 그리고 숫자는요? 데이터를 안 줬으니 비어 있거나, [확인필요]로 남거나, <b>그럴듯한 가짜 숫자</b>가 들어 있을 겁니다. 세 번째라면 오늘의 첫 교훈입니다. 출처를 못 대는 숫자는 가짜입니다.</p>
+      </div>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 데이터부터 읽혀 보기</div>
+        <p>같은 대화에서 이번 주 매출 엑셀을 첨부하고 차례로 시킵니다.</p>
+        <div class="pbox"><div class="pbox-label">세 단계</div><pre>이 주간 매출 데이터를 한눈에 보게 요약해 줘. 다섯 시트를 모두 열어 보고, 가장 눈에 띄는 변화 3가지를 짚어 줘.
+일별매출과 전주실적을 비교해서 요일별로 어떻게 달라졌는지 표로 보여 줘.
+매출이 가장 높았던 날과 그 이유를 채널 데이터랑 엮어서 설명해 줘.</pre></div>
+        <p><b>확인할 것</b> — 세 번째 답에서 "6/20 라이브 덕분에 주말 매출이 급증했습니다"처럼 원인을 <b>단정</b>했나요? 데이터가 증명하는 건 "라이브를 했다"와 "주말 매출이 늘었다" 두 사실뿐입니다. 일부러 안 막았습니다. 실습 F에서 직접 고칩니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 구조 잡고 → 내용 → 표현 순으로 교정</h2><p>내용이 바뀌면 애써 다듬은 문장도 같이 버려집니다. 순서가 중요합니다.</p></div>
+      <p>팀장은 첫 문단만, 임원은 첫 문장만 읽습니다. 그래서 실무 보고서는 <b>결론부터</b> 씁니다. 가장 중요한 결론 → 근거 숫자 → 세부 내역 → 참고 자료 순서의 역피라미드입니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>구조</th><th>순서</th><th>언제</th></tr></thead>
+        <tbody>
+          <tr><td><b>PREP</b></td><td>결론 → 이유 → 사례 → 결론 재확인</td><td>짧은 보고, 의견 전달. 가장 범용</td></tr>
+          <tr><td><b>SCQA</b></td><td>상황 → 문제 → 질문 → 답</td><td>설득이 필요할 때 (예산 요청, 개선 제안)</td></tr>
+          <tr><td><b>정기보고형</b></td><td>요약 → 지표 → 분석 → 이슈 · 계획</td><td>매주 · 매월 반복 보고 (오늘 실습)</td></tr>
+        </tbody>
+      </table></div>
+      <p>지시할 때 구조 이름을 그냥 대도 됩니다. "이 내용을 SCQA 구조로 정리해 줘." 오늘은 Project의 템플릿 덕분에 따로 말하지 않아도 정기보고형으로 나왔을 겁니다. 참조할 형식이 없는 내 업무에서는 이름을 직접 대세요.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 D — 초안에 숫자 채우고 문장 다듬기</div>
+        <ol class="num-steps">
+          <li><b>내용 교정</b> — "아까 잡아 준 정기보고서 초안에, 방금 읽은 데이터의 숫자를 정확히 채워 넣어 줘." <span class="meta">숫자가 들어왔다고 맞게 들어온 건 아닙니다. 검수는 5절에서</span></li>
+          <li><b>표현 교정</b> — 필요한 것만 골라 칩니다.
+            <div class="pbox"><div class="pbox-label">표현 교정 4종</div><pre>맞춤법·띄어쓰기만 고쳐 줘. 문장은 건드리지 마.
+번역투·어색한 표현을 자연스럽게 바꾸고, 바꾼 곳을 목록으로 보여 줘.
+한 문장이 두 줄을 넘으면 둘로 쪼개 줘.
+'진행하다'가 5번 나와. 중복 표현을 다양하게 바꿔 줘.</pre></div></li>
+        </ol>
+        <p>핵심은 <b>바뀐 곳이 어디인지</b> 아는 것입니다. 알려 주지 않았다면 "바꾼 곳을 보여 줘"로 확인하세요. 뭘 고쳤는지 모르면 검토할 수 없습니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 형식 입히기 — 회사 양식에 앉히기</h2><p>형식 지시 없이 먼저 한 번 돌려 보고, 다를 때만 기준을 못 박습니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 E — 보고서 완성하고 지난주와 대조</div>
+        <ol class="num-steps">
+          <li><b>형식 얘기 없이 완성</b> — "아까 숫자까지 채운 그 초안을, 이번 주(6/16~6/22) 주간 운영 보고서로 완성해 줘."</li>
+          <li><b>눈으로 대조</b> — 섹션 개수 · 순서 · 제목이 지난주 것과 같나요? 핵심 요약이 맨 앞에 왔나요?</li>
+          <li><b>다르게 나왔을 때만</b>
+            <div class="pbox"><div class="pbox-label">기준 못 박기</div><pre>Project에 올려 둔 '지난주 주간보고서'와 같은 항목 구성·순서로 맞춰 줘. 문장은 그대로 두고 배치만 바꿔.</pre></div></li>
+        </ol>
+      </div>
+      <p>왜 매번 달라질까요? Project에 참조가 셋(지난주 보고서 · 템플릿 · 메일 예시) 있어서, 기준을 안 정하면 어느 걸 얼마나 따를지 매번 달라집니다. 위 한 줄은 구조를 만드는 지시가 아니라 "<b>셋 중 이걸 기준으로 삼아</b>"라고 못 박는 지시입니다.</p>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 숫자 검수 — 초안은 AI, 검수는 사람</h2><p>보고서는 숫자를 문장으로 바꾸는 일입니다. 그 변환 지점에서 사고가 납니다.</p></div>
+      <p>AI는 계산기가 아니라 "그럴듯한 다음 말"을 예측하는 기계입니다. 긴 표의 합계 · 비율 같은 진짜 계산에서 그럴듯한 근사값을 슬쩍 내놓곤 합니다. "계산 과정을 단계별로 보여 줘"라고 시키면 정확도가 올라갑니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>사고 유형</th><th>예시</th><th>막는 지시</th></tr></thead>
+        <tbody>
+          <tr><td>단위 뒤섞임</td><td>18,627,000원 → "1,862만원"(O) / "186만원"(X)</td><td>"금액은 원 단위 그대로, 만원 표기는 괄호에"</td></tr>
+          <tr><td>반올림 과잉</td><td>26.1% → "약 30%"</td><td>"소수점 첫째 자리까지, 임의 반올림 금지"</td></tr>
+          <tr><td>기준 실종</td><td>"26% 증가" — 뭐 대비?</td><td>"증감은 반드시 '전주 대비'처럼 기준 명시"</td></tr>
+          <tr><td><b>상관을 인과로</b></td><td>라이브 했고 매출 올랐다 → "라이브 때문에"</td><td>"원인은 '추정'으로 표시, 단정 금지"</td></tr>
+        </tbody>
+      </table></div>
+      <p>마지막이 가장 자주, 가장 조용히 일어납니다. 실제로는 주말 효과일 수도, 신제품 효과일 수도 있죠. 읽는 사람이 그걸 근거로 다음 달 예산을 정하기 때문에 위험합니다. 또 증감은 <b>절대값과 비율을 함께</b> 씁니다. 환불이 2건 → 4건이면 "100% 증가"지만 실제론 2건 차이입니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 F — 숫자 검수 훈련</div>
+        <p>보고서는 사람마다 다르게 나와도 엑셀 숫자는 누구에게나 같습니다. 워크시트 C를 펴고 숫자 → 논리 → 톤 순으로 봅니다.</p>
+        <ol class="num-steps">
+          <li><b>숫자층 · 직접 해 보기 (2분)</b> — 일별매출 시트 매출 열 아래 빈칸에 <code>=SUM(D2:D8)</code>. 정답 <b>18,627,000원</b>. 내 보고서의 총매출과 단위까지 비교합니다. 다르면 "총매출을 계산 과정까지 보여 주면서 다시 확인해 줘."
+            <span class="meta">전주 총매출 14,777,000원 · 증감률 (18,627,000 ÷ 14,777,000 − 1) × 100 = 약 +26.1% · 주문 976건 · 환불 24건(약 2.5%)</span></li>
+          <li><b>논리층</b> — 원인을 '추정'으로 표시했나요? 실습 C의 "라이브 덕분에"가 남았다면 "원인을 단정한 문장을 찾아서 '추정' 표현으로 바꿔 줘." 실습 B에서 데이터 없이 나온 "고객 반응이 좋았습니다" 류도 근거 시트를 못 대면 뺍니다. 환불사유 시트에서 파손이 11건으로 절반 가까운데, "포장재 보강 검토" 같은 다음 액션까지 적었나요?</li>
+          <li><b>톤 · 형식층</b> — 순서가 지난주와 같은지, 팀장 기준으로 결론이 첫 문단에 있는지, 브랜드 금지 표현이 없는지 봅니다. 걸리면 "접속사를 줄이고 문장을 짧게, 단정할 건 단정해 줘."</li>
+        </ol>
+      </div>
+      <div class="practice-card">
+        <div class="practice-title">실습 G — 검수표 시켜 보기</div>
+        <div class="pbox"><div class="pbox-label">검수표</div><pre>방금 보고서의 '핵심 숫자 검수표'를 만들어 줘.
+열: 항목 | 보고서에 쓴 값 | 데이터 원본 시트·위치 | 계산식.
+전주 대비 증감은 계산식까지 보여 줘.</pre></div>
+        <p>직접 계산하는 것보다 얼마나 빠른가요? 단, 검수표도 AI가 만든 것입니다. <b>총매출 하나만큼은 직접 엑셀에서</b> 확인하세요.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. 같은 내용, 독자별 세 가지 버전</h2><p>정보는 하나도 안 바뀝니다. 길이와 격식만 바뀝니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>독자</th><th>필요한 것</th><th>덜어낼 것</th><th>분량</th></tr></thead>
+        <tbody>
+          <tr><td>실무 동료</td><td>세부 수치, 작업 맥락</td><td>없음</td><td>길어도 됨</td></tr>
+          <tr><td>팀장</td><td>결론 + 근거 숫자 + 이슈</td><td>과정, 사소한 수치</td><td>1페이지</td></tr>
+          <tr><td>임원</td><td>결론 + 판단 필요 사항</td><td>대부분의 숫자</td><td>3줄</td></tr>
+          <tr><td>사외 (거래처)</td><td>상대가 행동할 것만</td><td><b>내부 지표 전부</b></td><td>짧게</td></tr>
+        </tbody>
+      </table></div>
+      <div class="result-box"><div class="result-label">경영진 한 줄 예시</div><p>주간 매출 1,862만원(+26%), 써모 라인 견인. 포장 파손 환불 증가 대응 검토 중.</p></div>
+      <p>사외용에서 가장 흔한 사고는 내부 보고서를 그대로 복사해 거래처에 보내면서 매출액 · 환불률이 딸려 나가는 것입니다. 02차시의 범위형 제약을 씁니다. "거래처에 보낼 내용까지만 남기고, 매출액·환불률 같은 내부 지표는 빼고 다시 써 줘." 그래도 마지막엔 내 눈으로 한 번 거르세요.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 H — 독자별로 퍼뜨리기 (Cowork로 파일까지)</div>
+        <p>워크시트 D에 몇 가지를 뽑을지, 각각 누가 읽는지 먼저 적습니다. <b>반드시 실습 F · G의 검수를 통과한 보고서</b>에서 시작하세요. 틀린 숫자는 그대로 복제됩니다.</p>
+        <div class="pbox"><div class="pbox-label">한 번에 맡기기</div><pre>Project의 공유 예시 톤을 참고해서, 위 보고서를 세 가지로 만들어 줘.
+① 팀 전체 공유용 3문단 이메일 (제목 포함)  ② 사내 메신저용 3줄 요약  ③ 경영진용 한 줄 보고
+보고서 본문은 주간보고_6월3주.docx로, ①②③은 공유문구.md 한 파일로 저장해 줘.</pre></div>
+        <p>실습 B에서 던진 한 줄이 이제 보고서 + 메일 + 메신저 요약 + 경영진 한 줄, 네 가지 문서가 됐습니다. <span class="meta">보고서 파일은 꼭 내려받아 두세요. 06차시에서 메일로 내보낼 재료입니다</span></p>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 같은 환불 이슈를 PREP 3줄("팀장이 '포장 바꿀까요?'라고 물었다고 치고")과 SCQA("포장재 예산 추가를 요청하는 상황")로 각각 뽑아 비교. 실습 H는 독자가 바뀌어 길이가 달라졌고, 여기는 목적이 바뀌어 순서가 달라집니다.</div>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 반복 보고서는 템플릿으로 굳힌다</h2><p>매번 형식은 같고 숫자만 바뀌는 문서가 자동화 효과가 가장 큽니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>판별 질문</th><th>예 →</th><th>아니오 →</th></tr></thead>
+        <tbody>
+          <tr><td>① 형식이 매번 같은가?</td><td>템플릿으로 굳힐 수 있음</td><td>매번 새로 설계 (효과 작음)</td></tr>
+          <tr><td>② 내용 대부분이 데이터에서 나오나?</td><td>데이터만 주면 자동 생성</td><td>판단 · 창작 비중이 큼 (초안 정도만)</td></tr>
+          <tr><td>③ 얼마나 자주 쓰나?</td><td>매주 · 매월 → 효과 누적</td><td>1년에 한 번 → 그냥 손으로</td></tr>
+        </tbody>
+      </table></div>
+      <p>셋 다 '예'면 1순위입니다. 주간 실적 보고, 월 마감 정산 요약이 해당하고, 정기 공지문은 템플릿만이라도, 신규 사업 제안서는 초안 도움 정도입니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 I — 내 보고서를 템플릿으로 굳히기</div>
+        <p>틀린 보고서에서 템플릿을 뽑으면 틀린 형식이 매주 굳습니다. 검수가 먼저입니다.</p>
+        <div class="pbox"><div class="pbox-label">템플릿 만들기</div><pre>방금 만든 보고서에서 매주 바뀌는 값만 [대괄호]로 바꿔 재사용 템플릿을 만들어 줘.
+숫자·날짜·상품명처럼 주마다 달라지는 건 [대괄호]로, 항목 제목과 문장 틀은 그대로 둬.
+주간보고_템플릿.docx로 저장해 줘.</pre></div>
+        <p>받은 템플릿을 준비물의 재사용 보고 템플릿과 비교한 뒤, Project 자료의 <b>기존 템플릿과 교체</b>합니다. 이제 내가 만든 게 기준입니다.</p>
+      </div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>직무</th><th>반복 문서</th><th>특히 주의할 검수</th></tr></thead>
+        <tbody>
+          <tr><td>마케팅</td><td>주간 성과 보고</td><td>상관을 인과로 단정</td></tr>
+          <tr><td>영업</td><td>파이프라인 현황, 견적서</td><td>금액 단위, 확정 / 미확정 구분</td></tr>
+          <tr><td>CS · 운영</td><td>VOC 주간 요약</td><td>개별 고객 정보 노출</td></tr>
+          <tr><td>인사</td><td>채용 진행 현황, 월 근태</td><td>개인정보 — 실명 대신 이니셜</td></tr>
+          <tr><td>재무 · 회계</td><td>월 마감 요약, 예산 집행률</td><td>숫자 전부 — 단위 · 반올림</td></tr>
+          <tr><td>기획</td><td>프로젝트 주간 리포트</td><td>일정 확정 여부</td></tr>
+        </tbody>
+      </table></div>
+      <p>모든 직무가 "<b>정해진 형식 + 매번 바뀌는 숫자</b>" 구조입니다. 다른 건 어디를 특히 검수하느냐뿐입니다. 워크시트 A에 내 보고서 목차를, B에 어느 데이터가 어느 섹션으로 가는지를 적으면 그게 내 템플릿의 초안입니다.</p>
+    </section>
+
+    <section class="hub-section" id="s8">
+      <div class="hub-section-head"><h2>8. 매주 5분 루틴</h2><p>템플릿은 형식을, 마스터 프롬프트는 규칙을 고정합니다. 둘 다 있어야 매주 같은 모양이 나옵니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 J — 루틴 한 바퀴 돌려 보기</div>
+        <ol class="num-steps">
+          <li><b>새 대화</b>를 엽니다. 앞 대화의 기억 없이 템플릿 + 프롬프트만으로 굴러가는지 보는 게 핵심입니다.</li>
+          <li>이번 주 매출 엑셀을 첨부하고 아래 마스터 프롬프트를 붙여 넣습니다.</li>
+          <li>표 전체를 다 볼 필요는 없고 <b>총매출 18,627,000원 / 전주 대비 +26.1%</b> 두 개만 엑셀과 맞춰 봅니다.</li>
+          <li>톤은 손댈 데가 있을 때만 한두 줄. "문장이 긴 곳만 둘로 쪼개 줘."</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">주간보고 마스터 프롬프트</div><pre>너는 우리 회사 주간보고 담당자야. 첨부한 이번 주 데이터로 보고서를 써 줘.
+- 형식: 프로젝트에 올려 둔 보고서 템플릿의 [대괄호]만 채운다. 항목 제목·순서는 그대로.
+- 숫자: 데이터에서 정확히 뽑고, 전주 대비 증감(%)도 계산해 표시. 금액은 원 단위 그대로. 없는 값은 [확인필요].
+- 해석: 원인은 '추정'이라고 표시하고 단정하지 마.
+- 톤: 팀장 보고용으로 담백하게.
+마지막에 '핵심 숫자 검수표'(항목 | 보고서 값 | 데이터 원본 값)도 붙여 줘.
+결과는 주간보고_[주차].docx로 저장해 줘.</pre></div>
+      </div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>프롬프트의 줄</th><th>나온 곳</th></tr></thead>
+        <tbody>
+          <tr><td>템플릿의 [대괄호]만 채운다</td><td>실습 I — 내가 만든 템플릿</td></tr>
+          <tr><td>정확히 뽑고 증감 표시, 원 단위 그대로</td><td>5절 — 단위 뒤섞임 · 기준 실종</td></tr>
+          <tr><td>없는 값은 [확인필요]</td><td>실습 B — 지어낸 숫자</td></tr>
+          <tr><td>원인은 '추정'</td><td>5절 — 상관을 인과로</td></tr>
+          <tr><td>팀장 보고용</td><td>6절 — 독자별 톤</td></tr>
+          <tr><td>핵심 숫자 검수표</td><td>실습 G — 매주 손으로 시키지 않으려고 박아 둠</td></tr>
+        </tbody>
+      </table></div>
+      <p>위 줄들은 누구에게나 해당하는 일반 규칙입니다. "환불률은 소수점 둘째 자리까지", "상품명은 정식 명칭으로" 같은 내 팀만의 규칙을 더해 워크시트 E에 내 버전으로 적어 두세요. 매주 반복해서 고친 내용이 있으면 그것도 프롬프트에 넣을 규칙입니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>주차</th><th>소요</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>1주차</td><td>20~25분</td><td>프롬프트 다듬느라 오래 걸림. 정상입니다. 목표는 한 번 끝까지 해 보기</td></tr>
+          <tr><td>2주차</td><td>10분</td><td>1주차에 고친 부분을 마스터 프롬프트에 반영</td></tr>
+          <tr><td>3주차</td><td>5분</td><td>붙여 넣고 검수만. 여기서부터 진짜 이득</td></tr>
+        </tbody>
+      </table></div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 보고서를 6개 항목(결론 위치 · 숫자 근거 · 사실/추정 구분 · 독자 적합 · 다음 액션 · 바로 쓸 수 있나)으로 0~2점씩 채점시키고, 1점 이하 항목만 고쳐 달라고 하기. 10점 이상이면 그대로 보내도 됩니다.</div>
+    </section>
+
+    <section class="hub-section" id="s9">
+      <div class="hub-section-head"><h2>9. 정리 · 자주 묻는 질문 · 안 될 때</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>글쓰기를 <b>초안 · 교정 · 형식 · 검수 · 톤</b>으로 쪼갭니다. 숫자 사고 4가지 중 <b>상관을 인과로</b>가 가장 조용하고 위험합니다. 검수를 통과한 보고서만 재활용하고, <b>템플릿 + 마스터 프롬프트</b>로 굳히면 매주 5분입니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>AI가 쓴 보고서를 그대로 내도 되나요?</td><td>그대로 내지 마세요. 티가 나서가 아니라 검수를 안 한 셈이기 때문입니다. 과한 접속사, "~할 수 있습니다" 반복, 결론 없는 균형 잡기만 걷어 내면 티는 안 납니다.</td></tr>
+          <tr><td>그래프도 넣고 싶어요.</td><td>오늘은 텍스트 보고서까지입니다. 시각화는 08차시 데이터에서 다룹니다.</td></tr>
+          <tr><td>인사 · 급여 · 계약 문서도 되나요?</td><td>회사 정책을 먼저 확인하세요. 실명은 A씨로, 금액은 비율로 바꾸거나, 구조 · 문장만 맡기고 민감 값은 사람이 채우는 방법도 있습니다.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>엑셀을 안 읽거나 한 시트만 봄</td><td>시트를 특정 안 함</td><td>"일별매출과 전주실적 두 시트를 모두 열어서"처럼 시트명 나열</td></tr>
+          <tr><td>합계 · 증감률이 틀림</td><td>어림 계산</td><td>"계산 과정을 단계별로 보여 줘" + 검수표</td></tr>
+          <tr><td>템플릿 형식이 깨짐</td><td>지시가 모호</td><td>"형식·순서는 그대로, [대괄호]만 채워"</td></tr>
+          <tr><td>지난주 문장까지 그대로 베낌</td><td>지난 글을 통째로 참조</td><td>템플릿(대괄호) 방식으로 전환</td></tr>
+          <tr><td>[확인필요]투성이</td><td>템플릿 항목이 데이터에 없음</td><td>템플릿 항목을 데이터 구조에 맞게 조정</td></tr>
+          <tr><td>전주 대비를 못 계산함</td><td>비교할 전주 데이터가 없음</td><td>전주 시트를 포함해서 주기</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 검수를 통과한 주간보고_6월3주.docx, 독자별 공유문구.md, 주간보고_템플릿.docx(Project에 교체), 내 버전 마스터 프롬프트(워크시트 E)<br>다음 차시 준비 · 보고서 파일을 꼭 남겨 두세요. 06차시에서 메일과 캘린더로 내보냅니다.</div>
+
+    <nav class="snav"><a href="04.html"><small>← 04차시</small>Project</a><a class="nx" href="06.html"><small>06차시 →</small>커넥터 · 메일</a></nav>
+    <div class="d-foot">AI Agent 1 · 05차시</div>
+  </main><script>
+document.querySelectorAll('.pbox').forEach(function(b){
+  var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
+  btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
+    var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done)}else{var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}};
+  b.appendChild(btn);
+});
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<div class="day-head"><span class="day-num">04차시</span><h3>Project</h3></div>
+    <p class="goal">회사 배경을 매번 설명하지 않도록, 지침과 자료를 한 번만 올려 두는 전용 작업 공간을 만듭니다. 빈 Project → 지침만 → 지침 + 자료 순서로 하나씩 더하며 결과가 어떻게 바뀌는지 비교하고, 자료를 오래 관리하는 법까지 익힙니다.</p>
+    <div class="tags"><span class="tag time">이론 45 · 실습 60 · 조절 15</span><span class="tag">Claude (PC)</span><span class="tag src">그린컵 자료 6종 · 프로젝트 설계 워크시트</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>Project란</a><a href="#s2"><span>2</span>지침</a><a href="#s3"><span>3</span>자료 올리기</a><a href="#s4"><span>4</span>지침 vs 파일</a><a href="#s5"><span>5</span>수명주기</a><a href="#s6"><span>6</span>팀에서</a><a href="#s7"><span>7</span>내 회사에</a><a href="#s8"><span>8</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>Claude에게 일을 잘 시키게 됐는데, 매번 똑같은 설명에 지칩니다. "우리는 친환경 텀블러 쇼핑몰이고, 브랜드 톤은 이렇고, 배송 정책은 저렇고…" 새 대화를 열 때마다 복사해 붙입니다. 회사 배경을 딱 한 번만 알려 주고 그다음부턴 바로 일을 시킬 수는 없을까요?</p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. Project 이해하기</h2><p>일반 대화가 매번 처음 만나는 아르바이트생이라면, Project는 우리 회사를 이미 아는 전담 직원입니다.</p></div>
+      <p>Project는 Claude 안에 만드는 <b>전용 작업 공간</b>입니다. 회사 자료와 기본 지시를 한 번 올려 두면, 그 안에서 하는 모든 대화가 자동으로 참고합니다. 02차시의 '맥락 주기'를 매번 하지 않고 한 번에 끝내는 방법입니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>일반 대화</th><th>Project 안에서</th></tr></thead>
+        <tbody>
+          <tr><td>회사 배경</td><td>매번 다시 설명</td><td>한 번 올려 두면 끝</td></tr>
+          <tr><td>자료</td><td>대화마다 다시 첨부</td><td>Project에 상주</td></tr>
+          <tr><td>일관성</td><td>대화마다 들쭉날쭉</td><td>항상 같은 기준</td></tr>
+          <tr><td>적합한 일</td><td>일회성 질문</td><td>반복되는 회사 업무</td></tr>
+        </tbody>
+      </table></div>
+      <p>몇 개로 나눌지는 <b>자료와 규칙이 겹치는가</b>로 정합니다. 마케팅 글과 CS 답변처럼 같은 브랜드 톤 · 같은 정책을 쓰면 하나로 합칩니다. 마케팅과 재무처럼 톤도 자료도 다르거나, 대외용과 대내용 말투가 정반대면 나눕니다. 3개월 캠페인 같은 일은 따로 만들고 끝나면 정리합니다. Project는 <b>작업 단위가 아니라 맥락 단위</b>입니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 빈 Project 만들기</div>
+        <ol class="num-steps">
+          <li>프로젝트 설계 워크시트의 <b>A(회사 정보)</b>만 채웁니다. 회사명과 한 줄 설명이면 충분합니다.</li>
+          <li>claude.ai 왼쪽 사이드바 <b>프로젝트</b> → <b>새 프로젝트</b>에서 이름과 설명을 넣고 만듭니다.
+            <div class="pbox"><div class="pbox-label">이름 · 설명</div><pre>이름: 그린컵
+설명: 친환경 텀블러 쇼핑몰 '그린컵'의 마케팅·CS 작업 공간. 브랜드 톤과 정책에 맞춰 글을 쓴다.</pre></div></li>
+          <li>그 Project 안에서 새 대화를 열고 "신규 가입 환영 메일 써 줘"를 입력합니다. 지침도 자료도 없어서 평균적인 답이 나옵니다. <span class="meta">이 결과를 기억해 두세요. 다음 실습부터 하나씩 비교합니다</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 지침 — 가장 강력한 한 칸</h2><p>Project 지침 칸에 적은 내용은 그 안의 모든 대화에 자동으로 적용됩니다.</p></div>
+      <p>지침은 톤과 태도를 잡는 짧은 규칙입니다. 자료가 하나도 없어도 먼저 넣을 수 있습니다. 워크시트 <b>B</b>에 직접 써 본 뒤 아래 예시와 비교하고, 지침 칸에 붙여 저장합니다.</p>
+      <div class="pbox"><div class="pbox-label">그린컵 지침 예시</div><pre>너는 그린컵(친환경 텀블러 쇼핑몰)의 마케팅·CS 담당자다.
+- 모든 글은 다정한 존댓말로 쓴다. "~해요/~예요"체, 딱딱한 "~하십시오"는 피한다.
+- 금지 표현: 역대급, 미친 혜택, 대박 같은 과장.
+- 회사·제품·정책에 대해 확실하지 않은 내용은 지어내지 말고 "확인 후 안내드릴게요"라고 말한다.
+- 결과는 바로 쓸 수 있게 깔끔한 형식으로 준다.</pre></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 지침 넣고 비교하기</div>
+        <ol class="num-steps">
+          <li><b>톤 비교</b> — "신규 가입 고객에게 보낼 환영 메일 써 줘"를 다시 시켜 실습 A 결과와 나란히 봅니다. 차이는 지침 한 칸뿐입니다.</li>
+          <li><b>환각 테스트</b> — "그린컵 매장 위치가 어디야?"처럼 근거가 없는 질문을 던집니다. 지어내지 않고 "확인 후 안내드릴게요"처럼 답하면 성공입니다. <span class="meta">지침은 태도를 잡아 줄 뿐 실제 회사 정보는 못 줍니다. 그 한계를 느끼는 게 이 실습의 핵심입니다</span></li>
+        </ol>
+      </div>
+      <p>규칙끼리 부딪히는 경우가 있습니다. 두 가지 방법으로 풉니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>충돌</th><th>푸는 법</th><th>지침에 쓰는 문장</th></tr></thead>
+        <tbody>
+          <tr><td>"친근하게" vs "정중한 존댓말"</td><td><b>상황으로 나누기</b></td><td>"마케팅 홍보 문구는 친근하고 캐주얼하게, 그 외 고객 응대·안내는 다정한 존댓말로."</td></tr>
+          <tr><td>"짧게" vs "근거 조항을 함께"</td><td><b>우선순위 정하기</b></td><td>"규칙이 부딪히면 정확성 > 정중함 > 간결함 순으로 판단해라."</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">확인 · 우선순위를 넣은 뒤 "배송 지연 안내 문자를 10자 이내로. 단, '3일 지연', '원인은 물류센터 시스템 오류', '보상 5천원 쿠폰'은 절대 빠지면 안 돼"를 시켜 보세요. 10자에 다 못 담으니 정확성이 이기는지 봅니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>좋은 지침의 4층</th><th>무엇</th><th>빠지면</th></tr></thead>
+        <tbody>
+          <tr><td><b>① 역할</b></td><td>누구로서 일하는가</td><td>톤 · 관점이 매번 달라짐</td></tr>
+          <tr><td><b>② 자료 사용법</b></td><td>올려 둔 자료를 언제 어떻게 쓰는가</td><td>자료를 두고도 자기 지식으로 답함</td></tr>
+          <tr><td><b>③ 톤 · 형식</b></td><td>결과물의 모양</td><td>매번 손봐야 함</td></tr>
+          <tr><td><b>④ 안전장치</b></td><td>모를 때 어떻게 하는가</td><td>지어냄</td></tr>
+        </tbody>
+      </table></div>
+      <p>02차시의 6가지 요소가 한 번의 지시를 위한 것이라면, 이 4층은 <b>모든 지시 밑에 항상 깔리는 바닥</b>입니다. 지금 지침엔 ② 자료 사용법이 없습니다. 3절에서 자료를 올린 뒤 채웁니다.</p>
+      <p>지침에 넣지 말아야 할 것도 있습니다. 이번 달 할인율처럼 <b>자주 바뀌는 숫자</b>, <b>긴 목록과 표</b>는 파일로 올립니다. "이번 공지는 3문단으로"처럼 <b>한 번만 쓸 요청</b>은 그 대화에서 말하면 됩니다.</p>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 자료 올리기 — 찾기 쉽게 넣는다</h2><p>반복해서 참고하는 것들을 올립니다. 처음엔 2~3개로 시작해 필요할 때 더합니다.</p></div>
+      <p>회사 · 제품 소개, 브랜드 보이스 가이드(말투 · 금지 표현), FAQ, 정책 문서, 제품 목록 · 가격 · 재고, 자주 쓰는 양식, 과거에 잘 쓴 결과물이 좋은 후보입니다.</p>
+      <p>Project에 올린 자료를 AI가 통째로 외우는 게 아닙니다. 질문이 오면 <b>관련 있어 보이는 부분을 찾아서</b> 읽습니다. 도서관 사서가 질문을 듣고 책을 뽑아 오는 것과 같습니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>이렇게 두면</th><th>생기는 일</th></tr></thead>
+        <tbody>
+          <tr><td>최종_문서_v3.docx</td><td>제목만 보고 뭔지 몰라 못 찾거나 엉뚱한 걸 뽑음</td></tr>
+          <tr><td>배송정책.docx</td><td>배송 질문이 오면 바로 집어 옴</td></tr>
+          <tr><td>200쪽짜리 통합 문서 하나</td><td>관련 없는 부분까지 딸려 와 정확도가 떨어짐</td></tr>
+          <tr><td>주제별로 쪼갠 문서 5개</td><td>필요한 것만 정확히 집어 옴</td></tr>
+          <tr><td>옛 정책 + 새 정책이 둘 다 있음</td><td><b>섞이거나 옛것을 집어 올 수 있음 — 가장 흔한 사고</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 자료 올리고 비교하기</div>
+        <ol class="num-steps">
+          <li><b>올리기</b> — 그린컵 Project의 파일 영역에 자료 6개를 끌어다 놓습니다.</li>
+          <li><b>실습 B와 비교</b> — 같은 "신규 가입 환영 메일 써 줘"를 다시 시킵니다. 브랜드 톤, 정책 근거, 과거 예시의 구조까지 반영되는지 봅니다.</li>
+          <li><b>자료 근거로 일 시키기</b> — 배경 설명 없이 바로 묻습니다. 주제가 바뀌면 새 대화를 엽니다. Project가 자료와 규칙을 기억하니 잃는 게 없습니다.
+            <div class="pbox"><div class="pbox-label">자료 근거 질문 4개</div><pre>미니 머그 스카이 색상 재고 있어? 없으면 대안 추천해 줘.
+식기세척기 사용 문의가 들어왔어. FAQ 기준으로 답변 문구 만들어 줘.
+단순 변심 교환하면 배송비 누가 내? 정책대로 안내 문구 써 줘.
+써모 라인 인스타 홍보 문구 3개. 브랜드 가이드의 금지 표현은 피해서.</pre></div>
+            <span class="meta">정답 · 스카이는 품절, 단순 변심 교환은 왕복 배송비 고객 부담</span></li>
+          <li><b>환각 재테스트</b> — "그린컵 매장 위치가 어디야?"를 다시 묻습니다. 자료가 많아져도 그럴듯하게 끼워 맞추지 않아야 합니다.</li>
+        </ol>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>회사 소개 · FAQ · 브랜드 보이스 가이드 · 배송·교환·환불 정책 · 과거 잘 쓴 결과물</b> <span class="meta">· Word</span></li><li><b>제품 카탈로그</b> <span class="meta">· Excel</span></li></ul></div>
+      </div>
+      <div class="pbox"><div class="pbox-label">그린컵 브랜드 보이스 가이드는 이렇게 생겼습니다</div><pre>[말투] 다정한 존댓말. 친구에게 말하듯, 강요하지 않기. "~해요/~예요"체.
+[자주 쓰는 표현] 같이 가요 · 작은 습관 · 천천히 · 고마워요
+[이모지] 새싹 하나 정도만 가끔. 남발 금지.
+[금지 표현] 역대급, 미친 혜택, 대박 같은 과장·낚시성 표현
+[호칭] 고객님보다 "○○님"</pre></div>
+      <p>이런 규칙 문서가 있으면 누가 어떤 글을 쓰든 톤이 하나로 묶입니다. 자료가 생긴 지금부터는 지침에 톤을 길게 풀어 쓰는 대신 "브랜드 보이스 가이드를 따른다" 한 줄로 줄여도 됩니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 D — 4층 완성하고 하나씩 빼 보기</div>
+        <ol class="num-steps">
+          <li>지침 맨 아래에 "<b>첨부 자료에 근거해 답한다</b>"를 추가하고 저장합니다. 이제 4층이 다 찼습니다.</li>
+          <li><b>① 역할</b> 줄을 지우고 새 대화에서 "신제품 텀블러 인스타 홍보 문구 써 줘" → "저희 그린컵은…" 대신 "그린컵이라면 이런 문구가 어울릴 것 같습니다"처럼 컨설턴트 톤으로 물러나는지 봅니다. 확인했으면 다시 넣습니다.</li>
+          <li><b>② 자료 사용법</b> 줄을 지우고 같은 재고 질문 → 카탈로그를 두고도 자기 지식으로 답하는지 봅니다. <span class="meta">③ 톤 · ④ 안전장치는 표로만 참고합니다. 최신 모델은 알아서 조심하는 경향이 있어 차이가 잘 안 보일 수 있습니다</span></li>
+        </ol>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 내 브랜드(또는 가상 브랜드)의 보이스 가이드를 [말투] [자주 쓰는 표현] [이모지 사용] [금지 표현] [호칭] 다섯 칸으로 만들어 보기. 막히면 "10~20대 대상 인생네컷 브랜드 '스냅컷'의 보이스 가이드를 다섯 항목으로 만들어 줘"처럼 시켜서 시작합니다.</div>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 지침 칸 vs 자료 파일</h2><p>짧고 항상 지킬 규칙은 지침, 양이 많고 참조용인 데이터는 파일.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>넣을 것</th><th>어디에</th><th>왜</th></tr></thead>
+        <tbody>
+          <tr><td>말투 · 역할 · 금지 표현</td><td>지침</td><td>짧고 모든 글에 매번 적용</td></tr>
+          <tr><td>"지어내지 마" 같은 안전 규칙</td><td>지침</td><td>항상 켜 둬야 함</td></tr>
+          <tr><td>300개 제품 가격 · 재고</td><td>파일 (엑셀)</td><td>양이 많고 자주 바뀜</td></tr>
+          <tr><td>FAQ · 정책 전문</td><td>파일</td><td>참조용, 지침에 넣으면 지저분</td></tr>
+          <tr><td>과거 잘 쓴 예시</td><td>파일</td><td>본보기 샘플</td></tr>
+        </tbody>
+      </table></div>
+      <p>헷갈리면 "<b>이걸 매번 말할 건가?</b>"를 물어보세요. 예면 지침, "필요할 때 찾아보게 둘 건가?"면 파일입니다.</p>
+      <div class="callout"><div class="callout-label">Project 안에서 Cowork로 맡기기</div><p>Project 안에서도 결과물을 말하면 Cowork로 일을 맡길 수 있습니다. 예를 들어 "신규 가입 · 첫 구매 · 재구매 고객용 환영 메일 3종을 워드 파일로 만들어 줘"라고 하면, 지침과 자료가 그대로 적용된 파일을 받습니다. 매번 쓰는 규칙은 Project에, 그때그때 일은 대화창에 — 03차시의 과제문이 훨씬 짧아집니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 수명주기와 안티패턴</h2><p>지침과 자료는 한 번 만들고 끝이 아닙니다. 단계마다 자주 빠지는 함정이 있습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>단계</th><th>언제</th><th>할 일</th><th>이 단계의 함정</th></tr></thead>
+        <tbody>
+          <tr><td><b>① 만들기</b></td><td>처음</td><td>자주 쓰는 자료 2~3개로 시작</td><td>업무마다 Project를 새로 판다 · 일단 다 올리고 본다</td></tr>
+          <tr><td><b>② 길들이기</b></td><td>첫 2~3주</td><td>쓰면서 빠진 자료를 채우고, 결과가 틀어지면 지침 보강</td><td>지침에 모든 걸 다 쓴다 (10개 넘으면 서로 묻힘)</td></tr>
+          <tr><td><b>③ 유지하기</b></td><td>안정기</td><td>원본이 바뀌면 자료를 <b>교체</b>(추가 아님), 분기마다 정리</td><td>옛 버전을 안 지운다</td></tr>
+          <tr><td><b>④ 정리하기</b></td><td>업무가 끝나거나 바뀌면</td><td>낡은 Project는 지우거나 보관</td><td>만들어 놓고 안 쓴다</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 E — 옛 버전 사고 직접 재현하기</div>
+        <p>배송·교환·환불 정책 문서의 <b>환불 기한만</b> 다르게 바꾼 사본을 <code>배송정책_구버전</code>으로 함께 올리고, "단순 변심 환불 기한이 며칠이야?"라고 묻습니다. 두 문서를 다 언급하나요, 아무 말 없이 하나만 골라 답하나요? 확인했으면 구버전은 지웁니다.</p>
+      </div>
+      <p>가장 무서운 건 <b>아무 말 없이 옛것을 골랐을 때</b>입니다. 틀렸다는 신호가 전혀 없습니다. 자료는 더하는 것보다 빼는 게 더 어렵고 더 중요합니다.</p>
+      <div class="callout"><div class="callout-label">보안 한 줄</div><p>Project에 올린 자료도 결국 외부 서비스에 올라갑니다. 회사 기밀과 고객 개인정보는 사내 정책을 먼저 확인하세요. 오늘은 가상 회사라 안전합니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. 팀에서 같이 쓸 때</h2><p>혼자 쓰는 Project와 팀이 공유하는 Project는 관리 포인트가 다릅니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>정할 것</th><th>안 정하면</th></tr></thead>
+        <tbody>
+          <tr><td><b>지침을 누가 고칠지</b> — 관리자 한 명</td><td>여러 명이 각자 고쳐 규칙이 충돌</td></tr>
+          <tr><td><b>자료 갱신 담당</b> — 정책이 바뀌면 누가 파일을 교체하나</td><td>아무도 안 함</td></tr>
+          <tr><td><b>변경 기록</b> — 지침 맨 아래 "v2 · 7/21 금지 표현 추가 (담당: 김○○)"</td><td>왜 바뀌었는지 아무도 모름</td></tr>
+        </tbody>
+      </table></div>
+      <p>Project 공유는 Team · Enterprise 요금제에서 됩니다. Pro는 혼자만 씁니다. 공유할 때는 각자 자기 계정으로 로그인한 채로, 만든 사람이 팀원에게 열람 · 편집 권한을 줍니다.</p>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 내 회사에 적용하기</h2><p>"반복 업무 + 참조 자료 + 규칙" 세 가지가 갖춰지면 업종과 상관없이 통합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>팀</th><th>반복 업무</th><th>참조 자료</th><th>지침</th></tr></thead>
+        <tbody>
+          <tr><td>인사팀</td><td>채용공고 작성</td><td>톤 가이드, 과거 공고, 직무기술서</td><td>전문적이면서 친근하게 · 클리셰 과장 금지 · 미확정 조건은 "협의 후 안내"</td></tr>
+          <tr><td>회계팀</td><td>비용 처리 · 정산 보고</td><td>비용 처리 규정, 계정과목표, 보고 양식</td><td>계정과목별 표로 · 숫자 임의 계산 · 추정 금지</td></tr>
+          <tr><td>업종 불문</td><td>반복해서 나가는 문서</td><td>그 업무에 항상 쓰는 자료 2~3개</td><td>톤 · 금지 표현 + "모르면 지어내지 말 것"</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 F — 내 팀 버전 Project 만들기</div>
+        <p>그린컵과 자료 · 규칙이 겹치지 않으니 <b>새 Project</b>를 만듭니다. 실제 회사 자료가 없으면 Claude로 먼저 만들어 씁니다.</p>
+        <ol class="num-steps">
+          <li><b>지침 만들기</b>
+            <div class="pbox"><div class="pbox-label">지침 요청</div><pre>나는 [내 업종/직무]에서 일해. 내가 반복해서 하는 업무는 [○○]야.
+이 업무를 할 때 항상 지켜야 할 톤·형식·금지사항을 담은 프로젝트 지침을 만들어 줘.
+역할 / 자료 사용법 / 톤·형식 / 안전장치 4층 구조로.</pre></div></li>
+          <li><b>자료 만들기</b>
+            <div class="pbox"><div class="pbox-label">자료 요청</div><pre>이 업무를 할 때 항상 참고하는 자료 2~3개(규정 / 과거 예시 / 템플릿 성격)를 가상으로 만들어 줘. 각각 워드 파일로.</pre></div>
+            <span class="meta">나온 파일을 새 Project의 자료로 올립니다</span></li>
+          <li><b>실제 요청</b> — "[이번에 처리할 구체적인 건]을 자료 기준으로 처리해 줘."</li>
+          <li><b>채점</b> — 톤 통일 · 자료 근거 · 환각 없음 · 형식 · 금지 표현 다섯 가지로 스스로 점검합니다. 워크시트 D를 씁니다.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s8">
+      <div class="hub-section-head"><h2>8. 정리 · 자주 묻는 질문 · 안 될 때</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>지침은 <b>톤과 안전장치</b>를 잡고, 자료는 <b>근거</b>를 줍니다. 둘이 합쳐져야 바로 쓸 결과가 나옵니다. AI는 자료를 외우지 않고 찾아 읽으니 <b>파일명과 구조</b>가 정확도를 좌우하고, 옛 버전은 반드시 뺍니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>올린 자료를 AI가 학습해 남에게 쓰나요?</td><td>그 Project 안의 대화에서 참고되는 것이지, 모델이 외워 남에게 쓰는 것과는 다릅니다. 다만 외부 서비스에 올리는 건 맞으니 사내 정책을 먼저 확인하세요.</td></tr>
+          <tr><td>파일은 몇 개까지 올리나요?</td><td>개수보다 용량 한도에 걸립니다. 한도에 가까워지면 개수를 늘리기보다 안 쓰는 걸 빼세요.</td></tr>
+          <tr><td>엑셀 숫자를 자꾸 틀리게 읽어요.</td><td>자료 참조와 정확한 계산은 다른 문제입니다. 계산은 08차시 Claude Code에서 다룹니다. 지금은 "숫자는 자료 값 그대로만 쓰고 계산하지 마"를 지침에 넣으세요.</td></tr>
+          <tr><td>뭘 시켜야 할지 모르겠어요.</td><td>최근에 배경 설명을 반복했던 일을 떠올리세요. 그게 Project가 필요했던 일입니다.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>지침을 무시함</td><td>저장을 안 했거나 Project 밖 대화에서 하는 중</td><td>저장 확인 → Project 안에서 새 대화</td></tr>
+          <tr><td>규칙이 오락가락</td><td>지침끼리, 또는 지침과 파일이 충돌</td><td>충돌 규칙 정리, 우선순위 한 줄 명시</td></tr>
+          <tr><td>자료가 있는데 못 찾음</td><td>파일명이 모호하거나 문서가 너무 큼</td><td>파일명 명확히, 큰 문서는 주제별로 쪼개기</td></tr>
+          <tr><td>엉뚱한 파일을 인용</td><td>비슷한 자료가 여러 개</td><td>옛 버전 · 중복 파일 삭제</td></tr>
+          <tr><td>여전히 지어냄</td><td>근거 규칙이 약함</td><td>"자료에 없으면 지어내지 말고 [확인필요]" 강화</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 지침 4층과 자료 6개가 들어간 그린컵 Project, 내 팀 버전 Project 1개, 채점한 워크시트<br>다음 차시 준비 · 그린컵 Project는 지우지 말고 그대로 둡니다. 05차시 보고서에서 다시 씁니다.</div>
