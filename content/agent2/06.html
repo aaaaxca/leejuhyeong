@@ -1,0 +1,150 @@
+<div class="day-head"><span class="day-num">06차시</span><h3>검색 노출 — SEO · AEO · GEO</h3></div>
+    <p class="goal">홈페이지는 올라갔지만 지금은 주소를 아는 사람만 들어옵니다. 모르는 사람이 찾아오려면 검색 목록, 질문의 답 상자, AI 답변 속에 걸려야 합니다. 세 가지를 구분하고, 05차시 뮤지엄 홈페이지를 점검해 검색 요소를 넣고 다시 배포한 뒤, 구글 · 네이버에 "여기 새 사이트 있어요"라고 등록합니다.</p>
+    <div class="tags"><span class="tag time">이론 40 · 실습 65 · 조절 15</span><span class="tag">Claude (05차시 Project)</span><span class="tag">구글 서치 콘솔 · 네이버 서치어드바이저</span><span class="tag src">05차시 홈페이지 주소 · 구글 · 네이버 계정</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>검색 세 가지</a><a href="#s2"><span>2</span>넣을 것</a><a href="#s3"><span>3</span>사실대로</a><a href="#s4"><span>4</span>점검 · 다시 배포</a><a href="#s5"><span>5</span>검색엔진 등록</a><a href="#s6"><span>6</span>마스터 프롬프트</a><a href="#s7"><span>7</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 상황</div><p>05차시에 올린 뮤지엄 홈페이지에 아무도 들어오지 않습니다. 당연합니다. 주소를 아는 사람이 우리 반뿐이니까요. 오늘은 홈페이지 내용은 그대로 두고, 검색엔진과 AI가 <b>읽기 쉬운 모양</b>으로 다듬습니다. 체험판 배포 횟수를 아끼기 위해 오늘 배포는 딱 두 번입니다.</p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. 검색에 걸리는 세 가지 방식</h2><p>요즘 사람들이 무언가를 찾는 방법은 셋입니다. 우리 학원을 예로 들어 봅니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>이름</th><th>사람이 하는 일</th><th>우리가 바라는 것</th></tr></thead>
+        <tbody>
+          <tr><td><b>SEO</b><br>검색엔진 최적화</td><td>네이버 · 구글에 "안산 AI 학원" 검색</td><td>검색 결과 목록 위쪽에 뜨기</td></tr>
+          <tr><td><b>AEO</b><br>답변엔진 최적화</td><td>"AI 에이전트 수업은 몇 주 걸려요?"처럼 질문으로 검색</td><td>검색창 위 답 상자나 음성 비서의 답으로 뽑히기</td></tr>
+          <tr><td><b>GEO</b><br>생성형 엔진 최적화</td><td>ChatGPT · Claude · 구글 AI 개요에 "안산에서 AI 배울 곳 추천해 줘"</td><td>AI 답변 속에 이름이 나오고 출처로 인용되기</td></tr>
+        </tbody>
+      </table></div>
+      <p>셋은 결국 같은 걸 봅니다. 검색엔진도 AI도 <b>페이지를 읽어서</b> 판단합니다. 그래서 할 일은 대부분 겹칩니다.</p>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 페이지에 넣을 것</h2><p>화면에 보이는 것과, 화면엔 안 보이지만 검색엔진이 읽는 것이 있습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>넣을 것</th><th>쉬운 뜻</th><th>주로 돕는 것</th></tr></thead>
+        <tbody>
+          <tr><td>제목 · 설명 메타 태그</td><td>검색 결과에 보이는 제목과 두 줄 설명</td><td>SEO</td></tr>
+          <tr><td>제목 구조 (h1, h2)</td><td>큰 제목 하나, 그 아래 소제목들. 글의 목차</td><td>SEO · AEO</td></tr>
+          <tr><td>글자로 된 내용</td><td>중요한 말을 이미지가 아닌 글자로</td><td>셋 다</td></tr>
+          <tr><td><b>FAQ (질문과 답)</b></td><td>"○○은 뭔가요?" — "○○은 …입니다." 한 문장으로 바로 답</td><td>AEO · GEO</td></tr>
+          <tr><td>구조화 데이터 (JSON-LD)</td><td>"이건 회사 이름, 이건 로고, 이건 질문과 답"이라고 붙인 검색엔진용 꼬리표</td><td>셋 다</td></tr>
+          <tr><td>sitemap.xml</td><td>이 사이트에 어떤 페이지가 있는지 알려 주는 목록</td><td>SEO</td></tr>
+          <tr><td>robots.txt</td><td>검색 로봇에게 "들어와도 돼요 / 여긴 안 돼요"를 알리는 안내문</td><td>셋 다</td></tr>
+          <tr><td>공유 미리보기 (OG 태그)</td><td>카톡 · SNS에 링크를 보냈을 때 뜨는 제목 · 그림</td><td>검색보다는 공유용</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout--tip"><div class="callout-label">FAQ가 왜 중요한가</div><p>사람들이 AI에게 묻는 방식이 질문이기 때문입니다. 페이지에 "뮤지엄은 어떤 브랜드인가요?" — "뮤지엄은 평범한 일상 장면을 짧은 영상으로 전시하는 1인 브랜드입니다."처럼 <b>질문과 한 문장짜리 답</b>이 글자로 있으면 AI가 그 문장을 가져다 쓰기 쉽습니다. 05차시 인터뷰의 7번이 여기서 쓰입니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 사실대로 알아 둘 것</h2><p>검색 노출에는 과장된 약속이 많습니다. 수업에서 확인된 것만 정리합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>흔한 기대</th><th>실제</th></tr></thead>
+        <tbody>
+          <tr><td>넣으면 바로 뜬다</td><td>검색엔진이 찾아 읽는 데 며칠~몇 주. 순위는 아무도 보장할 수 없음</td></tr>
+          <tr><td>FAQ 구조화 데이터를 넣으면 구글에 질문 · 답 모양으로 뜬다</td><td>구글은 2023년부터 이 모양을 정부 · 의료 같은 일부 사이트에만 보여 줌. 그래도 화면에 글자로 적힌 질문과 답은 AI 답변에 계속 도움</td></tr>
+          <tr><td>AI 답변에 뽑히는 비법이 있다</td><td>특별한 비법은 없음. 구글도 AI 개요에 나오려고 따로 할 건 없고 기본 SEO와 좋은 내용이 같다고 안내</td></tr>
+          <tr><td>llms.txt를 넣으면 AI에 잘 나온다</td><td>제안된 형식이지만 주요 검색엔진 · AI 회사가 공식 표준으로 쓴다고 밝힌 건 아님. 넣어서 손해는 없지만 효과는 확인되지 않음</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">반대로 검색에 <b>안</b> 걸려야 하는 페이지도 있습니다. 팀 내부용 회의록 같은 페이지에는 noindex(검색에 넣지 마세요) 표시를 넣습니다.</p>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 점검하고 넣고, 다시 배포</h2><p>진단 → 넣기 → 배포 → 확인. 고치기 전에 지금 상태부터 봅니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 검색 요소 점검 · 추가 · 두 번째 배포</div>
+        <p>05차시 '브랜드 홈페이지' Project의 그 대화에서 이어 갑니다. AI SPACE 커넥터가 켜져 있어야 합니다.</p>
+        <div class="pbox"><div class="pbox-label">① 진단</div><pre>방금 배포한 홈페이지를 SEO · AEO · GEO 관점에서 점검해 줘.
+제목 · 설명 메타 태그, 제목 구조, FAQ, 구조화 데이터, sitemap.xml, robots.txt, 공유 미리보기가
+각각 있는지 없는지 표로 보여 줘. 고치는 건 아직 하지 마.</pre></div>
+        <div class="pbox"><div class="pbox-label">② 넣기</div><pre>표에서 없다고 나온 것은 넣고, 있어도 아래 조건에 안 맞으면 고쳐 줘.
+- 제목은 '뮤지엄(MUSEUM) — 일상을 전시하다.'처럼 브랜드 이름이 먼저, 설명은 두 문장 이내
+- 큰 제목(h1)은 하나만
+- FAQ는 페이지에 글자로 보이게, 각 답의 첫 문장은 질문에 바로 답하는 한 문장
+- 구조화 데이터(JSON-LD)는 Organization(이름 · 로고 · 설명)과 FAQPage
+- sitemap.xml과 robots.txt 추가 (robots.txt는 모든 검색 로봇 허용, sitemap 위치 적기)
+- 공유 미리보기(OG) 제목 · 설명 · 이미지
+- 내가 준 정보만 쓰고, 없는 건 넣지 마
+바꾼 곳을 목록으로 보여 주고 아직 배포는 하지 마.</pre></div>
+        <div class="pbox"><div class="pbox-label">③ 다시 배포 — 오늘의 첫 번째</div><pre>바꾼 내용으로 같은 주소에 다시 배포해 줘.</pre></div>
+        <p><b>④ 확인</b></p>
+        <ol class="num-steps">
+          <li>홈페이지에서 <b>Ctrl + U</b>(소스 보기) → <b>Ctrl + F</b>로 <code>&lt;title&gt;</code>, <code>name="description"</code>, <code>application/ld+json</code>을 찾습니다.</li>
+          <li>주소 뒤에 <code>/robots.txt</code>, <code>/sitemap.xml</code>을 붙여 각각 열리는지 봅니다. <span class="meta">sitemap.xml 안의 주소가 실제 주소와 같은지. example.com이 들어 있기도 합니다</span></li>
+          <li>validator.schema.org에 주소를 넣고 Organization과 FAQPage가 <b>오류 0개</b>로 나오는지 봅니다.</li>
+          <li>카톡 나와의 채팅에 주소를 보내 공유 미리보기(제목 · 그림)가 뜨는지 봅니다.</li>
+        </ol>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>05차시 홈페이지 주소</b> <span class="meta">· 같은 대화에 있음</span></li><li><b>Schema Markup Validator</b> <span class="meta">· validator.schema.org, 무료, 구조화 데이터 오류 검사</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 검색엔진 등록 — "여기 새 사이트 있어요"</h2><p>검색엔진은 언젠가 스스로 찾아오기도 하지만, 새 사이트는 직접 알리는 게 빠릅니다. 우리나라에서는 두 곳.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>구글 서치 콘솔</th><th>네이버 서치어드바이저</th></tr></thead>
+        <tbody>
+          <tr><td>주소</td><td>search.google.com/search-console</td><td>searchadvisor.naver.com</td></tr>
+          <tr><td>등록 방식</td><td>속성 추가 → URL 접두어 → 홈페이지 주소</td><td>웹마스터 도구 → 사이트 등록 → 홈페이지 주소</td></tr>
+          <tr><td>내 사이트인지 증명</td><td>HTML 태그 한 줄을 페이지에 넣기</td><td>HTML 태그 한 줄을 페이지에 넣기</td></tr>
+          <tr><td>등록 뒤 할 일</td><td>Sitemaps에 sitemap.xml 제출</td><td>요청 → 사이트맵 제출에 sitemap.xml 제출</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">왜 '도메인' 방식은 못 쓰나</div><p>구글의 '도메인' 방식은 그 주소의 주인만 씁니다. …mycafe24.ai는 카페24 것이라 <b>URL 접두어</b>를 고릅니다. 04차시 …github.io도 같습니다. 내 도메인을 사서 연결했다면 도메인 방식도 됩니다. 주인 증명은 검색엔진이 주는 태그 한 줄(<code>&lt;meta name="google-site-verification" …&gt;</code> 같은 것)을 내 페이지에 넣는 것으로 합니다. "이 페이지를 고칠 수 있는 사람 = 주인"이라는 뜻입니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 구글 · 네이버에 등록하기</div>
+        <p>구글은 강사 화면으로 함께 보고, 네이버는 같은 순서로 각자 합니다. 실습 A와 같은 대화에서 이어 갑니다.</p>
+        <ol class="num-steps">
+          <li><b>인증 태그 찾아 두기</b> — 구글 서치 콘솔 → 속성 추가 → URL 접두어에 주소 → 확인 방법에서 HTML 태그. 네이버 서치어드바이저 → 사이트 등록 → 소유확인에서 HTML 태그. <span class="meta">확인 버튼은 아직 누르지 않고 두 탭을 열어 둠</span></li>
+          <li><b>프롬프트에 붙여넣기</b> — 아래 프롬프트를 입력창에 붙여넣고(아직 보내지 않음), 구글 탭에서 복사한 태그를 [구글 태그] 자리에, 네이버 탭에서 복사한 태그를 [네이버 태그] 자리에 붙입니다. 두 줄이 다 들어갔는지 보고 보냅니다. <span class="meta">한 번에 넣어 배포 횟수를 아낌 — 오늘의 두 번째 배포</span></li>
+          <li><b>확인 누르기</b> — 배포가 끝나면 두 화면으로 돌아가 확인(소유확인)을 누릅니다.</li>
+          <li><b>sitemap 제출</b> — 구글: Sitemaps → <code>sitemap.xml</code> → 제출. 네이버: 요청 → 사이트맵 제출 → <code>sitemap.xml</code> → 확인.</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">인증 태그 넣고 배포</div><pre>아래 두 줄을 홈페이지 &lt;head&gt; 안에 그대로 넣고, 같은 주소에 다시 배포해 줘. 다른 곳은 바꾸지 마.
+[구글 태그]
+[네이버 태그]</pre></div>
+        <p><b>확인할 것</b> — '소유권 확인됨'과 사이트맵 '성공'이 떴나요? 둘 다 떴으면 오늘 할 일은 끝입니다. 실제로 검색에 나오는지는 며칠~몇 주 뒤. 구글에서 <code>site:내주소</code>로 검색하면 들어갔는지 볼 수 있습니다. 사이트맵이 '가져올 수 없음'이면 하루 뒤 다시 보세요. 처음엔 흔히 그렇게 뜹니다.</p>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>구글 계정</b> <span class="meta">· 서치 콘솔용</span></li><li><b>네이버 계정</b> <span class="meta">· 서치어드바이저용</span></li></ul></div>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 ① 04차시 GitHub Pages 가격표 주소도 같은 방법으로 등록해 보기(이번엔 Claude Code에 태그를 넣어 달라고 하고 다시 올리기), ② Claude나 ChatGPT에 "뮤지엄이라는 브랜드 알아?"라고 물어 지금은 모른다는 걸 확인하고 기록해 두기. 몇 주 뒤 다시 물어 비교합니다.</div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. 마스터 프롬프트</h2><p>어디에 올린 페이지든 똑같이 씁니다. 메타 태그 · FAQ · 구조화 데이터 · sitemap · robots.txt는 페이지 파일 안에 들어가는 것이라 GitHub Pages · Firebase · AI SPACE 어디서나 똑같이 작동합니다.</p></div>
+      <div class="pbox"><div class="pbox-label">검색 요소 점검 · 추가</div><pre>이 홈페이지를 SEO · AEO · GEO 관점에서 점검해서 표로 보여 주고,
+없는 것은 넣고 있어도 아래 조건에 안 맞으면 고쳐 줘.
+- 제목은 브랜드 이름이 먼저, 설명은 두 문장 이내
+- h1은 하나만
+- FAQ는 화면에 글자로, 각 답의 첫 문장은 바로 답하는 한 문장
+- JSON-LD: Organization과 FAQPage
+- sitemap.xml, robots.txt (모든 검색 로봇 허용, sitemap 위치 적기)
+- 공유 미리보기(OG)
+- 내가 준 정보만 쓸 것
+바꾼 곳을 목록으로 보여 주고, 배포는 내가 말할 때.</pre></div>
+      <p class="note">FAQ 질문은 실제로 전화 · 메시지로 자주 받는 질문에서 고르세요. 사람들이 묻는 그 말 그대로가 검색창과 AI에 입력되는 말입니다.</p>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 정리 · 자주 묻는 질문 · 안 될 때</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>SEO는 목록 위로, AEO는 답으로 뽑히기, GEO는 AI 답변에 인용되기. 셋 다 <b>글자로 된 분명한 내용과 질문 · 한 문장 답</b>에서 시작합니다. 구글 · 네이버에 등록 → 태그로 주인 증명 → sitemap 제출. 결과는 며칠~몇 주 뒤이고, 순위는 아무도 보장하지 못합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>그럼 검색 1등이 되나요?</td><td>아무도 보장할 수 없습니다. 오늘 한 일은 잘 읽히게 하는 기본입니다. 그다음은 내용이 얼마나 쓸모 있는지, 다른 곳에서 얼마나 언급되는지에 달려 있습니다 — 7 · 08차시 블로그 · 인스타가 그 '다른 곳'입니다.</td></tr>
+          <tr><td>페이지가 늘면?</td><td>sitemap.xml에 모든 페이지가 들어갔는지 확인하고 다시 제출합니다.</td></tr>
+          <tr><td>주소가 바뀌면?</td><td>인증 태그와 등록을 새 주소로 다시 합니다.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>구조화 데이터 검사에서 오류</td><td>따옴표 · 쉼표 누락, 또는 없는 값</td><td>오류 문구를 복사해 "이 오류를 고쳐 줘"</td></tr>
+          <tr><td>sitemap.xml에 example.com</td><td>예시 주소를 넣어 둠</td><td>"sitemap.xml의 주소를 실제 주소 [주소]로 바꿔 줘"</td></tr>
+          <tr><td>소유확인 실패</td><td>태그 넣기 전 · 배포 전에 확인을 누름</td><td>Ctrl + U로 태그가 들어갔는지 본 뒤 다시 확인</td></tr>
+          <tr><td>공유 미리보기에 그림이 안 뜸</td><td>이미지 주소가 상대 경로 · 카톡이 옛 미리보기를 기억</td><td>"OG 이미지를 전체 주소(https://…)로 바꿔 줘", 잠시 뒤 다시</td></tr>
+          <tr><td>배포가 안 됨 (횟수 초과)</td><td>체험판 하루 빌드 횟수</td><td>내일 다시. 태그는 두 줄을 한 번에</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 검색 요소 점검표(전 · 후), 검색 요소를 넣어 다시 배포한 홈페이지, 구조화 데이터 검사 오류 0, 구글 서치 콘솔 · 네이버 서치어드바이저 소유확인과 사이트맵 제출 · 다음 차시 준비 · 네이버 블로그 로그인 확인, 이 과정에서 해 본 것 3~5줄 메모</div>
