@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>03차시 · 예약 작업 · 이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+
+  .stu header{margin-bottom:40px}
+  a.pcard{cursor:pointer}
+  a.pcard .ps{color:var(--sub)}
+  .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-done)} .callout--tip .callout-label{color:var(--c-done)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-left:3px solid var(--c-wip);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--c-wip)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .doc .timeline{list-style:none;margin:20px 0 8px;padding:0 0 0 26px;position:relative}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .doc .timeline li{position:relative;margin:0 0 30px}
+  .timeline li:last-child{margin-bottom:0}
+  .timeline li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-wip);box-shadow:0 0 0 4px var(--bg,#fff)}
+  .tl-year{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600;color:var(--c-wip);letter-spacing:.02em}
+  .tl-title{display:block;font-weight:600;color:var(--ink);font-size:15.5px;margin:6px 0 6px}
+  .timeline p{margin:0;color:var(--sub);font-size:14.5px}
+  .concept-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px;align-items:center;margin:20px 0 28px}
+  .concept-list{display:flex;flex-direction:column;gap:8px}
+  .concept-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:10px 14px}
+  .concept-card:last-child{border-color:color-mix(in srgb,var(--c-wip) 45%,var(--line))}
+  .cc-name{font-weight:600;color:var(--ink);font-size:15px}
+  .concept-card:last-child .cc-name{color:var(--c-wip)}
+  .cc-name small{font-weight:400;color:var(--faint);font-size:12px;margin-left:4px}
+  .concept-card p{margin:3px 0 4px;font-size:13.5px;color:var(--sub);line-height:1.6}
+  .cc-ex{font-size:12.5px;color:var(--faint)}
+  @media (max-width:720px){.concept-grid{grid-template-columns:1fr}.concept-grid figure{max-width:360px;margin:0 auto}}
+  .doc ol.steps{margin:12px 0 0;padding-left:1.3em;font-size:14px;color:var(--sub)}
+  .doc ol.steps li{margin-bottom:.55em}
+  .doc ol.steps b{color:var(--ink)}
+  .sec-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:22px 0 8px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .sec-nav a{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 4px;background:var(--panel);white-space:nowrap;flex-shrink:0}
+  .sec-nav a:hover{color:var(--ink);border-color:var(--sub)}
+  .sec-nav a span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .doc h2.sec-head{display:flex;align-items:center;gap:12px;font-family:"Noto Serif KR",serif;font-size:21px;font-weight:500;color:var(--ink);margin:64px 0 16px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:20px}
+  .doc .sec-nav + h2.sec-head{border-top:0;padding-top:0;margin-top:44px}
+  .sec-num{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:14px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .dl-btn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:12.5px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:6px;padding:3px 10px;vertical-align:middle}
+  .dl-btn::before{content:"↓"}
+  .dl-btn:hover{background:color-mix(in srgb,var(--c-wip) 14%,transparent)}
+  .files-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:8px;padding:9px 16px;background:color-mix(in srgb,var(--c-wip) 8%,transparent)}
+  .files-btn:hover{background:color-mix(in srgb,var(--c-wip) 16%,transparent)}
+  .prep-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 16px;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 70%,transparent);font-size:14px}
+  .pb-label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--sub);margin-right:2px}
+  .pb-label::before{content:"";width:15px;height:15px;background:var(--sub);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pb-label::after{content:":";margin-left:-3px}
+  .pb-item{display:inline-flex;align-items:baseline;gap:6px}
+  .pb-num{color:var(--ink);font-weight:600}
+  .pb-item b{color:var(--ink);font-weight:600}
+  .pb-item small{color:var(--faint);font-size:12px}
+  .pb-sep{color:var(--faint)}
+  .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
+  .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:8px 0 12px;padding:0}
+  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:6px 0 6px 52px;font-size:14.5px;color:var(--sub);line-height:1.7}
+  .doc ol.num-steps>li::before{content:counter(ns,decimal-leading-zero);position:absolute;left:0;top:6px;width:30px;padding-right:10px;border-right:1px solid var(--line);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.95;color:var(--faint);text-align:left}
+  .doc ol.num-steps b{color:var(--ink)}
+  .doc ol.sub-steps{list-style:none;counter-reset:ss;margin:8px 0 6px;padding:0}
+  .doc ol.sub-steps li{counter-increment:ss;position:relative;padding:3px 0 3px 26px;font-size:14px}
+  .doc ol.sub-steps li::before{content:counter(ss) ")";position:absolute;left:4px;color:var(--faint);font-size:12.5px}
+  .doc ol.num-steps .meta{display:block;font-size:12.5px;color:var(--faint);margin-top:4px;border:0;padding:0}
+  .step-group{margin:18px 0 4px;font-size:12.5px;font-weight:600;letter-spacing:.08em;color:var(--faint);padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .doc p.note{font-size:13px;color:var(--faint);margin:2px 0 14px}
+  .duo-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .duo-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
+  .duo-title{font-weight:600;color:var(--c-wip);margin-bottom:6px}
+  .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+  .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .pbox .nc{color:var(--faint);font-size:12.5px;margin-left:6px;user-select:none}
+  .result-box{margin:-4px 0 16px;border-left:2px solid var(--line);padding:4px 0 4px 16px}
+  .result-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:6px}
+  .result-box p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.75}
+  .doc details.toggle{margin:10px 0 4px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+  .doc details.toggle>summary{cursor:pointer;padding:9px 14px;font-size:13.5px;color:var(--sub);list-style:none}
+  .doc details.toggle>summary::-webkit-details-marker{display:none}
+  .doc details.toggle>summary::before{content:"+";display:inline-block;width:16px;color:var(--faint)}
+  .doc details.toggle[open]>summary::before{content:"−"}
+  .doc details.toggle .pbox{margin:0 12px 12px}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .snav .off{flex:1;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--faint);font-size:14px}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
+  .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
+</style>
+</head>
+<body class="stu">
+<div class="wrap">
+  <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../../index.html#/">홈</a> <span>/</span> <a href="../../index.html#/course">수업 과정</a> <span>/</span> <a href="../agent2-bbjyp.html">AI Agent 2</a> <span>/</span> <b>03차시</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
+    <a class="back" href="../agent2-bbjyp.html">← AI Agent 2 전체</a><br>
+    <span class="d-eyebrow">AI Agent 2 · 03차시</span>
+    <h1 class="d-title">예약 작업</h1>
+    <p class="lead d-lead">매일 · 매주 돌아가는 자동화</p>
+    <p class="goal">Agent 1 07차시에서 아침 브리핑 하나를 예약해 봤습니다. 오늘은 예약 작업을 <b>업무에 쓸 수 있게</b> 만듭니다. 사람이 없는 시간에 도는 지시문은 무엇이 달라야 하는지 배우고, 매일 도는 아침 스크랩과 매주 도는 주간 회고 · 홍보 초안을 걸고, 실패했을 때 알아채는 법과 예약을 관리하는 법까지 갑니다.</p>
+    <div class="tags"><span class="tag">Claude 데스크톱 앱</span><span class="tag src">Gmail · 캘린더 · 카카오톡 커넥터 · 02차시 museum-promo 스킬</span></div>
+  </header>
+  <main class="doc">
+    <nav class="sec-nav"><a href="#s1"><span>1</span>어디서 도나</a><a href="#s2"><span>2</span>맡길 일</a><a href="#s3"><span>3</span>무인 지시문</a><a href="#s4"><span>4</span>매일</a><a href="#s5"><span>5</span>매주</a><a href="#s6"><span>6</span>실패 알아채기</a><a href="#s7"><span>7</span>관리</a><a href="#s8"><span>8</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>뮤지엄 운영자는 아침마다 숏폼 트렌드를 찾아보느라 30분, 금요일마다 이번 주에 뭘 했는지 되짚느라 30분, 목요일마다 홍보 문구를 쓰느라 20분을 씁니다. 02차시에 홍보 문구는 스킬이 됐지만, 여전히 <b>내가 시작해야</b> 돕니다. 오늘은 시작도 맡깁니다. 단, 내가 자는 동안 무언가가 세상에 나가는 일은 만들지 않습니다.</p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. 예약 작업은 어디서 도나</h2><p>"컴퓨터를 꺼도 되나요?"의 답은 무엇을 읽느냐에 따라 갈립니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>예약이 쓰는 것</th><th>도는 곳</th><th>그 시간에 필요한 것</th></tr></thead>
+        <tbody>
+          <tr><td>웹 검색 · 커넥터(메일 · 캘린더 · 카톡 · 업리카)</td><td>Anthropic 클라우드</td><td>없음. 컴퓨터가 꺼져 있어도 돎</td></tr>
+          <tr><td>내 컴퓨터 폴더의 파일</td><td>클라우드 + 내 컴퓨터</td><td><b>데스크톱 앱이 켜져 있고 폴더가 연결돼 있어야</b></td></tr>
+          <tr><td>네이버 블로그 발행 (07차시)</td><td>클라우드 + 내 크롬 확장</td><td>크롬이 켜져 있어야</td></tr>
+        </tbody>
+      </table></div>
+      <p>오늘 실습은 모두 첫째 줄입니다. 커넥터와 웹만 써서, 컴퓨터를 꺼도 돌게 만듭니다. 폴더가 필요한 예약(04차시 가격표 같은)은 그 시간에 컴퓨터가 켜져 있는지부터 따져야 합니다.</p>
+      <div class="callout"><div class="callout-label">예약도 사용량을 씁니다</div><p>예약 작업이 한 번 돌 때마다 내가 직접 시킨 것과 똑같이 사용량이 듭니다. 매시간 도는 예약 몇 개가 하루 사용량을 다 먹을 수도 있습니다. <b>필요한 만큼 드물게</b>가 기본입니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 예약에 맡길 일, 맡기면 안 되는 일</h2><p>01차시 자동화 사다리의 3칸이 오늘입니다. 4칸(내보내기까지)은 되돌리기 쉬운 일만.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>예약 결과가 가는 곳</th><th>예</th><th>판정</th></tr></thead>
+        <tbody>
+          <tr><td>나에게 알림</td><td>카톡 나에게 보내기, 내 메일로 요약</td><td>좋음 — 틀려도 나만 봄</td></tr>
+          <tr><td>초안으로 저장</td><td>Gmail 임시보관함, 업리카 초안, 블로그 임시저장</td><td>좋음 — 내가 보고 보냄</td></tr>
+          <tr><td>팀에게 공유</td><td>팀 채널에 주간 요약</td><td>조심 — 몇 주 지켜본 뒤</td></tr>
+          <tr><td>고객 · 세상에 바로</td><td>고객에게 메일 발송, 인스타 발행</td><td><b>하지 않음</b> — 공개 버튼은 사람</td></tr>
+        </tbody>
+      </table></div>
+      <p>오늘의 원칙은 하나입니다. <b>예약은 "보내기"가 아니라 "준비해 두기"까지.</b> 아침에 일어나면 준비된 것을 내가 보고, 누릅니다.</p>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 무인 지시문 — 아무도 없을 때 읽히는 글</h2><p>대화에서는 Claude가 되물을 수 있습니다. 새벽 7시에는 물어볼 사람이 없습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>대화에서는 괜찮던 것</th><th>예약에서 생기는 일</th><th>무인 지시문에 쓸 것</th></tr></thead>
+        <tbody>
+          <tr><td>"최근 뉴스"</td><td>언제 기준? 어제 것을 또 가져옴</td><td>"실행 시각 기준 지난 24시간"</td></tr>
+          <tr><td>애매하면 되물음</td><td>물을 사람이 없어 멈추거나 마음대로 정함</td><td>"애매하면 가장 보수적으로 고르고, 무엇을 가정했는지 맨 위에 적어"</td></tr>
+          <tr><td>실패하면 화면에 보임</td><td>조용히 실패, 아무도 모름</td><td>"자료를 못 찾으면 '오늘은 없음'이라고 그래도 보내"</td></tr>
+          <tr><td>결과는 대화창에</td><td>아무도 안 봄</td><td>"카톡 나에게 / 임시보관함에" — 받는 곳을 명시</td></tr>
+          <tr><td>"보내 줘"</td><td>새벽에 고객에게 발송</td><td>"보내지 말고 초안으로만"</td></tr>
+        </tbody>
+      </table></div>
+      <div class="pbox"><div class="pbox-label">무인 지시문 틀</div><pre>[무엇을]
+[기간] 실행 시각 기준 지난 ○○
+[자료] 어디에서 (커넥터 · 웹 · 스킬)
+[결과 모양] 몇 줄 · 표 · 맨 위 한 줄 요약
+[받는 곳] 카톡 나에게 / Gmail 임시보관함 / 업리카 초안
+[애매하면] 가장 보수적으로, 가정은 맨 위에 적기
+[없으면] '오늘은 해당 없음'이라도 보내기
+[절대 금지] 다른 사람에게 발송 · 게시 · 삭제</pre></div>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 매일 — 아침 트렌드 스크랩</h2><p>Agent 1의 아침 브리핑을 업무용으로 바꿉니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 지시문 쓰고, 지금 한 번, 그다음 예약</div>
+        <ol class="num-steps">
+          <li><b>지시문 시험</b> — 새 대화(이름 '03차시 아침 스크랩')에서 아래를 그대로 보내 <b>지금 한 번</b> 돌려 봅니다. 예약은 아직 아닙니다.</li>
+          <li><b>다듬기</b> — 카톡으로 온 결과를 보고 한 번에 모아 고칩니다. <span class="meta">예: "3줄 요약을 2줄로, 링크는 맨 아래로"</span></li>
+          <li><b>예약</b> — "지금 이 지시문을 매일 오전 7시 예약 작업으로 만들어 줘. 이름은 '뮤지엄_아침스크랩'."</li>
+          <li><b>지금 실행</b> — 예약이 만들어지면 예약 목록에서 지금 실행(Run now)을 한 번 더 눌러, 예약 쪽에서도 똑같이 오는지 봅니다.</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">아침 스크랩</div><pre>실행 시각 기준 지난 24시간 동안 나온 '숏폼 영상 · 릴스 · 쇼츠' 관련 국내 소식을 웹에서 찾아,
+1인 영상 크리에이터에게 쓸모 있는 것 3개만 골라 줘.
+각 항목: 제목 한 줄 / 왜 나에게 중요한지 한 줄 / 출처 링크
+맨 위에는 '오늘의 한 줄'(셋을 합친 요약) 하나.
+광고성 글 · 출처 없는 글은 빼고, 3개가 안 되면 있는 만큼만. 하나도 없으면 '오늘은 쓸 만한 소식 없음'.
+애매하면 가장 보수적으로 고르고, 가정한 게 있으면 맨 위에 적어.
+결과는 카카오톡 '나에게 보내기'로 보내. 다른 사람에게는 보내지 마.</pre></div>
+        <p><b>확인할 것</b> — 링크를 하나 직접 열어 정말 지난 24시간 안의 글인지 봅니다. 날짜가 오래된 글이 섞이면 "글의 게시일을 확인하고 24시간 밖이면 빼"를 지시문에 더합니다. 예약을 고칠 땐 새로 만들지 말고 <b>그 예약을 수정</b>합니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 매주 — 회고 메일과 홍보 초안</h2><p>매주 도는 예약은 내 데이터(메일 · 일정)와 02차시 스킬을 씁니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 금요일 주간 회고 (임시보관함)</div>
+        <div class="pbox"><div class="pbox-label">주간 회고</div><pre>이번 주(실행 시각 기준 지난 7일) 내 구글 캘린더 일정과 Gmail 보낸편지함 제목을 보고
+'이번 주 한 일' 회고를 써 줘. 메일 본문은 읽지 말고 제목만.
+구성: ① 이번 주 한 일 5줄 이내 ② 미뤄진 것으로 보이는 일 (일정은 있었는데 관련 메일이 없는 것 등, 추측이면 추측이라고)
+③ 다음 주 블로그 글감 3개 — 이번 주 한 일 중 내가 직접 겪은 것에서만
+제목은 '[주간회고] 날짜 범위'로 해서 Gmail 임시보관함에 나에게 보내는 초안으로만 저장해. 보내지 마.</pre></div>
+        <p>대화에서 지금 한 번 돌려 임시보관함을 확인한 뒤 → "매주 금요일 오후 5시 예약 작업으로, 이름은 '뮤지엄_주간회고'."</p>
+        <p><b>확인할 것</b> — Gmail <b>임시보관함</b>에 있고 <b>보낸편지함</b>에는 없나요? 블로그 글감이 내가 실제로 한 일에서 나왔나요? 07차시에 이 글감을 그대로 씁니다.</p>
+      </div>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 목요일 홍보 초안 (02차시 스킬 부르기)</div>
+        <div class="pbox"><div class="pbox-label">스킬을 부르는 예약</div><pre>Gmail에서 지난 7일 안에 내가 나에게 보낸 메일 중 제목이 '[영상메모]'로 시작하는 것을 찾아,
+가장 최근 것 하나의 본문을 영상 메모로 삼아 museum-promo 스킬로 홍보 패키지를 만들어 줘.
+결과는 제목 '[홍보초안] 영상 제목'으로 Gmail 임시보관함에 초안으로만 저장해. 게시 · 발송은 하지 마.
+해당 메일이 없으면 '이번 주 영상 메모 없음'이라는 초안만 남겨.</pre></div>
+        <ol class="num-steps">
+          <li>시험용으로 나에게 메일을 하나 보냅니다. 제목 <code>[영상메모] 세탁소의 오후</code>, 본문엔 02차시 시험 문장의 설명 · 장면 메모.</li>
+          <li>위 지시문을 지금 한 번 → 임시보관함 확인 → "매주 목요일 오전 9시 예약, 이름 '뮤지엄_홍보초안'".</li>
+        </ol>
+        <p><b>확인할 것</b> — 결과에 스킬의 기준(해시태그 5~8개, #뮤지엄 포함)이 지켜졌나요? 지켜졌다면 예약 안에서도 스킬이 불린 겁니다. 이제 운영자의 일은 "목요일에 메모 메일 한 통 보내기 → 금요일 아침 초안 보고 올리기"로 줄었습니다.</p>
+        <p class="note">왜 메일로 메모를 넘기나 — 예약은 클라우드에서 돌아서 내 컴퓨터 폴더를 보려면 앱이 켜져 있어야 합니다. 메일 · 노션 · 구글 드라이브처럼 커넥터로 닿는 곳에 두면 컴퓨터가 꺼져 있어도 됩니다. 10차시에 노션 · 스프레드시트로 넓힙니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. 실패를 알아채는 법</h2><p>자동화의 가장 흔한 실패는 "걸어 놓고 안 보는 것"입니다. 조용히 멈춘 예약은 몇 주 뒤에야 들킵니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>실패 모습</th><th>흔한 원인</th><th>미리 막는 법</th></tr></thead>
+        <tbody>
+          <tr><td>아예 안 옴</td><td>커넥터 인증 만료 · 사용량 한도</td><td>"없음"이라도 매번 보내게 → 안 오면 그 자체가 신호</td></tr>
+          <tr><td>왔는데 내용이 어제와 같음</td><td>기간 지정이 없음</td><td>"실행 시각 기준 지난 ○○"</td></tr>
+          <tr><td>왔는데 엉뚱함</td><td>애매한 지시를 마음대로 해석</td><td>"가정한 것을 맨 위에" → 가정을 보면 원인이 보임</td></tr>
+          <tr><td>스킬 기준이 안 지켜짐</td><td>스킬이 꺼졌거나 이름이 바뀜</td><td>스킬을 이름으로 부르고, 결과에서 기준 한 가지를 매번 눈으로</td></tr>
+          <tr><td>보내면 안 될 곳에 보냄</td><td>"보내 줘"를 씀</td><td>"초안으로만 · 다른 사람에게 보내지 마"를 지시문 끝에 항상</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout--tip"><div class="callout-label">사흘 규칙</div><p>새 예약은 <b>사흘 연속</b>(매주 예약이면 두 번 연속) 결과를 직접 확인한 뒤에 믿습니다. 그전까진 아침마다 "왔나, 맞나"를 봅니다. 사흘이 지나면 매주 한 번, 결과 하나를 골라 링크 · 숫자를 직접 열어 보는 것으로 줄입니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 예약 관리 — 늘어나기 전에 규칙을</h2><p>예약은 쉽게 만들고 쉽게 잊습니다. 석 달 뒤 누가 무엇을 보내는지 모르는 예약 열 개가 남습니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>규칙</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td><b>이름</b>은 [누구 · 무엇]</td><td>뮤지엄_아침스크랩, 뮤지엄_주간회고</td></tr>
+          <tr><td><b>받는 곳</b>은 지시문 끝에 한 줄</td><td>"→ 카톡 나에게", "→ Gmail 임시보관함"</td></tr>
+          <tr><td><b>드물게</b></td><td>매시간보다 매일, 매일보다 매주로 충분한지 먼저</td></tr>
+          <tr><td><b>한 달에 한 번 정리</b></td><td>결과를 안 읽은 예약은 일시정지 → 다음 달에도 안 읽으면 삭제</td></tr>
+          <tr><td><b>고칠 땐 수정</b></td><td>새로 만들면 옛것과 둘이 같이 돎</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 D — 예약 목록 점검표</div>
+        <div class="pbox"><div class="pbox-label">점검</div><pre>지금 내 계정의 예약 작업 목록을 표로 보여 줘.
+열: 이름 / 언제 / 무엇을 / 결과가 가는 곳 / 밖으로 보내는 동작이 있는지(있으면 굵게) / 마지막 실행 결과
+Agent 1 때 만든 예약도 포함해서. 아무것도 바꾸지 마.</pre></div>
+        <p><b>확인할 것</b> — '밖으로 보내는 동작'이 굵게 표시된 예약이 있나요? 그 결과를 지금도 매일 읽고 있나요? 읽지 않는다면 예약 화면에서 일시정지합니다. 오늘 만든 세 개(아침스크랩 · 주간회고 · 홍보초안)는 사흘 규칙 동안 그대로 둡니다.</p>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 01차시 <b>내 후보 카드</b>를 예약으로: 무인 지시문 틀로 지시문을 쓰고 → 지금 한 번 → 예약. 카드의 '성공 기준'("매주 ○요일 ○시에 ○○이 ○○에 있다")이 그대로 예약 시간과 받는 곳이 됩니다. 결과가 밖으로 나가는 업무라면 초안까지만.</div>
+    </section>
+
+    <section class="hub-section" id="s8">
+      <div class="hub-section-head"><h2>8. 정리 · 자주 묻는 질문 · 안 될 때</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>예약은 <b>"보내기"가 아니라 "준비해 두기"</b>까지. 아무도 없을 때 읽히니 기간 · 받는 곳 · 애매할 때 · 없을 때 · 금지를 지시문에 적습니다. 지금 한 번 돌려 보고 예약하고, 사흘 확인한 뒤 믿고, 한 달에 한 번 정리합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>정확히 7시 정각에 오나요?</td><td>몇 분 늦을 수 있습니다. 시간이 꼭 맞아야 하는 일(마감 직전 알림 등)은 여유를 두고 겁니다.</td></tr>
+          <tr><td>휴일은 건너뛰게 할 수 있나요?</td><td>"오늘이 주말 · 공휴일이면 아무것도 하지 말고 끝내"를 지시문 맨 앞에. 요일만이면 예약 자체를 평일로.</td></tr>
+          <tr><td>예약에서 Claude Code 도구도 돌릴 수 있나요?</td><td>폴더가 필요하니 그 시간에 데스크톱 앱이 켜져 있어야 합니다. 04차시 가격표처럼 '리포트까지만 만들고 알림'이 안전합니다.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>예약 메뉴가 없음</td><td>무료 요금제 · 앱이 옛 버전</td><td>요금제 확인, 앱 업데이트</td></tr>
+          <tr><td>아침에 안 옴</td><td>커넥터 인증 만료</td><td>지금 실행 → 실패하면 설정 → 커넥터에서 재연결</td></tr>
+          <tr><td>같은 게 두 번 옴</td><td>고칠 때 새로 만들어 예약이 둘</td><td>예약 목록에서 옛것 삭제</td></tr>
+          <tr><td>임시보관함이 아니라 발송됨</td><td>"보내"라는 말이 지시문에 남음</td><td>즉시 예약 일시정지, 지시문에 "초안으로만 · 발송 금지"</td></tr>
+          <tr><td>어제 소식을 또 가져옴</td><td>기간 지정 없음</td><td>"실행 시각 기준 지난 24시간, 게시일 확인"</td></tr>
+          <tr><td>스킬 기준이 안 지켜짐</td><td>스킬이 꺼짐 · 이름을 안 부름</td><td>설정에서 스킬 켜기, 지시문에 스킬 이름 명시</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 무인 지시문 틀, 예약 3개(뮤지엄_아침스크랩 · 뮤지엄_주간회고 · 뮤지엄_홍보초안)와 첫 실행 결과, 예약 목록 점검표 · 사흘 동안 아침마다 결과 확인하기</div>
+
+    <nav class="snav"><a href="02.html"><small>← 02차시</small>작업지시서 → 스킬</a><a class="nx" href="04.html"><small>04차시 →</small>Claude Code 실전 — 반복 도구 · 웹 배포</a></nav>
+    <div class="d-foot">AI Agent 2 · 03차시</div>
+  </main><script>
+document.querySelectorAll('.pbox').forEach(function(b){
+  var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
+  btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
+    var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done)}else{var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}};
+  b.appendChild(btn);
+});
+</script>
+</div>
+</body>
+</html>

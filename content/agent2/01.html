@@ -1,0 +1,191 @@
+<div class="day-head"><span class="day-num">01차시</span><h3>내 업무 분해하기 — 자동화할 일 고르기</h3></div>
+    <p class="goal">AI Agent 1에서는 일 하나씩 맡기는 법을 배웠습니다. AI Agent 2에서는 <b>내 업무 하나를 끝까지</b> 자동화하고, 홈페이지 · 블로그 · 인스타처럼 밖으로 내보내는 데까지 갑니다. 오늘은 그 출발점입니다. 업무를 단계로 쪼개 단계마다 도구를 배정하고, 점수를 매겨 무엇부터 자동화할지 고릅니다. 오늘 고른 한 가지가 02 · 03차시의 재료이고, 12차시 최종 프로젝트의 후보입니다.</p>
+    <div class="tags"><span class="tag time">이론 35 · 실습 70 · 조절 15</span><span class="tag">Claude 데스크톱 앱</span><span class="tag src">내 업무 3가지 메모 · Gmail · 캘린더 커넥터 (Agent 1 06차시)</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>Agent 2 지도</a><a href="#s2"><span>2</span>준비 점검</a><a href="#s3"><span>3</span>도구 다섯</a><a href="#s4"><span>4</span>업무 분해</a><a href="#s5"><span>5</span>자동화 점수</a><a href="#s6"><span>6</span>자동화 사다리</a><a href="#s7"><span>7</span>내 업무로</a><a href="#s8"><span>8</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>짧은 영상을 만드는 1인 브랜드 <b>뮤지엄(MUSEUM)</b>을 준비하는 사람이 있습니다. 혼자 기획하고, 찍고, 편집하고, 올리고, 홍보하고, 문의에 답하고, 숫자를 봅니다. "AI로 자동화하면 된다"는 말은 많이 들었는데, <b>무엇부터</b> 해야 할지 모릅니다. 다 하려다 아무것도 못 합니다. 오늘은 일을 쪼개서 자동화할 자리와 사람이 남을 자리를 가릅니다.</p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. AI Agent 2 지도 — 무엇이 달라지나</h2><p>Agent 1은 "맡기는 법", Agent 2는 "굴러가게 만드는 법"입니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>AI Agent 1</th><th>AI Agent 2</th></tr></thead>
+        <tbody>
+          <tr><td>단위</td><td>일 하나 (보고서 한 편, 견적 하나)</td><td>업무 하나의 처음부터 끝까지</td></tr>
+          <tr><td>시작</td><td>내가 말할 때</td><td>정해진 때 알아서 (예약)</td></tr>
+          <tr><td>지시</td><td>매번 프롬프트</td><td>작업지시서 → 스킬로 굳힘</td></tr>
+          <tr><td>결과가 가는 곳</td><td>나 · 팀</td><td>세상 (홈페이지 · 블로그 · 인스타 · 영상)</td></tr>
+          <tr><td>사람의 일</td><td>검수</td><td>설계 · 승인 · 공개 전 멈춤</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>묶음</th><th>차시</th><th>무엇을</th></tr></thead>
+        <tbody>
+          <tr><td>굴러가게</td><td>01 · 02 · 03</td><td>업무 분해 → 작업지시서 · 스킬 → 예약 작업</td></tr>
+          <tr><td>내 도구</td><td>04</td><td>Claude Code로 매주 도는 도구, 웹 배포</td></tr>
+          <tr><td>내 브랜드</td><td>05 · 06</td><td>브랜드 인터뷰 → 홈페이지, 검색 노출</td></tr>
+          <tr><td>알리기</td><td>07 · 08 · 09</td><td>블로그 · 인스타 카드뉴스 · 숏폼 영상</td></tr>
+          <tr><td>넓히기</td><td>10 · 11</td><td>Notion · 스프레드시트 연동과 보안, 대량 문서</td></tr>
+          <tr><td>마무리</td><td>12</td><td>에이전트 팀, 최종 프로젝트 발표</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 준비 점검 — Agent 1에서 만든 연결이 살아 있나</h2><p>Agent 2는 연결이 끊겨 있으면 시작부터 막힙니다. 10분만 씁니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 5분 점검</div>
+        <ol class="num-steps">
+          <li><b>요금제</b> — 설정에서 Pro 이상인지. 예약 작업 · Claude Code · 커스텀 커넥터가 모두 유료 기능입니다.</li>
+          <li><b>데스크톱 앱</b> — 최신 버전으로 업데이트. 사이드바에 Code 탭이 보이나.</li>
+          <li><b>커넥터</b> — 새 대화에서 아래를 보냅니다.</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">연결 점검</div><pre>지금 이 대화에서 쓸 수 있는 커넥터를 목록으로 보여 주고,
+Gmail · 구글 캘린더 · 카카오톡이 각각 실제로 동작하는지 읽기만 하는 동작으로 하나씩 확인해 줘.
+(메일은 최근 1통 제목만, 캘린더는 오늘 일정 개수만, 카톡은 연결 여부만)
+아무것도 보내거나 바꾸지 마.</pre></div>
+        <p><b>확인할 것</b> — 셋 다 '동작함'인가요? "인증이 만료됐다"면 설정 → 커넥터에서 다시 연결합니다. 예약 작업이 아침에 안 오는 가장 흔한 이유가 이것입니다. 지금 고쳐 두면 03차시가 편합니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 도구 다섯 — 누가 어떤 일을 잘하나</h2><p>Agent 1에서 하나씩 배운 것을 한 표에 놓습니다. 경쟁이 아니라 분업입니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>도구</th><th>일하는 방식</th><th>잘하는 일</th><th>배운 곳</th></tr></thead>
+        <tbody>
+          <tr><td><b>대화 · Project</b></td><td>주고받으며 다듬기</td><td>기획 · 판단 · 글쓰기 · 아이디어</td><td>Agent 1 02 · 04</td></tr>
+          <tr><td><b>Cowork</b> (대화 + 폴더)</td><td>맡기고 결과 받기</td><td>파일 뭉치 분류 · 정리 · 조립</td><td>Agent 1 03</td></tr>
+          <tr><td><b>Claude Code</b></td><td>도구로 굳히기</td><td>매번 똑같아야 하는 계산 · 변환</td><td>Agent 1 08 · 이번 04</td></tr>
+          <tr><td><b>커넥터 · MCP</b></td><td>바깥 서비스에 손 뻗기</td><td>메일 · 일정 · 카톡 · 블로그 · 인스타</td><td>Agent 1 06 · 07</td></tr>
+          <tr><td><b>예약 작업</b></td><td>정해진 때 알아서 시작</td><td>매일 · 매주 같은 시간에 하는 일</td><td>Agent 1 07 · 이번 03</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>판별 질문</th><th>예라면</th></tr></thead>
+        <tbody>
+          <tr><td>판단 · 대화가 핵심인가?</td><td>대화 · Project (사람이 중간중간 개입)</td></tr>
+          <tr><td>파일 뭉치를 통째로 맡기고 결과만 받고 싶나?</td><td>Cowork</td></tr>
+          <tr><td>매번 똑같은 숫자 계산 · 형식 변환인가?</td><td>Claude Code</td></tr>
+          <tr><td>바깥 서비스에서 읽거나 거기로 보내야 하나?</td><td>+ 커넥터</td></tr>
+          <tr><td>정해진 때 내가 없어도 시작돼야 하나?</td><td>+ 예약 작업</td></tr>
+          <tr><td>최종 판단 · 승인 · 공개 · 돈이 오가나?</td><td><b>사람</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">"매주 한다"만으로는 갈리지 않습니다</div><p>매주 반복되는 게 <b>문서 · 정리</b>면 Cowork나 스킬, <b>숫자 계산</b>이면 Claude Code입니다. Claude에게 매번 계산을 시키면 같은 질문에도 조금씩 다르게 답할 수 있지만, 프로그램으로 굳히면 같은 파일에 늘 같은 결과가 나옵니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>이렇게 고르면</th><th>생기는 일</th></tr></thead>
+        <tbody>
+          <tr><td>판단이 핵심인데 통째로 맡김</td><td>사람이 정할 것까지 AI가 임의로 정함</td></tr>
+          <tr><td>반복되는데 매번 손으로 다시 시킴</td><td>아낄 시간을 그대로 씀</td></tr>
+          <tr><td>한 번뿐인 일에 Claude Code부터</td><td>도구 만드는 시간이 더 걸림</td></tr>
+          <tr><td>공개되는 일을 예약에 통째로</td><td>틀린 글이 내가 자는 동안 세상에 나감</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 업무 분해 — 이름 하나를 단계 여럿으로</h2><p>"인스타 운영"은 자동화할 수 없습니다. "매주 월요일 지난주 게시물 숫자 모으기"는 됩니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>쪼갤 때 볼 것</th><th>예 — 뮤지엄 "새 영상 올리고 알리기"</th></tr></thead>
+        <tbody>
+          <tr><td>무엇이 들어오나 (입력)</td><td>편집 끝난 영상 파일, 장면 메모</td></tr>
+          <tr><td>무엇이 나가나 (출력)</td><td>유튜브 설명란 · 인스타 캡션 · 블로그 글 · 해시태그</td></tr>
+          <tr><td>언제 시작되나 (계기)</td><td>영상이 완성됐을 때 / 매주 목요일</td></tr>
+          <tr><td>어디서 판단이 들어가나</td><td>썸네일 문구, 어떤 장면을 강조할지</td></tr>
+          <tr><td>어디서 밖으로 나가나</td><td>업로드 · 게시 버튼을 누르는 순간</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 뮤지엄 업무 분해하고 도구 배정하기</div>
+        <p>새 대화에서 시작합니다. 대화 이름은 '01차시 업무 분해'.</p>
+        <div class="pbox"><div class="pbox-label">업무 분해</div><pre>내 업무는 '새 영상 올리고 알리기'야.
+업무 설명: 1인 브랜드 뮤지엄을 운영한다. 매주 짧은 영상 1편을 편집해 유튜브 쇼츠와 인스타 릴스에 올리고,
+같은 내용을 블로그 글로도 쓴다. 다음 주 월요일엔 지난주 영상의 조회 · 저장 숫자를 보고 다음 기획에 반영한다.
+
+이 업무를 6~8개 단계로 나누고, 각 단계를 [사람 / 대화 · Project / Cowork / Claude Code / 커넥터 / 예약 작업] 중
+무엇으로 하면 좋을지 표로 정리해 줘. 둘 이상이면 '예약 + 커넥터'처럼 같이 적어.
+열: 단계 / 입력 / 출력 / 담당 / 배정 이유 한 줄 / 밖으로 나가나(예·아니오)
+규칙:
+- 최종 판단 · 승인 · 공개 · 돈이 오가는 단계는 사람
+- '매주 반복'이라는 이유만으로 Claude Code에 넣지 말고, 숫자 계산일 때만
+- 설명에 없는 부분은 지어내지 말고 나에게 물어봐</pre></div>
+        <p><b>확인할 것</b> — 세 가지만 보세요. ① '밖으로 나가나'가 '예'인 줄의 담당에 <b>사람</b>이 있나. ② Claude Code는 숫자 집계 단계에만 갔나. ③ 촬영 · 편집처럼 AI가 못 하는 단계를 AI에게 맡기지 않았나. Claude가 되물으면 아는 만큼 답합니다. 단계 이름은 매번 조금씩 달라도 괜찮습니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 자동화 점수 — 무엇부터 할까</h2><p>쪼갠 단계를 다 자동화할 필요는 없습니다. 효과는 크고 사고는 작은 것부터.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>기준</th><th>1점</th><th>3점</th><th>5점</th></tr></thead>
+        <tbody>
+          <tr><td><b>빈도</b></td><td>한 달에 한 번 이하</td><td>매주</td><td>매일</td></tr>
+          <tr><td><b>1회 시간</b></td><td>5분 이하</td><td>15~30분</td><td>1시간 이상</td></tr>
+          <tr><td><b>규칙성</b> (매번 같은 방식인가)</td><td>매번 다름</td><td>틀은 같고 내용만 다름</td><td>완전히 같음</td></tr>
+          <tr><td><b>안전</b> (틀려도 괜찮나)</td><td>공개 · 돈 · 고객에게 바로</td><td>팀 · 나에게 먼저</td><td>나만 봄, 쉽게 되돌림</td></tr>
+        </tbody>
+      </table></div>
+      <p>네 칸을 더한 점수가 높을수록 먼저 자동화합니다. 안전 점수가 1점인 단계는 총점이 높아도 <b>통째로</b> 맡기지 않습니다. 앞 단계(초안 · 리포트)까지만 자동화하고 마지막은 사람이 누릅니다.</p>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 점수 매기고 하나 고르기</div>
+        <p>실습 B와 같은 대화에서 이어 갑니다.</p>
+        <div class="pbox"><div class="pbox-label">점수표</div><pre>방금 표의 각 단계에 빈도 · 1회 시간 · 규칙성 · 안전을 1~5점으로 매겨서 총점 순으로 다시 정렬해 줘.
+점수 기준: [위 표를 그대로 붙여 넣기]
+빈도와 1회 시간은 내가 말한 것만 쓰고, 모르면 [확인필요]로 두고 나에게 물어봐.
+마지막에 '지금 자동화하기 좋은 1순위'와 '자동화하면 안 되는 단계'를 하나씩 이유와 함께 적어 줘.</pre></div>
+        <p><b>확인할 것</b> — 1순위가 "안전 1점"짜리라면 그대로 받지 말고 "공개 직전까지만 자동화하는 버전으로 1순위를 다시 정해 줘". 대부분 반에서 <b>'영상 홍보 문구 패키지 만들기'</b>(설명란 · 캡션 · 해시태그 초안)가 올라옵니다. 02차시에 이걸로 스킬을 만듭니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. 자동화 사다리 — 한 번에 꼭대기로 가지 않는다</h2><p>사다리는 한 칸씩. 칸마다 사람이 확인하는 자리가 하나씩 줄어드니, 앞 칸에서 충분히 믿을 만해졌을 때 올라갑니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>칸</th><th>모습</th><th>사람이 하는 일</th><th>배우는 곳</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>매번 처음부터 손으로 / 매번 새로 설명</td><td>전부</td><td>—</td></tr>
+          <tr><td>1</td><td>지시문을 저장해 두고 붙여넣기</td><td>시작 · 검수 · 실행</td><td>Agent 1 02</td></tr>
+          <tr><td>2</td><td><b>스킬</b> — "이번 주 홍보 패키지 만들어 줘" 한 마디</td><td>시작 · 검수 · 실행</td><td>02</td></tr>
+          <tr><td>3</td><td><b>예약</b> — 정해진 때 알아서 초안까지</td><td>검수 · 실행</td><td>03</td></tr>
+          <tr><td>4</td><td>예약 + 내보내기까지</td><td>가끔 점검</td><td>되돌리기 쉬운 일만</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">사람이 남는 자리 네 곳</div><p><b>판단</b>(무엇을 강조할지) · <b>승인</b>(이대로 가도 되나) · <b>공개</b>(올리기 · 보내기 버튼) · <b>책임</b>(틀렸을 때 누가 고치나). Agent 2 내내 이 네 곳은 사람에게 남깁니다. 자동화가 잘될수록 이 자리를 빼고 싶어지는데, 그때가 사고가 나는 때입니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 내 업무로 — 자동화 후보 카드</h2><p>뮤지엄은 연습이었습니다. 이제 내 일입니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 D — 내 업무 3개 → 후보 카드 1장</div>
+        <ol class="num-steps">
+          <li><b>업무 3개</b> — 반복되는 내 업무 3개를 업무 이름 + 설명 두 줄로 적습니다. <span class="meta">AI는 내 업무를 모르니 설명 두 줄이 있어야 제대로 쪼갭니다</span></li>
+          <li><b>분해 · 점수</b> — 실습 B · C 프롬프트에서 업무 이름과 설명만 바꿔 셋 다 돌립니다.</li>
+          <li><b>후보 카드</b> — 셋 중 하나를 골라 아래로 정리합니다.</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">후보 카드</div><pre>지금까지 나눈 세 업무 중 '[고른 업무]'를 자동화 후보로 정했어.
+아래 칸으로 '자동화 후보 카드' 한 장을 만들어 줘. 표 하나로.
+- 업무 이름 / 지금 걸리는 시간(주 단위)
+- 자동화할 단계 (사다리 몇 칸까지 갈지)
+- 사람이 남는 단계 (판단 · 승인 · 공개 · 책임 중 무엇)
+- 입력 자료와 그게 지금 어디 있는지
+- 필요한 연결 (커넥터 · 폴더)
+- 틀리면 생기는 일 한 줄
+- 성공 기준 한 줄 (예: 매주 목요일 오전에 초안이 메일함에 있다)
+내가 말하지 않은 숫자는 [확인필요]로.</pre></div>
+        <p><b>확인할 것</b> — '성공 기준'이 눈으로 확인할 수 있는 문장인가요? "편해진다"가 아니라 "매주 ○요일 ○시에 ○○이 ○○에 있다"처럼. 카드는 복사해 메모장에 저장해 둡니다. 02차시에 그대로 씁니다.</p>
+        <div class="practice-prep"><div class="prep-label">준비물</div><ul><li><b>내 업무 3가지 메모</b> <span class="meta">· 업무 이름 + 설명 두 줄씩, 회사 업무가 어렵다면 개인 일(가계부 · 동호회 공지 등)도 좋음</span></li></ul></div>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 커넥터로 반복 업무를 찾아보기. "지난 2주 내 구글 캘린더 일정과 Gmail 보낸편지함 제목만 보고, 반복되는 업무 후보 5개를 뽑아 줘. 횟수 근거를 같이 적고, 추측은 추측이라고 표시해. 메일 본문은 읽지 마." 내가 몰랐던 반복 업무가 나오는지 봅니다.</div>
+    </section>
+
+    <section class="hub-section" id="s8">
+      <div class="hub-section-head"><h2>8. 정리 · 자주 묻는 질문</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>업무 이름은 자동화할 수 없고 <b>단계</b>는 자동화할 수 있습니다. 쪼개서 도구를 배정하고, 빈도 · 시간 · 규칙성 · 안전으로 점수를 매기고, 사다리는 한 칸씩. 판단 · 승인 · 공개 · 책임은 사람에게 남깁니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>점수가 다 비슷하게 나와요</td><td>1회 시간을 실제로 재 보세요. 감으로 쓴 시간은 대개 짧게 적힙니다. 다음 주에 한 번 재고 다시 매기면 갈립니다.</td></tr>
+          <tr><td>회사 자료를 쓰기 어려워요</td><td>후보 카드에는 자료가 '어디 있는지'만 적습니다. 실습은 가짜 자료로 하고, 실제 적용은 회사 규정을 확인한 뒤에.</td></tr>
+          <tr><td>후보를 나중에 바꿔도 되나요?</td><td>됩니다. 12차시 전까지 언제든. 다만 02 · 03차시는 한 후보로 끝까지 가 보는 걸 권합니다.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 연결 점검 결과, 뮤지엄 업무 분해표와 자동화 점수표, 내 업무 3개 분해표, 자동화 후보 카드 1장 · 다음 차시 준비 · 후보 카드의 업무를 실제로 할 때 쓰는 자료나 예전 결과물 1~2개</div>

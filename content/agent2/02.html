@@ -1,0 +1,183 @@
+<div class="day-head"><span class="day-num">02차시</span><h3>작업지시서 → 스킬</h3></div>
+    <p class="goal">01차시에 고른 업무를 <b>사람에게 넘겨도 되는 작업지시서(SOP)</b>로 먼저 씁니다. 그다음 그 지시서를 Claude가 알아서 꺼내 쓰는 <b>스킬</b>로 만듭니다. 매번 긴 프롬프트를 붙여넣던 일이 "이번 주 홍보 패키지 만들어 줘" 한 마디가 됩니다. 마지막엔 같은 것을 Claude Code의 폴더 전용 명령으로도 만들어 봅니다.</p>
+    <div class="tags"><span class="tag time">이론 35 · 실습 70 · 조절 15</span><span class="tag">Claude 데스크톱 앱 (대화 · Code 탭)</span><span class="tag src">01차시 자동화 후보 카드 · 예시 영상 메모</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>어디에 적어 두나</a><a href="#s2"><span>2</span>작업지시서</a><a href="#s3"><span>3</span>지시서 쓰기</a><a href="#s4"><span>4</span>스킬이란</a><a href="#s5"><span>5</span>스킬 만들기</a><a href="#s6"><span>6</span>폴더 전용 명령</a><a href="#s7"><span>7</span>고치기 · 안전</a><a href="#s8"><span>8</span>정리</a></nav>
+
+    <div class="callout"><div class="callout-label">오늘의 가상 상황</div><p>뮤지엄은 매주 영상 한 편을 올립니다. 그때마다 유튜브 설명란, 인스타 캡션, 해시태그, 블로그 글 개요를 씁니다. 지난주엔 Claude에게 잘 시켰는데 이번 주엔 그 프롬프트를 못 찾았고, 새로 쓰니 말투가 달라졌습니다. 해시태그는 30개가 붙어 나왔습니다. 오늘은 <b>"잘된 그 방식"을 파일로 굳힙니다.</b></p></div>
+
+    <section class="hub-section" id="s1">
+      <div class="hub-section-head"><h2>1. 지시를 어디에 적어 두나</h2><p>Agent 1에서 지시를 남기는 곳을 세 군데 배웠습니다. 오늘 네 번째가 더해집니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>적어 두는 곳</th><th>언제 읽히나</th><th>어디서</th><th>어울리는 것</th></tr></thead>
+        <tbody>
+          <tr><td>저장한 지시문 (메모장)</td><td>내가 붙여넣을 때만</td><td>어디든</td><td>가끔 쓰는 프롬프트</td></tr>
+          <tr><td>Project 지침</td><td>그 Project 안 대화마다 항상</td><td>그 Project</td><td>회사 · 브랜드 배경, 말투</td></tr>
+          <tr><td>CLAUDE.md</td><td>그 폴더를 열 때마다 항상</td><td>그 폴더 (Claude Code)</td><td>폴더 규칙 (원본 금지, 저장 위치)</td></tr>
+          <tr><td><b>스킬</b></td><td><b>그 일이 필요할 때만</b></td><td>모든 대화 · Code</td><td>특정 작업의 순서와 기준</td></tr>
+        </tbody>
+      </table></div>
+      <p>지침과 CLAUDE.md는 <b>항상</b> 읽힙니다. 그래서 길어지면 모든 대화가 무거워집니다. 스킬은 평소엔 이름과 한 줄 설명만 보이다가, 그 일이 나오면 그때 본문을 펼쳐 읽습니다. 작업 순서가 긴 일, 여러 Project에서 쓰는 일이 스킬 자리입니다.</p>
+    </section>
+
+    <section class="hub-section" id="s2">
+      <div class="hub-section-head"><h2>2. 작업지시서(SOP) — 신입에게 넘길 수 있게</h2><p>스킬부터 만들지 않습니다. 사람이 읽고 따라 할 수 있는 지시서가 먼저입니다. 사람에게 설명 못 하는 일은 AI에게도 설명 못 합니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>칸</th><th>묻는 것</th><th>뮤지엄 홍보 패키지 예</th></tr></thead>
+        <tbody>
+          <tr><td><b>목적</b></td><td>이걸 왜 하나</td><td>새 영상을 채널마다 맞는 말로 알려 조회 · 저장을 늘린다</td></tr>
+          <tr><td><b>언제</b></td><td>어떤 말 · 상황에서 시작하나</td><td>"홍보 패키지", "영상 올릴 문구" 등을 요청할 때</td></tr>
+          <tr><td><b>입력</b></td><td>무엇을 받아야 시작하나 · 없으면?</td><td>영상 제목 · 한 줄 설명 · 장면 메모. 없으면 먼저 묻는다</td></tr>
+          <tr><td><b>단계</b></td><td>순서대로 무엇을</td><td>핵심 한 문장 → 채널별 문구 → 해시태그 → 블로그 개요 → 점검</td></tr>
+          <tr><td><b>기준</b></td><td>잘된 결과는 어떤 모양</td><td>설명란 3줄 이내, 첫 줄에 핵심 키워드, 해시태그 5~8개</td></tr>
+          <tr><td><b>금지</b></td><td>하면 안 되는 것</td><td>메모에 없는 장소 · 사람 · 숫자 지어내기, 과장 표현</td></tr>
+          <tr><td><b>멈춤</b></td><td>어디서 사람에게 넘기나</td><td>게시 · 업로드는 하지 않는다. 초안까지만</td></tr>
+          <tr><td><b>예시</b></td><td>잘된 결과 하나</td><td>지난주 실제로 올린 문구 (가장 강력한 칸)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout--tip"><div class="callout-label">예시 한 개가 설명 열 줄보다 셉니다</div><p>"차분하고 담백한 말투"라고 열 번 쓰는 것보다, 마음에 들었던 지난 캡션 하나를 붙이는 게 정확합니다. 단, 예시가 하나면 그 문장을 베끼기 쉬우니 "말투만 참고하고 문장은 새로"를 같이 적습니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s3">
+      <div class="hub-section-head"><h2>3. 지시서 쓰기 — Claude가 묻고 내가 답한다</h2><p>빈 칸을 혼자 채우면 빠뜨립니다. 05차시 브랜드 인터뷰와 같은 방식으로 Claude에게 물어보게 합니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 A — 뮤지엄 홍보 패키지 지시서</div>
+        <p>새 대화(이름 '02차시 지시서')에서 시작합니다.</p>
+        <div class="pbox"><div class="pbox-label">지시서 인터뷰</div><pre>'새 영상 홍보 패키지 만들기' 작업지시서(SOP)를 같이 쓰자.
+칸은 목적 / 언제 / 입력 / 단계 / 기준 / 금지 / 멈춤 / 예시 여덟 개야.
+한 번에 하나씩 나에게 묻고, 내 답이 막연하면 예시 2~3개를 보여 주고 고르게 해.
+내가 말하지 않은 기준은 지어내지 마. 여덟 칸이 다 차면 신입이 읽고 바로 따라 할 수 있는 문서로 정리해 줘.</pre></div>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Claude가 물으면</th><th>반 공통 답 (뮤지엄)</th></tr></thead>
+          <tbody>
+            <tr><td>출력은?</td><td>유튜브 쇼츠 설명란, 인스타 릴스 캡션, 해시태그, 블로그 글 개요(소제목 4개)</td></tr>
+            <tr><td>말투는?</td><td>존댓말, 짧고 조용하게. 느낌표 쓰지 않음. 미술관 안내문 같은 톤</td></tr>
+            <tr><td>해시태그는?</td><td>5~8개. #뮤지엄 #일상을전시하다 는 항상, 나머지는 영상 내용에서</td></tr>
+            <tr><td>금지는?</td><td>메모에 없는 장소 · 사람 · 숫자, "역대급 · 꼭 보세요" 같은 과장, 이모지 3개 이상</td></tr>
+            <tr><td>예시는?</td><td>아래 예시 캡션을 붙여넣기</td></tr>
+          </tbody>
+        </table></div>
+        <div class="pbox"><div class="pbox-label">예시 캡션 (수업용)</div><pre>퇴근길 버스 창에 맺힌 빗방울.
+매일 지나치던 장면을 30초 동안만 멈춰 봤습니다.
+오늘의 전시: 창가의 비.
+#뮤지엄 #일상을전시하다 #비오는날 #버스창가 #쇼츠</pre></div>
+        <p><b>확인할 것</b> — 정리된 지시서를 <b>옆 사람에게 보여 주고</b> "이것만 보고 할 수 있겠어요?"라고 물어보세요. 되묻는 게 있으면 그게 빠진 칸입니다. 고쳐 달라고 한 뒤, 완성본을 메모장에 <code>홍보패키지_SOP.md</code>로 저장합니다.</p>
+      </div>
+      <div class="adjust"><b>조절 구간</b> — 빠른 수강생은 01차시 내 후보 카드로 같은 인터뷰를 한 번 더 돌려 <b>내 업무 지시서</b>를 만들기. 칸이 안 맞으면 바꿔도 됩니다 (예: 고객 응대라면 '말투' 대신 '절대 약속하면 안 되는 것').</div>
+    </section>
+
+    <section class="hub-section" id="s4">
+      <div class="hub-section-head"><h2>4. 스킬이란 — 필요할 때 펼쳐 보는 작업지시서</h2><p>스킬은 폴더 하나입니다. 핵심은 그 안의 SKILL.md 파일 하나.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>부분</th><th>내용</th><th>왜 중요한가</th></tr></thead>
+        <tbody>
+          <tr><td><b>name</b></td><td>영어 소문자 · 하이픈 (예: <code>museum-promo</code>)</td><td>부르는 이름</td></tr>
+          <tr><td><b>description</b></td><td>무엇을 하고 <b>언제 쓰는지</b> 한두 문장</td><td>Claude는 평소 이 문장만 보고 꺼낼지 정합니다. 여기가 흐리면 안 불리거나 엉뚱할 때 불립니다</td></tr>
+          <tr><td><b>본문</b></td><td>작업지시서 그대로 (단계 · 기준 · 금지 · 멈춤)</td><td>불린 뒤 읽는 부분</td></tr>
+          <tr><td>참고 파일 (선택)</td><td>예시 모음, 브랜드 규칙, 양식</td><td>필요할 때만 열어 봄. 본문을 짧게 유지</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>description 나쁜 예</th><th>좋은 예</th></tr></thead>
+        <tbody>
+          <tr><td>"홍보 문구를 만드는 스킬"</td><td>"뮤지엄의 새 영상을 올릴 때 유튜브 설명란 · 인스타 캡션 · 해시태그 · 블로그 개요를 한 번에 만든다. '홍보 패키지', '영상 올릴 문구' 요청에 사용."</td></tr>
+          <tr><td>너무 넓음 → 모든 글쓰기에 끼어듦</td><td>무엇 · 언제 · 어떤 말이 들어오면을 적어 좁힘</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="hub-section" id="s5">
+      <div class="hub-section-head"><h2>5. 스킬 만들기 — 지시서를 넘기면 된다</h2><p>파일을 직접 쓸 필요는 없습니다. 지시서를 주고 스킬로 만들어 달라고 합니다.</p></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 B — 지시서 → 스킬 → 새 대화에서 시험</div>
+        <ol class="num-steps">
+          <li><b>만들기</b> — 실습 A의 대화에 이어서 아래를 보냅니다.</li>
+          <li><b>저장</b> — Claude가 저장 카드를 띄우면 내용을 읽고 저장합니다. 파일(.zip)로 주면 내려받아 <b>설정 → 기능(Capabilities) → 스킬</b>에서 올리고 켭니다. <span class="meta">화면 이름은 앱 버전에 따라 조금 다를 수 있음</span></li>
+          <li><b>시험</b> — <b>새 대화</b>를 열고 아래 시험 문장을 보냅니다. 스킬 이름을 말하지 않습니다.</li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">스킬로 만들기</div><pre>방금 정리한 작업지시서를 그대로 스킬로 만들어 줘.
+- name: museum-promo
+- description은 무엇을 하는지와 언제 쓰는지(어떤 요청 문장에서)를 두 문장으로
+- 본문은 지시서 내용을 바꾸지 말고, 예시 캡션은 참고 파일로 따로 빼 줘
+- 마지막 단계에 '게시 · 업로드는 하지 않고 초안만 보여 준다'를 꼭 넣어 줘
+만들기 전에 description 문장을 먼저 보여 줘.</pre></div>
+        <div class="pbox"><div class="pbox-label">시험 — 새 대화</div><pre>이번 주 영상 홍보 패키지 만들어 줘.
+제목: 세탁소의 오후
+한 줄 설명: 동네 세탁소 다리미 김이 오르는 30초
+장면 메모: 다리미 김, 창문 햇빛, 걸려 있는 셔츠들, 라디오 소리</pre></div>
+        <p><b>확인할 것</b></p>
+        <ol class="num-steps">
+          <li>답 위에 스킬을 사용했다는 표시가 나오나 <span class="meta">안 나오면 description이 흐린 것</span></li>
+          <li>해시태그가 5~8개이고 #뮤지엄 #일상을전시하다 가 들어 있나</li>
+          <li>메모에 없는 장소 이름 · 사람 · 숫자가 없나 <span class="meta">"30년 된 세탁소" 같은 문장이 나오면 지어낸 것</span></li>
+          <li>마지막에 "게시하지 않았다 / 초안이다"로 멈추나</li>
+        </ol>
+        <p class="note">거꾸로도 시험합니다. 새 대화에서 "회사 송년회 안내 문구 써 줘" → 뮤지엄 스킬이 <b>안</b> 불려야 정상입니다. 불리면 description이 너무 넓은 것입니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s6">
+      <div class="hub-section-head"><h2>6. Claude Code의 폴더 전용 명령</h2><p>04 · 08차시에서 "이 폴더 전용 명령으로 저장해 줘"가 나옵니다. 같은 스킬을 폴더 안에 두는 방식입니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>앱 스킬 (실습 B)</th><th>폴더 스킬 (오늘 실습 C)</th></tr></thead>
+        <tbody>
+          <tr><td>사는 곳</td><td>내 계정</td><td>그 폴더의 <code>.claude/skills/</code> 안</td></tr>
+          <tr><td>쓰는 곳</td><td>모든 대화 · Code</td><td>그 폴더로 연 Claude Code</td></tr>
+          <tr><td>부르는 법</td><td>말하면 알아서 · 또는 이름으로</td><td><code>/이름</code> 또는 말하면 알아서</td></tr>
+          <tr><td>어울리는 일</td><td>어디서든 쓰는 글쓰기 · 정리</td><td>그 폴더의 파일을 읽고 만드는 일</td></tr>
+          <tr><td>나눠 주기</td><td>스킬 파일 전달</td><td>폴더째 복사하면 같이 감</td></tr>
+        </tbody>
+      </table></div>
+      <div class="practice-card">
+        <div class="practice-title">실습 C — 영상 메모 폴더에 /promo 만들기</div>
+        <ol class="num-steps">
+          <li>바탕화면에 <code>뮤지엄_영상</code> 폴더를 만들고, 메모장으로 <code>세탁소의오후_메모.txt</code>를 만들어 실습 B 시험 문장의 제목 · 설명 · 장면 메모를 붙여 저장합니다.</li>
+          <li>Code 탭 → Local · 이 폴더 · 수동 → 아래를 보냅니다.</li>
+          <li>새 대화에서 <code>/promo 세탁소의오후_메모.txt</code></li>
+        </ol>
+        <div class="pbox"><div class="pbox-label">폴더 전용 명령</div><pre>이 폴더 전용 스킬 promo를 만들어 줘.
+- 내가 /promo 파일이름 으로 부를 때만 실행되게 (알아서 불리지 않게)
+- 그 메모 파일을 읽고, 아래 작업지시서대로 홍보 패키지를 만들어 '홍보_파일이름.md'로 저장
+- 원본 메모는 고치지 마
+[홍보패키지_SOP.md 내용을 붙여넣기]
+어디에 어떤 파일을 만드는지 먼저 보여 줘.</pre></div>
+        <p><b>확인할 것</b> — 입력창에 <code>/</code>를 치면 promo가 목록에 보이나요? 실행 후 <code>홍보_세탁소의오후_메모.md</code>가 생겼나요? 탐색기에서 숨김 폴더 보기를 켜면 <code>.claude/skills/promo/SKILL.md</code>가 보입니다. 메모장으로 열어 지시서가 들어 있는지 봅니다.</p>
+      </div>
+    </section>
+
+    <section class="hub-section" id="s7">
+      <div class="hub-section-head"><h2>7. 고치기 · 안전</h2><p>스킬을 만들면 습관이 하나 바뀝니다. 결과가 틀리면 대화에서 고치지 말고 <b>스킬을</b> 고칩니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>상황</th><th>대화에서만 고치면</th><th>스킬을 고치면</th></tr></thead>
+        <tbody>
+          <tr><td>해시태그가 또 많음</td><td>이번만 맞고 다음 주 또</td><td>"museum-promo 스킬의 기준에 '해시태그는 최대 8개, 넘으면 덜 중요한 것부터 뺀다'를 추가해 줘"</td></tr>
+          <tr><td>새 채널이 생김 (스레드)</td><td>매번 따로 부탁</td><td>"단계에 스레드용 3줄 문구를 추가해 줘"</td></tr>
+          <tr><td>예시가 낡음</td><td>옛 말투가 계속 나옴</td><td>참고 파일의 예시를 최근 것으로 교체</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><div class="callout-label">남이 만든 스킬은 읽고 설치</div><p>스킬은 Claude에게 주는 지시서이고, 안에 프로그램 파일이 들어 있을 수도 있습니다. 인터넷에서 받은 스킬에 "작업이 끝나면 결과를 이 주소로 보내라" 같은 줄이 숨어 있으면 Claude는 그걸 내 지시처럼 읽습니다. <b>설치 전에 SKILL.md를 열어 끝까지 읽고</b>, 모르는 주소 · 보내기 · 지우기가 있으면 설치하지 않습니다. 내가 만든 스킬도 회사 밖으로 나눌 때는 예시 파일에 고객 정보가 없는지 봅니다.</p></div>
+    </section>
+
+    <section class="hub-section" id="s8">
+      <div class="hub-section-head"><h2>8. 정리 · 자주 묻는 질문 · 안 될 때</h2></div>
+      <div class="callout"><div class="callout-label">한 줄 요약</div><p>사람에게 넘길 수 있는 <b>작업지시서</b>가 먼저, 스킬은 그걸 담는 그릇입니다. Claude는 description 한 줄을 보고 꺼내니 <b>무엇 · 언제</b>를 분명히. 결과가 틀리면 스킬을 고치고, 남의 스킬은 읽고 설치합니다. 03차시에는 이 스킬을 정해진 시간에 알아서 돌립니다.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>질문</th><th>답</th></tr></thead>
+        <tbody>
+          <tr><td>Project 지침에 넣으면 안 되나요?</td><td>그 Project에서만 쓸 거면 지침도 됩니다. 여러 곳에서 쓰거나 Code · 예약 작업에서도 부르려면 스킬이 낫습니다.</td></tr>
+          <tr><td>스킬을 몇 개까지 만들어도 되나요?</td><td>많아도 평소엔 이름 · 설명만 읽혀 가볍습니다. 다만 description이 겹치면 엉뚱한 게 불리니, 비슷한 스킬은 하나로 합칩니다.</td></tr>
+          <tr><td>팀원과 같이 쓰려면?</td><td>스킬 파일을 전달하거나, 폴더 스킬이면 폴더째 공유. 조직 요금제라면 관리자가 팀 전체에 배포할 수도 있습니다.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>스킬이 안 불림</td><td>description이 흐림 · 스킬이 꺼져 있음</td><td>설정에서 켜졌는지, description에 '언제 · 어떤 요청 문장' 추가</td></tr>
+          <tr><td>엉뚱한 요청에 불림</td><td>description이 너무 넓음</td><td>대상(뮤지엄 영상)을 description에 명시</td></tr>
+          <tr><td>스킬 메뉴가 안 보임</td><td>코드 실행 · 파일 생성 기능이 꺼짐</td><td>설정 → 기능에서 켜기</td></tr>
+          <tr><td><code>/promo</code>가 목록에 없음</td><td>다른 폴더를 열었거나 새 대화가 아님</td><td>같은 폴더로 새 대화</td></tr>
+          <tr><td>지어낸 사실이 섞임</td><td>금지 칸이 약함</td><td>"메모에 없는 고유명사 · 숫자는 [확인필요]"를 스킬에 추가</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="out"><b>오늘 결과물</b> — 홍보패키지_SOP.md(작업지시서), 앱 스킬 museum-promo(불림 · 안 불림 시험 통과), 뮤지엄_영상 폴더의 /promo 명령과 결과 파일 · (조절) 내 업무 작업지시서</div>
