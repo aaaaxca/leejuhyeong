@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>01차시 · ComfyUI(Stability Matrix) — 설치와 기본 노드·Checkpoint·LoRA · 이주형 클래스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0e0e0f; --panel:#161617; --ink:#ecebe7; --sub:#9b9a96; --faint:#68676a; --line:#262628;
+    --accent:#e6e3dc; --accent-ink:#0e0e0f;
+    --c-plan:#7d7d80; --c-wip:#c29a5c; --c-live:#7fa487; --c-done:#8e9db5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--faint);margin-bottom:14px;letter-spacing:.01em}
+  .crumb a{color:var(--sub);text-decoration:none} .crumb a:hover{color:var(--ink)}
+  .crumb b{color:var(--ink);font-weight:500}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-family:"Noto Serif KR",serif;font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--sub);margin:8px 0 0;font-size:14px}
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;max-width:480px}
+
+  /* 1단계: 세로 카테고리 */
+  .cats{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .ic{display:inline-grid;place-items:center;color:var(--sub)}
+  .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .cat .ic{width:48px;height:48px;padding:12px;border:1px solid var(--line);border-radius:50%;transition:.2s}
+  .cat:hover .ic{color:var(--ink);border-color:var(--sub)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+  .card .ic{width:22px;height:22px}
+  .lead-ic{width:28px;height:28px;margin-bottom:14px;color:var(--sub)}
+  .cat{display:grid;grid-template-columns:64px 1fr auto 24px;align-items:center;gap:20px;text-decoration:none;color:inherit;
+    padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s}
+  .cat:hover{background:var(--panel)}
+  .cat .num{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .cat h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .cat p{margin:4px 0 0;color:var(--sub);font-size:14px}
+  .cat .cnt{font-size:13px;color:var(--sub);white-space:nowrap}
+  .cat .arr{color:var(--faint);transition:transform .2s}
+  .cat:hover .arr{transform:translateX(4px);color:var(--ink)}
+
+  /* 2·3단계 카드 */
+  .grp{margin-bottom:44px}
+  .grp-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .grp-head h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em}
+  .grp-head span{font-size:12px;color:var(--faint)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:168px;color:inherit;text-decoration:none;transition:border-color .2s}
+  a.card:hover{border-color:var(--sub)}
+  .no{font-size:11px;color:var(--faint);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .card h3{font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--sub)}
+  .card .more{font-size:12px;color:var(--faint)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+  .tag{color:var(--sub)}
+  .st{display:inline-flex;align-items:center;gap:6px;color:var(--sub)}
+  .st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st.plan{color:var(--c-plan)} .st.wip{color:var(--c-wip)} .st.live{color:var(--c-live)} .st.done{color:var(--c-done)}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:500;padding:8px 10px;border-radius:4px;
+    border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--sub)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn[aria-disabled=true]{opacity:.35;pointer-events:none}
+  .btn.copy{flex:0 0 auto}
+  .empty{color:var(--sub);font-size:14px;padding:40px;border:1px dashed var(--line);border-radius:6px;text-align:center}
+
+
+  /* 번호 잠금 */
+  .pin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:30;backdrop-filter:blur(2px)}
+  .pin-modal.on{display:flex}
+  .gate{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:22px 24px 12px;width:min(260px,100%);text-align:center;position:relative}
+  .gate h4{margin:0 0 2px;font-size:14px;font-weight:600}
+  .gate .x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--faint);font-size:16px;cursor:pointer}
+  .gate p{color:var(--sub);font-size:12px;margin:0 0 14px}
+  .pins{display:flex;gap:6px;justify-content:center}
+  .pins input{width:140px;height:34px;text-align:center;font:inherit;font-size:14px;letter-spacing:.12em;padding-left:.12em;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);color:var(--ink);outline:none}
+  .pins input:focus{border-color:var(--sub)}
+  .gate .err{color:#d08a7c;font-size:11px;height:16px;margin-top:8px}
+  .shake{animation:sh .35s}
+  @keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .cat .lock{font-size:12px;color:var(--faint)}
+
+  /* 3단계: 과정 상세 */
+  .d-eyebrow{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--sub);border:1px solid var(--line);
+    border-radius:999px;padding:4px 12px;margin-bottom:18px}
+  .d-title{font-size:36px}
+  .d-title .sub{color:var(--sub);font-weight:500}
+  .d-lead{max-width:560px;font-size:15px;line-height:1.75;margin-top:14px}
+  .d-sec{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0 0 18px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:8px;padding:16px 16px 14px;min-height:112px;
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s}
+  .pcard .pno{font-size:11px;color:var(--faint);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+  .pcard h3{margin:0;font-size:15px;font-weight:600}
+  .pcard .ps{margin-top:auto;font-size:12px;color:var(--faint)}
+  .pcard.ready{border-style:dashed;background:transparent}
+  .pcard.ready h3{color:var(--sub);font-weight:500}
+  .pcard.sample{opacity:.55}
+  a.pcard:hover{border-color:var(--sub)}
+  .pcard .row{margin-top:auto}
+  .pcard .btn{font-size:12px;padding:6px 8px}
+  .d-foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+  @media (max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .pgrid{grid-template-columns:1fr} .d-title{font-size:27px} }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 72px} h1{font-size:24px}
+    .cat{grid-template-columns:40px 1fr 16px;gap:12px;padding:24px 4px} .cat .ic{width:40px;height:40px;padding:10px} .cat .cnt{display:none} .cat h2{font-size:18px}
+  }
+
+  .stu header{margin-bottom:40px}
+  a.pcard{cursor:pointer}
+  a.pcard .ps{color:var(--sub)}
+  .notice{color:var(--sub);font-size:14px;padding:32px;border:1px dashed var(--line);border-radius:8px;text-align:center}
+
+  .meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:13px;color:var(--sub)}
+  .meta-row span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--faint);margin:0 8px 2px 0;vertical-align:middle}
+  .phase{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;font-size:12px;color:var(--sub)}
+  .phase span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+  .doc{font-size:15px;line-height:1.8;word-break:keep-all}
+  .doc p{margin:0 0 1em} .doc ul{margin:0 0 1em;padding-left:1.2em} .doc li{margin-bottom:.4em}
+  .doc b,.doc strong{color:var(--ink);font-weight:600}
+  .doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:.1em .4em}
+  .hub-section{margin:56px 0 0}
+  .hub-section-head{margin-bottom:16px}
+  .hub-section-head h2{font-family:"Noto Serif KR",serif;font-size:20px;font-weight:500;margin:0}
+  .hub-section-head p{margin:6px 0 0;color:var(--sub);font-size:14px}
+  .table-scroll{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px}
+  .doc table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  .doc th,.doc td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .doc th{background:var(--panel);font-weight:600;color:var(--sub);font-size:13px;white-space:nowrap}
+  .doc tbody tr:last-child td{border-bottom:none}
+  .doc .ok{color:var(--c-live);font-weight:600}
+  .callout{border:1px solid var(--line);border-left:2px solid var(--sub);background:var(--panel);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .callout-label{font-weight:600;margin-bottom:6px}
+  .callout--tip{border-left-color:var(--c-done)} .callout--tip .callout-label{color:var(--c-done)}
+  .callout--warning{border-left-color:#d08a7c}
+  .goal{font-size:15px;color:var(--sub);max-width:640px;line-height:1.75;margin:14px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tags .tag{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .tags .tag.time{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc h4{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin:0 0 10px}
+  .practice-card{border:1px solid var(--line);border-left:3px solid var(--c-wip);border-radius:8px;background:var(--panel);padding:18px 20px;margin:16px 0}
+  .practice-title{font-weight:600;font-size:15px;margin:0 0 8px;color:var(--c-wip)}
+  .practice-card>p{margin:0;font-size:14px;color:var(--sub)}
+  .practice-prep{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:13px}
+  .practice-prep .prep-label{font-weight:600;margin-bottom:4px;color:var(--sub)}
+  .practice-prep ul{list-style:none;padding:0;margin:0} .practice-prep li{margin:0 0 .2em}
+  .practice-prep .meta{display:inline;color:var(--faint);border:0;padding:0;margin:0;font-size:inherit}
+  .adjust,.out{border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--sub)}
+  .adjust{border:1px dashed var(--line)}
+  .out{background:var(--panel);border:1px solid var(--line)}
+  .doc .timeline{list-style:none;margin:20px 0 8px;padding:0 0 0 26px;position:relative}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .doc .timeline li{position:relative;margin:0 0 30px}
+  .timeline li:last-child{margin-bottom:0}
+  .timeline li::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-wip);box-shadow:0 0 0 4px var(--bg,#fff)}
+  .tl-year{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600;color:var(--c-wip);letter-spacing:.02em}
+  .tl-title{display:block;font-weight:600;color:var(--ink);font-size:15.5px;margin:6px 0 6px}
+  .timeline p{margin:0;color:var(--sub);font-size:14.5px}
+  .concept-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px;align-items:center;margin:20px 0 28px}
+  .concept-list{display:flex;flex-direction:column;gap:8px}
+  .concept-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:10px 14px}
+  .concept-card:last-child{border-color:color-mix(in srgb,var(--c-wip) 45%,var(--line))}
+  .cc-name{font-weight:600;color:var(--ink);font-size:15px}
+  .concept-card:last-child .cc-name{color:var(--c-wip)}
+  .cc-name small{font-weight:400;color:var(--faint);font-size:12px;margin-left:4px}
+  .concept-card p{margin:3px 0 4px;font-size:13.5px;color:var(--sub);line-height:1.6}
+  .cc-ex{font-size:12.5px;color:var(--faint)}
+  @media (max-width:720px){.concept-grid{grid-template-columns:1fr}.concept-grid figure{max-width:360px;margin:0 auto}}
+  .doc ol.steps{margin:12px 0 0;padding-left:1.3em;font-size:14px;color:var(--sub)}
+  .doc ol.steps li{margin-bottom:.55em}
+  .doc ol.steps b{color:var(--ink)}
+  .sec-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:22px 0 8px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .sec-nav a{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 4px;background:var(--panel);white-space:nowrap;flex-shrink:0}
+  .sec-nav a:hover{color:var(--ink);border-color:var(--sub)}
+  .sec-nav a span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .doc h2.sec-head{display:flex;align-items:center;gap:12px;font-family:"Noto Serif KR",serif;font-size:21px;font-weight:500;color:var(--ink);margin:64px 0 16px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:20px}
+  .doc .sec-nav + h2.sec-head{border-top:0;padding-top:0;margin-top:44px}
+  .sec-num{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:14px;font-weight:600;color:var(--c-wip);border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);background:color-mix(in srgb,var(--c-wip) 10%,transparent)}
+  .dl-btn{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:12.5px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:6px;padding:3px 10px;vertical-align:middle}
+  .dl-btn::before{content:"↓"}
+  .dl-btn:hover{background:color-mix(in srgb,var(--c-wip) 14%,transparent)}
+  .files-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;font-weight:600;color:var(--c-wip);text-decoration:none;border:1px solid color-mix(in srgb,var(--c-wip) 55%,transparent);border-radius:8px;padding:9px 16px;background:color-mix(in srgb,var(--c-wip) 8%,transparent)}
+  .files-btn:hover{background:color-mix(in srgb,var(--c-wip) 16%,transparent)}
+  .prep-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 16px;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel) 70%,transparent);font-size:14px}
+  .pb-label{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--sub);margin-right:2px}
+  .pb-label::before{content:"";width:15px;height:15px;background:var(--sub);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pb-label::after{content:":";margin-left:-3px}
+  .pb-item{display:inline-flex;align-items:baseline;gap:6px}
+  .pb-num{color:var(--ink);font-weight:600}
+  .pb-item b{color:var(--ink);font-weight:600}
+  .pb-item small{color:var(--faint);font-size:12px}
+  .pb-sep{color:var(--faint)}
+  .doc .hl,.doc b.hl,.doc code.hl{color:var(--c-wip)}
+  .doc code.hl{border-color:color-mix(in srgb,var(--c-wip) 40%,transparent)}
+  .doc ol.num-steps{list-style:none;counter-reset:ns;margin:8px 0 12px;padding:0}
+  .doc ol.num-steps>li{counter-increment:ns;position:relative;padding:6px 0 6px 52px;font-size:14.5px;color:var(--sub);line-height:1.7}
+  .doc ol.num-steps>li::before{content:counter(ns,decimal-leading-zero);position:absolute;left:0;top:6px;width:30px;padding-right:10px;border-right:1px solid var(--line);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.95;color:var(--faint);text-align:left}
+  .doc ol.num-steps b{color:var(--ink)}
+  .doc ol.sub-steps{list-style:none;counter-reset:ss;margin:8px 0 6px;padding:0}
+  .doc ol.sub-steps li{counter-increment:ss;position:relative;padding:3px 0 3px 26px;font-size:14px}
+  .doc ol.sub-steps li::before{content:counter(ss) ")";position:absolute;left:4px;color:var(--faint);font-size:12.5px}
+  .doc ol.num-steps .meta{display:block;font-size:12.5px;color:var(--faint);margin-top:4px;border:0;padding:0}
+  .step-group{margin:18px 0 4px;font-size:12.5px;font-weight:600;letter-spacing:.08em;color:var(--faint);padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .doc p.note{font-size:13px;color:var(--faint);margin:2px 0 14px}
+  .duo-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .duo-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
+  .duo-title{font-weight:600;color:var(--c-wip);margin-bottom:6px}
+  .duo-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+  .duo-card p.duo-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  @media (max-width:640px){.duo-cards{grid-template-columns:1fr}}
+  .pbox{position:relative;margin:10px 0 12px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 80%,black)}
+  .pbox-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);padding:8px 14px 0}
+  .pbox pre{margin:0;padding:10px 70px 12px 14px;white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:14px;line-height:1.75;color:var(--ink)}
+  .pbox-copy{position:absolute;top:7px;right:8px;font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+  .pbox-copy:hover{color:var(--ink);border-color:var(--sub)}
+  .pbox-copy.ok{color:var(--c-wip);border-color:color-mix(in srgb,var(--c-wip) 50%,transparent)}
+  .pbox .nc{color:var(--faint);font-size:12.5px;margin-left:6px;user-select:none}
+  .result-box{margin:-4px 0 16px;border-left:2px solid var(--line);padding:4px 0 4px 16px}
+  .result-label{font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:6px}
+  .result-box p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.75}
+  .doc details.toggle{margin:10px 0 4px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+  .doc details.toggle>summary{cursor:pointer;padding:9px 14px;font-size:13.5px;color:var(--sub);list-style:none}
+  .doc details.toggle>summary::-webkit-details-marker{display:none}
+  .doc details.toggle>summary::before{content:"+";display:inline-block;width:16px;color:var(--faint)}
+  .doc details.toggle[open]>summary::before{content:"−"}
+  .doc details.toggle .pbox{margin:0 12px 12px}
+  .snav{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+  .snav a{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);font-size:14px}
+  .snav a:hover{border-color:var(--sub)}
+  .snav small{display:block;font-size:11px;color:var(--faint);letter-spacing:.08em;margin-bottom:2px}
+  .snav .nx{text-align:right}
+  .snav .off{flex:1;border:1px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--faint);font-size:14px}
+  .back{display:inline-block;font-size:13px;color:var(--sub);text-decoration:none;margin-bottom:18px}
+  .back:hover{color:var(--ink)}
+
+  .tcrumb{display:none} .tcrumb.on{display:flex} .tcrumb.on~.back,.tcrumb.on~.back+br{display:none}
+</style>
+</head>
+<body class="stu">
+<div class="wrap">
+  <header>
+    <nav class="crumb tcrumb" id="tbar"><a href="../../index.html#/">홈</a> <span>/</span> <a href="../../index.html#/course">수업 과정</a> <span>/</span> <a href="../maya7-vtaxa.html">Maya 7</a> <span>/</span> <b>01차시</b></nav><script>try{if(sessionStorage.getItem("hub-ok")==="1")document.getElementById("tbar").classList.add("on")}catch(e){}</script>
+    <a class="back" href="../maya7-vtaxa.html">← Maya 7 전체</a><br>
+    <span class="d-eyebrow">Maya 7 · 01차시</span>
+    <h1 class="d-title">ComfyUI(Stability Matrix)</h1>
+    <p class="lead d-lead">설치와 기본 노드·Checkpoint·LoRA</p>
+    <p class="goal">Stability Matrix로 ComfyUI를 설치하고, 기본 노드 흐름으로 이미지를 만든 뒤 Checkpoint·프롬프트·이미지·LoRA를 바꿔 가며 결과를 비교합니다.</p>
+    <div class="tags"><span class="tag src">Stability Matrix · ComfyUI · CivitAI · ChatGPT</span></div>
+  </header>
+  <main class="doc">
+    <h4>이론</h4>
+    <ul>
+      <li><b>Stable Diffusion</b> — 텍스트를 입력하면 AI가 이미지를 만들어 주는 생성형 AI 모델</li>
+      <li><b>Stability Matrix</b> — Stable Diffusion 관련 프로그램을 설치·관리하는 런처(매니저)</li>
+      <li><b>ComfyUI</b> — 이미지 생성 과정을 <b>노드</b>로 연결해 파이프라인을 직접 만드는 툴</li>
+      <li>기본 흐름: <b>Checkpoint → Prompt(긍정/부정) → Empty Latent Image(잠재 공간) → KSampler(섞기) → VAE Decode(수치를 이미지로) → Save Image(결과)</b></li>
+    </ul>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 A — 설치</div>
+      <ol class="num-steps">
+        <li><b>Python</b> 검색 → Downloads → Windows → 최신 Windows installer(64-bit) 설치. <b>Add python.exe to PATH 체크</b></li>
+        <li><b>Git</b> 검색 → Downloads → Windows → Click here to download → 설치. 마지막에 View Release Notes 체크 해제 → Finish</li>
+        <li><b>Stability Matrix</b> 검색 → Lykos AI → Downloads → Windows → 설치할 위치에 압축 풀기(D 드라이브도 가능)</li>
+        <li><code>StabilityMatrix.exe</code> 실행 → <b>Portable Mode</b>(파일이 있는 경로에 설치) → Share Analytics → <b>ComfyUI</b> → Download → 기다리면 Packages 목록에 ComfyUI 표시</li>
+      </ol>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Stability Matrix 메뉴</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><td>Packages</td><td>설치된 AI 생성 패키지 목록 관리</td></tr>
+          <tr><td>Inference</td><td>모델을 실행해 실제 이미지·결과물 생성</td></tr>
+          <tr><td>Checkpoint Manager</td><td>다운받은 체크포인트 모델 관리</td></tr>
+          <tr><td>Model Browser</td><td>모델 다운로드(CivitAI 연동) — Checkpoint(메인), LoRA·VAE(서브), ControlNet(포즈 잡기), Upscaler(해상도 높이기) / Hugging Face(AI 연구용 모델 저장소, ControlNet·IPAdapter에서 사용)</td></tr>
+          <tr><td>Output Browser</td><td>AI가 생성한 결과 이미지 확인·관리</td></tr>
+          <tr><td>Downloads</td><td>다운로드 목록</td></tr>
+        </tbody>
+      </table></div>
+      <p>Manager 플러그인은 업데이트 후 따로 받을 필요가 없어졌습니다.</p>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 B — 실행하고 오류 확인하기</div>
+      <ol class="num-steps">
+        <li><b>Launch</b> → 브라우저에서 <code>http://127.0.0.1:8188</code> 열기</li>
+        <li>왼쪽 위 <b>Settings</b> → Comfy: 언어 / LiteGraph: 연결선 모양 <b>Linear</b></li>
+        <li>Unsaved Workflow 탭을 닫으면 기본 노드가 나타남 → <b>Run</b></li>
+        <li>Checkpoint 모델이 없어서 <b>오류</b>가 나는 것을 확인</li>
+      </ol>
+    </div>
+
+    <h4>누락된 모델 — 오류가 나는 이유</h4>
+    <ul>
+      <li>워크플로를 열면 <b>Setup required · Missing Models</b> 창이 뜬다. 워크플로에 필요한 모델이 컴퓨터에 없다는 뜻이고, 없으면 실행 시 오류가 난다</li>
+      <li>창의 <b>Download</b>(또는 Download all)로 받으면 맞는 폴더에 저장된다. 옆의 링크 아이콘은 주소 복사, 과녁 아이콘은 그 모델을 쓰는 노드로 이동(다른 모델로 바꿔 끼울 때)</li>
+    </ul>
+    <div class="table-scroll"><table>
+      <thead><tr><th>모델</th><th>역할</th><th>비유</th></tr></thead>
+      <tbody>
+        <tr><td>Text Encoder (CLIP) — 예: qwen_3_4b</td><td>프롬프트를 AI가 이해하는 숫자로 바꿈</td><td>통역사</td></tr>
+        <tr><td>Diffusion Model — 예: z_image_turbo</td><td>그 숫자를 보고 노이즈에서 그림을 그림</td><td>화가</td></tr>
+        <tr><td>VAE — 예: ae</td><td>AI 내부의 압축된 그림을 사람이 보는 이미지로 바꿈</td><td>인화기</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><div class="callout-label">왜 이렇게 무거운가</div><p>누락된 모델을 받으면 되지만 용량이 매우 큽니다(Z-Image Turbo는 약 19GB). 최신 모델이라 그렇습니다. 옛날 DreamShaper(SD1.5)는 세 개가 합쳐져 있어도 2GB 정도였는데, Z-Image는 통역사부터 언어 모델(Qwen) 하나를 통째로 씁니다. 그래서 긴 문장이나 한글 프롬프트를 훨씬 잘 알아듣고 품질도 좋지만, 그만큼 무겁습니다.</p></div>
+    <ul>
+      <li><b>Load Checkpoint</b> 하나로 불러오는 모델(SD1.5·SDXL) = 모델·CLIP·VAE가 파일 하나에 합쳐진 것</li>
+      <li><b>Load Diffusion Model / Load CLIP / Load VAE</b> 셋으로 나뉜 모델(Z-Image·Flux 등) = 세 파일을 따로 배포하는 최신 모델</li>
+    </ul>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 C — Checkpoint 받아서 실행하기</div>
+      <ol class="num-steps">
+        <li><b>CivitAI</b> 홈페이지 → Models → Filter: <b>All Time · Checkpoint · SD 1.5</b></li>
+        <li><b>DreamShaper</b>, <b>Realistic Vision V6.0</b> 다운로드</li>
+        <li><code>C:\Users\사용자이름\Documents\ComfyUI\models\checkpoints</code> 경로에 넣기</li>
+        <li>ComfyUI 화면에서 <b>R키</b>로 새로고침(목록에 안 보이면 Custom Node Manager → Restart 또는 ComfyUI 재실행)</li>
+        <li>Load Checkpoint에서 <b>DreamShaper → Run</b>, <b>Realistic → Run</b> 해서 비교. Save Image 노드는 Ctrl+C → V로 복제, 노드 연결·해제 연습</li>
+      </ol>
+      <div class="table-scroll"><table>
+        <thead><tr><th></th><th>DreamShaper</th><th>Realistic Vision V6.0</th></tr></thead>
+        <tbody>
+          <tr><td>잘하는 것</td><td>만능형 — 일러스트·판타지·반실사</td><td>실사 전문 — 사진 같은 인물·피부·조명</td></tr>
+          <tr><td>느낌</td><td>깔끔하고 그림 같은 이미지</td><td>카메라로 찍은 듯한 사진</td></tr>
+        </tbody>
+      </table></div>
+      <p>Realistic Vision에서 <b>noVAE</b> 버전을 받으면 색이 뿌옇게 나올 수 있습니다. VAE가 포함된 버전을 받으세요.</p>
+    </div>
+
+    <h4>노드 설정</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>노드 · 항목</th><th>값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>CLIP Text Encode</td><td>긍정 / 부정</td><td>긍정 → 1번(positive), 부정 → 2번(negative)</td></tr>
+        <tr><td>KSampler · Seed</td><td></td><td>경우의 수</td></tr>
+        <tr><td>KSampler · control after generate</td><td>fixed</td><td>fixed: 지정된 시드로 계산 / randomize: 랜덤. fixed에서 설정값을 바꾸면 구도·느낌은 비슷하고, 프롬프트를 바꾸면 완전히 달라진다</td></tr>
+        <tr><td>KSampler · Steps</td><td>30</td><td>보통 20~50. 높을수록 세부 묘사, 시간 증가</td></tr>
+        <tr><td>KSampler · cfg</td><td>7.5</td><td>프롬프트 반영 강도. 보통 7~10</td></tr>
+        <tr><td>KSampler · sampler_name</td><td>dpmpp_2m / dpm_sde</td><td>dpmpp_2m: 세밀·고품질 / dpm_sde: 안정적·자연스러움</td></tr>
+        <tr><td>KSampler · scheduler</td><td>karras</td><td>노이즈를 줄여 가는 방식, 고품질 출력</td></tr>
+        <tr><td>KSampler · denoise</td><td>0.9</td><td>높을수록 AI가, 낮을수록 입력을 따라감. 빈 Latent에서 0.3 이하면 이미지가 잘 안 나온다</td></tr>
+        <tr><td>Empty Latent Image</td><td>512</td><td>8의 배수(512·768·1024…)로 넣어야 오류가 덜 난다. 작게 만든 뒤 Upscale</td></tr>
+        <tr><td>Save Image · filename_prefix</td><td>bottle</td><td><code>image/bottle</code>로 쓰면 image 폴더 안에 저장. 뒤의 _00001은 사진 번호</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout callout--tip"><div class="callout-label">결과 이미지 위치</div><p>Assets 패널에서 확인하고, 파일은 <code>C:\Users\사용자이름\Documents\ComfyUI\output</code>에 있습니다. Save Image 노드에 보이는 이미지는 껐다 켜면 사라집니다. CivitAI에서 마음에 드는 결과물을 열면 오른쪽에 Prompt와 KSampler 수치(Other metadata)가 나와 그대로 참고할 수 있습니다.</p></div>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 D — 프롬프트 다듬기</div>
+      <p>Checkpoint는 <b>Realistic</b>, Empty Latent는 <b>W 512 · H 768</b>.</p>
+      <ol class="num-steps">
+        <li>일반 프롬프트 — 긍정: <code>masterpiece, best quality, a handsome young man, forest, cloth</code> / 부정: <code>text, watermark, low quality</code></li>
+        <li><b>ChatGPT</b>에 위 프롬프트에 어울리는 옷·카메라 앵글을 물어보고 나온 단어를 적용</li>
+        <li>Fixed는 같은 인물로 분위기만, Randomize는 다른 인물로 바뀌는 것 비교</li>
+      </ol>
+      <p>순서: <b>퀄리티 → 피사체 → 장소 → 복장 → 카메라 → 조명 → 색감</b></p>
+      <div class="table-scroll"><table>
+        <tbody>
+          <tr><td>퀄리티</td><td><code>masterpiece, best quality, ultra detailed, photorealistic</code></td></tr>
+          <tr><td>피사체 + 장소</td><td><code>handsome young man in forest</code></td></tr>
+          <tr><td>복장</td><td><code>earth tone forest ranger outfit, realistic fabric detail</code></td></tr>
+          <tr><td>카메라</td><td><code>medium shot, three-quarter view, 85mm lens, shallow depth of field</code> — 허리 위·45도, 인물 왜곡이 거의 없는 화보용</td></tr>
+          <tr><td>조명</td><td><code>soft sunlight through trees, warm natural lighting</code></td></tr>
+          <tr><td>색감</td><td><code>cinematic color grading</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 E — 이미지로 Latent 지정하기</div>
+      <ol class="num-steps">
+        <li><b>Load Image</b> — 원하는 분위기의 사진 불러오기</li>
+        <li><b>Resize</b>(comfyui_essentials, Stability Matrix → Extension에서 설치) — 8의 배수 크기, Method: Pad(비율이 안 맞는 여백을 채움) / Crop(원본 비율 유지), Multiple_of: 2</li>
+        <li><b>VAE Encode</b> — Load Image(IMAGE) → pixels, Load Checkpoint(VAE) → vae, LATENT → KSampler(latent_image)</li>
+        <li>KSampler <b>denoise</b> 조절 — 낮을수록 원본 이미지와 비슷, 높을수록 프롬프트 쪽 특징만 가져감</li>
+        <li>왼쪽 위 아이콘 → File → <b>Save</b>(덮어쓰기) / <b>Save As</b>(다른 이름, 예: Basic)</li>
+      </ol>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-title">실습 F — LoRA 적용하기</div>
+      <p>프롬프트만으로는 표현에 한계가 있습니다. 학습된 LoRA 모델로 디테일을 더합니다.</p>
+      <ol class="num-steps">
+        <li>CivitAI에서 받기 — 디테일: Add More Details / 빛: Light Control - Back Front(+ 정면, − 후면) / 손: Hand Detail / 얼굴: Real Face 계열</li>
+        <li><code>C:\Data\Models\Lora</code>로 옮기기(이름 변경 가능) → 재실행</li>
+        <li>Checkpoint 관련 노드 전체 선택 → Ctrl+C → V로 복제 → <b>Group</b>으로 Checkpoint / Lora 나누기(Edit Group에서 색·크기)</li>
+        <li><b>Load LoRA</b> 노드 — Checkpoint → LoRA, LoRA → KSampler·CLIP 연결. strength_model(이미지 강도) 0.5, strength_clip(프롬프트 해석 강도) 0.5</li>
+        <li><b>Image Compare</b> 노드(Stability Matrix → Extension에서 설치) — VAE Decode 두 개를 연결해 A/B 비교</li>
+      </ol>
+      <div class="table-scroll"><table>
+        <thead><tr><th>LoRA</th><th>strength_model</th><th>strength_clip</th></tr></thead>
+        <tbody>
+          <tr><td>more_detail</td><td>0.8</td><td>1</td></tr>
+          <tr><td>ff_v3 (Real_Face)</td><td>0.7</td><td>1</td></tr>
+          <tr><td>Detailed_Hands</td><td>0.8</td><td>0.8</td></tr>
+          <tr><td>Backlight_Slider</td><td>-3 (−5 ~ +5)</td><td>1</td></tr>
+        </tbody>
+      </table></div>
+      <p>KSampler Steps를 40~50으로 올리면 더 세밀해집니다. 쓰지 않는 노드는 <b>Bypass</b>로 건너뜁니다.</p>
+    </div>
+
+    <div class="adjust"><b>조절 구간</b> — 설치·모델 다운로드가 늦는 PC 돕기 / 빠른 수강생은 Seed·Steps·cfg를 바꿔 같은 프롬프트 결과 비교</div>
+    <div class="out"><b>오늘 결과물</b> — ComfyUI 설치, Basic 워크플로 저장, DreamShaper·Realistic 비교 이미지, LoRA 적용 전후 비교 이미지</div>
+
+    <nav class="snav"><span style=flex:1></span><span class="nx off"><small>02차시 · 준비 중</small>ControlNet · IPAdapter 기초 실습</span></nav>
+    <div class="d-foot">Maya 7 · 01차시</div>
+  </main>
+</div>
+</body>
+</html>
