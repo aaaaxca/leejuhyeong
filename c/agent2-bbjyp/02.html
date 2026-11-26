@@ -448,7 +448,7 @@
     <nav class="snav"><a href="01.html"><small>← 01차시</small>내 업무 분해하기</a><a class="nx" href="03.html"><small>03차시 →</small>예약 작업</a></nav>
     <div class="d-foot">AI Agent 2 · 02차시</div>
   </main><script>
-document.querySelectorAll('.pbox').forEach(function(b){
+document.querySelectorAll('.pbox:not(.pbox--ex)').forEach(function(b){
   var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
   btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
     var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};

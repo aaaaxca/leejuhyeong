@@ -495,7 +495,7 @@ CLAUDE.md의 브랜드 규칙을 따르고, 카드마다 1080×1350 크기로.
     <nav class="snav"><a href="07.html"><small>← 07차시</small>블로그 자동화 (업리카)</a><span class="nx off"><small>09차시 · 준비 중</small>숏폼 · 유튜브 영상 자동화</span></nav>
     <div class="d-foot">AI Agent 2 · 08차시</div>
   </main><script>
-document.querySelectorAll('.pbox').forEach(function(b){
+document.querySelectorAll('.pbox:not(.pbox--ex)').forEach(function(b){
   var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
   btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \t]+$/gm,'');
     var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};

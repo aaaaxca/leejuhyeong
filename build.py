@@ -283,7 +283,7 @@ def course_with_content(it, folder):
     return shell(it["title"], inner)
 
 COPY_JS = """<script>
-document.querySelectorAll('.pbox').forEach(function(b){
+document.querySelectorAll('.pbox:not(.pbox--ex)').forEach(function(b){
   var btn=document.createElement('button');btn.className='pbox-copy';btn.type='button';btn.textContent='복사';
   btn.onclick=function(){var c=b.querySelector('pre').cloneNode(true);c.querySelectorAll('.nc').forEach(function(n){n.remove()});var txt=c.textContent.replace(/[ \\t]+$/gm,'');
     var done=function(){btn.textContent='복사됨';btn.classList.add('ok');setTimeout(function(){btn.textContent='복사';btn.classList.remove('ok')},1500)};
