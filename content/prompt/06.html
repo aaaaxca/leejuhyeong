@@ -1,0 +1,305 @@
+<div class="day-head"><span class="day-num">06차시</span><h3>Midjourney 파라미터</h3></div>
+    <p class="goal">글로 정하기 어려운 비율, 스타일화 정도, 다양성, 버전 같은 것을 먼저 설정 패널로 조절해 보고, 같은 일을 프롬프트 끝의 파라미터로 하는 방법을 배웁니다. 값만 바꿔 여러 장을 한 번에 비교하는 방법도 익히고, 마지막에는 배운 파라미터로 책 표지 일러스트를 만듭니다.</p>
+    <div class="tags"><span class="tag">Midjourney (웹)</span></div>
+    <nav class="sec-nav"><a href="#s1"><span>1</span>설정 패널</a><a href="#s2"><span>2</span>파라미터란</a><a href="#s3"><span>3</span>비율</a><a href="#s4"><span>4</span>스타일 · 버전</a><a href="#s5"><span>5</span>세부 조정</a><a href="#s6"><span>6</span>빼기 · 반복 · 시드</a><a href="#s7"><span>7</span>한 번에 비교</a><a href="#s8"><span>8</span>실습 · 책 표지</a><a href="#s9"><span>9</span>정리</a></nav>
+
+    <h2 class="sec-head" id="s1"><span class="sec-num">1</span>설정 패널로 조절하기</h2>
+    <p>입력창 오른쪽의 <b>설정 아이콘</b>(슬라이더 모양)을 누르면 비율, 미학, 모델 같은 값을 버튼과 슬라이더로 바꿀 수 있습니다. 글자를 몰라도 눈으로 보며 조절할 수 있어서, 오늘은 여기서 먼저 시작합니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>패널 칸</th><th>항목</th><th>하는 일</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2">이미지 비율</td><td>세로 · 정사각형 · 가로</td><td>모양을 먼저 고릅니다</td></tr>
+        <tr><td>슬라이더</td><td>2:3, 16:9처럼 비율을 세밀하게 맞춥니다</td></tr>
+        <tr><td rowspan="3">미학</td><td>스타일화</td><td>Midjourney 특유의 예술적인 느낌을 얼마나 넣을지</td></tr>
+        <tr><td>Weird</td><td>얼마나 독특하고 기묘하게 그릴지</td></tr>
+        <tr><td>다양성</td><td>4장이 서로 얼마나 다르게 나올지. 결과 태그에는 <code>chaos</code>로 표시됨 (0~100)</td></tr>
+        <tr><td rowspan="3">모델</td><td>버전 (숫자)</td><td>어떤 모델로 그릴지 (기본 8.2)</td></tr>
+        <tr><td>Standard · HD</td><td>HD를 고르면 고해상도로 생성</td></tr>
+        <tr><td>Raw</td><td>AI가 더하는 꾸밈을 줄이고 프롬프트에 충실하게</td></tr>
+        <tr><td>더 보기</td><td>속도 · 동영상 해상도 · 배치 크기</td><td>Relax/Fast 속도, 영상을 만들 때의 화질과 개수</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 A — 어디에 쓸지 먼저 정하고 만들기</div>
+      <p>설정 패널은 <b>만들기 전에</b> 정하는 곳입니다. 이미 나온 이미지를 고치는 일은 7차시에서 합니다. 그래서 먼저 "이 그림을 어디에 쓸까"를 정하고, 거기에 맞게 패널을 맞춘 다음 생성합니다. 같은 프롬프트 하나로 세 가지 의뢰를 받았다고 생각하고 진행합니다.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>의뢰</th><th>먼저 생각할 것</th><th>패널 설정</th></tr></thead>
+        <tbody>
+          <tr><td>1. 인스타그램 피드 게시물</td><td>휴대폰 피드에서 크게 보이게</td><td>이미지 비율 세로 <b>4:5</b></td></tr>
+          <tr><td>2. 쇼츠 배경 영상</td><td>세로 화면이고 움직여야 함, 여러 안 중에서 고르고 싶음</td><td>이미지 비율 세로 <b>9:16</b>, 다양성 <b>높게</b>, 동영상 해상도 <b>SD</b>, 동영상 배치 크기 <b>1</b></td></tr>
+          <tr><td>3. 전시 포스터</td><td>그림처럼 화려하게, 더 독특하게도 비교</td><td>이미지 비율 세로 <b>2:3</b>, 스타일화 <b>높게</b>, 비교용으로 Weird <b>조금</b></td></tr>
+        </tbody>
+      </table></div>
+      <ol class="num-steps">
+        <li><b>패널 열고 모델 정하기</b> — 입력창 오른쪽 설정 아이콘을 누르고, 모델에서 버전 <b>8.2</b>, Raw는 <b>Standard</b>로 맞춥니다.
+          <span class="meta">입력창 옆의 <b>개인화</b>는 꺼 둡니다. 켜져 있으면 패널 설정과 상관없이 내 취향이 섞여 결과 비교가 어렵습니다. 개인화는 9차시에 배웁니다.</span>
+        </li>
+        <li><b>프롬프트 넣기</b> — 아래 프롬프트를 입력창에 붙여 넣습니다. 아직 생성하지 않습니다.
+          <div class="pbox"><div class="pbox-label">뜻 — 달빛 비치는 숲속의 흰 사슴, 스테인드글라스 아트, 빛나는 보석 같은 색, 검은 납 테두리 선</div><pre>A white deer in a moonlit forest, stained glass art, glowing jewel colors, black lead lines</pre></div>
+        </li>
+        <li><b>의뢰 1 · 인스타그램 피드</b> — 이미지 비율에서 <b>세로</b>를 누르고 슬라이더를 <b>4:5</b>에 맞춘 뒤 생성합니다.</li>
+        <li><b>의뢰 2 · 쇼츠 배경 영상</b> — 결과를 기다리지 않고 바로 패널을 바꿉니다. 입력창이 비었으면 프롬프트를 다시 붙여 넣습니다.
+          <ol class="sub-steps">
+            <li>이미지 비율 <b>9:16</b>, 미학의 <b>다양성</b>을 오른쪽으로 올린 뒤 생성</li>
+            <li>더 보기에서 동영상 해상도 <b>SD</b>, 동영상 배치 크기 <b>1</b>로 맞춤</li>
+            <li>결과 4장 중 마음에 드는 이미지를 열지 않고, 생성 화면에서 바로 <b>이미지로 비디오 생성 → 자동</b></li>
+          </ol>
+          <span class="meta">다양성을 올려서 4장의 구도가 서로 달라 고를 거리가 많습니다. 영상은 이미지보다 사용량이 훨씬 많아서 연습할 때는 1개, SD로 만듭니다.</span>
+        </li>
+        <li><b>의뢰 3 · 전시 포스터</b> — 두 번 연달아 생성해 비교합니다.
+          <ol class="sub-steps">
+            <li>다양성은 처음 위치로 돌리고, 이미지 비율 <b>2:3</b>, 스타일화를 오른쪽으로 크게 옮긴 뒤 생성</li>
+            <li>같은 설정에서 미학의 <b>Weird</b>만 오른쪽으로 조금 올려 한 번 더 생성</li>
+          </ol>
+          <span class="meta">Weird를 올리면 사슴과 숲이 기묘하고 초현실적으로 바뀝니다. 조금만 올려도 차이가 커서, 눈길을 끄는 독특한 포스터가 필요할 때 씁니다. 태그에는 <code>weird</code>로 표시됩니다.</span>
+        </li>
+        <li><b>결과 비교 · 태그 확인</b> — 세 결과를 나란히 봅니다. 비율이 다르면 사슴의 자세와 숲의 구도부터 다르게 그려집니다. 결과 아래에는 <code>ar 4:5</code>, <code>ar 9:16</code>, <code>chaos 95</code>, <code>s …</code> 같은 태그가 붙어 있습니다. 프롬프트에 쓰지 않았는데도 붙어 있습니다. 패널에서 정한 값이 곧 파라미터라는 뜻입니다. 패널의 <b>다양성</b>은 태그에 <code>chaos</code>(카오스, 혼돈)로 나오고, 숫자가 클수록 4장이 제각각입니다. 5섹션의 <code>--c</code>와 같은 것입니다.</li>
+        <li><b>되돌리기</b> — 이미지 비율 정사각형, 스타일화와 Weird는 처음 위치로 돌려 둡니다. 패널 값은 바꾸면 <b>다음 생성에도 계속</b> 적용되기 때문입니다.</li>
+      </ol>
+      <p class="note">결과물: 같은 프롬프트로 만든 인스타그램 게시물, 쇼츠 배경 영상, 전시 포스터. 다음부터는 만들기 전에 "어디에 쓸까 → 패널 맞추기 → 생성" 순서를 먼저 떠올리세요.</p>
+    </div>
+
+    <h2 class="sec-head" id="s2"><span class="sec-num">2</span>파라미터 — 글로 조절하기</h2>
+    <p>패널에서 바꾼 값을 글자로 쓰는 것이 <b>파라미터</b>입니다. 파라미터는 이미지를 만들 때 크기, 예술성, 다양성, 모델 버전 같은 세부 동작을 정하는 추가 명령어입니다. 프롬프트 맨 끝에 <code>--</code>와 함께 씁니다.</p>
+    <div class="pbox pbox--ex"><div class="pbox-label">쓰는 모양 — 예시</div><pre><span style="display:inline-block;vertical-align:top">A golden retriever wearing a sweater<br><span class="nc" style="margin-left:0">↑ 프롬프트</span></span> <span style="display:inline-block;vertical-align:top">--ar 2:3 --s 250<br><span class="nc" style="margin-left:0">↑ 파라미터: 띄어쓰기로 구분, 여러 개 가능</span></span></pre></div>
+    <div class="table-scroll"><table>
+      <thead><tr><th>정하는 곳</th><th>적용 범위</th><th>이럴 때</th></tr></thead>
+      <tbody>
+        <tr><td><b>설정 패널</b> (입력창 오른쪽 아이콘)</td><td>한 번 정하면 <b>모든 프롬프트</b>에 적용</td><td>오늘 내내 같은 비율·버전으로 작업할 때</td></tr>
+        <tr><td><b>프롬프트 끝에 직접</b></td><td><b>이번 프롬프트</b>에만 적용</td><td>값을 바꿔 가며 비교할 때</td></tr>
+      </tbody>
+    </table></div>
+    <p>정리하면 <b>프롬프트에 붙이면 그 한 번만, 설정 패널에서 바꾸면 계속</b>입니다. 예를 들어 프롬프트 끝에 <code>--v 6.1</code>을 붙여도 그 프롬프트만 V6.1로 그려지고, 다음 생성은 다시 패널의 8.2로 돌아갑니다. <code>--seed</code>, <code>--no</code>, <code>--niji</code>처럼 패널에 없는 것은 글로만 쓸 수 있습니다.</p>
+    <div class="callout"><div class="callout-label">버전마다 되는 것이 다릅니다</div><p>지금 웹의 기본 버전은 <b>V8.2</b>입니다. 파라미터 중에는 특정 버전에서만 되는 것이 있어서, 아래 실습에 버전을 함께 적어 두었습니다. 예를 들어 <code>--q</code>는 V8.2에서 지원하지 않고, <code>--hd</code>는 V8.2에서만 됩니다. 결과 아래에 붙는 태그(예: <code>ar 2:3</code>)로 파라미터가 적용됐는지 확인할 수 있습니다.</p></div>
+
+    <p class="note">파라미터 이름을 외우지 않아도 됩니다. 아래에서 하나씩 눈으로 확인한 뒤, 8섹션에서 한국어로 말한 조건을 ChatGPT 키트로 파라미터로 바꾸는 방법을 씁니다.</p>
+
+    <h2 class="sec-head" id="s3"><span class="sec-num">3</span>비율과 해상도 — <code>--ar</code> · <code>--hd</code></h2>
+    <p><code>--ar</code>은 <b>aspect ratio</b>(애스펙트 레이쇼, 화면 비율)의 줄임말로, 이미지의 가로:세로 비율을 정합니다. 기본값은 1:1이고, 소수점은 쓸 수 없습니다. 비율은 크기(해상도)와 다른 개념입니다.</p>
+    <p><code>--hd</code>는 <b>high definition</b>(하이 데피니션, 고화질)의 줄임말로, 비율은 그대로 두고 크기를 키워 더 선명하게 만듭니다. V8.2에서만 됩니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>비율</th><th>모양</th><th>주로 쓰는 곳</th></tr></thead>
+      <tbody>
+        <tr><td><b>1:1</b></td><td>정사각형</td><td>SNS 피드, 프로필, 제품 사진, 썸네일</td></tr>
+        <tr><td><b>3:4 · 2:3</b></td><td>세로 사진</td><td>인물, 화보, 포스터, 인쇄 사진</td></tr>
+        <tr><td><b>4:3 · 3:2</b></td><td>가로</td><td>공간, 풍경</td></tr>
+        <tr><td><b>16:9</b></td><td>와이드 가로</td><td>유튜브, 영상, 넓은 풍경</td></tr>
+        <tr><td><b>9:16</b></td><td>세로 영상</td><td>릴스, 쇼츠, 모바일 배경</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 B — 같은 프롬프트, 비율 세 가지</div>
+      <ol class="num-steps">
+        <li>아래 세 프롬프트를 차례로 실행하고 구도가 어떻게 달라지는지 비교
+          <div class="pbox"><div class="pbox-label">뜻 — 스웨터를 입은 골든리트리버 · 정사각형 1:1</div><pre>A golden retriever wearing a sweater --ar 1:1</pre></div>
+          <div class="pbox"><div class="pbox-label">뜻 — 스웨터를 입은 골든리트리버 · 와이드 가로 16:9</div><pre>A golden retriever wearing a sweater --ar 16:9</pre></div>
+          <div class="pbox"><div class="pbox-label">뜻 — 스웨터를 입은 골든리트리버 · 세로 2:3</div><pre>A golden retriever wearing a sweater --ar 2:3</pre></div>
+        </li>
+        <li><b>V8.2</b>에서 <code>--hd</code>를 붙여 실행하고, 내려받은 파일의 크기를 확인 — 기본 1024×1024가 2048×2048로 만들어집니다
+          <div class="pbox"><div class="pbox-label">뜻 — 스웨터를 입은 흰 포메라니안 · 고해상도</div><pre>A white Pomeranian wearing a sweater --hd</pre></div>
+        </li>
+      </ol>
+      <p class="note">비율이 바뀌면 AI가 빈 공간을 채우려고 배경과 자세까지 바꿉니다. 쓸 곳이 정해져 있다면 비율부터 정하고 만드세요.</p>
+    </div>
+
+    <h2 class="sec-head" id="s4"><span class="sec-num">4</span>스타일과 버전 — <code>--raw</code> · <code>--niji</code> · <code>--v</code></h2>
+    <p>Midjourney 안에는 그림을 그리는 <b>모델</b>이 여러 개 있습니다. 모델은 수많은 이미지를 보고 그림을 배운 '화가'라고 생각하면 됩니다. 원하는 느낌을 얻는 방법은 두 가지입니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>방법</th><th>예</th><th>누가 그리나</th></tr></thead>
+      <tbody>
+        <tr><td>프롬프트에 느낌을 말로 설명</td><td><code>A girl in the garden, anime style</code></td><td>기본 모델(V8.2)이 애니메이션 느낌을 흉내 내서</td></tr>
+        <tr><td>파라미터로 모델을 직접 지정</td><td><code>A girl in the garden --niji 7</code></td><td>애니메이션 전용 모델이 직접</td></tr>
+      </tbody>
+    </table></div>
+    <p>이번 섹션은 두 번째, <b>모델을 직접 고르는 방법</b>입니다. <code>--v</code>는 몇 년도 화가에게 맡길지(버전), <code>--niji</code>는 애니메이션 전문 화가에게 맡길지를 고릅니다. <code>--raw</code>는 모델을 바꾸지 않고, 같은 화가에게 "꾸미지 말고 말한 대로 그려 달라"고 주문하는 것입니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>파라미터</th><th>하는 일</th></tr></thead>
+      <tbody>
+        <tr><td><code>--raw</code> (<code>--style raw</code>)</td><td>AI가 임의로 더하는 미적 보정을 줄이고 프롬프트에 충실하게. 사실적인 사진에 좋음</td></tr>
+        <tr><td><code>--niji</code></td><td>애니메이션·일러스트 전용 모델. Niji 5는 감성적이고 다양한 연출, 6은 정교한 캐릭터와 디테일, 7은 정확한 프롬프트 반영과 깔끔한 선화</td></tr>
+        <tr><td><code>--v</code></td><td>모델 버전 선택 (예: <code>--v 7</code>, <code>--v 6.1</code>). 버전이 높다고 무조건 좋은 게 아니라 버전마다 그림 느낌이 다름</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 C — Standard와 Raw, Niji 버전, 모델 버전 비교</div>
+      <ol class="num-steps">
+        <li><b>Standard vs Raw</b> — 같은 프롬프트를 그대로 한 번, <code>--raw</code>를 붙여 한 번
+          <div class="pbox"><div class="pbox-label">뜻 — 야외에서 이젤에 풍경화를 그리는 젊은 여성, 빈티지 드레스, 인상주의 유화 스타일</div><pre>A young woman painting a landscape on an easel outdoors, vintage dress, impressionist oil painting style</pre></div>
+          <span class="meta">Standard는 그림처럼 나오기도 하고 사진처럼 나오기도 합니다. Raw는 프롬프트 문장 그대로에 더 가깝게 나옵니다.</span>
+        </li>
+        <li><b>Niji 버전</b> — 끝에 <code>--niji 5</code>, <code>--niji 6</code>, <code>--niji 7</code>을 바꿔 가며
+          <div class="pbox"><div class="pbox-label">뜻 — 정원에 있는 소녀</div><pre>A girl in the garden</pre></div>
+        </li>
+        <li><b>모델 버전</b> — 끝에 <code>--v 6.1</code>, <code>--v 7</code>을 붙인 것과 붙이지 않은 것(V8.2)을 비교
+          <div class="pbox"><div class="pbox-label">뜻 — 모나리자 그림 앞에 서 있는 여성의 뒷모습</div><pre>The back view of a woman standing in front of the painting of the Mona Lisa</pre></div>
+        </li>
+      </ol>
+    </div>
+
+    <h2 class="sec-head" id="s5"><span class="sec-num">5</span>세부 조정 — <code>--s</code> · <code>--c</code> · <code>--w</code> · <code>--q</code></h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>파라미터</th><th>조절하는 것</th><th>핵심 질문</th><th>범위 (기본값)</th></tr></thead>
+      <tbody>
+        <tr><td><code>--stylize</code> · <code>--s</code></td><td>Midjourney가 얼마나 예술적으로 재해석할지. 낮으면 프롬프트에 충실</td><td>한 장을 얼마나 예술적으로?</td><td>0~1000 (100)</td></tr>
+        <tr><td><code>--chaos</code> · <code>--c</code></td><td>4장이 서로 얼마나 다를지. 높으면 구도·스타일이 제각각</td><td>4장을 얼마나 다르게?</td><td>0~100 (0)</td></tr>
+        <tr><td><code>--weird</code> · <code>--w</code></td><td>기이하고 비정형적인 표현</td><td>얼마나 기묘하게?</td><td>0~3000 (0)</td></tr>
+        <tr><td><code>--quality</code> · <code>--q</code></td><td>생성에 쓰는 GPU 시간. 해상도가 아니라 디테일·질감에 영향</td><td>얼마나 공들여?</td><td>버전마다 다름</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><code>--q</code> 값은 V6.1이 0.5·1·2, V7이 1·2·4이고, <b>V8.2는 지원하지 않습니다</b>. <code>--s</code>는 입력창 설정의 슬라이더로도, <code>--c</code>는 설정의 Variety로도 조절할 수 있습니다. <code>--w</code>는 <code>--seed</code>와 함께 쓸 수 없습니다.</p>
+    <div class="practice-card">
+      <div class="practice-title">실습 D — 숫자만 바꿔 차이 보기</div>
+      <ol class="num-steps">
+        <li><b>--s</b> — 끝에 <code>--s 0</code>, <code>--s 500</code>, <code>--s 1000</code>을 바꿔 가며 (값이 없으면 기본 100)
+          <div class="pbox"><div class="pbox-label">뜻 — 화분에 핀 꽃들</div><pre>Flowers in pots</pre></div>
+        </li>
+        <li><b>--c</b> — <code>--c 0</code>과 <code>--c 100</code>을 비교. 0은 4장의 구도가 거의 같고, 100은 제각각입니다
+          <div class="pbox"><div class="pbox-label">뜻 — 벚꽃 나무로 둘러싸인 한국 전통 정자, 봄 분위기, 아름다운 일러스트</div><pre>A traditional Korean pavilion surrounded by cherry blossom trees, spring atmosphere, beautiful illustration</pre></div>
+        </li>
+        <li><b>--w</b> — <code>--w 100</code>, <code>--w 500</code>, <code>--w 3000</code>
+          <div class="pbox"><div class="pbox-label">뜻 — 케이크</div><pre>A cake</pre></div>
+        </li>
+      </ol>
+      <p class="note">값을 하나씩 바꿔 입력하기 번거롭다면 7번 섹션의 중괄호 <code>{ }</code>로 한 번에 실행할 수 있습니다.</p>
+    </div>
+
+    <h2 class="sec-head" id="s6"><span class="sec-num">6</span>빼기 · 반복 패턴 · 시드 — <code>--no</code> · <code>--tile</code> · <code>--seed</code></h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>파라미터</th><th>하는 일</th><th>알아 둘 점</th></tr></thead>
+      <tbody>
+        <tr><td><code>--no</code></td><td>넣고 싶지 않은 요소 빼기. 쉼표로 여러 개</td><td>완전히 사라진다고 보장하지는 않음</td></tr>
+        <tr><td><code>--tile</code></td><td>상하좌우가 이어지는 반복 패턴</td><td>포장지, 배경, 원단 패턴에 활용</td></tr>
+        <tr><td><code>--seed</code></td><td>생성의 출발점(시작 노이즈) 번호를 고정</td><td>같은 시드 + 같은 프롬프트 = 거의 비슷한 결과. 스타일이나 캐릭터를 저장하는 기능은 아님</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 E — 빼고, 반복하고, 고정하기</div>
+      <ol class="num-steps">
+        <li><b>--no</b> — 차례로 실행해 무엇이 빠지는지 비교
+          <div class="pbox"><div class="pbox-label">뜻 — 햇살 가득한 해변</div><pre>Sunlit beaches</pre></div>
+          <div class="pbox"><div class="pbox-label">뜻 — 햇살 가득한 해변 · 나무 빼기</div><pre>Sunlit beaches --no trees</pre></div>
+          <div class="pbox"><div class="pbox-label">뜻 — 햇살 가득한 해변 · 나무, 해, 구름 빼기</div><pre>Sunlit beaches --no trees, sun, clouds</pre></div>
+        </li>
+        <li><b>--tile</b> — 결과를 내려받아 바둑판처럼 이어 붙이면 경계 없이 이어집니다
+          <div class="pbox"><div class="pbox-label">뜻 — 양귀비꽃, 수레국화 · 반복 패턴</div><pre>Poppies, cornflowers --tile</pre></div>
+        </li>
+        <li><b>--seed</b> — 01의 첫 결과를 클릭 → 오른쪽 위 옵션 메뉴 → <b>복사</b> → <b>seed</b>로 시드 번호를 복사합니다 (4장 어디서 복사해도 번호는 같음)</li>
+        <li>복사한 번호로 단어만 바꿔 실행하고, 구도가 얼마나 유지되는지 확인
+          <div class="pbox"><div class="pbox-label">뜻 — 노을 지는 해변 · 복사한 시드 번호 그대로</div><pre>Sunset beaches --seed 복사한번호</pre></div>
+          <span class="meta">midnight beaches처럼 다른 단어로도 바꿔 보세요. 구도가 비슷하게 유지되지만 항상 보장되지는 않습니다.</span>
+        </li>
+      </ol>
+    </div>
+
+    <h2 class="sec-head" id="s7"><span class="sec-num">7</span>한 번에 비교하기 — 중괄호 <code>{ }</code>와 <code>--r</code></h2>
+    <p>값을 하나씩 바꿔 여러 번 입력하는 대신, 중괄호 안에 후보를 쉼표로 넣으면 조합마다 따로 생성됩니다. 이것을 <b>퍼뮤테이션(Permutations)</b>이라고 합니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th></th><th>퍼뮤테이션 <code>{ }</code></th><th>반복 <code>--r</code></th></tr></thead>
+      <tbody>
+        <tr><td><b>목적</b></td><td>여러 조건을 비교</td><td>같은 조건을 여러 번</td></tr>
+        <tr><td><b>프롬프트</b></td><td>일부를 바꿈</td><td>그대로</td></tr>
+        <tr><td><b>예</b></td><td><code>a {red, blue, yellow} flower</code> → 3작업</td><td><code>A red flower --r 3</code> → 같은 작업 3번</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><div class="callout-label">시작 전에 — 속도를 Fast로</div><p>퍼뮤테이션은 <b>Fast 또는 Turbo 모드에서만</b> 됩니다 (Relax 불가). 한 줄로 입력해도 실제로는 생성이 여러 번 들어가기 때문입니다. 실습 전에 설정 패널 더 보기에서 속도를 <b>Fast</b>로 바꾸세요. 작업마다 GPU 시간을 따로 쓰고, 한 번에 만들 수 있는 수가 요금제마다 다릅니다(Basic 4개, Standard 10개, Pro·Mega 40개). 중괄호를 여러 개 쓰면 수가 빠르게 늘어나니 조심하세요. Relax로 해야 한다면 값을 하나씩 바꿔 여러 번 실행합니다.</p></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 F — 퍼뮤테이션으로 비교표 만들기</div>
+      <ol class="num-steps">
+        <li><b>단어 비교</b> — 중괄호 두 개를 쓰면 2 × 2 = 4작업이 만들어집니다
+          <div class="pbox"><div class="pbox-label">뜻 — 빨강·파랑 꽃 × 유리·도자기 꽃병 → 4가지 조합</div><pre>A {red, blue} flower in a {glass vase, ceramic vase}</pre></div>
+        </li>
+        <li><b>비율 비교</b>
+          <div class="pbox"><div class="pbox-label">뜻 — 아름다운 꽃 정원, 영화 같은 사진 · 비율 1:1, 4:5, 16:9 세 가지</div><pre>A beautiful flower garden, cinematic photography --ar {1:1, 4:5, 16:9}</pre></div>
+        </li>
+        <li><b>파라미터 비교</b> — 5번 섹션의 --s 실습을 한 줄로
+          <div class="pbox"><div class="pbox-label">뜻 — 화분에 핀 꽃들 · 스타일화 0, 100, 500, 1000을 한 번에</div><pre>Flowers in pots --s {0, 100, 500, 1000}</pre></div>
+        </li>
+      </ol>
+    </div>
+
+    <h2 class="sec-head" id="s8"><span class="sec-num">8</span>오늘 배운 파라미터로 책 표지 만들기</h2>
+    <p>표지 하나를 골라 비율(<code>--ar 2:3</code>), 스타일화(<code>--s</code>), 필요하면 <code>--no</code>까지 넣어 완성합니다. 아래 목록에 없는 표지여도 됩니다.</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>표지 후보</th></tr></thead>
+      <tbody>
+        <tr><td>판타지 소설 · 추리·미스터리 소설 · 여행·세계문화 잡지 · 패션·뷰티 잡지 · 베이킹·디저트 요리책</td></tr>
+        <tr><td>커피·차 전문 잡지 · AI·미래 기술 잡지 · 한국 전통문화 도서 · 건축·공간 디자인 잡지 · 식물·꽃 도감</td></tr>
+      </tbody>
+    </table></div>
+    <h4>표지 글자에 쓰는 표현</h4>
+    <div class="table-scroll"><table>
+      <thead><tr><th>표현</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td><code>large bold typography</code></td><td>크고 굵은 제목 글자</td></tr>
+        <tr><td><code>elegant serif typography</code></td><td>우아한 명조 계열 서체</td></tr>
+        <tr><td><code>modern sans-serif typography</code></td><td>현대적인 산세리프 서체</td></tr>
+        <tr><td><code>clear text hierarchy</code></td><td>제목과 부제목의 위계가 분명하게</td></tr>
+        <tr><td><code>editorial typography layout</code></td><td>잡지 편집 디자인 같은 글자 배치</td></tr>
+        <tr><td><code>legible and correctly spelled text</code></td><td>읽기 쉽고 철자가 정확하게</td></tr>
+      </tbody>
+    </table></div>
+    <div class="practice-card">
+      <div class="practice-title">실습 G — 책 표지 일러스트</div>
+      <ol class="num-steps">
+        <li><b>예시로 실행</b> — 판타지 소설 표지
+          <div class="pbox"><div class="pbox-label">뜻 — 구름 바다 위 떠 있는 섬의 웅장한 고성, 달빛, 남색·보라에 금빛 포인트, 영화 같은 판타지 콘셉트 아트. 위쪽에 제목 THE LAST KINGDOM(우아한 명조), 그 아래 부제, 맨 아래 작가 이름을 정확한 철자로 · 세로 2:3</div><pre>A breathtaking fantasy novel book cover illustration, an ancient majestic castle standing on a floating island above a vast sea of clouds, enormous floating islands in the distance, a winding stone bridge connecting mysterious mountain peaks, glowing magical lights drifting through the air, dramatic moonlight illuminating the castle, deep navy blue and muted violet color palette with subtle golden highlights, ethereal atmosphere, intricate architectural details, cinematic fantasy concept art, strong focal point in the upper center, professional publishing cover design. Include the exact main title "THE LAST KINGDOM" in large elegant serif typography at the top, the subtitle "A JOURNEY BEYOND THE STARS" below the title, and the author name "BY E. MORGAN" at the bottom. All text must be clearly legible and correctly spelled. --ar 2:3 --s 250</pre></div>
+        </li>
+        <li><b>글자 없이 만들기</b> — 글자는 나중에 디자인 툴로 넣으려면, 글자 문장을 빼고 여백과 <code>--no</code>를 넣습니다
+          <div class="pbox"><div class="pbox-label">뜻 — 절벽을 따라 파스텔 건물이 늘어선 지중해 해안 마을, 청록 바다, 황금빛 햇살, 높은 곳에서 내려다본 여행 잡지 표지 사진. 위쪽 하늘은 제목 자리로 비워 두기 · 글자 빼기</div><pre>A premium travel magazine cover photograph featuring a breathtaking Mediterranean coastal village, colorful pastel buildings cascading down a dramatic seaside cliff, crystal clear turquoise ocean, warm golden sunlight, shot from an elevated viewpoint, professional travel editorial photography, generous clean sky area at the top for the magazine title --ar 2:3 --s 150 --no text, letters</pre></div>
+        </li>
+        <li><b>내 표지</b> — ChatGPT에 아래 키트로 요청하고, 받은 영어 프롬프트로 실행합니다. 무엇을 만들지 못 정했다면 칸을 비워 두세요. 질문에 고르기만 하면 함께 정해 줍니다
+          <div class="pbox"><div class="pbox-label">키트 5 · 책 표지 — 회색 글씨는 설명이라 복사되지 않습니다</div><pre>너는 책 표지 디자이너이자 Midjourney 프롬프트 전문가야. 나는 영어를 잘 몰라.
+
+[표지 종류] <span class="nc">← 예: 식물 도감. 모르면 비워 두기</span>
+[제목] <span class="nc">← 표지에 넣을 영어 제목. 넣지 않으려면 '글자 없음'. 모르면 비워 두기</span>
+[원하는 느낌] <span class="nc">← 한국어로 자유롭게. 모르면 비워 두기</span>
+
+비어 있는 칸이 있으면, 먼저 그 칸을 정할 수 있게 한 번에 하나씩 질문해줘.
+질문마다 선택지 3개를 한국어로 보여주고, 영어 제목은 한국어 뜻을 같이 달아줘.
+원하는 느낌은 그림체, 배경, 색, 분위기를 하나씩 골라서 정하게 해줘.
+다 정해지면 세 칸을 정리해서 보여주고, 그다음 프롬프트를 써줘.
+
+주어, 매체, 환경, 조명, 색상, 분위기, 구도를 모두 넣은 영어 프롬프트를 써줘.
+제목이 있으면 글자 위치와 서체를 넣고, 없으면 제목 자리로 비워 둘 여백만 넣어줘.
+끝에 --ar 2:3 --s 150을 붙이고, 아래에 한국어 뜻을 달아줘.</pre></div>
+        </li>
+        <li><b>조건 더하기</b> — 결과를 보고 바꾸고 싶은 점을 한국어로 정리해, 키트 6으로 파라미터를 붙여 다시 실행합니다
+          <div class="pbox"><div class="pbox-label">키트 6 · 파라미터 붙이기 — 회색 글씨는 설명이라 복사되지 않습니다</div><pre>아래 Midjourney 프롬프트 끝에, 내가 원하는 조건을 파라미터로 붙여줘. 지금 버전은 V8.2야.
+붙인 파라미터마다 무슨 뜻인지 한국어로 한 줄씩 알려줘.
+
+[프롬프트]
+<span class="nc">← 영어 프롬프트 붙여 넣기</span>
+
+[원하는 조건]
+<span class="nc">← 예: 세로 포스터 비율, 사진처럼 사실적으로, 너무 예술적이지 않게, 글자는 빼고</span></pre></div>
+          <details class="toggle"><summary>예시 — 이렇게 채우고, 이렇게 받습니다</summary>
+            <div class="pbox"><div class="pbox-label">채운 예시</div><pre>[프롬프트]
+A white deer in a moonlit forest, stained glass art, glowing jewel colors, black lead lines
+
+[원하는 조건]
+유튜브 쇼츠용 세로, 시안을 여러 개 다르게 보고 싶어, 너무 예술적이지 않게</pre></div>
+            <div class="pbox"><div class="pbox-label">받은 결과 — 세로 9:16 · 4장을 서로 다르게 · 예술성 낮게</div><pre>A white deer in a moonlit forest, stained glass art, glowing jewel colors, black lead lines --ar 9:16 --c 50 --s 50</pre></div>
+          </details>
+          <span class="meta">[프롬프트]에는 3번에서 받은 영어 프롬프트를, [원하는 조건]에는 "글자는 빼고", "4장을 더 다르게"처럼 한국어로 씁니다. 오늘 배운 파라미터를 다시 떠올리는 총정리입니다.</span>
+        </li>
+        <li>마음에 드는 결과를 업스케일하고 '06차시' 폴더에 모으기</li>
+      </ol>
+      <p class="note">글자를 넣으라는 문장과 <code>--no text</code>를 한 프롬프트에 같이 쓰면 서로 부딪칩니다. 글자를 넣을지 뺄지 먼저 정하세요. 글자는 틀리게 나올 수 있으니 꼭 확인하고, 틀리면 4차시처럼 ChatGPT나 디자인 툴로 고칩니다.</p>
+    </div>
+
+    <h2 class="sec-head" id="s9"><span class="sec-num">9</span>정리 — 파라미터 한눈에 보기</h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>하고 싶은 것</th><th>파라미터</th></tr></thead>
+      <tbody>
+        <tr><td>비율 정하기</td><td><code>--ar 2:3</code></td></tr>
+        <tr><td>사실적으로, 프롬프트에 충실하게</td><td><code>--raw</code>, 낮은 <code>--s</code></td></tr>
+        <tr><td>애니메이션 그림체</td><td><code>--niji 7</code></td></tr>
+        <tr><td>더 예술적으로</td><td>높은 <code>--s</code></td></tr>
+        <tr><td>4장을 다양하게</td><td>높은 <code>--c</code></td></tr>
+        <tr><td>특정 요소 빼기</td><td><code>--no</code></td></tr>
+        <tr><td>반복 패턴</td><td><code>--tile</code></td></tr>
+        <tr><td>비슷한 출발점에서 다시</td><td><code>--seed</code></td></tr>
+        <tr><td>여러 조건 한 번에 비교</td><td><code>{ }</code></td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout callout--tip"><div class="callout-label">다음 차시 예고</div><p>7차시에는 만든 이미지를 처음부터 다시 만들지 않고 <b>다듬습니다</b>. 변형 · 업스케일 · 빠른 편집 같은 생성 작업 버튼과, 원하는 곳만 지우고 다시 그리는 <b>편집기</b>를 씁니다.</p></div>
